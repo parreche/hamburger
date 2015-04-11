@@ -261,6 +261,7 @@ flash.display.DisplayObject = function() {
 	this.eventRemap = new haxe.ds.StringMap();
 	if(this.component == null) this.component = flash.Lib.jsNode("div");
 	this.component.node = this;
+	this.component.setAttribute("node",Type.getClassName(Type.getClass(this)));
 	this.transform = new flash.geom.Transform(this);
 };
 $hxClasses["flash.display.DisplayObject"] = flash.display.DisplayObject;
@@ -318,6 +319,7 @@ flash.display.DisplayObject.prototype = $extend(flash.events.EventWrapper.protot
 			var m = this.transform.get_matrix();
 			if(m != null && !m.isIdentity()) v += "matrix(" + m.a + ", " + m.b + ", " + m.c + ", " + m.d + ", " + m.tx + ", " + m.ty + ")" + " ";
 		}
+		this.component.setAttribute("transform",v);
 		n = "transform";
 		s.setProperty(n,v,null);
 		s.setProperty("-o-" + n,v,null);
@@ -399,7 +401,7 @@ flash.display.DisplayObject.prototype = $extend(flash.events.EventWrapper.protot
 	}
 	,set_scrollRect: function(v) {
 		var v1 = Std.string(this) + ".scrollRect = " + Std.string(v);
-		null;
+		if(console) console.log(v1);
 		return v;
 	}
 	,get_stage: function() {
@@ -2200,6 +2202,23 @@ Bread.__super__ = flixel.FlxSprite;
 Bread.prototype = $extend(flixel.FlxSprite.prototype,{
 	mPlayerInput: null
 	,update: function() {
+		haxe.Log.trace(this.y,{ fileName : "Bread.hx", lineNumber : 28, className : "Bread", methodName : "update"});
+		if(this.x + this.get_width() > 800 && this.velocity.x > 0) {
+			var _g = this.velocity;
+			_g.set_x(_g.x * -1);
+		}
+		if(this.x < 0 && this.velocity.x < 0) {
+			var _g1 = this.velocity;
+			_g1.set_x(_g1.x * -1);
+		}
+		if(this.y < 0 && this.velocity.y < 0) {
+			var _g2 = this.velocity;
+			_g2.set_y(_g2.y * -1);
+		}
+		if(this.y + this.get_height() > 480 && this.velocity.y > 0) {
+			var _g3 = this.velocity;
+			_g3.set_y(_g3.y * -1);
+		}
 		this.acceleration.set(0,0);
 		if(this.mPlayerInput.left()) this.acceleration.set_x(-1000);
 		if(this.mPlayerInput.right()) this.acceleration.set_x(1000);
@@ -2866,7 +2885,8 @@ GameState.prototype = $extend(flixel.FlxState.prototype,{
 	,time: null
 	,update: function() {
 		flixel.FlxState.prototype.update.call(this);
-		flixel.FlxG.overlap(this.mBreadTop,this.mBreadBottom,null,flixel.FlxObject.separate);
+		var collide = flixel.FlxG.overlap(this.mBreadTop,this.mBreadBottom,null,flixel.FlxObject.separate);
+		haxe.Log.trace(collide,{ fileName : "GameState.hx", lineNumber : 49, className : "GameState", methodName : "update"});
 		flixel.FlxG.overlap(this.mBreadTop,this.mIngredients,null,flixel.FlxObject.separate);
 		flixel.FlxG.overlap(this.mBreadBottom,this.mIngredients,null,flixel.FlxObject.separate);
 		flixel.FlxG.overlap(this.mIngredients,this.mIngredients,null,flixel.FlxObject.separate);
@@ -3803,6 +3823,173 @@ flash.geom.Point.prototype = {
 	,__class__: flash.geom.Point
 	,__properties__: {get_length:"get_length"}
 };
+var js = {};
+js.Boot = function() { };
+$hxClasses["js.Boot"] = js.Boot;
+js.Boot.__name__ = ["js","Boot"];
+js.Boot.__unhtml = function(s) {
+	return s.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
+};
+js.Boot.__trace = function(v,i) {
+	var msg;
+	if(i != null) msg = i.fileName + ":" + i.lineNumber + ": "; else msg = "";
+	msg += js.Boot.__string_rec(v,"");
+	if(i != null && i.customParams != null) {
+		var _g = 0;
+		var _g1 = i.customParams;
+		while(_g < _g1.length) {
+			var v1 = _g1[_g];
+			++_g;
+			msg += "," + js.Boot.__string_rec(v1,"");
+		}
+	}
+	var d;
+	if(typeof(document) != "undefined" && (d = document.getElementById("haxe:trace")) != null) d.innerHTML += js.Boot.__unhtml(msg) + "<br/>"; else if(typeof console != "undefined" && console.log != null) console.log(msg);
+};
+js.Boot.__clear_trace = function() {
+	var d = document.getElementById("haxe:trace");
+	if(d != null) d.innerHTML = "";
+};
+js.Boot.isClass = function(o) {
+	return o.__name__;
+};
+js.Boot.isEnum = function(e) {
+	return e.__ename__;
+};
+js.Boot.getClass = function(o) {
+	if((o instanceof Array) && o.__enum__ == null) return Array; else {
+		var cl = o.__class__;
+		if(cl != null) return cl;
+		var name = js.Boot.__nativeClassName(o);
+		if(name != null) return js.Boot.__resolveNativeClass(name);
+		return null;
+	}
+};
+js.Boot.__string_rec = function(o,s) {
+	if(o == null) return "null";
+	if(s.length >= 5) return "<...>";
+	var t = typeof(o);
+	if(t == "function" && (o.__name__ || o.__ename__)) t = "object";
+	switch(t) {
+	case "object":
+		if(o instanceof Array) {
+			if(o.__enum__) {
+				if(o.length == 2) return o[0];
+				var str = o[0] + "(";
+				s += "\t";
+				var _g1 = 2;
+				var _g = o.length;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(i != 2) str += "," + js.Boot.__string_rec(o[i],s); else str += js.Boot.__string_rec(o[i],s);
+				}
+				return str + ")";
+			}
+			var l = o.length;
+			var i1;
+			var str1 = "[";
+			s += "\t";
+			var _g2 = 0;
+			while(_g2 < l) {
+				var i2 = _g2++;
+				str1 += (i2 > 0?",":"") + js.Boot.__string_rec(o[i2],s);
+			}
+			str1 += "]";
+			return str1;
+		}
+		var tostr;
+		try {
+			tostr = o.toString;
+		} catch( e ) {
+			return "???";
+		}
+		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
+			var s2 = o.toString();
+			if(s2 != "[object Object]") return s2;
+		}
+		var k = null;
+		var str2 = "{\n";
+		s += "\t";
+		var hasp = o.hasOwnProperty != null;
+		for( var k in o ) {
+		if(hasp && !o.hasOwnProperty(k)) {
+			continue;
+		}
+		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
+			continue;
+		}
+		if(str2.length != 2) str2 += ", \n";
+		str2 += s + k + " : " + js.Boot.__string_rec(o[k],s);
+		}
+		s = s.substring(1);
+		str2 += "\n" + s + "}";
+		return str2;
+	case "function":
+		return "<function>";
+	case "string":
+		return o;
+	default:
+		return String(o);
+	}
+};
+js.Boot.__interfLoop = function(cc,cl) {
+	if(cc == null) return false;
+	if(cc == cl) return true;
+	var intf = cc.__interfaces__;
+	if(intf != null) {
+		var _g1 = 0;
+		var _g = intf.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var i1 = intf[i];
+			if(i1 == cl || js.Boot.__interfLoop(i1,cl)) return true;
+		}
+	}
+	return js.Boot.__interfLoop(cc.__super__,cl);
+};
+js.Boot.__instanceof = function(o,cl) {
+	if(cl == null) return false;
+	switch(cl) {
+	case Int:
+		return (o|0) === o;
+	case Float:
+		return typeof(o) == "number";
+	case Bool:
+		return typeof(o) == "boolean";
+	case String:
+		return typeof(o) == "string";
+	case Array:
+		return (o instanceof Array) && o.__enum__ == null;
+	case Dynamic:
+		return true;
+	default:
+		if(o != null) {
+			if(typeof(cl) == "function") {
+				if(o instanceof cl) return true;
+				if(js.Boot.__interfLoop(js.Boot.getClass(o),cl)) return true;
+			} else if(typeof(cl) == "object" && js.Boot.__isNativeObj(cl)) {
+				if(o instanceof cl) return true;
+			}
+		} else return false;
+		if(cl == Class && o.__name__ != null) return true;
+		if(cl == Enum && o.__ename__ != null) return true;
+		return o.__enum__ == cl;
+	}
+};
+js.Boot.__cast = function(o,t) {
+	if(js.Boot.__instanceof(o,t)) return o; else throw "Cannot cast " + Std.string(o) + " to " + Std.string(t);
+};
+js.Boot.__nativeClassName = function(o) {
+	var name = js.Boot.__toStr.call(o).slice(8,-1);
+	if(name == "Object" || name == "Function" || name == "Math" || name == "JSON") return null;
+	return name;
+};
+js.Boot.__isNativeObj = function(o) {
+	return js.Boot.__nativeClassName(o) != null;
+};
+js.Boot.__resolveNativeClass = function(name) {
+	if(typeof window != "undefined") return window[name]; else return global[name];
+};
 flash.geom.Transform = function(displayObject) {
 	if(displayObject == null) throw "Cannot create Transform with no DisplayObject.";
 	this._displayObject = displayObject;
@@ -4132,6 +4319,7 @@ flash.Lib.jsHelper = function() {
 		var o = flash.Lib.jsNode("div");
 		flash.Lib.get_stage().component.appendChild(o);
 		o.style.visibility = "hidden";
+		o.setAttribute("node","flash.Lib.jsHelper");
 		o.appendChild(flash.Lib.qHelper = flash.Lib.jsNode("div"));
 	}
 	return flash.Lib.qHelper;
@@ -4204,6 +4392,7 @@ flash.display.BitmapData = function(w,h,t,c) {
 	this.__revision = 0;
 	this.__rect = new flash.geom.Rectangle(0,0,w,h);
 	this.component = flash.Lib.jsNode("canvas");
+	this.component.setAttribute("node",Type.getClassName(Type.getClass(this)));
 	this.component.width = w;
 	this.component.height = h;
 	this.__context = this.component.getContext("2d");
@@ -4902,6 +5091,7 @@ flash.display.Graphics = function() {
 	this.rgPending = false;
 	this.synced = true;
 	this.component = flash.Lib.jsNode("canvas");
+	this.component.setAttribute("node",Type.getClassName(Type.getClass(this)));
 	this.context = this.component.getContext("2d");
 	this.context.save();
 	this.bounds = new flash.geom.Rectangle();
@@ -5348,7 +5538,7 @@ flash.display.Graphics.prototype = {
 				ctx.restore();
 				break;
 			default:
-				throw 4000 + i;
+				throw new flash.errors.Error("Unknown operation " + i,4000 + i);
 			}
 		}
 		if(n > 0) f = this._closePath(cnv,ctx,f,m,tex);
@@ -6124,7 +6314,7 @@ flash.media.Sound.prototype = $extend(flash.events.EventDispatcher.prototype,{
 			o._loops = loops;
 			o.play(ofs);
 		} catch( e ) {
-			null;
+			if(console) console.log(e);
 		}
 		return o;
 	}
@@ -6526,7 +6716,7 @@ flash.net.URLVariables.prototype = {
 			i = s.indexOf("&",o);
 			if(i < 0) i = l;
 			e = s.indexOf("=",o);
-			if(e == -1 || e > i) throw 2101;
+			if(e == -1 || e > i) throw new flash.errors.Error("Error #2101: The String passed to URLVariables.decode() must be a URL-encoded query string containing name/value pairs.",2101);
 			k = s.substring(o,e);
 			v = s.substring(e + 1,i);
 			if(Object.prototype.hasOwnProperty.call(this,k)) {
@@ -8762,173 +8952,6 @@ $hxClasses["haxe.Log"] = haxe.Log;
 haxe.Log.__name__ = ["haxe","Log"];
 haxe.Log.trace = function(v,infos) {
 	js.Boot.__trace(v,infos);
-};
-var js = {};
-js.Boot = function() { };
-$hxClasses["js.Boot"] = js.Boot;
-js.Boot.__name__ = ["js","Boot"];
-js.Boot.__unhtml = function(s) {
-	return s.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
-};
-js.Boot.__trace = function(v,i) {
-	var msg;
-	if(i != null) msg = i.fileName + ":" + i.lineNumber + ": "; else msg = "";
-	msg += js.Boot.__string_rec(v,"");
-	if(i != null && i.customParams != null) {
-		var _g = 0;
-		var _g1 = i.customParams;
-		while(_g < _g1.length) {
-			var v1 = _g1[_g];
-			++_g;
-			msg += "," + js.Boot.__string_rec(v1,"");
-		}
-	}
-	var d;
-	if(typeof(document) != "undefined" && (d = document.getElementById("haxe:trace")) != null) d.innerHTML += js.Boot.__unhtml(msg) + "<br/>"; else if(typeof console != "undefined" && console.log != null) console.log(msg);
-};
-js.Boot.__clear_trace = function() {
-	var d = document.getElementById("haxe:trace");
-	if(d != null) d.innerHTML = "";
-};
-js.Boot.isClass = function(o) {
-	return o.__name__;
-};
-js.Boot.isEnum = function(e) {
-	return e.__ename__;
-};
-js.Boot.getClass = function(o) {
-	if((o instanceof Array) && o.__enum__ == null) return Array; else {
-		var cl = o.__class__;
-		if(cl != null) return cl;
-		var name = js.Boot.__nativeClassName(o);
-		if(name != null) return js.Boot.__resolveNativeClass(name);
-		return null;
-	}
-};
-js.Boot.__string_rec = function(o,s) {
-	if(o == null) return "null";
-	if(s.length >= 5) return "<...>";
-	var t = typeof(o);
-	if(t == "function" && (o.__name__ || o.__ename__)) t = "object";
-	switch(t) {
-	case "object":
-		if(o instanceof Array) {
-			if(o.__enum__) {
-				if(o.length == 2) return o[0];
-				var str = o[0] + "(";
-				s += "\t";
-				var _g1 = 2;
-				var _g = o.length;
-				while(_g1 < _g) {
-					var i = _g1++;
-					if(i != 2) str += "," + js.Boot.__string_rec(o[i],s); else str += js.Boot.__string_rec(o[i],s);
-				}
-				return str + ")";
-			}
-			var l = o.length;
-			var i1;
-			var str1 = "[";
-			s += "\t";
-			var _g2 = 0;
-			while(_g2 < l) {
-				var i2 = _g2++;
-				str1 += (i2 > 0?",":"") + js.Boot.__string_rec(o[i2],s);
-			}
-			str1 += "]";
-			return str1;
-		}
-		var tostr;
-		try {
-			tostr = o.toString;
-		} catch( e ) {
-			return "???";
-		}
-		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
-			var s2 = o.toString();
-			if(s2 != "[object Object]") return s2;
-		}
-		var k = null;
-		var str2 = "{\n";
-		s += "\t";
-		var hasp = o.hasOwnProperty != null;
-		for( var k in o ) {
-		if(hasp && !o.hasOwnProperty(k)) {
-			continue;
-		}
-		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
-			continue;
-		}
-		if(str2.length != 2) str2 += ", \n";
-		str2 += s + k + " : " + js.Boot.__string_rec(o[k],s);
-		}
-		s = s.substring(1);
-		str2 += "\n" + s + "}";
-		return str2;
-	case "function":
-		return "<function>";
-	case "string":
-		return o;
-	default:
-		return String(o);
-	}
-};
-js.Boot.__interfLoop = function(cc,cl) {
-	if(cc == null) return false;
-	if(cc == cl) return true;
-	var intf = cc.__interfaces__;
-	if(intf != null) {
-		var _g1 = 0;
-		var _g = intf.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			var i1 = intf[i];
-			if(i1 == cl || js.Boot.__interfLoop(i1,cl)) return true;
-		}
-	}
-	return js.Boot.__interfLoop(cc.__super__,cl);
-};
-js.Boot.__instanceof = function(o,cl) {
-	if(cl == null) return false;
-	switch(cl) {
-	case Int:
-		return (o|0) === o;
-	case Float:
-		return typeof(o) == "number";
-	case Bool:
-		return typeof(o) == "boolean";
-	case String:
-		return typeof(o) == "string";
-	case Array:
-		return (o instanceof Array) && o.__enum__ == null;
-	case Dynamic:
-		return true;
-	default:
-		if(o != null) {
-			if(typeof(cl) == "function") {
-				if(o instanceof cl) return true;
-				if(js.Boot.__interfLoop(js.Boot.getClass(o),cl)) return true;
-			} else if(typeof(cl) == "object" && js.Boot.__isNativeObj(cl)) {
-				if(o instanceof cl) return true;
-			}
-		} else return false;
-		if(cl == Class && o.__name__ != null) return true;
-		if(cl == Enum && o.__ename__ != null) return true;
-		return o.__enum__ == cl;
-	}
-};
-js.Boot.__cast = function(o,t) {
-	if(js.Boot.__instanceof(o,t)) return o; else throw "Cannot cast " + Std.string(o) + " to " + Std.string(t);
-};
-js.Boot.__nativeClassName = function(o) {
-	var name = js.Boot.__toStr.call(o).slice(8,-1);
-	if(name == "Object" || name == "Function" || name == "Math" || name == "JSON") return null;
-	return name;
-};
-js.Boot.__isNativeObj = function(o) {
-	return js.Boot.__nativeClassName(o) != null;
-};
-js.Boot.__resolveNativeClass = function(name) {
-	if(typeof window != "undefined") return window[name]; else return global[name];
 };
 flixel.system.frontEnds.PluginFrontEnd = function() {
 	this.list = [];
@@ -24441,7 +24464,7 @@ openfl.Assets.exists = function(id,type) {
 	var ln = id.substring(0,i);
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
-	if(lr != null) r = lr != null && lr.exists(sn,type); else null;
+	if(lr != null) r = lr != null && lr.exists(sn,type); else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.getBitmapData = function(id,useCache) {
@@ -24461,8 +24484,8 @@ openfl.Assets.getBitmapData = function(id,useCache) {
 			if(useCache) {
 				if(c.get_enabled()) c.bitmapData.set(id,r);
 			} else r = r.clone();
-		} else null;
-	} else null;
+		} else if(console) console.log("[openfl.Assets] There is no BitmapData asset with an ID of \"" + sn + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.getBytes = function(id) {
@@ -24474,9 +24497,9 @@ openfl.Assets.getBytes = function(id) {
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
 		if(lr.exists(sn,openfl.AssetType.BINARY)) {
-			if(lr.isLocal(sn,openfl.AssetType.BINARY)) r = lr.getBytes(sn); else null;
-		} else null;
-	} else null;
+			if(lr.isLocal(sn,openfl.AssetType.BINARY)) r = lr.getBytes(sn); else if(console) console.log("[openfl.Assets] Binary asset \"" + id + "\" exists, but only asynchronously");
+		} else if(console) console.log("[openfl.Assets] There is no binary asset with an id of \"" + sn + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.getFont = function(id,useCache) {
@@ -24493,9 +24516,9 @@ openfl.Assets.getFont = function(id,useCache) {
 			if(lr.isLocal(sn,openfl.AssetType.FONT)) {
 				r = lr.getFont(sn);
 				if(useCache && openfl.Assets.cache.get_enabled()) openfl.Assets.cache.font.set(id,r);
-			} else null;
-		} else null;
-	} else null;
+			} else if(console) console.log("[openfl.Assets] Font asset \"" + id + "\" exists, but only asynchronously");
+		} else if(console) console.log("[openfl.Assets] There is no font asset with an id of \"" + sn + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.getLibrary = function(name) {
@@ -24510,9 +24533,9 @@ openfl.Assets.getMovieClip = function(id) {
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
 		if(lr.exists(sn,openfl.AssetType.MOVIE_CLIP)) {
-			if(lr.isLocal(sn,openfl.AssetType.MOVIE_CLIP)) r = lr.getMovieClip(sn); else null;
-		} else null;
-	} else null;
+			if(lr.isLocal(sn,openfl.AssetType.MOVIE_CLIP)) r = lr.getMovieClip(sn); else if(console) console.log("[openfl.Assets] MovieClip asset \"" + id + "\" exists, but only asynchronously");
+		} else if(console) console.log("[openfl.Assets] There is no MovieClip asset with an ID of \"" + id + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.getMusic = function(id,useCache) {
@@ -24532,9 +24555,9 @@ openfl.Assets.getMusic = function(id,useCache) {
 			if(lr.isLocal(sn,openfl.AssetType.MUSIC)) {
 				r = lr.getMusic(sn);
 				if(useCache && openfl.Assets.cache.get_enabled()) openfl.Assets.cache.sound.set(id,r);
-			} else null;
-		} else null;
-	} else null;
+			} else if(console) console.log("[openfl.Assets] Sound asset \"" + id + "\" exists, but only asynchronously");
+		} else if(console) console.log("[openfl.Assets] There is no Sound asset with an ID of \"" + id + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.getPath = function(id) {
@@ -24545,8 +24568,8 @@ openfl.Assets.getPath = function(id) {
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
-		if(lr.exists(sn,null)) r = lr.getPath(sn); else null;
-	} else null;
+		if(lr.exists(sn,null)) r = lr.getPath(sn); else if(console) console.log("[openfl.Assets] There is no asset with an ID of \"" + id + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.getSound = function(id,useCache) {
@@ -24566,9 +24589,9 @@ openfl.Assets.getSound = function(id,useCache) {
 			if(lr.isLocal(sn,openfl.AssetType.SOUND)) {
 				r = lr.getMusic(sn);
 				if(useCache && openfl.Assets.cache.get_enabled()) openfl.Assets.cache.sound.set(id,r);
-			} else null;
-		} else null;
-	} else null;
+			} else if(console) console.log("[openfl.Assets] Sound asset \"" + id + "\" exists, but only asynchronously");
+		} else if(console) console.log("[openfl.Assets] There is no Sound asset with an ID of \"" + id + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.getText = function(id) {
@@ -24580,9 +24603,9 @@ openfl.Assets.getText = function(id) {
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
 		if(lr.exists(sn,openfl.AssetType.TEXT)) {
-			if(lr.isLocal(sn,openfl.AssetType.TEXT)) r = lr.getText(sn); else null;
-		} else null;
-	} else null;
+			if(lr.isLocal(sn,openfl.AssetType.TEXT)) r = lr.getText(sn); else if(console) console.log("[openfl.Assets] Text asset \"" + id + "\" exists, but only asynchronously");
+		} else if(console) console.log("[openfl.Assets] There is no text asset with an id of \"" + sn + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.initialize = function() {
@@ -24610,7 +24633,7 @@ openfl.Assets.isLocal = function(id,type,useCache) {
 	var ln = id.substring(0,i);
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
-	if(lr != null) r = lr.isLocal(sn,type); else null;
+	if(lr != null) r = lr.isLocal(sn,type); else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	return r;
 };
 openfl.Assets.isValidBitmapData = function(bitmapData) {
@@ -24650,7 +24673,7 @@ openfl.Assets.loadBitmapData = function(id,handler,useCache) {
 			sn2 = sn;
 			lr2 = lr;
 		}
-	} else null;
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	if(r != null) {
 		if(r) {
 			if(useCache && openfl.Assets.cache.get_enabled()) lr2.loadBitmapData(sn2,function(b1) {
@@ -24658,7 +24681,7 @@ openfl.Assets.loadBitmapData = function(id,handler,useCache) {
 				handler(b1);
 			}); else lr2.loadBitmapData(sn2,handler);
 			return;
-		} else null;
+		} else if(console) console.log("[openfl.Assets] There is no BitmapData asset with an ID of \"" + id + "\"");
 	}
 	handler(null);
 };
@@ -24670,8 +24693,8 @@ openfl.Assets.loadBytes = function(id,handler) {
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
-		if(r = lr.exists(sn,openfl.AssetType.BINARY)) lr.loadBytes(sn,handler); else null;
-	} else null;
+		if(r = lr.exists(sn,openfl.AssetType.BINARY)) lr.loadBytes(sn,handler); else if(console) console.log("[openfl.Assets] There is no binary asset with an ID of \"" + id + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	if(r) return;
 	handler(null);
 };
@@ -24694,7 +24717,7 @@ openfl.Assets.loadFont = function(id,handler,useCache) {
 			lr2 = lr;
 			sn2 = sn;
 		}
-	} else null;
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	if(r != null) {
 		if(r) {
 			if(useCache && openfl.Assets.cache.get_enabled()) lr2.loadFont(sn2,function(o) {
@@ -24702,7 +24725,7 @@ openfl.Assets.loadFont = function(id,handler,useCache) {
 				handler(o);
 			}); else lr2.loadFont(sn2,handler);
 			return;
-		} else null;
+		} else if(console) console.log("[openfl.Assets] There is no font asset with an ID of \"" + id + "\"");
 	}
 	handler(null);
 };
@@ -24715,7 +24738,7 @@ openfl.Assets.loadLibrary = function(name,handler) {
 		var library = unserializer.unserialize();
 		openfl.Assets.libraries.set(name,library);
 		library.load(handler);
-	} else null;
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + name + "\"");
 };
 openfl.Assets.loadMusic = function(id,handler,useCache) {
 	if(useCache == null) useCache = true;
@@ -24737,7 +24760,7 @@ openfl.Assets.loadMusic = function(id,handler,useCache) {
 			lr2 = lr;
 			sn2 = sn;
 		}
-	} else null;
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	if(r != null) {
 		if(r) {
 			if(useCache && openfl.Assets.cache.get_enabled()) lr2.loadMusic(sn2,function(s) {
@@ -24745,7 +24768,7 @@ openfl.Assets.loadMusic = function(id,handler,useCache) {
 				handler(s);
 			}); else lr2.loadMusic(sn2,handler);
 			return;
-		} else null;
+		} else if(console) console.log("[openfl.Assets] There is no sound asset with an ID of \"" + id + "\"");
 	}
 	handler(null);
 };
@@ -24757,8 +24780,8 @@ openfl.Assets.loadMovieClip = function(id,handler) {
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
-		if(r = lr.exists(sn,openfl.AssetType.MOVIE_CLIP)) lr.loadMovieClip(sn,handler); else null;
-	} else null;
+		if(r = lr.exists(sn,openfl.AssetType.MOVIE_CLIP)) lr.loadMovieClip(sn,handler); else if(console) console.log("[openfl.Assets] There is no MovieClip asset with an ID of \"" + id + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	if(r) return;
 	handler(null);
 };
@@ -24782,7 +24805,7 @@ openfl.Assets.loadSound = function(id,handler,useCache) {
 			lr2 = lr;
 			sn2 = sn;
 		}
-	} else null;
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	if(r != null) {
 		if(r) {
 			if(useCache && openfl.Assets.cache.get_enabled()) lr2.loadSound(sn2,function(s) {
@@ -24790,7 +24813,7 @@ openfl.Assets.loadSound = function(id,handler,useCache) {
 				handler(s);
 			}); else lr2.loadSound(sn2,handler);
 			return;
-		} else null;
+		} else if(console) console.log("[openfl.Assets] There is no sound asset with an ID of \"" + id + "\"");
 	}
 	handler(null);
 };
@@ -24802,8 +24825,8 @@ openfl.Assets.loadText = function(id,handler) {
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
-		if(r = lr.exists(sn,openfl.AssetType.TEXT)) lr.loadText(sn,handler); else null;
-	} else null;
+		if(r = lr.exists(sn,openfl.AssetType.TEXT)) lr.loadText(sn,handler); else if(console) console.log("[openfl.Assets] There is no text asset with an ID of \"" + id + "\"");
+	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
 	if(r) return;
 	handler(null);
 };
@@ -24954,6 +24977,7 @@ flixel.FlxObject.WALL = 17;
 flixel.FlxObject.ANY = 4369;
 flixel.FlxObject._firstSeparateFlxRect = flixel.util.FlxRect.get(null,null,null,null);
 flixel.FlxObject._secondSeparateFlxRect = flixel.util.FlxRect.get(null,null,null,null);
+js.Boot.__toStr = {}.toString;
 flash.geom.Transform.DEG_TO_RAD = Math.PI / 180.0;
 flash.geom.Matrix.pool = [];
 haxe.ds.ObjectMap.count = 0;
@@ -24982,7 +25006,6 @@ flixel.system.frontEnds.HTML5FrontEnd.CHROME = "Chrome";
 flixel.system.frontEnds.HTML5FrontEnd.FIREFOX = "Firefox";
 flixel.system.frontEnds.HTML5FrontEnd.SAFARI = "Safari";
 flixel.system.frontEnds.HTML5FrontEnd.OPERA = "Opera";
-js.Boot.__toStr = {}.toString;
 flixel.util.FlxPath.FORWARD = 0;
 flixel.util.FlxPath.BACKWARD = 1;
 flixel.util.FlxPath.LOOP_FORWARD = 16;
@@ -25305,3 +25328,5 @@ openfl.Assets.libraries = new haxe.ds.StringMap();
 openfl.Assets.initialized = false;
 ApplicationMain.main();
 })();
+
+//# sourceMappingURL=FlixelExample.js.map

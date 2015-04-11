@@ -25,6 +25,25 @@ class Bread extends FlxSprite
 	
 	override function update():Void
 	{
+		trace(y);
+		
+		if (x+width > 800 && velocity.x>0)
+		{
+			velocity.x *= -1;
+		}
+		if (x < 0 && velocity.x<0)
+		{
+			velocity.x *= -1;
+		}
+		if (y < 0 && velocity.y<0)
+		{
+			velocity.y *= -1;
+		}
+		if (y+height > 480 && velocity.y>0)
+		{
+			velocity.y *= -1;
+		}
+		
 		acceleration.set(0, 0);
 		if (mPlayerInput.left())
 		{

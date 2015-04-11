@@ -1,5 +1,7 @@
-import lime.Assets;
 #if !macro
+
+
+@:access(lime.Assets)
 
 
 class ApplicationMain {
@@ -11,8 +13,15 @@ class ApplicationMain {
 	
 	public static function create ():Void {
 		
-		var app = new openfl.display.Application ();
+		var app = new lime.app.Application ();
 		app.create (config);
+		openfl.Lib.application = app;
+		
+		#if !flash
+		var stage = new openfl.display.Stage (app.window.width, app.window.height, config.background);
+		stage.addChild (openfl.Lib.current);
+		app.addModule (stage);
+		#end
 		
 		var display = new NMEPreloader ();
 		
@@ -26,23 +35,23 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/sounds/beep.mp3");
-		types.push (AssetType.MUSIC);
+		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
 		urls.push ("assets/sounds/flixel.mp3");
-		types.push (AssetType.MUSIC);
+		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
 		urls.push ("img/BreadBottom.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/BreadTop.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/Tomato.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		
@@ -50,7 +59,7 @@ class ApplicationMain {
 			
 			for (i in 0...urls.length) {
 				
-				if (types[i] != AssetType.FONT) {
+				if (types[i] != lime.Assets.AssetType.FONT) {
 					
 					urls[i] = config.assetsPrefix + urls[i];
 					
@@ -65,7 +74,7 @@ class ApplicationMain {
 		
 		var result = app.exec ();
 		
-		#if (sys && !emscripten)
+		#if (sys && !nodejs && !emscripten)
 		Sys.exit (result);
 		#end
 		
@@ -108,22 +117,26 @@ class ApplicationMain {
 			antialiasing: Std.int (0),
 			background: Std.int (0),
 			borderless: false,
+			company: "tomas",
 			depthBuffer: false,
+			file: "FlixelExample",
 			fps: Std.int (60),
 			fullscreen: false,
 			height: Std.int (480),
 			orientation: "",
+			packageName: "FlixelExample",
 			resizable: true,
-			stencilBuffer: false,
+			stencilBuffer: true,
 			title: "FlixelExample",
+			version: "1.0.0",
 			vsync: false,
 			width: Std.int (800),
 			
 		}
 		
-		#if js
+		#if (js && html5)
 		#if (munit || utest)
-		flash.Lib.embed (null, 800, 480, "000000");
+		openfl.Lib.embed (null, 800, 480, "000000");
 		#end
 		#else
 		create ();
@@ -147,6 +160,8 @@ class ApplicationMain {
 			}
 			
 		}
+		
+		lime.Assets.initialize ();
 		
 		if (hasMain) {
 			
