@@ -3,19 +3,21 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="Hamburger" package="Hamburger" version="1.0.0" company="Arreche-Piaggio" />
+	<meta title="FlixelExample" package="FlixelExample" version="1.0.0" company="tomas" />
 	
 	<!-- output -->
-	<app main="Main" file="Hamburger" path="bin" />
+	<app main="Main" file="FlixelExample" path="bin" />
 	
 	<window background="#000000" fps="60" />
 	<window width="800" height="480" unless="mobile" />
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
+	<app swf-version="11.8" />
 	
 	<!-- classpath, haxe libs -->
 	<source path="src" />
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
+	<haxelib name="flixel" />
 	
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
