@@ -16,9 +16,8 @@ ApplicationMain.loaders = null;
 ApplicationMain.urlLoaders = null;
 ApplicationMain.loaderStack = null;
 ApplicationMain.urlLoaderStack = null;
-ApplicationMain.embeds = null;
 ApplicationMain.loadEmbed = function(o) {
-	ApplicationMain.embeds = (ApplicationMain.embeds != null?ApplicationMain.embeds:0) + 1;
+	ApplicationMain.embeds++;
 	var f = null;
 	f = function(_) {
 		o.removeEventListener("load",f);
@@ -27,7 +26,7 @@ ApplicationMain.loadEmbed = function(o) {
 	o.addEventListener("load",f);
 };
 ApplicationMain.main = function() {
-	if(ApplicationMain.embeds == null || ApplicationMain.embeds == 0) ApplicationMain.preload();
+	if(ApplicationMain.embeds == 0) ApplicationMain.preload();
 };
 ApplicationMain.preload = function() {
 	ApplicationMain.completed = 0;
@@ -179,7 +178,9 @@ flash.events.EventDispatcher.prototype = {
 		} else o = this.eventList.get(type);
 		o.push(listener);
 	}
-	,removeEventListener: function(type,listener,useCapture) {
+	,removeEventListener: function(type,listener,useCapture,priority,weak) {
+		if(weak == null) weak = false;
+		if(priority == null) priority = 0;
 		if(useCapture == null) useCapture = false;
 		if(this.eventList.exists(type)) {
 			var r = this.eventList.get(type);
@@ -200,13 +201,15 @@ flash.events.EventDispatcher.prototype = {
 	}
 	,dispatchEvent: function(event) {
 		if(event.get_target() == null) event.set_target(this);
-		event.set_currentTarget(this);
 		var t = event.type;
 		if(this.eventList.exists(t)) {
-			var list = this.eventList.get(t);
-			var i = 0;
-			var n = list.length;
-			while(i < n) list[i++](event);
+			var _g = 0;
+			var _g1 = this.eventList.get(t);
+			while(_g < _g1.length) {
+				var o = _g1[_g];
+				++_g;
+				o(event);
+			}
 		}
 		return true;
 	}
@@ -238,9 +241,11 @@ flash.events.EventWrapper.prototype = $extend(flash.events.EventDispatcher.proto
 		if(!(this.eventMap.h.__keys__[listener.__id__] != null)) this.eventMap.set(listener,f);
 		this.component.addEventListener(type,f,useCapture);
 	}
-	,removeEventListener: function(type,listener,useCapture) {
+	,removeEventListener: function(type,listener,useCapture,priority,weak) {
+		if(weak == null) weak = false;
+		if(priority == null) priority = 0;
 		if(useCapture == null) useCapture = false;
-		flash.events.EventDispatcher.prototype.removeEventListener.call(this,type,listener,useCapture);
+		flash.events.EventDispatcher.prototype.removeEventListener.call(this,type,listener,useCapture,priority,weak);
 		if(this.eventMap.h.__keys__[listener.__id__] != null) {
 			this.component.removeEventListener(type,this.eventMap.h[listener.__id__],useCapture);
 			this.eventMap.remove(listener);
@@ -261,7 +266,6 @@ flash.display.DisplayObject = function() {
 	this.eventRemap = new haxe.ds.StringMap();
 	if(this.component == null) this.component = flash.Lib.jsNode("div");
 	this.component.node = this;
-	this.component.setAttribute("node",Type.getClassName(Type.getClass(this)));
 	this.transform = new flash.geom.Transform(this);
 };
 $hxClasses["flash.display.DisplayObject"] = flash.display.DisplayObject;
@@ -269,13 +273,6 @@ flash.display.DisplayObject.__name__ = ["flash","display","DisplayObject"];
 flash.display.DisplayObject.convMatrix = null;
 flash.display.DisplayObject.convPoint = null;
 flash.display.DisplayObject.routedEvents = null;
-flash.display.DisplayObject.__init = function() {
-	flash.display.DisplayObject.routedEvents = new haxe.ds.StringMap();
-	var m = ["mouseMove","mouseOver","mouseOut","mouseClick","mouseDown","mouseUp","rightClick","rightMouseDown","rightMouseUp","middleClick","middleMouseDown","middleMouseUp","mouseWheel","touchMove","touchBegin","touchEnd"];
-	var i = -1;
-	var l = m.length;
-	while(++i < l) flash.display.DisplayObject.routedEvents.set(m[i],1);
-};
 flash.display.DisplayObject.__super__ = flash.events.EventWrapper;
 flash.display.DisplayObject.prototype = $extend(flash.events.EventWrapper.prototype,{
 	name: null
@@ -290,13 +287,13 @@ flash.display.DisplayObject.prototype = $extend(flash.events.EventWrapper.protot
 	,scrollRect: null
 	,mask: null
 	,transform: null
-	,__filters: null
+	,filters: null
 	,loaderInfo: null
 	,mouseX: null
 	,mouseY: null
-	,__stage: null
-	,__width: null
-	,__height: null
+	,_stage: null
+	,qWidth: null
+	,qHeight: null
 	,broadcastEvent: function(e) {
 		this.dispatchEvent(e);
 	}
@@ -319,7 +316,6 @@ flash.display.DisplayObject.prototype = $extend(flash.events.EventWrapper.protot
 			var m = this.transform.get_matrix();
 			if(m != null && !m.isIdentity()) v += "matrix(" + m.a + ", " + m.b + ", " + m.c + ", " + m.d + ", " + m.tx + ", " + m.ty + ")" + " ";
 		}
-		this.component.setAttribute("transform",v);
 		n = "transform";
 		s.setProperty(n,v,null);
 		s.setProperty("-o-" + n,v,null);
@@ -363,54 +359,43 @@ flash.display.DisplayObject.prototype = $extend(flash.events.EventWrapper.protot
 		return v;
 	}
 	,get_width: function() {
-		return this.__width || 0;
+		return this.qWidth || 0;
 	}
 	,get_height: function() {
-		return this.__height || 0;
+		return this.qHeight || 0;
 	}
 	,set_width: function(v) {
 		var q = this.get_width();
 		this.set_scaleX(q == 0 || q == null?1:v / q);
-		this.__width = v;
+		this.qWidth = v;
 		return v;
 	}
 	,set_height: function(v) {
 		var q = this.get_height();
 		this.set_scaleY(q == 0 || q == null?1:v / q);
-		this.__height = v;
+		this.qHeight = v;
 		return v;
 	}
 	,set_alpha: function(v) {
 		if(v != this.alpha) this.component.style.opacity = (this.alpha = v).toFixed(4);
 		return v;
 	}
-	,get_filters: function() {
-		if(this.__filters == null) return [];
-		return this.__filters.slice();
-	}
-	,set_filters: function(v) {
-		this.__filters = v;
-		return v;
-	}
 	,set_visible: function(v) {
-		if(this.visible != v) {
-			this.visible = v;
-			if(v) this.component.style.display = ""; else this.component.style.display = "none";
-		}
+		if(this.visible = v) this.component.style.display = null; else this.component.style.display = "none";
 		return v;
 	}
 	,set_scrollRect: function(v) {
 		var v1 = Std.string(this) + ".scrollRect = " + Std.string(v);
-		if(console) console.log(v1);
+		null;
 		return v;
 	}
 	,get_stage: function() {
-		return this.__stage;
+		return this._stage;
 	}
 	,set_stage: function(v) {
-		if(this.__stage != v) {
-			var z = this.__stage != null != (v != null);
-			this.__stage = v;
+		if(this._stage != v) {
+			var z = this._stage != null != (v != null);
+			this._stage = v;
 			if(z) this.dispatchEvent(new flash.events.Event(v != null?"addedToStage":"removedFromStage"));
 		}
 		return v;
@@ -505,33 +490,37 @@ flash.display.DisplayObject.prototype = $extend(flash.events.EventWrapper.protot
 		var l;
 		var x;
 		var y;
-		h.push(this);
-		if(mc.length > 0) m = mc.pop(); else m = new flash.geom.Matrix();
-		l = ms.length;
-		while(l <= d) {
-			o = h[l];
-			m.identity();
-			o.concatTransform(m);
-			m.invert();
-			if(mc.length > 0) m2 = mc.pop(); else m2 = new flash.geom.Matrix();
-			if(l > 0) m2.copy(ms[l - 1]); else m2.identity();
-			m2.concat(m);
-			ms.push(m2);
-			l++;
-		}
-		m.copy(ms[d]);
-		x = e.stageX * m.a + e.stageY * m.c + m.tx;
-		y = e.stageX * m.b + e.stageY * m.d + m.ty;
-		mc.push(m);
-		h.pop();
-		if(this.hitTestLocal(x,y,true,true)) {
-			if(e.relatedObject == null) {
-				e.localX = x;
-				e.localY = y;
-				e.relatedObject = this;
+		if(this.hasEventListener(t) || t == "mouseMove" && (this.hasEventListener(t = "mouseOver") || this.hasEventListener(t = "mouseOut"))) {
+			h.push(this);
+			if(mc.length > 0) m = mc.pop(); else m = new flash.geom.Matrix();
+			l = ms.length;
+			while(l <= d) {
+				o = h[l];
+				m.identity();
+				o.concatTransform(m);
+				m.invert();
+				if(mc.length > 0) m2 = mc.pop(); else m2 = new flash.geom.Matrix();
+				if(l > 0) m2.copy(ms[l - 1]); else m2.identity();
+				m2.concat(m);
+				ms.push(m2);
+				l++;
 			}
-			this.dispatchEvent(e);
-			return true;
+			m.copy(ms[d]);
+			x = e.stageX * m.a + e.stageY * m.c + m.tx;
+			y = e.stageX * m.b + e.stageY * m.d + m.ty;
+			mc.push(m);
+			h.pop();
+			if(this.hitTestLocal(x,y,true,true)) {
+				if(e.relatedObject == null) {
+					e.localX = x;
+					e.localY = y;
+					e.relatedObject = this;
+				}
+				if(t == e.type) {
+					this.dispatchEvent(e);
+					return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -547,7 +536,7 @@ flash.display.DisplayObject.prototype = $extend(flash.events.EventWrapper.protot
 		return Type.getClassName(Type.getClass(this));
 	}
 	,__class__: flash.display.DisplayObject
-	,__properties__: {get_mouseY:"get_mouseY",get_mouseX:"get_mouseX",set_filters:"set_filters",get_filters:"get_filters",set_scrollRect:"set_scrollRect",set_height:"set_height",get_height:"get_height",set_width:"set_width",get_width:"get_width",set_y:"set_y",set_x:"set_x",set_rotation:"set_rotation",set_scaleY:"set_scaleY",set_scaleX:"set_scaleX",set_alpha:"set_alpha",set_visible:"set_visible",set_stage:"set_stage",get_stage:"get_stage"}
+	,__properties__: {get_mouseY:"get_mouseY",get_mouseX:"get_mouseX",set_scrollRect:"set_scrollRect",set_height:"set_height",get_height:"get_height",set_width:"set_width",get_width:"get_width",set_y:"set_y",set_x:"set_x",set_rotation:"set_rotation",set_scaleY:"set_scaleY",set_scaleX:"set_scaleX",set_alpha:"set_alpha",set_visible:"set_visible",set_stage:"set_stage",get_stage:"get_stage"}
 });
 flash.display.InteractiveObject = function() {
 	flash.display.DisplayObject.call(this);
@@ -596,15 +585,13 @@ flash.display.DisplayObjectContainer.prototype = $extend(flash.display.Interacti
 		return o;
 	}
 	,removeChild: function(o) {
-		if(o.parent == this) {
-			o.parent = null;
-			o.set_stage(null);
-			HxOverrides.remove(this.children,o);
-			this.component.removeChild(o.component);
-			var e = new flash.events.Event("removed");
-			o.dispatchEvent(e);
-			this.dispatchEvent(e);
-		}
+		o.parent = null;
+		o.set_stage(null);
+		HxOverrides.remove(this.children,o);
+		this.component.removeChild(o.component);
+		var e = new flash.events.Event("removed");
+		o.dispatchEvent(e);
+		this.dispatchEvent(e);
 		return o;
 	}
 	,addChildAt: function(o,v) {
@@ -635,12 +622,6 @@ flash.display.DisplayObjectContainer.prototype = $extend(flash.display.Interacti
 		while(++i < l) if(this.children[i] == v) return i;
 		return -1;
 	}
-	,setChildIndex: function(v,i) {
-		if(v.parent == this && i >= 0 && i <= this.children.length) {
-			this.removeChild(v);
-			this.addChildAt(v,i);
-		}
-	}
 	,contains: function(v) {
 		var _g = 0;
 		var _g1 = this.children;
@@ -664,18 +645,13 @@ flash.display.DisplayObjectContainer.prototype = $extend(flash.display.Interacti
 	,broadcastMouse: function(h,e,ms,mc) {
 		if(!this.visible) return false;
 		var r = false;
+		var l = this.children.length;
+		var i = this.children.length;
 		if(this.mouseChildren) {
-			var i = this.children.length;
-			if(i > 0) {
-				h.push(this);
-				while(--i >= 0) if(this.children[i].broadcastMouse(h,e,ms,mc)) {
-					r = true;
-					break;
-				}
-				h.pop();
-			}
+			h.push(this);
+			while(--i >= 0) r = r || this.children[i].broadcastMouse(h,e,ms,mc);
+			h.pop();
 		}
-		while(ms.length > h.length) mc.push(ms.pop());
 		r = r || flash.display.InteractiveObject.prototype.broadcastMouse.call(this,h,e,ms,mc);
 		while(ms.length > h.length) mc.push(ms.pop());
 		return r;
@@ -748,29 +724,19 @@ flash.display.Sprite.prototype = $extend(flash.display.DisplayObjectContainer.pr
 		if(z && this._graphics != null) this._graphics.invalidate();
 		return r;
 	}
-	,set_buttonMode: function(o) {
+	,set_useHandCursor: function(o) {
 		if(o) this.component.style.cursor = "pointer"; else this.component.style.cursor = null;
 		return this.useHandCursor = o;
-	}
-	,startDrag: function(c,r) {
-		if(this.get_stage() != null) this.get_stage().__startDrag(this,c,r);
-	}
-	,stopDrag: function() {
-		if(this.get_stage() != null) this.get_stage().__stopDrag(this);
 	}
 	,drawToSurface: function(cnv,ctx,mtx,ctr,blendMode,clipRect,smoothing) {
 		this.get_graphics().drawToSurface(cnv,ctx,mtx,ctr,blendMode,clipRect,smoothing);
 	}
 	,hitTestLocal: function(x,y,p,v) {
-		if(flash.display.DisplayObjectContainer.prototype.hitTestLocal.call(this,x,y,p,v)) return true;
-		if(!v || this.visible) {
-			var g = this._graphics;
-			if(g != null) return g.hitTestLocal(x,y,p);
-		}
-		return false;
+		var g;
+		return (!v || this.visible) && (flash.display.DisplayObjectContainer.prototype.hitTestLocal.call(this,x,y,p,v) || (g = this._graphics) != null && g.hitTestLocal(x,y,p));
 	}
 	,__class__: flash.display.Sprite
-	,__properties__: $extend(flash.display.DisplayObjectContainer.prototype.__properties__,{set_buttonMode:"set_buttonMode",get_graphics:"get_graphics"})
+	,__properties__: $extend(flash.display.DisplayObjectContainer.prototype.__properties__,{set_useHandCursor:"set_useHandCursor",get_graphics:"get_graphics"})
 });
 var Main = function() {
 	flash.display.Sprite.call(this);
@@ -2455,9 +2421,6 @@ EReg.prototype = {
 		this.r.s = s;
 		return this.r.m != null;
 	}
-	,matched: function(n) {
-		if(this.r.m != null && n >= 0 && n < this.r.m.length) return this.r.m[n]; else throw "EReg::matched";
-	}
 	,__class__: EReg
 };
 flixel.group = {};
@@ -2676,7 +2639,7 @@ flixel.group.FlxTypedGroup.prototype = $extend(flixel.FlxBasic.prototype,{
 	}
 	,clear: function() {
 		this.length = 0;
-		flixel.util.FlxArrayUtil.clearArray(this.members);
+		flixel.util.FlxArrayUtil.clearArray_flixel_group_FlxTypedGroup_T(this.members);
 	}
 	,kill: function() {
 		var i = 0;
@@ -2885,8 +2848,11 @@ GameState.prototype = $extend(flixel.FlxState.prototype,{
 	,time: null
 	,update: function() {
 		flixel.FlxState.prototype.update.call(this);
-		var collide = flixel.FlxG.overlap(this.mBreadTop,this.mBreadBottom,null,flixel.FlxObject.separate);
-		haxe.Log.trace(collide,{ fileName : "GameState.hx", lineNumber : 49, className : "GameState", methodName : "update"});
+		this.mBreadTop.set_immovable(false);
+		this.mBreadBottom.set_immovable(false);
+		flixel.FlxG.overlap(this.mBreadTop,this.mBreadBottom,null,flixel.FlxObject.separate);
+		this.mBreadTop.set_immovable(true);
+		this.mBreadBottom.set_immovable(true);
 		flixel.FlxG.overlap(this.mBreadTop,this.mIngredients,null,flixel.FlxObject.separate);
 		flixel.FlxG.overlap(this.mBreadBottom,this.mIngredients,null,flixel.FlxObject.separate);
 		flixel.FlxG.overlap(this.mIngredients,this.mIngredients,null,flixel.FlxObject.separate);
@@ -3489,7 +3455,6 @@ flash.display.Stage = function() {
 	o.addEventListener("mouseup",$bind(this,this.onMouse));
 	o.addEventListener("mousemove",$bind(this,this.onMouse));
 	o.addEventListener("mousewheel",$bind(this,this.onWheel));
-	o.addEventListener("DOMMouseScroll",$bind(this,this.onWheel));
 	o.addEventListener("touchmove",this.getOnTouch(0));
 	o.addEventListener("touchstart",this.getOnTouch(1));
 	o.addEventListener("touchend",this.getOnTouch(2));
@@ -3564,9 +3529,7 @@ flash.display.Stage.prototype = $extend(flash.display.DisplayObjectContainer.pro
 		return new flash.events.MouseEvent(type,true,false,null,null,null,e.ctrlKey,e.altKey,e.shiftKey);
 	}
 	,_translateTouchEvent: function(e,o,type) {
-		var r = new flash.events.TouchEvent(type,true,false,o.identifier,false,null,null,o.radiusX,o.radiusY,o.force,null,e.ctrlKey,e.altKey,e.shiftKey);
-		r.__jsEvent = e;
-		return r;
+		return new flash.events.TouchEvent(type,true,false,o.identifier,false,null,null,o.radiusX,o.radiusY,o.force,null,e.ctrlKey,e.altKey,e.shiftKey);
 	}
 	,mouseEventPrevent: function(o,x,y) {
 		var mp = this.mousePos;
@@ -3603,14 +3566,8 @@ flash.display.Stage.prototype = $extend(flash.display.DisplayObjectContainer.pro
 		e.preventDefault();
 		this.isTouchScreen = true;
 		if(qt != null && (m == 0 || m == 1 && nt == nc || m == 2 && nt == 0 && nc > 0) && !this.mouseEventPrevent(m,qt.pageX,qt.pageY)) {
-			this.mouseLastEvent = new flash.events.MouseEvent(m == 1?"mouseDown":m == 2?"mouseUp":"mouseMove");
-			this.mouseLastEvent.__jsEvent = e;
-			this._broadcastMouseEvent(this.mouseLastEvent);
-			if(m == 2) {
-				var ec = new flash.events.MouseEvent("mouseClick");
-				ec.__jsEvent = e;
-				this._broadcastMouseEvent(ec);
-			}
+			this._broadcastMouseEvent(this.mouseLastEvent = new flash.events.MouseEvent(m == 1?"mouseDown":m == 2?"mouseUp":"mouseMove"));
+			if(m == 2) this._broadcastMouseEvent(new flash.events.MouseEvent("mouseClick"));
 		}
 		if(nc > 0) {
 			switch(m) {
@@ -3632,11 +3589,7 @@ flash.display.Stage.prototype = $extend(flash.display.DisplayObjectContainer.pro
 	}
 	,onWheel: function(e) {
 		var f = this._translateMouseEvent(e,"mouseWheel");
-		var d = e.wheelDelta;
-		if(d != null) {
-			if(Math.abs(d) > 40) d = Math.round(d / 40); else if(d < 0) d = -1; else if(d > 0) d = 1; else d = 0;
-		} else d = -e.detail;
-		f.delta = d;
+		f.delta = Math.round(e.wheelDelta / 40);
 		this.mousePos.setTo(e.pageX,e.pageY);
 		this._broadcastMouseEvent(f);
 	}
@@ -3666,48 +3619,7 @@ flash.display.Stage.prototype = $extend(flash.display.DisplayObjectContainer.pro
 				return;
 			}
 		}
-		if(!this.mouseEventPrevent(o,e.pageX,e.pageY)) {
-			this.mouseLastEvent = new flash.events.MouseEvent(t);
-			this.mouseLastEvent.__jsEvent = e;
-			this._broadcastMouseEvent(this.mouseLastEvent);
-		}
-	}
-	,__dragging: null
-	,__dragObject: null
-	,__dragBounds: null
-	,__dragOffsetX: null
-	,__dragOffsetY: null
-	,__onDrag: function(e) {
-		var parent = this.__dragObject.parent;
-		if(parent == null) return;
-		var mouse = parent.globalToLocal(this.mousePos);
-		var x = this.__dragOffsetX + mouse.x;
-		var y = this.__dragOffsetY + mouse.y;
-		var r = this.__dragBounds;
-		if(r != null) {
-			if(x < r.x) x = r.x; else if(x > r.x + r.width) x = r.x + r.width;
-			if(y < r.y) y = r.y; else if(y > r.y + r.height) y = r.y + r.height;
-		}
-		this.__dragObject.set_x(x);
-		this.__dragObject.set_y(y);
-	}
-	,__startDrag: function(o,c,r) {
-		if(this.__dragObject == null) this.addEventListener("mouseMove",$bind(this,this.__onDrag));
-		this.__dragObject = o;
-		if(c) {
-			this.__dragOffsetX = -this.__dragObject.get_width() / 2;
-			this.__dragOffsetY = -this.__dragObject.get_height() / 2;
-		} else {
-			var mouse = this.__dragObject.parent.globalToLocal(this.mousePos);
-			this.__dragOffsetX = this.__dragObject.x - mouse.x;
-			this.__dragOffsetY = this.__dragObject.y - mouse.y;
-		}
-	}
-	,__stopDrag: function(o) {
-		if(this.__dragObject != null) {
-			this.removeEventListener("mouseMove",$bind(this,this.__onDrag));
-			this.__dragObject = null;
-		}
+		if(!this.mouseEventPrevent(o,e.pageX,e.pageY)) this._broadcastMouseEvent(new flash.events.MouseEvent(t));
 	}
 	,hitTestLocal: function(x,y,p,v) {
 		return !v || this.visible;
@@ -3721,11 +3633,13 @@ flash.display.Stage.prototype = $extend(flash.display.DisplayObjectContainer.pro
 		flash.display.DisplayObjectContainer.prototype.addEventListener.call(this,type,listener,useCapture,priority,useWeakReference);
 		this.component = o;
 	}
-	,removeEventListener: function(type,listener,useCapture) {
+	,removeEventListener: function(type,listener,useCapture,priority,useWeakReference) {
+		if(useWeakReference == null) useWeakReference = false;
+		if(priority == null) priority = 0;
 		if(useCapture == null) useCapture = false;
 		var o = this.component;
 		this.component = window;
-		flash.display.DisplayObjectContainer.prototype.removeEventListener.call(this,type,listener,useCapture);
+		flash.display.DisplayObjectContainer.prototype.removeEventListener.call(this,type,listener,useCapture,priority,useWeakReference);
 		this.component = o;
 	}
 	,get_focus: function() {
@@ -3822,173 +3736,6 @@ flash.geom.Point.prototype = {
 	}
 	,__class__: flash.geom.Point
 	,__properties__: {get_length:"get_length"}
-};
-var js = {};
-js.Boot = function() { };
-$hxClasses["js.Boot"] = js.Boot;
-js.Boot.__name__ = ["js","Boot"];
-js.Boot.__unhtml = function(s) {
-	return s.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
-};
-js.Boot.__trace = function(v,i) {
-	var msg;
-	if(i != null) msg = i.fileName + ":" + i.lineNumber + ": "; else msg = "";
-	msg += js.Boot.__string_rec(v,"");
-	if(i != null && i.customParams != null) {
-		var _g = 0;
-		var _g1 = i.customParams;
-		while(_g < _g1.length) {
-			var v1 = _g1[_g];
-			++_g;
-			msg += "," + js.Boot.__string_rec(v1,"");
-		}
-	}
-	var d;
-	if(typeof(document) != "undefined" && (d = document.getElementById("haxe:trace")) != null) d.innerHTML += js.Boot.__unhtml(msg) + "<br/>"; else if(typeof console != "undefined" && console.log != null) console.log(msg);
-};
-js.Boot.__clear_trace = function() {
-	var d = document.getElementById("haxe:trace");
-	if(d != null) d.innerHTML = "";
-};
-js.Boot.isClass = function(o) {
-	return o.__name__;
-};
-js.Boot.isEnum = function(e) {
-	return e.__ename__;
-};
-js.Boot.getClass = function(o) {
-	if((o instanceof Array) && o.__enum__ == null) return Array; else {
-		var cl = o.__class__;
-		if(cl != null) return cl;
-		var name = js.Boot.__nativeClassName(o);
-		if(name != null) return js.Boot.__resolveNativeClass(name);
-		return null;
-	}
-};
-js.Boot.__string_rec = function(o,s) {
-	if(o == null) return "null";
-	if(s.length >= 5) return "<...>";
-	var t = typeof(o);
-	if(t == "function" && (o.__name__ || o.__ename__)) t = "object";
-	switch(t) {
-	case "object":
-		if(o instanceof Array) {
-			if(o.__enum__) {
-				if(o.length == 2) return o[0];
-				var str = o[0] + "(";
-				s += "\t";
-				var _g1 = 2;
-				var _g = o.length;
-				while(_g1 < _g) {
-					var i = _g1++;
-					if(i != 2) str += "," + js.Boot.__string_rec(o[i],s); else str += js.Boot.__string_rec(o[i],s);
-				}
-				return str + ")";
-			}
-			var l = o.length;
-			var i1;
-			var str1 = "[";
-			s += "\t";
-			var _g2 = 0;
-			while(_g2 < l) {
-				var i2 = _g2++;
-				str1 += (i2 > 0?",":"") + js.Boot.__string_rec(o[i2],s);
-			}
-			str1 += "]";
-			return str1;
-		}
-		var tostr;
-		try {
-			tostr = o.toString;
-		} catch( e ) {
-			return "???";
-		}
-		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
-			var s2 = o.toString();
-			if(s2 != "[object Object]") return s2;
-		}
-		var k = null;
-		var str2 = "{\n";
-		s += "\t";
-		var hasp = o.hasOwnProperty != null;
-		for( var k in o ) {
-		if(hasp && !o.hasOwnProperty(k)) {
-			continue;
-		}
-		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
-			continue;
-		}
-		if(str2.length != 2) str2 += ", \n";
-		str2 += s + k + " : " + js.Boot.__string_rec(o[k],s);
-		}
-		s = s.substring(1);
-		str2 += "\n" + s + "}";
-		return str2;
-	case "function":
-		return "<function>";
-	case "string":
-		return o;
-	default:
-		return String(o);
-	}
-};
-js.Boot.__interfLoop = function(cc,cl) {
-	if(cc == null) return false;
-	if(cc == cl) return true;
-	var intf = cc.__interfaces__;
-	if(intf != null) {
-		var _g1 = 0;
-		var _g = intf.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			var i1 = intf[i];
-			if(i1 == cl || js.Boot.__interfLoop(i1,cl)) return true;
-		}
-	}
-	return js.Boot.__interfLoop(cc.__super__,cl);
-};
-js.Boot.__instanceof = function(o,cl) {
-	if(cl == null) return false;
-	switch(cl) {
-	case Int:
-		return (o|0) === o;
-	case Float:
-		return typeof(o) == "number";
-	case Bool:
-		return typeof(o) == "boolean";
-	case String:
-		return typeof(o) == "string";
-	case Array:
-		return (o instanceof Array) && o.__enum__ == null;
-	case Dynamic:
-		return true;
-	default:
-		if(o != null) {
-			if(typeof(cl) == "function") {
-				if(o instanceof cl) return true;
-				if(js.Boot.__interfLoop(js.Boot.getClass(o),cl)) return true;
-			} else if(typeof(cl) == "object" && js.Boot.__isNativeObj(cl)) {
-				if(o instanceof cl) return true;
-			}
-		} else return false;
-		if(cl == Class && o.__name__ != null) return true;
-		if(cl == Enum && o.__ename__ != null) return true;
-		return o.__enum__ == cl;
-	}
-};
-js.Boot.__cast = function(o,t) {
-	if(js.Boot.__instanceof(o,t)) return o; else throw "Cannot cast " + Std.string(o) + " to " + Std.string(t);
-};
-js.Boot.__nativeClassName = function(o) {
-	var name = js.Boot.__toStr.call(o).slice(8,-1);
-	if(name == "Object" || name == "Function" || name == "Math" || name == "JSON") return null;
-	return name;
-};
-js.Boot.__isNativeObj = function(o) {
-	return js.Boot.__nativeClassName(o) != null;
-};
-js.Boot.__resolveNativeClass = function(name) {
-	if(typeof window != "undefined") return window[name]; else return global[name];
 };
 flash.geom.Transform = function(displayObject) {
 	if(displayObject == null) throw "Cannot create Transform with no DisplayObject.";
@@ -4319,7 +4066,6 @@ flash.Lib.jsHelper = function() {
 		var o = flash.Lib.jsNode("div");
 		flash.Lib.get_stage().component.appendChild(o);
 		o.style.visibility = "hidden";
-		o.setAttribute("node","flash.Lib.jsHelper");
 		o.appendChild(flash.Lib.qHelper = flash.Lib.jsNode("div"));
 	}
 	return flash.Lib.qHelper;
@@ -4352,7 +4098,6 @@ flash.Lib.setCSSProperties = function(o,k,v,f) {
 };
 flash.display.Bitmap = function(bitmapData,pixelSnapping,smoothing) {
 	if(smoothing == null) smoothing = false;
-	this.pixelSnapping = false;
 	this.smoothing = false;
 	flash.display.DisplayObject.call(this);
 	this.set_bitmapData(bitmapData);
@@ -4364,17 +4109,21 @@ flash.display.Bitmap.__super__ = flash.display.DisplayObject;
 flash.display.Bitmap.prototype = $extend(flash.display.DisplayObject.prototype,{
 	bitmapData: null
 	,smoothing: null
-	,pixelSnapping: null
 	,set_bitmapData: function(v) {
 		if(this.bitmapData != null) this.component.removeChild(this.bitmapData.component);
 		if(v != null) this.component.appendChild(v.handle());
 		return this.bitmapData = v;
 	}
+	,set_smoothing: function(v) {
+		var o = this.bitmapData.qContext;
+		o.imageSmoothingEnabled = o.oImageSmoothingEnabled = o.msImageSmoothingEnabled = o.webkitImageSmoothingEnabled = o.mozImageSmoothingEnabled = v;
+		return v;
+	}
 	,get_width: function() {
-		if(this.__width != null) return this.__width; else if(this.bitmapData != null) return this.bitmapData.component.width; else return 0;
+		if(this.qWidth != null) return this.qWidth; else if(this.bitmapData != null) return this.bitmapData.component.width; else return 0;
 	}
 	,get_height: function() {
-		if(this.__height != null) return this.__height; else if(this.bitmapData != null) return this.bitmapData.component.height; else return 0;
+		if(this.qHeight != null) return this.qHeight; else if(this.bitmapData != null) return this.bitmapData.component.height; else return 0;
 	}
 	,drawToSurface: function(cnv,ctx,matrix,ctr,blendMode,clipRect,smoothing) {
 		this.bitmapData.drawToSurface(cnv,ctx,matrix,ctr,blendMode,clipRect,smoothing);
@@ -4383,24 +4132,43 @@ flash.display.Bitmap.prototype = $extend(flash.display.DisplayObject.prototype,{
 		return (!v || this.visible) && this.bitmapData != null && x >= 0 && y >= 0 && x < this.bitmapData.component.width && y < this.bitmapData.component.height;
 	}
 	,__class__: flash.display.Bitmap
-	,__properties__: $extend(flash.display.DisplayObject.prototype.__properties__,{set_bitmapData:"set_bitmapData"})
+	,__properties__: $extend(flash.display.DisplayObject.prototype.__properties__,{set_smoothing:"set_smoothing",set_bitmapData:"set_bitmapData"})
 });
+flash.display.ImageDataLease = function() {
+};
+$hxClasses["flash.display.ImageDataLease"] = flash.display.ImageDataLease;
+flash.display.ImageDataLease.__name__ = ["flash","display","ImageDataLease"];
+flash.display.ImageDataLease.prototype = {
+	seed: null
+	,time: null
+	,set: function(s,t) {
+		this.seed = s;
+		this.time = t;
+	}
+	,clone: function() {
+		var leaseClone = new flash.display.ImageDataLease();
+		leaseClone.seed = this.seed;
+		leaseClone.time = this.time;
+		return leaseClone;
+	}
+	,__class__: flash.display.ImageDataLease
+};
 flash.display.BitmapData = function(w,h,t,c) {
 	if(t == null) t = true;
-	this.__sync = 1;
-	this.__transparent = t;
-	this.__revision = 0;
-	this.__rect = new flash.geom.Rectangle(0,0,w,h);
+	this.qSync = 1;
+	this.qTransparent = t;
+	this.qTick = 0;
+	this.qTime = new Date().getTime();
+	this.rect = new flash.geom.Rectangle(0,0,w,h);
 	this.component = flash.Lib.jsNode("canvas");
-	this.component.setAttribute("node",Type.getClassName(Type.getClass(this)));
 	this.component.width = w;
 	this.component.height = h;
-	this.__context = this.component.getContext("2d");
-	flash.display.BitmapData.setSmoothing(this.__context,true);
-	this.__pixelData = this.__context.createImageData(1,1);
+	this.qContext = this.component.getContext("2d");
+	flash.display.BitmapData.setSmoothing(this.qContext,true);
+	this.qPixel = this.qContext.createImageData(1,1);
 	if(c == null) c = -1;
 	if(!t) c |= -16777216;
-	if((c & -16777216) != 0) this.fillRect(this.__rect,c);
+	if((c & -16777216) != 0) this.fillRect(this.rect,c);
 };
 $hxClasses["flash.display.BitmapData"] = flash.display.BitmapData;
 flash.display.BitmapData.__name__ = ["flash","display","BitmapData"];
@@ -4413,67 +4181,69 @@ flash.display.BitmapData.makeColor = function(color) {
 };
 flash.display.BitmapData.loadFromBytes = function(bytes,inRawAlpha,onload) {
 	var bitmapData = new flash.display.BitmapData(0,0);
-	bitmapData.__loadFromBytes(bytes,inRawAlpha,onload);
+	bitmapData.nmeLoadFromBytes(bytes,inRawAlpha,onload);
 	return bitmapData;
 };
-flash.display.BitmapData.__isPNG = function(d) {
-	if(d.length < 8) return false;
-	d.position = 0;
-	return d.data.getUint8(d.position++) == 137 && d.data.getUint8(d.position++) == 80 && d.data.getUint8(d.position++) == 78 && d.data.getUint8(d.position++) == 71 && d.data.getUint8(d.position++) == 13 && d.data.getUint8(d.position++) == 10 && d.data.getUint8(d.position++) == 26 && d.data.getUint8(d.position++) == 10;
+flash.display.BitmapData.nmeIsPNG = function(bytes) {
+	bytes.position = 0;
+	return bytes.data.getUint8(bytes.position++) == 137 && bytes.data.getUint8(bytes.position++) == 80 && bytes.data.getUint8(bytes.position++) == 78 && bytes.data.getUint8(bytes.position++) == 71 && bytes.data.getUint8(bytes.position++) == 13 && bytes.data.getUint8(bytes.position++) == 10 && bytes.data.getUint8(bytes.position++) == 26 && bytes.data.getUint8(bytes.position++) == 10;
 };
-flash.display.BitmapData.__isJPG = function(d) {
-	if(d.length < 2) return false;
-	d.position = 0;
-	return d.data.getUint8(d.position++) == 255 && d.data.getUint8(d.position++) == 216;
+flash.display.BitmapData.nmeIsJPG = function(bytes) {
+	bytes.position = 0;
+	return bytes.data.getUint8(bytes.position++) == 255 && bytes.data.getUint8(bytes.position++) == 216;
 };
 flash.display.BitmapData.prototype = {
 	component: null
+	,qContext: null
 	,width: null
 	,height: null
 	,transparent: null
 	,rect: null
-	,get_rect: function() {
-		return this.__rect.clone();
-	}
-	,__rect: null
-	,__context: null
-	,__imageData: null
-	,__pixelData: null
-	,__sync: null
-	,__transparent: null
-	,__revision: null
+	,qImageData: null
+	,qSync: null
+	,qTransparent: null
+	,qTime: null
+	,qTick: null
+	,qPixel: null
 	,fillRect: function(area,color) {
 		if(area == null || area.width <= 0 || area.height <= 0) return;
-		if(area.equals(this.__rect) && this.__transparent && (color & -16777216) == 0) {
+		if(area.equals(this.rect) && this.qTransparent && (color & -16777216) == 0) {
 			this.component.width = this.component.width;
 			return;
 		}
-		if(!this.__transparent) color |= -16777216; else if((color & -16777216) != -16777216) this.__context.clearRect(area.x,area.y,area.width,area.height);
+		if(!this.qTransparent) color |= -16777216; else if((color & -16777216) != -16777216) this.qContext.clearRect(area.x,area.y,area.width,area.height);
 		if((color & -16777216) != 0) {
-			this.__context.fillStyle = flash.display.BitmapData.makeColor(color);
-			this.__context.fillRect(area.x,area.y,area.width,area.height);
+			this.qContext.fillStyle = flash.display.BitmapData.makeColor(color);
+			this.qContext.fillRect(area.x,area.y,area.width,area.height);
 		}
-		this.__sync |= 5;
+		this.qSync |= 5;
 	}
 	,clone: function() {
 		this.syncCanvas();
-		var r = new flash.display.BitmapData(this.component.width,this.component.height,this.__transparent,0);
-		r.__context.drawImage(this.component,0,0);
-		r.__sync |= 5;
+		var r = new flash.display.BitmapData(this.component.width,this.component.height,this.qTransparent,0);
+		r.qContext.drawImage(this.component,0,0);
+		r.qSync |= 5;
 		return r;
 	}
 	,dispose: function() {
 		this.component.width = this.component.height = 1;
-		this.__imageData = null;
-		this.__sync = 5;
+		this.qImageData = null;
+		this.qSync = 5;
 	}
 	,handle: function() {
 		this.syncCanvas();
-		if((this.__sync & 4) != 0) {
-			this.__revision++;
-			this.__sync &= -5;
+		if((this.qSync & 4) != 0) {
+			this.qTick++;
+			this.qTime = new Date().getTime();
+			this.qSync &= -5;
 		}
 		return this.component;
+	}
+	,getTime: function() {
+		return this.qTime;
+	}
+	,getTick: function() {
+		return this.qTick;
 	}
 	,drawToSurface: function(cnv,ctx,matrix,ctr,blendMode,clipRect,smoothing) {
 		ctx.save();
@@ -4533,30 +4303,30 @@ flash.display.BitmapData.prototype = {
 		if(dx + sw > tw) sw = tw - dx;
 		if(dy + sh > th) sh = th - dy;
 		if(sw <= 0 || sh <= 0) return;
-		if(this.__transparent && !mergeAlpha) this.__context.clearRect(dx,dy,sw,sh);
-		this.__context.drawImage(bit,sx,sy,sw,sh,dx,dy,sw,sh);
-		this.__sync |= 5;
+		if(this.qTransparent && !mergeAlpha) this.qContext.clearRect(dx,dy,sw,sh);
+		this.qContext.drawImage(bit,sx,sy,sw,sh,dx,dy,sw,sh);
+		this.qSync |= 5;
 	}
 	,draw: function(source,matrix,colorTransform,blendMode,clipRect,smoothing) {
 		this.syncCanvas();
 		var a = 0;
-		this.__context.save();
+		this.qContext.save();
 		if(colorTransform != null) {
 			a = colorTransform.alphaMultiplier;
 			colorTransform.alphaMultiplier = 1;
-			this.__context.globalAlpha *= a;
+			this.qContext.globalAlpha *= a;
 		}
 		if(clipRect != null) {
-			this.__context.beginPath();
-			this.__context.rect(clipRect.x,clipRect.y,clipRect.width,clipRect.height);
-			this.__context.clip();
-			this.__context.beginPath();
+			this.qContext.beginPath();
+			this.qContext.rect(clipRect.x,clipRect.y,clipRect.width,clipRect.height);
+			this.qContext.clip();
+			this.qContext.beginPath();
 		}
-		if(smoothing != null) flash.display.BitmapData.setSmoothing(this.__context,smoothing);
-		source.drawToSurface(this.handle(),this.__context,matrix,colorTransform,blendMode,clipRect,null);
-		this.__context.restore();
+		if(smoothing != null) flash.display.BitmapData.setSmoothing(this.qContext,smoothing);
+		source.drawToSurface(this.handle(),this.qContext,matrix,colorTransform,blendMode,clipRect,null);
+		this.qContext.restore();
 		if(colorTransform != null) colorTransform.alphaMultiplier = a;
-		this.__sync |= 5;
+		this.qSync |= 5;
 	}
 	,lock: function() {
 		this.syncData();
@@ -4566,7 +4336,7 @@ flash.display.BitmapData.prototype = {
 	}
 	,hitTestLocal: function(x,y) {
 		if(x >= 0 && y >= 0 && x < this.component.width && y < this.component.height) try {
-			return this.__context.getImageData(x,y,1,1).data[3] != 0;
+			return this.qContext.getImageData(x,y,1,1).data[3] != 0;
 		} catch( _ ) {
 			return true;
 		}
@@ -4574,58 +4344,58 @@ flash.display.BitmapData.prototype = {
 	}
 	,getPixel: function(x,y) {
 		if(x < 0 || y < 0 || x >= this.component.width || y >= this.component.height) return 0;
-		if(!((this.__sync & 3) != 1)) {
-			var d = this.__context.getImageData(x,y,1,1).data;
+		if(!((this.qSync & 3) != 1)) {
+			var d = this.qContext.getImageData(x,y,1,1).data;
 			return d[0] << 16 | d[1] << 8 | d[2];
 		} else {
 			var o = y * this.component.width + x << 2;
-			return this.__imageData.data[o] << 16 | this.__imageData.data[o + 1] << 8 | this.__imageData.data[o + 2];
+			return this.qImageData.data[o] << 16 | this.qImageData.data[o + 1] << 8 | this.qImageData.data[o + 2];
 		}
 	}
 	,getPixel32: function(x,y) {
 		if(x < 0 || y < 0 || x >= this.component.width || y >= this.component.height) return 0;
-		if(!((this.__sync & 3) != 1)) {
-			var d = this.__context.getImageData(x,y,1,1).data;
-			return (this.__transparent?d[3] << 24:-16777216) | d[0] << 16 | d[1] << 8 | d[2];
+		if(!((this.qSync & 3) != 1)) {
+			var d = this.qContext.getImageData(x,y,1,1).data;
+			return (this.qTransparent?d[3] << 24:-16777216) | d[0] << 16 | d[1] << 8 | d[2];
 		} else {
 			var o = y * this.component.width + x << 2;
-			return (this.__transparent?this.__imageData.data[o + 3] << 24:-16777216) | this.__imageData.data[o] << 16 | this.__imageData.data[o + 1] << 8 | this.__imageData.data[o + 2];
+			return (this.qTransparent?this.qImageData.data[o + 3] << 24:-16777216) | this.qImageData.data[o] << 16 | this.qImageData.data[o + 1] << 8 | this.qImageData.data[o + 2];
 		}
 	}
 	,setPixel: function(x,y,color) {
 		if(x < 0 || y < 0 || x >= this.component.width || y >= this.component.height) return;
-		if(!((this.__sync & 3) != 1)) {
-			this.__pixelData.data[0] = color >>> 16 & 255;
-			this.__pixelData.data[1] = color >>> 8 & 255;
-			this.__pixelData.data[2] = color & 255;
-			this.__pixelData.data[3] = 255;
-			this.__context.putImageData(this.__pixelData,x,y);
-			this.__sync |= 5;
+		if((this.qSync & 3) != 2) {
+			this.qPixel.data[0] = color >>> 16 & 255;
+			this.qPixel.data[1] = color >>> 8 & 255;
+			this.qPixel.data[2] = color & 255;
+			this.qPixel.data[3] = 255;
+			this.qContext.putImageData(this.qPixel,x,y);
+			this.qSync |= 5;
 		} else {
 			var o = y * this.component.width + x << 2;
-			this.__imageData.data[o] = color >>> 16 & 255;
-			this.__imageData.data[o + 1] = color >>> 8 & 255;
-			this.__imageData.data[o + 2] = color & 255;
-			this.__imageData.data[o + 3] = 255;
-			this.__sync |= 6;
+			this.qImageData.data[o] = color >>> 16 & 255;
+			this.qImageData.data[o + 1] = color >>> 8 & 255;
+			this.qImageData.data[o + 2] = color & 255;
+			this.qImageData.data[o + 3] = 255;
+			this.qSync |= 6;
 		}
 	}
 	,setPixel32: function(x,y,color) {
 		if(x < 0 || y < 0 || x >= this.component.width || y >= this.component.height) return;
-		if(!((this.__sync & 3) != 1)) {
-			this.__pixelData.data[0] = color >>> 16 & 255;
-			this.__pixelData.data[1] = color >>> 8 & 255;
-			this.__pixelData.data[2] = color & 255;
-			this.__pixelData.data[3] = color >>> 24 & 255;
-			this.__context.putImageData(this.__pixelData,x,y);
-			this.__sync |= 5;
+		if((this.qSync & 3) != 2) {
+			this.qPixel.data[0] = color >>> 16 & 255;
+			this.qPixel.data[1] = color >>> 8 & 255;
+			this.qPixel.data[2] = color & 255;
+			this.qPixel.data[3] = color >>> 24 & 255;
+			this.qContext.putImageData(this.qPixel,x,y);
+			this.qSync |= 5;
 		} else {
 			var o = y * this.component.width + x << 2;
-			this.__imageData.data[o] = color >>> 16 & 255;
-			this.__imageData.data[o + 1] = color >>> 8 & 255;
-			this.__imageData.data[o + 2] = color & 255;
-			this.__imageData.data[o + 3] = color >>> 24 & 255;
-			this.__sync |= 6;
+			this.qImageData.data[o] = color >>> 16 & 255;
+			this.qImageData.data[o + 1] = color >>> 8 & 255;
+			this.qImageData.data[o + 2] = color & 255;
+			this.qImageData.data[o + 3] = color >>> 24 & 255;
+			this.qSync |= 6;
 		}
 	}
 	,getPixels: function(q) {
@@ -4642,12 +4412,12 @@ flash.display.BitmapData.prototype = {
 		var l = qw * qh * 4;
 		r.set_length(l);
 		v = r.data;
-		if(!((this.__sync & 3) != 1)) {
-			d = this.__context.getImageData(qx,qy,qw,qh);
+		if(!((this.qSync & 3) != 1)) {
+			d = this.qContext.getImageData(qx,qy,qw,qh);
 			u = d.data;
 			while(i < l) r.writeUnsignedInt(u[i++] << 16 | u[i++] << 8 | u[i++] | u[i++] << 24);
 		} else {
-			u = this.__imageData.data;
+			u = this.qImageData.data;
 			if(qx == 0 && qy == 0 && qw == this.component.width && qh == this.component.height) while(i < l) r.writeUnsignedInt(u[i++] << 16 | u[i++] << 8 | u[i++] | u[i++] << 24); else while(qh-- > 0) {
 				i = (qx + qy++ * (j = qw)) * 4;
 				while(j-- > 0) r.writeUnsignedInt(u[i++] << 16 | u[i++] << 8 | u[i++] | u[i++] << 24);
@@ -4667,8 +4437,8 @@ flash.display.BitmapData.prototype = {
 		var w = this.component.width;
 		var d;
 		var u;
-		if((this.__sync & 3) != 2) {
-			d = this.__context.createImageData(qw,qh);
+		if((this.qSync & 3) != 2) {
+			d = this.qContext.createImageData(qw,qh);
 			u = d.data;
 			while(i < l) {
 				p = r.readUnsignedInt();
@@ -4678,9 +4448,10 @@ flash.display.BitmapData.prototype = {
 				u[i + 3] = p >>> 24 & 255;
 				i += 4;
 			}
-			this.__context.putImageData(d,qx,qy);
+			this.qContext.putImageData(d,qx,qy);
+			haxe.Log.trace("?",{ fileName : "BitmapData.hx", lineNumber : 373, className : "flash.display.BitmapData", methodName : "setPixels"});
 		} else {
-			u = this.__imageData.data;
+			u = this.qImageData.data;
 			while(qh-- > 0) {
 				i = (qx + qy++ * w) * 4;
 				j = qw;
@@ -4698,7 +4469,7 @@ flash.display.BitmapData.prototype = {
 	,getColorBoundsRect: function(mask,color,findColor) {
 		if(findColor == null) findColor = true;
 		this.syncData();
-		var data = this.__imageData.data;
+		var data = this.qImageData.data;
 		var minX = this.component.width;
 		var minY = this.component.height;
 		var maxX = 0;
@@ -4710,7 +4481,7 @@ flash.display.BitmapData.prototype = {
 		var y;
 		i = 0;
 		while(i < len) {
-			px = (this.__transparent?data[i + 3] << 24:-16777216) | (data[i] & 255) << 16 | (data[i + 1] & 255) << 8 | data[i + 2] & 255;
+			px = (this.qTransparent?data[i + 3] << 24:-16777216) | (data[i] & 255) << 16 | (data[i + 1] & 255) << 8 | data[i + 2] & 255;
 			if(px == color == findColor) {
 				x = Math.floor((i >> 2) % this.component.width);
 				y = Math.floor((i >> 2) / this.component.width);
@@ -4726,11 +4497,11 @@ flash.display.BitmapData.prototype = {
 		return new flash.geom.Rectangle(0,0,0,0);
 	}
 	,floodFill: function(fx,fy,fc) {
-		var wasCanvas = (this.__sync & 3) == 1;
+		var wasCanvas = (this.qSync & 3) == 1;
 		this.lock();
 		var q = [fx | fy << 16];
 		var c = 1;
-		var d = this.__imageData.data;
+		var d = this.qImageData.data;
 		var zr;
 		var zg;
 		var zb;
@@ -4783,7 +4554,7 @@ flash.display.BitmapData.prototype = {
 				if(y > 0 && (o[p = y - 1][x >> 5] >> (x & 31) & 1) == 0) q[c++] = p << 16 | x;
 			}
 		}
-		this.__sync |= 6;
+		this.qSync |= 6;
 		if(wasCanvas) this.unlock();
 	}
 	,colorTransform: function(q,o) {
@@ -4793,8 +4564,8 @@ flash.display.BitmapData.prototype = {
 		var h = ~(~q.height);
 		var tw = this.component.width;
 		var th = this.component.height;
-		var f = this.__context.globalCompositeOperation;
-		var a = this.__context.globalAlpha;
+		var f = this.qContext.globalCompositeOperation;
+		var a = this.qContext.globalAlpha;
 		if(x < 0) {
 			w += x;
 			x = 0;
@@ -4808,29 +4579,29 @@ flash.display.BitmapData.prototype = {
 		if(w <= 0 || h <= 0) return;
 		if(o.isAlphaMultiplier()) {
 			this.syncCanvas();
-			this.__context.globalCompositeOperation = "copy";
-			this.__context.globalAlpha *= o.alphaMultiplier;
-			this.__context.drawImage(this.component,x,y,w,h,x,y,w,h);
-			this.__sync |= 5;
+			this.qContext.globalCompositeOperation = "copy";
+			this.qContext.globalAlpha *= o.alphaMultiplier;
+			this.qContext.drawImage(this.component,x,y,w,h,x,y,w,h);
+			this.qSync |= 5;
 		} else if(o.isColorSetter()) {
-			var s = this.__context.fillStyle;
+			var s = this.qContext.fillStyle;
 			if(o.alphaMultiplier != 0) {
-				this.__context.globalCompositeOperation = "source-in";
-				this.__context.fillStyle = "rgb(" + ~(~o.redOffset) + "," + ~(~o.greenOffset) + "," + ~(~o.blueOffset) + ")";
-				this.__context.fillRect(x,y,w,h);
-				this.__context.globalCompositeOperation = "copy";
-				this.__context.globalAlpha = o.alphaMultiplier;
-				this.__context.drawImage(this.component,x,y,w,h,x,y,w,h);
+				this.qContext.globalCompositeOperation = "source-in";
+				this.qContext.fillStyle = "rgb(" + ~(~o.redOffset) + "," + ~(~o.greenOffset) + "," + ~(~o.blueOffset) + ")";
+				this.qContext.fillRect(x,y,w,h);
+				this.qContext.globalCompositeOperation = "copy";
+				this.qContext.globalAlpha = o.alphaMultiplier;
+				this.qContext.drawImage(this.component,x,y,w,h,x,y,w,h);
 			} else {
-				this.__context.globalCompositeOperation = "copy";
-				this.__context.fillStyle = "rgba(" + ~(~o.redOffset) + "," + ~(~o.greenOffset) + "," + ~(~o.blueOffset) + "," + ~(~o.alphaOffset) + ")";
-				this.__context.fillRect(x,y,w,h);
+				this.qContext.globalCompositeOperation = "copy";
+				this.qContext.fillStyle = "rgba(" + ~(~o.redOffset) + "," + ~(~o.greenOffset) + "," + ~(~o.blueOffset) + "," + ~(~o.alphaOffset) + ")";
+				this.qContext.fillRect(x,y,w,h);
 			}
-			this.__context.fillStyle = s;
+			this.qContext.fillStyle = s;
 		} else {
-			var wasCanvas = (this.__sync & 3) != 2;
+			var wasCanvas = (this.qSync & 3) != 2;
 			this.lock();
-			var d = this.__imageData.data;
+			var d = this.qImageData.data;
 			var c = tw * th * 4;
 			var i = c;
 			var v;
@@ -4863,11 +4634,11 @@ flash.display.BitmapData.prototype = {
 					}
 				}
 			}
-			this.__sync |= 6;
+			this.qSync |= 6;
 			if(wasCanvas) this.unlock();
 		}
-		this.__context.globalCompositeOperation = f;
-		this.__context.globalAlpha = a;
+		this.qContext.globalCompositeOperation = f;
+		this.qContext.globalAlpha = a;
 	}
 	,copyChannel: function(o,q,p,sourceChannel,destChannel) {
 		var x = ~(~o.x);
@@ -4909,26 +4680,26 @@ flash.display.BitmapData.prototype = {
 		if(py + h > th) h = th - py;
 		if(w <= 0 || h <= 0) return;
 		if(sc == 8 && dc == 8) {
-			var f = this.__context.globalCompositeOperation;
-			var s = this.__context.fillStyle;
-			this.__context.globalCompositeOperation = "darker";
+			var f = this.qContext.globalCompositeOperation;
+			var s = this.qContext.fillStyle;
+			this.qContext.globalCompositeOperation = "darker";
 			i = 0;
-			while(i++ < 8) this.__context.drawImage(this.component,px,py,w,h,px,py,w,h);
-			this.__context.globalCompositeOperation = "destination-over";
-			this.__context.fillStyle = "black";
-			this.__context.fillRect(x,y,w,h);
-			this.__context.globalCompositeOperation = "destination-atop";
-			this.__context.drawImage(o.handle(),x,y,w,h,px,py,w,h);
-			this.__context.globalCompositeOperation = f;
-			this.__context.fillStyle = s;
+			while(i++ < 8) this.qContext.drawImage(this.component,px,py,w,h,px,py,w,h);
+			this.qContext.globalCompositeOperation = "destination-over";
+			this.qContext.fillStyle = "black";
+			this.qContext.fillRect(x,y,w,h);
+			this.qContext.globalCompositeOperation = "destination-atop";
+			this.qContext.drawImage(o.handle(),x,y,w,h,px,py,w,h);
+			this.qContext.globalCompositeOperation = f;
+			this.qContext.fillStyle = s;
 		} else {
-			var wasCanvas = (this.__sync & 3) != 2;
+			var wasCanvas = (this.qSync & 3) != 2;
 			var ds;
 			var dd;
 			this.lock();
-			dd = this.__imageData.data;
+			dd = this.qImageData.data;
 			o.lock();
-			ds = o.__imageData.data;
+			ds = o.qImageData.data;
 			if(sc == 8) sc = 3; else if(sc == 4) sc = 2; else if(sc == 2) sc = 1; else if(sc == 1) sc = 0; else sc = -1;
 			if(dc == 8) dc = 3; else if(dc == 4) dc = 2; else if(dc == 2) dc = 1; else if(dc == 1) dc = 0; else dc = -1;
 			if(sc < 0 || dc < 0) return;
@@ -4945,7 +4716,7 @@ flash.display.BitmapData.prototype = {
 					u += 4;
 				}
 			}
-			this.__sync |= 6;
+			this.qSync |= 6;
 			if(wasCanvas) this.unlock();
 		}
 	}
@@ -4954,7 +4725,7 @@ flash.display.BitmapData.prototype = {
 		if(c == null) c = 7;
 		if(h == null) h = 255;
 		if(l == null) l = 0;
-		var wasCanvas = (this.__sync & 3) != 2;
+		var wasCanvas = (this.qSync & 3) != 2;
 		var i = 0;
 		var n;
 		var p;
@@ -4965,7 +4736,7 @@ flash.display.BitmapData.prototype = {
 		var b = (c & 4) > 0;
 		var a = (c & 8) > 0;
 		this.lock();
-		p = this.__imageData.data;
+		p = this.qImageData.data;
 		n = p.length;
 		while(i < n) {
 			if(m) {
@@ -4978,7 +4749,7 @@ flash.display.BitmapData.prototype = {
 			}
 			if(a) p[i++] = l + (z = z * 16807 % 2147483647) % d; else p[i++] = 255;
 		}
-		this.__sync |= 6;
+		this.qSync |= 6;
 		if(wasCanvas) this.unlock();
 	}
 	,applyFilter: function(sourceBitmapData,sourceRect,destPoint,filter) {
@@ -4993,7 +4764,7 @@ flash.display.BitmapData.prototype = {
 		ctx.drawImage(data.image,0,0,width,height);
 		data.bitmapData.width = width;
 		data.bitmapData.height = height;
-		data.bitmapData.__rect = new flash.geom.Rectangle(0,0,width,height);
+		data.bitmapData.rect = new flash.geom.Rectangle(0,0,width,height);
 		if(data.inLoader != null) {
 			var e1 = new flash.events.Event("complete");
 			e1.set_target(data.inLoader);
@@ -5017,20 +4788,20 @@ flash.display.BitmapData.prototype = {
 		image.src = inFilename;
 	}
 	,syncCanvas: function() {
-		if(!((this.__sync & 3) != 2)) {
-			this.__context.putImageData(this.__imageData,0,0);
-			this.__sync = this.__sync & -4;
+		if(!((this.qSync & 3) != 2)) {
+			this.qContext.putImageData(this.qImageData,0,0);
+			this.qSync = this.qSync & -4;
 		}
 	}
 	,syncData: function() {
-		if(!((this.__sync & 3) != 1)) {
-			this.__imageData = this.__context.getImageData(0,0,this.component.width,this.component.height);
-			this.__sync = this.__sync & -4;
+		if(!((this.qSync & 3) != 1)) {
+			this.qImageData = this.qContext.getImageData(0,0,this.component.width,this.component.height);
+			this.qSync = this.qSync & -4;
 		}
 	}
-	,__loadFromBytes: function(c,a,h) {
+	,nmeLoadFromBytes: function(c,a,h) {
 		var _g = this;
-		var t = null;
+		var t;
 		var o = document.createElement("img");
 		var n = this.component;
 		var q;
@@ -5038,12 +4809,18 @@ flash.display.BitmapData.prototype = {
 		var i;
 		var l;
 		var p;
-		if(flash.display.BitmapData.__isPNG(c)) t = "png"; else if(flash.display.BitmapData.__isJPG(c)) t = "jpeg"; else throw new flash.errors.IOError("BitmapData can only load from ByteArrays with PNG/JPEG data.");
+		if(!(function($this) {
+			var $r;
+			var v;
+			v = flash.display.BitmapData.nmeIsPNG(c)?t = "png":flash.display.BitmapData.nmeIsJPG(c)?t = "jpeg":t = "";
+			$r = v;
+			return $r;
+		}(this))) throw new flash.errors.IOError("BitmapData can only load from ByteArrays with PNG/JPEG data.");
 		f = function(_) {
 			o.removeEventListener("load",f);
-			_g.__rect.width = n.width = o.width;
-			_g.__rect.height = n.height = o.height;
-			q = _g.__context = n.getContext("2d");
+			_g.rect.width = n.width = o.width;
+			_g.rect.height = n.height = o.height;
+			q = _g.qContext = n.getContext("2d");
 			q.drawImage(o,0,0);
 			if(a != null) {
 				i = -1;
@@ -5058,7 +4835,6 @@ flash.display.BitmapData.prototype = {
 		o.src = "data:image/" + t + ";base64," + c.toBase64();
 	}
 	,__class__: flash.display.BitmapData
-	,__properties__: {get_rect:"get_rect"}
 };
 flash.display.BitmapDataChannel = function() { };
 $hxClasses["flash.display.BitmapDataChannel"] = flash.display.BitmapDataChannel;
@@ -5091,7 +4867,6 @@ flash.display.Graphics = function() {
 	this.rgPending = false;
 	this.synced = true;
 	this.component = flash.Lib.jsNode("canvas");
-	this.component.setAttribute("node",Type.getClassName(Type.getClass(this)));
 	this.context = this.component.getContext("2d");
 	this.context.save();
 	this.bounds = new flash.geom.Rectangle();
@@ -5376,7 +5151,6 @@ flash.display.Graphics.prototype = {
 		var nr = this.frec;
 		var np = -1;
 		if(m == null) this._drawMatrix = m = new flash.geom.Matrix();
-		ctx.save();
 		while(ip < il) {
 			var _g = i = ir[++ip];
 			switch(_g) {
@@ -5538,11 +5312,10 @@ flash.display.Graphics.prototype = {
 				ctx.restore();
 				break;
 			default:
-				throw new flash.errors.Error("Unknown operation " + i,4000 + i);
+				throw 4000 + i;
 			}
 		}
 		if(n > 0) f = this._closePath(cnv,ctx,f,m,tex);
-		ctx.restore();
 	}
 	,__class__: flash.display.Graphics
 	,__properties__: {set_displayObject:"set_displayObject"}
@@ -5821,7 +5594,6 @@ flash.events.Event.__name__ = ["flash","events","Event"];
 flash.events.Event.prototype = {
 	_target: null
 	,_current: null
-	,__jsEvent: null
 	,get_target: function() {
 		return this._target || this.target;
 	}
@@ -5841,7 +5613,6 @@ flash.events.Event.prototype = {
 	,cancelable: null
 	,defaultPrevented: null
 	,preventDefault: function() {
-		if(this.__jsEvent != null) this.__jsEvent.preventDefault();
 		this.defaultPrevented = true;
 	}
 	,isDefaultPrevented: function() {
@@ -6033,13 +5804,22 @@ flash.events.TouchEvent.prototype = $extend(flash.events.UIEvent.prototype,{
 	,__class__: flash.events.TouchEvent
 });
 flash.filters = {};
-flash.filters.BitmapFilter = function() {
+flash.filters.BitmapFilter = function(inType) {
+	this._mType = inType;
 };
 $hxClasses["flash.filters.BitmapFilter"] = flash.filters.BitmapFilter;
 flash.filters.BitmapFilter.__name__ = ["flash","filters","BitmapFilter"];
 flash.filters.BitmapFilter.prototype = {
-	clone: function() {
-		return new flash.filters.BitmapFilter();
+	_mType: null
+	,_nmeCached: null
+	,clone: function() {
+		throw "Implement in subclass. BitmapFilter::clone";
+		return null;
+	}
+	,nmePreFilter: function(surface) {
+	}
+	,nmeApplyFilter: function(surface,rect,refreshCache) {
+		if(refreshCache == null) refreshCache = false;
 	}
 	,__class__: flash.filters.BitmapFilter
 };
@@ -6314,7 +6094,7 @@ flash.media.Sound.prototype = $extend(flash.events.EventDispatcher.prototype,{
 			o._loops = loops;
 			o.play(ofs);
 		} catch( e ) {
-			if(console) console.log(e);
+			null;
 		}
 		return o;
 	}
@@ -6716,7 +6496,7 @@ flash.net.URLVariables.prototype = {
 			i = s.indexOf("&",o);
 			if(i < 0) i = l;
 			e = s.indexOf("=",o);
-			if(e == -1 || e > i) throw new flash.errors.Error("Error #2101: The String passed to URLVariables.decode() must be a URL-encoded query string containing name/value pairs.",2101);
+			if(e == -1 || e > i) throw 2101;
 			k = s.substring(o,e);
 			v = s.substring(e + 1,i);
 			if(Object.prototype.hasOwnProperty.call(this,k)) {
@@ -6808,28 +6588,19 @@ flash.text.FontType.DEVICE = ["DEVICE",1];
 flash.text.FontType.DEVICE.toString = $estr;
 flash.text.FontType.DEVICE.__enum__ = flash.text.FontType;
 flash.text.TextField = function() {
-	this.__editable = false;
-	this.__text = "";
-	this.__autoSize = -1;
-	this.wordWrap = false;
+	this.qText = "";
 	this.type = "DYNAMIC";
-	this.selectable = true;
-	this.multiline = false;
 	this.maxChars = 0;
 	this.borderColor = 0;
-	this.border = false;
 	this.backgroundColor = 16777215;
 	flash.display.InteractiveObject.call(this);
 	var s = this.component.style;
 	s.whiteSpace = "nowrap";
 	s.overflow = "hidden";
-	s.padding = 1.5 + "px";
-	s.lineHeight = "1.25";
-	this.__textFormat = new flash.text.TextFormat("Times New Roman",12,0,false,false,false,"","","LEFT",0,0,0,0);
-	this.__width = 100;
-	this.__height = 100;
-	this.__applySize(3);
-	this.__applyTextFormat();
+	this.defaultTextFormat = new flash.text.TextFormat("_serif",16,0);
+	this.textColor = 0;
+	this.wordWrap = this.qEditable = this.qBackground = this.qBorder = false;
+	this.set_width(this.set_height(100));
 };
 $hxClasses["flash.text.TextField"] = flash.text.TextField;
 flash.text.TextField.__name__ = ["flash","text","TextField"];
@@ -6838,209 +6609,159 @@ flash.text.TextField.__super__ = flash.display.InteractiveObject;
 flash.text.TextField.prototype = $extend(flash.display.InteractiveObject.prototype,{
 	autoSize: null
 	,antiAliasType: null
-	,background: null
 	,backgroundColor: null
-	,border: null
 	,borderColor: null
 	,caretIndex: null
+	,defaultTextFormat: null
 	,displayAsPassword: null
 	,embedFonts: null
 	,htmlText: null
 	,length: null
 	,maxChars: null
 	,multiline: null
-	,scrollH: null
 	,scrollV: null
-	,maxScrollH: null
 	,maxScrollV: null
 	,numLines: null
 	,selectable: null
 	,selectedText: null
+	,styleSheet: null
+	,textColor: null
 	,textHeight: null
 	,textWidth: null
 	,type: null
 	,wordWrap: null
-	,__autoSize: null
-	,__text: null
-	,__textFormat: null
-	,__textFormatSync: null
-	,__fontStyle: null
-	,__editable: null
-	,__field: null
+	,qText: null
+	,qFontStyle: null
+	,qLineHeight: null
+	,qTextArea: null
+	,qEditable: null
+	,qBackground: null
+	,qBorder: null
+	,get_background: function() {
+		return this.qBackground;
+	}
 	,set_background: function(v) {
-		if(this.background != v) {
-			var s = this.component.style;
-			if(this.background = v) s.background = flash.Lib.rgbf(this.backgroundColor,1); else s.background = "";
+		if(this.qBackground != v) {
+			if(this.qBackground = v) this.component.style.background = flash.Lib.rgbf(this.backgroundColor,1);
 		}
 		return v;
 	}
-	,set_backgroundColor: function(c) {
-		if(this.backgroundColor != c) {
-			this.backgroundColor = c;
-			if(this.background) this.component.style.background = flash.Lib.rgbf(c,1);
+	,set_backgroundColor: function(v) {
+		if(this.backgroundColor != v) {
+			this.backgroundColor = v;
+			if(this.qBackground) this.component.style.background = flash.Lib.rgbf(v,1);
 		}
-		return c;
+		return v;
+	}
+	,get_border: function() {
+		return this.qBorder;
 	}
 	,set_border: function(v) {
-		if(this.border != v) {
-			var s = this.component.style;
-			if(this.border = v) s.border = "1px solid " + flash.Lib.rgbf(this.borderColor,1); else s.border = "0";
-			this.__applySize(3);
+		if(this.qBorder != v) {
+			if(this.qBorder = v) this.component.style.border = "1px solid " + flash.Lib.rgbf(this.borderColor,1);
 		}
 		return v;
 	}
-	,set_borderColor: function(c) {
-		if(this.borderColor != c) {
-			this.borderColor = c;
-			if(this.border) this.component.style.border = "1px solid " + flash.Lib.rgbf(c,1);
+	,set_borderColor: function(v) {
+		if(this.borderColor != v) {
+			this.borderColor = v;
+			if(this.qBorder) this.component.style.border = "1px solid " + flash.Lib.rgbf(this.borderColor,1);
 		}
-		return c;
-	}
-	,get_defaultTextFormat: function() {
-		return this.__textFormat.clone();
-	}
-	,set_defaultTextFormat: function(f) {
-		this.__textFormat.merge(f);
-		this.__textFormatSync = false;
-		return f;
-	}
-	,get_textColor: function() {
-		return this.__textFormat.color;
-	}
-	,set_textColor: function(c) {
-		this.__textFormat.color = c;
-		this.__applyTextFormat();
-		return c;
+		return v;
 	}
 	,setTextFormat: function(v,f,l) {
 	}
-	,__applyType: function(v) {
-		var c = this.component;
-		var s = this.get_text();
-		if(this.__editable = v) {
-			var e = flash.Lib.jsNode(this.multiline?"textarea":"input");
-			e.value = s;
-			if(this.maxChars > 0) e.maxLength = this.maxChars; else e.maxLength = 2147483647;
-			var s1 = e.style;
-			s1.border = "0";
-			s1.padding = "0";
-			s1.background = "transparent";
-			c.appendChild(this.__field = e);
-		} else {
-			c.removeChild(this.__field);
-			this.__field = null;
-		}
-	}
-	,__applyTextFormat: function() {
-		this.__textFormatSync = true;
-		var f = this.__textFormat;
-		var s = (this.__editable?this.__field:this.component).style;
-		this.__fontStyle = s.font = f.get_fontStyle();
-		s.textAlign = f.align;
-		if(f.bold) s.fontWeight = "bold"; else s.fontWeight = "";
-		if(f.italic) s.fontStyle = "italic"; else s.fontStyle = "";
-		if(f.underline) s.textDecoration = "underline"; else s.textDecoration = "";
-		s.color = flash.Lib.rgbf(f.color,1);
-	}
-	,__applyText: function(s) {
-		this.__text = s;
-		if(this.__editable) this.__field.value = s; else if(this.component.innerText == null) this.component.innerHTML = StringTools.replace(StringTools.htmlEscape(s),"\n","<br>"); else this.component.innerText = s;
-		this.__applyAutoSize();
-	}
-	,__applySize: function(m) {
-		var s = this.component.style;
-		var e = this.__editable;
-		var fs;
-		if(e) fs = this.__field.style; else fs = null;
-		var n = 1;
-		while(n < 4) {
-			if((m & n) != 0) {
-				var f;
-				if(n == 1) f = this.__width; else f = this.__height;
-				if(this.border) f -= 1;
-				f -= 3.0;
-				if(n == 1) {
-					s.width = f + "px";
-					if(e) fs.width = f + "px";
-				} else {
-					s.height = f + "px";
-					if(e) fs.height = f + "px";
-				}
-			}
-			n <<= 1;
-		}
-	}
-	,get_length: function() {
-		return this.get_text().length;
-	}
 	,get_text: function() {
-		if(this.__editable) return this.__field.value; else return this.__text;
+		if(this.qEditable) return this.qTextArea.value; else return this.qText;
 	}
-	,set_text: function(s) {
-		if(this.get_text() != s) this.__applyText(s);
-		if(!this.__textFormatSync) this.__applyTextFormat();
-		return s;
+	,set_text: function(v) {
+		if(this.get_text() != v) {
+			var o;
+			var q = this.defaultTextFormat;
+			var z = this.qEditable;
+			this.qText = v;
+			if(z) this.qTextArea.value = v; else if(this.component.innerText == null) this.component.innerHTML = StringTools.replace(StringTools.htmlEscape(v),"\n","<br>"); else this.component.innerText = v;
+			o = (z?this.qTextArea:this.component).style;
+			this.qFontStyle = o.font = q.get_fontStyle();
+			o.lineHeight = (this.qLineHeight = q.size * 1.25 | 0) + "px";
+			o.color = flash.Lib.rgbf(q.color != null?q.color:this.textColor,1);
+		}
+		return v;
 	}
-	,appendText: function(s) {
+	,appendText: function(v) {
 		var _g = this;
-		_g.set_text(_g.get_text() + s);
+		_g.set_text(_g.get_text() + v);
 	}
 	,setSelection: function(v,o) {
-		if(this.__editable) this.__field.setSelectionRange(v,o);
+		if(this.qEditable) this.qTextArea.setSelectionRange(v,o);
 	}
 	,drawToSurface: function(cnv,ctx,mtx,ctr,blendMode,clipRect,smoothing) {
+		var q = this.defaultTextFormat;
 		ctx.save();
 		ctx.fillStyle = this.component.style.color;
-		ctx.font = this.__fontStyle;
+		ctx.font = this.qFontStyle;
 		ctx.textBaseline = "top";
-		ctx.textAlign = this.__textFormat.align;
+		if(q.align != null) ctx.textAlign = q.align; else ctx.textAlign = "left";
 		ctx.fillText(this.get_text(),0,0);
 		ctx.restore();
 	}
 	,get_width: function() {
-		if(this.__autoSize < 0) return this.__width; else return this.get_textWidth();
+		if(this.qWidth != null) return this.qWidth; else return this.get_textWidth();
 	}
 	,get_height: function() {
-		if(this.__autoSize < 0) return this.__height; else return this.get_textHeight();
+		if(this.qHeight != null) return this.qHeight; else return this.get_textHeight();
 	}
 	,set_width: function(v) {
-		if(this.__width != v) {
-			this.__width = v;
-			this.__applySize(1);
+		if(this.qWidth != v) {
+			var o;
+			if(v != null) o = v + "px"; else o = "";
+			this.component.style.width = o;
+			if(this.qEditable) this.qTextArea.style.width = o;
+			this.qWidth = v;
 		}
 		return v;
 	}
 	,set_height: function(v) {
-		if(this.__height != v) {
-			this.__height = v;
-			this.__applySize(2);
+		if(this.qHeight != v) {
+			var o;
+			if(v != null) o = v + "px"; else o = "";
+			this.component.style.height = o;
+			if(this.qEditable) this.qTextArea.style.height = o;
+			this.qHeight = v;
 		}
 		return v;
 	}
-	,__measurePre: function() {
+	,_measure_pre: function() {
 		var o = flash.Lib.jsHelper();
-		o.setAttribute("style",this.component.getAttribute("style"));
+		var s = o.style;
+		var q = this.component.style;
+		var i;
+		i = q.length;
+		while(--i >= 0) s[q[i]] = q[q[i]];
 		o.innerHTML = this.component.innerHTML;
 		return o;
 	}
-	,__measurePost: function(o) {
-		o.setAttribute("style","");
+	,_measure_post: function(o) {
+		var i;
+		var s = o.style;
+		i = s.length;
+		while(--i >= 0) s[s[i]] = "";
 		o.innerHTML = "";
 	}
 	,get_textWidth: function() {
 		if(this.get_stage() == null) {
-			var o = this.__measurePre();
+			var o = this._measure_pre();
 			var r = o.clientWidth;
-			this.__measurePost(o);
+			this._measure_post(o);
 			return r;
 		}
 		return this.component.clientWidth;
 	}
 	,get_textHeight: function() {
 		if(this.get_stage() == null) {
-			var o = this.__measurePre();
+			var o = this._measure_pre();
 			var r = o.clientHeight;
-			this.__measurePost(o);
+			this._measure_post(o);
 			return r;
 		}
 		return this.component.clientHeight;
@@ -7056,56 +6777,57 @@ flash.text.TextField.prototype = $extend(flash.display.InteractiveObject.prototy
 		}
 		return r;
 	}
-	,__applyAutoSize: function() {
-		var f = this.__autoSize;
-		var s = this.component.style;
-		if(f >= 0 && !this.__editable) {
-			if(f > 0) s.left = (this.__width - this.get_textWidth()) * f / 2 + "px"; else s.left = "";
-			s.width = "";
-			s.height = "";
-		} else {
-			s.left = "";
-			this.__applySize(3);
-		}
-	}
 	,set_autoSize: function(v) {
 		if(this.autoSize != v) {
-			var i;
-			var _g = this.autoSize = v;
-			switch(_g) {
-			case "LEFT":
-				i = 0;
-				break;
-			case "CENTER":
-				i = 1;
-				break;
-			case "RIGHT":
-				i = 2;
-				break;
-			default:
-				i = -1;
-			}
-			this.__autoSize = i;
-			this.__applyAutoSize();
+			if((this.autoSize = v) != "NONE") this.set_width(this.set_height(null));
 		}
 		return v;
 	}
-	,set_type: function(s) {
-		var v = s == "INPUT";
-		if(v != this.__editable) this.__applyType(v);
-		return s;
+	,set_type: function(v) {
+		var z = v == "INPUT";
+		var o = this;
+		var c;
+		var e;
+		var q;
+		var t;
+		var text;
+		var f;
+		if(z != o.qEditable) {
+			c = o.component;
+			text = o.get_text();
+			o.set_text(text != ""?"":" ");
+			if(o.qEditable = z) {
+				c.appendChild(e = flash.Lib.jsNode(this.multiline?"textarea":"input"));
+				e.value = text + " ";
+				if((t = this.maxChars) > 0) e.maxLength = t; else e.maxLength = 2147483647;
+				t = e.style;
+				t.border = "0";
+				t.background = "transparent";
+				if((f = o.qWidth) != null) t.width = f + "px";
+				if((f = o.qHeight) != null) t.height = f + "px";
+				o.qTextArea = e;
+			} else {
+				c.removeChild(o.qTextArea);
+				o.qTextArea = null;
+			}
+			o.set_text(text);
+		}
+		return v;
 	}
 	,set_multiline: function(v) {
 		if(this.multiline != v) {
 			this.multiline = v;
-			if(this.__editable) this.__applyType(true);
+			if(this.qEditable) {
+				this.set_type("DYNAMIC");
+				this.set_type("INPUT");
+			}
 		}
 		return v;
 	}
 	,set_maxChars: function(v) {
 		if(this.maxChars != v) {
 			this.maxChars = v;
-			if(this.__editable) if(v > 0) this.__field.maxLength = v; else this.__field.maxLength = 2147483647;
+			if(this.qEditable) if(v > 0) this.qTextArea.maxLength = v; else this.qTextArea.maxLength = 2147483647;
 		}
 		return v;
 	}
@@ -7120,45 +6842,33 @@ flash.text.TextField.prototype = $extend(flash.display.InteractiveObject.prototy
 		}
 		return v;
 	}
-	,set_wordWrap: function(v) {
-		if(this.wordWrap != v) {
-			var s;
-			if(this.wordWrap = v) s = "normal"; else s = "nowrap";
-			this.component.style.whiteSpace = s;
-			if(this.__editable) this.__field.style.whiteSpace = s;
-		}
-		return v;
-	}
 	,giveFocus: function() {
-		(this.__editable?this.__field:this.component).focus();
+		(this.qEditable?this.qTextArea:this.component).focus();
 	}
 	,get_selectionBeginIndex: function() {
-		if(this.__editable) return this.__field.selectionStart; else return 0;
+		if(this.qEditable) return this.qTextArea.selectionStart; else return 0;
 	}
 	,get_selectionEndIndex: function() {
-		if(this.__editable) return this.__field.selectionEnd; else return 0;
+		if(this.qEditable) return this.qTextArea.selectionEnd; else return 0;
 	}
 	,set_selectionBeginIndex: function(v) {
-		if(this.__editable && this.__field.selectionStart != v) this.__field.selectionStart = v;
+		if(this.qEditable && this.get_selectionBeginIndex() != v) this.qTextArea.selectionStart = v;
 		return v;
 	}
 	,set_selectionEndIndex: function(v) {
-		if(this.__editable && this.__field.selectionEnd != v) this.__field.selectionEnd = v;
+		if(this.qEditable && this.get_selectionEndIndex() != v) this.qTextArea.selectionEnd = v;
 		return v;
 	}
 	,get_selectedText: function() {
-		if(this.__editable) {
-			var a = this.__field.selectionStart;
-			var b = this.__field.selectionEnd;
-			var c;
-			if(b < a) {
-				c = a;
-				a = b;
-				b = c;
-			}
-			return this.__field.value.substring(a,b);
+		var a = this.qTextArea.selectionStart;
+		var b = this.qTextArea.selectionEnd;
+		var c;
+		if(b < a) {
+			c = a;
+			a = b;
+			b = c;
 		}
-		return null;
+		if(this.qEditable) return this.qTextArea.value.substring(a,b); else return null;
 	}
 	,hitTestLocal: function(x,y,p,v) {
 		return (!v || this.visible) && x >= 0 && y >= 0 && x < this.get_width() && y < this.get_height();
@@ -7168,35 +6878,42 @@ flash.text.TextField.prototype = $extend(flash.display.InteractiveObject.prototy
 		if(priority == null) priority = 0;
 		if(useCapture == null) useCapture = false;
 		var o = this.component;
-		if(this.__editable) this.component = this.__field;
+		if(this.qEditable) this.component = this.qTextArea;
 		flash.display.InteractiveObject.prototype.addEventListener.call(this,type,listener,useCapture,priority,weak);
-		if(this.__editable) this.component = o;
+		if(this.qEditable) this.component = o;
 	}
-	,removeEventListener: function(type,listener,useCapture) {
+	,removeEventListener: function(type,listener,useCapture,priority,weak) {
+		if(weak == null) weak = false;
+		if(priority == null) priority = 0;
 		if(useCapture == null) useCapture = false;
 		var o = this.component;
-		if(this.__editable) this.component = this.__field;
-		flash.display.InteractiveObject.prototype.removeEventListener.call(this,type,listener,useCapture);
-		if(this.__editable) this.component = o;
+		if(this.qEditable) this.component = this.qTextArea;
+		flash.display.InteractiveObject.prototype.removeEventListener.call(this,type,listener,useCapture,priority,weak);
+		if(this.qEditable) this.component = o;
 	}
 	,__class__: flash.text.TextField
-	,__properties__: $extend(flash.display.InteractiveObject.prototype.__properties__,{set_wordWrap:"set_wordWrap",set_type:"set_type",get_textWidth:"get_textWidth",get_textHeight:"get_textHeight",set_textColor:"set_textColor",get_textColor:"get_textColor",set_text:"set_text",get_text:"get_text",set_selectionEndIndex:"set_selectionEndIndex",get_selectionEndIndex:"get_selectionEndIndex",set_selectionBeginIndex:"set_selectionBeginIndex",get_selectionBeginIndex:"get_selectionBeginIndex",get_selectedText:"get_selectedText",set_selectable:"set_selectable",get_numLines:"get_numLines",set_multiline:"set_multiline",set_maxChars:"set_maxChars",get_length:"get_length",set_defaultTextFormat:"set_defaultTextFormat",get_defaultTextFormat:"get_defaultTextFormat",set_borderColor:"set_borderColor",set_border:"set_border",set_backgroundColor:"set_backgroundColor",set_background:"set_background",set_autoSize:"set_autoSize"})
+	,__properties__: $extend(flash.display.InteractiveObject.prototype.__properties__,{set_type:"set_type",get_textWidth:"get_textWidth",get_textHeight:"get_textHeight",set_text:"set_text",get_text:"get_text",set_selectionEndIndex:"set_selectionEndIndex",get_selectionEndIndex:"get_selectionEndIndex",set_selectionBeginIndex:"set_selectionBeginIndex",get_selectionBeginIndex:"get_selectionBeginIndex",get_selectedText:"get_selectedText",set_selectable:"set_selectable",get_numLines:"get_numLines",set_multiline:"set_multiline",set_maxChars:"set_maxChars",set_borderColor:"set_borderColor",set_border:"set_border",get_border:"get_border",set_backgroundColor:"set_backgroundColor",set_background:"set_background",get_background:"get_background",set_autoSize:"set_autoSize"})
 });
-flash.text.TextFormat = function(font,size,color,bold,italic,underline,url,target,align,leftMargin,rightMargin,indent,leading) {
-	this.font = font;
-	this.size = size;
-	this.color = color;
-	this.bold = bold;
-	this.italic = italic;
-	this.underline = underline;
-	this.url = url;
-	this.target = target;
-	this.align = align;
-	this.leftMargin = leftMargin;
-	this.rightMargin = rightMargin;
-	this.indent = indent;
-	this.leading = leading;
-	this.tabStops = [];
+flash.text.TextFieldAutoSize = function() { };
+$hxClasses["flash.text.TextFieldAutoSize"] = flash.text.TextFieldAutoSize;
+flash.text.TextFieldAutoSize.__name__ = ["flash","text","TextFieldAutoSize"];
+flash.text.TextFieldType = function() { };
+$hxClasses["flash.text.TextFieldType"] = flash.text.TextFieldType;
+flash.text.TextFieldType.__name__ = ["flash","text","TextFieldType"];
+flash.text.TextFormat = function(in_font,in_size,in_color,in_bold,in_italic,in_underline,in_url,in_target,in_align,in_leftMargin,in_rightMargin,in_indent,in_leading) {
+	this.font = in_font;
+	this.size = in_size;
+	this.color = in_color;
+	this.bold = in_bold;
+	this.italic = in_italic;
+	this.underline = in_underline;
+	this.url = in_url;
+	this.target = in_target;
+	this.align = in_align;
+	this.leftMargin = in_leftMargin;
+	this.rightMargin = in_rightMargin;
+	this.indent = in_indent;
+	this.leading = in_leading;
 };
 $hxClasses["flash.text.TextFormat"] = flash.text.TextFormat;
 flash.text.TextFormat.__name__ = ["flash","text","TextFormat"];
@@ -7205,7 +6922,7 @@ flash.text.TextFormat.translateFont = function(n) {
 	case "_sans":
 		return "sans-serif";
 	case "_serif":
-		return "serif";
+		return "sans";
 	case "_typewriter":
 		return "monospace";
 	default:
@@ -7219,6 +6936,7 @@ flash.text.TextFormat.prototype = {
 	,bold: null
 	,bullet: null
 	,color: null
+	,display: null
 	,font: null
 	,indent: null
 	,italic: null
@@ -7232,35 +6950,20 @@ flash.text.TextFormat.prototype = {
 	,target: null
 	,underline: null
 	,url: null
-	,merge: function(f) {
-		if(f.font != null) this.font = f.font;
-		if(f.size != null) this.size = f.size;
-		if(f.color != null) this.color = f.color;
-		if(f.bold != null) this.bold = f.bold;
-		if(f.italic != null) this.italic = f.italic;
-		if(f.underline != null) this.underline = f.underline;
-		if(f.url != null) this.url = f.url;
-		if(f.target != null) this.target = f.target;
-		if(f.align != null) this.align = f.align;
-		if(f.leftMargin != null) this.leftMargin = f.leftMargin;
-		if(f.rightMargin != null) this.rightMargin = f.rightMargin;
-		if(f.indent != null) this.indent = f.indent;
-		if(f.leading != null) this.leading = f.leading;
-		if(f.blockIndent != null) this.blockIndent = f.blockIndent;
-		if(f.bullet != null) this.bullet = f.bullet;
-		if(f.kerning != null) this.kerning = f.kerning;
-		if(f.letterSpacing != null) this.letterSpacing = f.letterSpacing;
-		if(f.tabStops != null) this.tabStops = f.tabStops;
-	}
 	,clone: function() {
-		var r = new flash.text.TextFormat(this.font,this.size,this.color,this.bold,this.italic,this.underline,this.url,this.target,this.align,this.leftMargin,this.rightMargin,this.indent,this.leading);
-		r.blockIndent = this.blockIndent;
-		r.bullet = this.bullet;
-		r.indent = this.indent;
-		r.kerning = this.kerning;
-		r.letterSpacing = this.letterSpacing;
-		r.tabStops = this.tabStops.slice(0);
-		return r;
+		var o = new flash.text.TextFormat(this.font,this.size,this.color,this.bold,this.italic,this.underline,this.url,this.target);
+		o.align = this.align;
+		o.leftMargin = this.leftMargin;
+		o.rightMargin = this.rightMargin;
+		o.indent = this.indent;
+		o.leading = this.leading;
+		o.blockIndent = this.blockIndent;
+		o.bullet = this.bullet;
+		o.display = this.display;
+		o.kerning = this.kerning;
+		o.letterSpacing = this.letterSpacing;
+		o.tabStops = this.tabStops;
+		return o;
 	}
 	,get_fontStyle: function() {
 		return (this.bold?"bold ":"") + (this.italic?"italic ":"") + this.size + "px " + flash.text.TextFormat.translateFont(this.font);
@@ -8026,7 +7729,7 @@ flixel.FlxCamera.prototype = $extend(flixel.FlxBasic.prototype,{
 	}
 	,set_antialiasing: function(Antialiasing) {
 		this.antialiasing = Antialiasing;
-		this._flashBitmap.smoothing = Antialiasing;
+		this._flashBitmap.set_smoothing(Antialiasing);
 		return Antialiasing;
 	}
 	,__class__: flixel.FlxCamera
@@ -8953,6 +8656,173 @@ haxe.Log.__name__ = ["haxe","Log"];
 haxe.Log.trace = function(v,infos) {
 	js.Boot.__trace(v,infos);
 };
+var js = {};
+js.Boot = function() { };
+$hxClasses["js.Boot"] = js.Boot;
+js.Boot.__name__ = ["js","Boot"];
+js.Boot.__unhtml = function(s) {
+	return s.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
+};
+js.Boot.__trace = function(v,i) {
+	var msg;
+	if(i != null) msg = i.fileName + ":" + i.lineNumber + ": "; else msg = "";
+	msg += js.Boot.__string_rec(v,"");
+	if(i != null && i.customParams != null) {
+		var _g = 0;
+		var _g1 = i.customParams;
+		while(_g < _g1.length) {
+			var v1 = _g1[_g];
+			++_g;
+			msg += "," + js.Boot.__string_rec(v1,"");
+		}
+	}
+	var d;
+	if(typeof(document) != "undefined" && (d = document.getElementById("haxe:trace")) != null) d.innerHTML += js.Boot.__unhtml(msg) + "<br/>"; else if(typeof console != "undefined" && console.log != null) console.log(msg);
+};
+js.Boot.__clear_trace = function() {
+	var d = document.getElementById("haxe:trace");
+	if(d != null) d.innerHTML = "";
+};
+js.Boot.isClass = function(o) {
+	return o.__name__;
+};
+js.Boot.isEnum = function(e) {
+	return e.__ename__;
+};
+js.Boot.getClass = function(o) {
+	if((o instanceof Array) && o.__enum__ == null) return Array; else {
+		var cl = o.__class__;
+		if(cl != null) return cl;
+		var name = js.Boot.__nativeClassName(o);
+		if(name != null) return js.Boot.__resolveNativeClass(name);
+		return null;
+	}
+};
+js.Boot.__string_rec = function(o,s) {
+	if(o == null) return "null";
+	if(s.length >= 5) return "<...>";
+	var t = typeof(o);
+	if(t == "function" && (o.__name__ || o.__ename__)) t = "object";
+	switch(t) {
+	case "object":
+		if(o instanceof Array) {
+			if(o.__enum__) {
+				if(o.length == 2) return o[0];
+				var str = o[0] + "(";
+				s += "\t";
+				var _g1 = 2;
+				var _g = o.length;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(i != 2) str += "," + js.Boot.__string_rec(o[i],s); else str += js.Boot.__string_rec(o[i],s);
+				}
+				return str + ")";
+			}
+			var l = o.length;
+			var i1;
+			var str1 = "[";
+			s += "\t";
+			var _g2 = 0;
+			while(_g2 < l) {
+				var i2 = _g2++;
+				str1 += (i2 > 0?",":"") + js.Boot.__string_rec(o[i2],s);
+			}
+			str1 += "]";
+			return str1;
+		}
+		var tostr;
+		try {
+			tostr = o.toString;
+		} catch( e ) {
+			return "???";
+		}
+		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
+			var s2 = o.toString();
+			if(s2 != "[object Object]") return s2;
+		}
+		var k = null;
+		var str2 = "{\n";
+		s += "\t";
+		var hasp = o.hasOwnProperty != null;
+		for( var k in o ) {
+		if(hasp && !o.hasOwnProperty(k)) {
+			continue;
+		}
+		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
+			continue;
+		}
+		if(str2.length != 2) str2 += ", \n";
+		str2 += s + k + " : " + js.Boot.__string_rec(o[k],s);
+		}
+		s = s.substring(1);
+		str2 += "\n" + s + "}";
+		return str2;
+	case "function":
+		return "<function>";
+	case "string":
+		return o;
+	default:
+		return String(o);
+	}
+};
+js.Boot.__interfLoop = function(cc,cl) {
+	if(cc == null) return false;
+	if(cc == cl) return true;
+	var intf = cc.__interfaces__;
+	if(intf != null) {
+		var _g1 = 0;
+		var _g = intf.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var i1 = intf[i];
+			if(i1 == cl || js.Boot.__interfLoop(i1,cl)) return true;
+		}
+	}
+	return js.Boot.__interfLoop(cc.__super__,cl);
+};
+js.Boot.__instanceof = function(o,cl) {
+	if(cl == null) return false;
+	switch(cl) {
+	case Int:
+		return (o|0) === o;
+	case Float:
+		return typeof(o) == "number";
+	case Bool:
+		return typeof(o) == "boolean";
+	case String:
+		return typeof(o) == "string";
+	case Array:
+		return (o instanceof Array) && o.__enum__ == null;
+	case Dynamic:
+		return true;
+	default:
+		if(o != null) {
+			if(typeof(cl) == "function") {
+				if(o instanceof cl) return true;
+				if(js.Boot.__interfLoop(js.Boot.getClass(o),cl)) return true;
+			} else if(typeof(cl) == "object" && js.Boot.__isNativeObj(cl)) {
+				if(o instanceof cl) return true;
+			}
+		} else return false;
+		if(cl == Class && o.__name__ != null) return true;
+		if(cl == Enum && o.__ename__ != null) return true;
+		return o.__enum__ == cl;
+	}
+};
+js.Boot.__cast = function(o,t) {
+	if(js.Boot.__instanceof(o,t)) return o; else throw "Cannot cast " + Std.string(o) + " to " + Std.string(t);
+};
+js.Boot.__nativeClassName = function(o) {
+	var name = js.Boot.__toStr.call(o).slice(8,-1);
+	if(name == "Object" || name == "Function" || name == "Math" || name == "JSON") return null;
+	return name;
+};
+js.Boot.__isNativeObj = function(o) {
+	return js.Boot.__nativeClassName(o) != null;
+};
+js.Boot.__resolveNativeClass = function(name) {
+	if(typeof window != "undefined") return window[name]; else return global[name];
+};
 flixel.system.frontEnds.PluginFrontEnd = function() {
 	this.list = [];
 	this.add_flixel_plugin_PathManager(flixel.util.FlxPath.manager = new flixel.plugin.PathManager());
@@ -9386,7 +9256,7 @@ flixel.plugin.PathManager.__super__ = flixel.plugin.FlxPlugin;
 flixel.plugin.PathManager.prototype = $extend(flixel.plugin.FlxPlugin.prototype,{
 	_paths: null
 	,destroy: function() {
-		flixel.util.FlxArrayUtil.clearArray(this._paths);
+		flixel.util.FlxArrayUtil.clearArray_flixel_util_FlxPath(this._paths);
 		this._paths = null;
 		flixel.plugin.FlxPlugin.prototype.destroy.call(this);
 	}
@@ -9419,10 +9289,10 @@ flixel.plugin.PathManager.prototype = $extend(flixel.plugin.FlxPlugin.prototype,
 		flixel.util.FlxArrayUtil.fastSplice_flixel_util_FlxPath(this._paths,Path);
 	}
 	,clear: function() {
-		flixel.util.FlxArrayUtil.clearArray(this._paths);
+		flixel.util.FlxArrayUtil.clearArray_flixel_util_FlxPath(this._paths);
 	}
 	,onStateSwitch: function() {
-		flixel.util.FlxArrayUtil.clearArray(this._paths);
+		flixel.util.FlxArrayUtil.clearArray_flixel_util_FlxPath(this._paths);
 	}
 	,__class__: flixel.plugin.PathManager
 });
@@ -9521,7 +9391,7 @@ flixel.plugin.TimerManager.__super__ = flixel.plugin.FlxPlugin;
 flixel.plugin.TimerManager.prototype = $extend(flixel.plugin.FlxPlugin.prototype,{
 	_timers: null
 	,destroy: function() {
-		flixel.util.FlxArrayUtil.clearArray(this._timers);
+		flixel.util.FlxArrayUtil.clearArray_flixel_util_FlxTimer(this._timers);
 		this._timers = null;
 		flixel.plugin.FlxPlugin.prototype.destroy.call(this);
 	}
@@ -9541,10 +9411,10 @@ flixel.plugin.TimerManager.prototype = $extend(flixel.plugin.FlxPlugin.prototype
 		flixel.util.FlxArrayUtil.fastSplice_flixel_util_FlxTimer(this._timers,Timer);
 	}
 	,clear: function() {
-		flixel.util.FlxArrayUtil.clearArray(this._timers);
+		flixel.util.FlxArrayUtil.clearArray_flixel_util_FlxTimer(this._timers);
 	}
 	,onStateSwitch: function() {
-		flixel.util.FlxArrayUtil.clearArray(this._timers);
+		flixel.util.FlxArrayUtil.clearArray_flixel_util_FlxTimer(this._timers);
 	}
 	,__class__: flixel.plugin.TimerManager
 });
@@ -10549,7 +10419,7 @@ flixel.FlxGame.prototype = $extend(flash.display.Sprite.prototype,{
 			++_g;
 			swipe = null;
 		}
-		flixel.util.FlxArrayUtil.clearArray(flixel.FlxG.swipes);
+		flixel.util.FlxArrayUtil.clearArray_flixel_input_FlxSwipe(flixel.FlxG.swipes);
 	}
 	,updateInput: function() {
 		flixel.FlxG.inputs.update();
@@ -10561,7 +10431,7 @@ flixel.FlxGame.prototype = $extend(flash.display.Sprite.prototype,{
 		flixel.FlxG.cameras.lock();
 		flixel.FlxG.plugins.draw();
 		this._state.draw();
-		this._display.fillRect(this._display.__rect.clone(),0);
+		this._display.fillRect(this._display.rect,0);
 		var _g = 0;
 		var _g1 = flixel.FlxG.cameras.list;
 		while(_g < _g1.length) {
@@ -10603,15 +10473,16 @@ flixel._FlxSprite = {};
 flixel._FlxSprite.GraphicDefault = function(width,height,transparent,color) {
 	var o = flixel._FlxSprite.GraphicDefault.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel._FlxSprite.GraphicDefault"] = flixel._FlxSprite.GraphicDefault;
 flixel._FlxSprite.GraphicDefault.__name__ = ["flixel","_FlxSprite","GraphicDefault"];
 flixel._FlxSprite.GraphicDefault.image = null;
 flixel._FlxSprite.GraphicDefault.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel._FlxSprite.GraphicDefault.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,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";
+	flixel._FlxSprite.GraphicDefault.image = o;
 };
 flixel._FlxSprite.GraphicDefault.__super__ = flash.display.BitmapData;
 flixel._FlxSprite.GraphicDefault.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -12970,15 +12841,16 @@ flixel.input.mouse._FlxMouse = {};
 flixel.input.mouse._FlxMouse.GraphicCursor = function(width,height,transparent,color) {
 	var o = flixel.input.mouse._FlxMouse.GraphicCursor.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.input.mouse._FlxMouse.GraphicCursor"] = flixel.input.mouse._FlxMouse.GraphicCursor;
 flixel.input.mouse._FlxMouse.GraphicCursor.__name__ = ["flixel","input","mouse","_FlxMouse","GraphicCursor"];
 flixel.input.mouse._FlxMouse.GraphicCursor.image = null;
 flixel.input.mouse._FlxMouse.GraphicCursor.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.input.mouse._FlxMouse.GraphicCursor.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAmRJREFUeNq0ls9rE0EUx7872YSgJlTSSiWpVvrDIqhFUIKg+CeIIgqeFE/iTRC8pLQXjyL04g9ComXTJIW0OVUEMTdBRIk5W6WtkKJSbGnDpsn6Zk2W3TQbs+nkwduZnVm+n30zw3sjBULBCIApdMlc+/z+d9Rq5LluAORaO8kfDyenW0byaOKeYwDjD03TdAgJRERHINEeaJVKFYxJkCSJj03YRXL/9mVbod6BkH0EumlSvSc0EgNw5ep1jA6PCIcYgAM+P548nsaxwUGhEGZ+2ShVMJ9K4+jAEWEQC2C7pEJjHiyk0wgFg0IgrHFgabmoi2dmkzjc379nyC7An80t/F7f0PeCQw719RkQOoqRPQO4fV0p6u3w0BAyySQCgUDHkKaA4s91bG6V9P7xkVE9koM9PR1BmN3EUi0KbifGxjCnKPD7fI4htoDV4i+o5R3j/fTJUwRJOIbYAnh++r66Zhk7Mz4OJR6H1+ttG8JaTX77sYZKtWoZC589h9SrmbYhLQGquqMvVaOdD4cxE43C43bDVE8ijgGNm222SxcuIv78xX8hcivxWSWGfP4Tbex+Emr+KV8qtVw2Q2Cu8baAVOIlFubT/z6SXWAu1u7Rt0CaArIknMkkwQucLMuQmOQ0QxiQXYDXi1kkaGkYY5DdLj70lvxBh8nUYwHkcm8Qiz41L8kiL3ZUo7c7rckG4OOH9ygU8nATs1b8s+TXSFwVUnC+FD7TXxs3izkR4kYELusJ4eI3m4nbLYOTVKGQ3xDx55aLV60fI7/D85zIm109gmfkt0SL12/XvdTe7db1/a8AAwCZUMQMzQodywAAAABJRU5ErkJggg==";
+	flixel.input.mouse._FlxMouse.GraphicCursor.image = o;
 };
 flixel.input.mouse._FlxMouse.GraphicCursor.__super__ = flash.display.BitmapData;
 flixel.input.mouse._FlxMouse.GraphicCursor.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -13569,15 +13441,16 @@ flixel.system._FlxAssets.FontDebugger.prototype = $extend(flash.text.Font.protot
 flixel.system.GraphicLogo = function(width,height,transparent,color) {
 	var o = flixel.system.GraphicLogo.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.GraphicLogo"] = flixel.system.GraphicLogo;
 flixel.system.GraphicLogo.__name__ = ["flixel","system","GraphicLogo"];
 flixel.system.GraphicLogo.image = null;
 flixel.system.GraphicLogo.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.GraphicLogo.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,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";
+	flixel.system.GraphicLogo.image = o;
 };
 flixel.system.GraphicLogo.__super__ = flash.display.BitmapData;
 flixel.system.GraphicLogo.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -14317,7 +14190,7 @@ flixel.system.FlxSplash.prototype = $extend(flixel.FlxState.prototype,{
 		this._text.embedFonts = true;
 		var dtf = new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEFAULT,16,16777215);
 		dtf.align = "CENTER";
-		this._text.set_defaultTextFormat(dtf);
+		this._text.defaultTextFormat = dtf;
 		this._text.set_text("HaxeFlixel");
 		flash.Lib.get_current().get_stage().addChild(this._text);
 		this.onResize(stageWidth,stageHeight);
@@ -14344,7 +14217,7 @@ flixel.system.FlxSplash.prototype = $extend(flixel.FlxState.prototype,{
 	}
 	,timerCallback: function(Timer) {
 		this._functions[this._curPart]();
-		this._text.set_textColor(this._colors[this._curPart]);
+		this._text.textColor = this._colors[this._curPart];
 		this._text.set_text("HaxeFlixel");
 		this._curPart++;
 		if(this._curPart == 5) {
@@ -14442,7 +14315,7 @@ flixel.system.debug.Window = function(Title,Icon,Width,Height,Resizable,Bounds,C
 	this._title.set_selectable(false);
 	this._title.set_multiline(false);
 	this._title.embedFonts = true;
-	this._title.set_defaultTextFormat(new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,12,16777215));
+	this._title.defaultTextFormat = new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,12,16777215);
 	this._title.set_text(Title);
 	this.addChild(this._shadow);
 	this.addChild(this._background);
@@ -14798,7 +14671,7 @@ flixel.system.debug.BitmapLog.prototype = $extend(flixel.system.debug.Window.pro
 			this._entries[i] = null;
 		}
 		this._entries = [];
-		this._canvasBitmap.bitmapData.fillRect(this._canvasBitmap.bitmapData.__rect.clone(),0);
+		this._canvasBitmap.bitmapData.fillRect(this._canvasBitmap.bitmapData.rect,0);
 		this._dimensionsText.set_text("");
 		this._counterText.set_text("0/0");
 		this._footerText.set_text("");
@@ -14809,7 +14682,7 @@ flixel.system.debug.BitmapLog.prototype = $extend(flixel.system.debug.Window.pro
 			return false;
 		}
 		if(Index == null) Index = this._curIndex;
-		this._canvasBitmap.bitmapData.fillRect(this._canvasBitmap.bitmapData.__rect.clone(),0);
+		this._canvasBitmap.bitmapData.fillRect(this._canvasBitmap.bitmapData.rect,0);
 		if(Index < 0) Index = this._entries.length - 1; else if(Index >= this._entries.length) Index = 0;
 		this._curIndex = Index;
 		this._point.set_x(this._canvasBitmap.bitmapData.component.width / 2 - this._entries[this._curIndex].bitmap.component.width * this.zoom / 2);
@@ -14818,9 +14691,9 @@ flixel.system.debug.BitmapLog.prototype = $extend(flixel.system.debug.Window.pro
 		this._matrix.identity();
 		this._matrix.scale(this.zoom,this.zoom);
 		this._matrix.translate(this._point.x,this._point.y);
-		this._canvasBitmap.bitmapData.draw(this._entries[this._curIndex].bitmap,this._matrix,null,null,this._canvasBitmap.bitmapData.__rect.clone(),false);
+		this._canvasBitmap.bitmapData.draw(this._entries[this._curIndex].bitmap,this._matrix,null,null,this._canvasBitmap.bitmapData.rect,false);
 		this.drawBoundingBox(this._entries[this._curIndex].bitmap);
-		this._canvasBitmap.bitmapData.draw(flixel.util.FlxSpriteUtil.flashGfxSprite,this._matrix,null,null,this._canvasBitmap.bitmapData.__rect.clone(),false);
+		this._canvasBitmap.bitmapData.draw(flixel.util.FlxSpriteUtil.flashGfxSprite,this._matrix,null,null,this._canvasBitmap.bitmapData.rect,false);
 		this.refreshTexts();
 		return true;
 	}
@@ -14885,7 +14758,7 @@ flixel.system.debug.Console = function() {
 	this._input = new flash.text.TextField();
 	this._input.set_type("INPUT");
 	this._input.embedFonts = true;
-	this._input.set_defaultTextFormat(new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,13,16777215,false,false,false));
+	this._input.defaultTextFormat = new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,13,16777215,false,false,false);
 	this._input.set_text("(Click here / press [Tab] to enter command. Type 'help' for help.)");
 	this._input.set_width(this._width - 4);
 	this._input.set_height(this._height - 15);
@@ -15448,10 +15321,10 @@ flixel.system.debug.DebuggerUtil.createTextField = function(X,Y,Color,Size) {
 	tf.set_x(X);
 	tf.set_y(Y);
 	tf.set_multiline(false);
-	tf.set_wordWrap(false);
+	tf.wordWrap = false;
 	tf.embedFonts = true;
 	tf.set_selectable(false);
-	tf.set_defaultTextFormat(new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,Size,(Color >> 16 & 255) << 16 | (Color >> 8 & 255) << 8 | Color & 255));
+	tf.defaultTextFormat = new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,Size,(Color >> 16 & 255) << 16 | (Color >> 8 & 255) << 8 | Color & 255);
 	tf.set_alpha(flixel.util.FlxColorUtil.getAlphaFloat(Color));
 	return tf;
 };
@@ -15459,15 +15332,16 @@ flixel.system.debug._FlxDebugger = {};
 flixel.system.debug._FlxDebugger.GraphicFlixel = function(width,height,transparent,color) {
 	var o = flixel.system.debug._FlxDebugger.GraphicFlixel.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._FlxDebugger.GraphicFlixel"] = flixel.system.debug._FlxDebugger.GraphicFlixel;
 flixel.system.debug._FlxDebugger.GraphicFlixel.__name__ = ["flixel","system","debug","_FlxDebugger","GraphicFlixel"];
 flixel.system.debug._FlxDebugger.GraphicFlixel.image = null;
 flixel.system.debug._FlxDebugger.GraphicFlixel.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._FlxDebugger.GraphicFlixel.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,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";
+	flixel.system.debug._FlxDebugger.GraphicFlixel.image = o;
 };
 flixel.system.debug._FlxDebugger.GraphicFlixel.__super__ = flash.display.BitmapData;
 flixel.system.debug._FlxDebugger.GraphicFlixel.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15476,15 +15350,16 @@ flixel.system.debug._FlxDebugger.GraphicFlixel.prototype = $extend(flash.display
 flixel.system.debug._FlxDebugger.GraphicDrawDebug = function(width,height,transparent,color) {
 	var o = flixel.system.debug._FlxDebugger.GraphicDrawDebug.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._FlxDebugger.GraphicDrawDebug"] = flixel.system.debug._FlxDebugger.GraphicDrawDebug;
 flixel.system.debug._FlxDebugger.GraphicDrawDebug.__name__ = ["flixel","system","debug","_FlxDebugger","GraphicDrawDebug"];
 flixel.system.debug._FlxDebugger.GraphicDrawDebug.image = null;
 flixel.system.debug._FlxDebugger.GraphicDrawDebug.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._FlxDebugger.GraphicDrawDebug.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAE9JREFUeNq0kMsNACAIQ6tbsqBr1vgnahQPNukFXgkpSKJaeFaYQVHh5YgVlAbf1I7Q5QTgsJfe0eNBX2Apj4xWdqZuxAL3RtIgGKtDFGAA4h4VM55iyBsAAAAASUVORK5CYII=";
+	flixel.system.debug._FlxDebugger.GraphicDrawDebug.image = o;
 };
 flixel.system.debug._FlxDebugger.GraphicDrawDebug.__super__ = flash.display.BitmapData;
 flixel.system.debug._FlxDebugger.GraphicDrawDebug.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15493,15 +15368,16 @@ flixel.system.debug._FlxDebugger.GraphicDrawDebug.prototype = $extend(flash.disp
 flixel.system.debug.GraphicLog = function(width,height,transparent,color) {
 	var o = flixel.system.debug.GraphicLog.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug.GraphicLog"] = flixel.system.debug.GraphicLog;
 flixel.system.debug.GraphicLog.__name__ = ["flixel","system","debug","GraphicLog"];
 flixel.system.debug.GraphicLog.image = null;
 flixel.system.debug.GraphicLog.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug.GraphicLog.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAkSURBVHjaYvz//z8DsYAFiY1PFyO6YsZRkweHyQAAAAD//wMA+fYILAhjnxYAAAAASUVORK5CYII=";
+	flixel.system.debug.GraphicLog.image = o;
 };
 flixel.system.debug.GraphicLog.__super__ = flash.display.BitmapData;
 flixel.system.debug.GraphicLog.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15510,15 +15386,16 @@ flixel.system.debug.GraphicLog.prototype = $extend(flash.display.BitmapData.prot
 flixel.system.debug.GraphicStats = function(width,height,transparent,color) {
 	var o = flixel.system.debug.GraphicStats.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug.GraphicStats"] = flixel.system.debug.GraphicStats;
 flixel.system.debug.GraphicStats.__name__ = ["flixel","system","debug","GraphicStats"];
 flixel.system.debug.GraphicStats.image = null;
 flixel.system.debug.GraphicStats.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug.GraphicStats.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAxSURBVHjaYvz//z8DsYCJgQRAjOL/UEwdk+Gm0dTNWBVjtZo+zmAkJQYBAAAA//8DAL8HDAlqdGYRAAAAAElFTkSuQmCC";
+	flixel.system.debug.GraphicStats.image = o;
 };
 flixel.system.debug.GraphicStats.__super__ = flash.display.BitmapData;
 flixel.system.debug.GraphicStats.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15527,15 +15404,16 @@ flixel.system.debug.GraphicStats.prototype = $extend(flash.display.BitmapData.pr
 flixel.system.debug.GraphicWatch = function(width,height,transparent,color) {
 	var o = flixel.system.debug.GraphicWatch.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug.GraphicWatch"] = flixel.system.debug.GraphicWatch;
 flixel.system.debug.GraphicWatch.__name__ = ["flixel","system","debug","GraphicWatch"];
 flixel.system.debug.GraphicWatch.image = null;
 flixel.system.debug.GraphicWatch.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug.GraphicWatch.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADcSURBVHjajJAhS8NhGMR/e1FZGMJgwSarVsOKWRHbmpj8BH4Cm9/BZl2wGsRgE9RmFlw0CCJYLHdn8P1v+6uIB0957ri75+kk4b8oANgFexf7GvsFe4p9gj1oqZMQaT9SIt1HOo50Fuk90mWkfhKSzMTTSLeRug0R6TCSIx00u1ID1oEHSvlYCL0BXoFhu/MXsYc9qjesAkdAt3KtzpuRHiO9RbqKdFdvOI+01NTozF5nbwDjGtsHdoBnYJtSnubOiyOtROpFOq3uFz+dv8NeAybAMqVsAX+If8HnANR4wpQk9pFxAAAAAElFTkSuQmCC";
+	flixel.system.debug.GraphicWatch.image = o;
 };
 flixel.system.debug.GraphicWatch.__super__ = flash.display.BitmapData;
 flixel.system.debug.GraphicWatch.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15544,15 +15422,16 @@ flixel.system.debug.GraphicWatch.prototype = $extend(flash.display.BitmapData.pr
 flixel.system.debug.GraphicBitmapLog = function(width,height,transparent,color) {
 	var o = flixel.system.debug.GraphicBitmapLog.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug.GraphicBitmapLog"] = flixel.system.debug.GraphicBitmapLog;
 flixel.system.debug.GraphicBitmapLog.__name__ = ["flixel","system","debug","GraphicBitmapLog"];
 flixel.system.debug.GraphicBitmapLog.image = null;
 flixel.system.debug.GraphicBitmapLog.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug.GraphicBitmapLog.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gQZExsadkVG4wAAAEFJREFUGNOVzcsJADAIBNEt1TJytPPJKeRnxAwseHig9BNQmfEDAStDQGWY4Qu+cAhP7Mws+jiOxp4yvOYZLkFAHW6XYC088dqdAAAAAElFTkSuQmCC";
+	flixel.system.debug.GraphicBitmapLog.image = o;
 };
 flixel.system.debug.GraphicBitmapLog.__super__ = flash.display.BitmapData;
 flixel.system.debug.GraphicBitmapLog.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15561,15 +15440,16 @@ flixel.system.debug.GraphicBitmapLog.prototype = $extend(flash.display.BitmapDat
 flixel.system.debug.GraphicConsole = function(width,height,transparent,color) {
 	var o = flixel.system.debug.GraphicConsole.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug.GraphicConsole"] = flixel.system.debug.GraphicConsole;
 flixel.system.debug.GraphicConsole.__name__ = ["flixel","system","debug","GraphicConsole"];
 flixel.system.debug.GraphicConsole.image = null;
 flixel.system.debug.GraphicConsole.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug.GraphicConsole.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABUSURBVHjatJHRCUAhDAPjG8UV3MnhnMVZXOH8UShPhIoYyE+5tIEGQF59OpCFo6QqKW1pwDoDDSi/uYAFni4jlD3wvIINXG12d45ABdKuWnj2lD4AKUbXQsd8lwkAAAAASUVORK5CYII=";
+	flixel.system.debug.GraphicConsole.image = o;
 };
 flixel.system.debug.GraphicConsole.__super__ = flash.display.BitmapData;
 flixel.system.debug.GraphicConsole.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15578,15 +15458,16 @@ flixel.system.debug.GraphicConsole.prototype = $extend(flash.display.BitmapData.
 flixel.system.debug.GraphicArrowLeft = function(width,height,transparent,color) {
 	var o = flixel.system.debug.GraphicArrowLeft.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug.GraphicArrowLeft"] = flixel.system.debug.GraphicArrowLeft;
 flixel.system.debug.GraphicArrowLeft.__name__ = ["flixel","system","debug","GraphicArrowLeft"];
 flixel.system.debug.GraphicArrowLeft.image = null;
 flixel.system.debug.GraphicArrowLeft.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug.GraphicArrowLeft.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gQZEjA03SHccgAAAEBJREFUGNNj/P//PwMRIJKBgcGX4f////hw5P///5f9hwKiFOFSjFURumK8ipAVE1REtskku5ms0MCriZGUGAQAs9Npmz8IihEAAAAASUVORK5CYII=";
+	flixel.system.debug.GraphicArrowLeft.image = o;
 };
 flixel.system.debug.GraphicArrowLeft.__super__ = flash.display.BitmapData;
 flixel.system.debug.GraphicArrowLeft.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15595,15 +15476,16 @@ flixel.system.debug.GraphicArrowLeft.prototype = $extend(flash.display.BitmapDat
 flixel.system.debug.GraphicArrowRight = function(width,height,transparent,color) {
 	var o = flixel.system.debug.GraphicArrowRight.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug.GraphicArrowRight"] = flixel.system.debug.GraphicArrowRight;
 flixel.system.debug.GraphicArrowRight.__name__ = ["flixel","system","debug","GraphicArrowRight"];
 flixel.system.debug.GraphicArrowRight.image = null;
 flixel.system.debug.GraphicArrowRight.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug.GraphicArrowRight.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD5JREFUeNpi+P///zIgjgRiBkIYRMAAQU3IiglqwqYYpyZ8ijE0Mf4HayEKLCfJZIrdTFRoEBXORMcgQIABAMqtfziHFgbhAAAAAElFTkSuQmCC";
+	flixel.system.debug.GraphicArrowRight.image = o;
 };
 flixel.system.debug.GraphicArrowRight.__super__ = flash.display.BitmapData;
 flixel.system.debug.GraphicArrowRight.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -15628,7 +15510,7 @@ flixel.system.debug.FlxDebugger = function(Width,Height) {
 	txt.set_multiline(false);
 	txt.embedFonts = true;
 	var format = new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,12,-1);
-	txt.set_defaultTextFormat(format);
+	txt.defaultTextFormat = format;
 	txt.set_autoSize("LEFT");
 	txt.set_text(Std.string(flixel.FlxG.VERSION));
 	this._leftButtons = [];
@@ -15946,10 +15828,10 @@ flixel.system.debug.Log = function() {
 	this._text.set_x(2);
 	this._text.set_y(15);
 	this._text.set_multiline(true);
-	this._text.set_wordWrap(true);
+	this._text.wordWrap = true;
 	this._text.set_selectable(true);
 	this._text.embedFonts = true;
-	this._text.set_defaultTextFormat(new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,12,16777215));
+	this._text.defaultTextFormat = new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEBUGGER,12,16777215);
 	this.addChild(this._text);
 	this._lines = new Array();
 };
@@ -16054,15 +15936,16 @@ flixel.system.debug._Stats = {};
 flixel.system.debug._Stats.GraphicMinimizeButton = function(width,height,transparent,color) {
 	var o = flixel.system.debug._Stats.GraphicMinimizeButton.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._Stats.GraphicMinimizeButton"] = flixel.system.debug._Stats.GraphicMinimizeButton;
 flixel.system.debug._Stats.GraphicMinimizeButton.__name__ = ["flixel","system","debug","_Stats","GraphicMinimizeButton"];
 flixel.system.debug._Stats.GraphicMinimizeButton.image = null;
 flixel.system.debug._Stats.GraphicMinimizeButton.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._Stats.GraphicMinimizeButton.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAB2AAAAdgFOeyYIAAAAB3RJTUUH3gMJCR01eEZxFQAAAD9JREFUGNNj+P///38GAgCuBsZA1oRNDC6BrhCZz/T//38mfNYT4zTyACO68YyMjFjFmJAlsZqELEdU8BAb4AC4cFLFswuInwAAAABJRU5ErkJggg==";
+	flixel.system.debug._Stats.GraphicMinimizeButton.image = o;
 };
 flixel.system.debug._Stats.GraphicMinimizeButton.__super__ = flash.display.BitmapData;
 flixel.system.debug._Stats.GraphicMinimizeButton.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16071,15 +15954,16 @@ flixel.system.debug._Stats.GraphicMinimizeButton.prototype = $extend(flash.displ
 flixel.system.debug._Stats.GraphicMaximizeButton = function(width,height,transparent,color) {
 	var o = flixel.system.debug._Stats.GraphicMaximizeButton.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._Stats.GraphicMaximizeButton"] = flixel.system.debug._Stats.GraphicMaximizeButton;
 flixel.system.debug._Stats.GraphicMaximizeButton.__name__ = ["flixel","system","debug","_Stats","GraphicMaximizeButton"];
 flixel.system.debug._Stats.GraphicMaximizeButton.image = null;
 flixel.system.debug._Stats.GraphicMaximizeButton.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._Stats.GraphicMaximizeButton.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAB2AAAAdgFOeyYIAAAAB3RJTUUH3gMJCR8UBhkDyQAAAE9JREFUGNOtkEESwDAIAov///P2ooaa9BZPZoAwqwCeNZLUD9fCHW76TY2fdw2IU9UpeHeUNd1YAFndMAFQmgu5txaV3m6T5ymoD/H0OvkLSA9B8n+4cjoAAAAASUVORK5CYII=";
+	flixel.system.debug._Stats.GraphicMaximizeButton.image = o;
 };
 flixel.system.debug._Stats.GraphicMaximizeButton.__super__ = flash.display.BitmapData;
 flixel.system.debug._Stats.GraphicMaximizeButton.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16132,7 +16016,7 @@ flixel.system.debug.Stats = function() {
 	this.addChild(this._leftTextField = flixel.system.debug.DebuggerUtil.createTextField(gutter,graphHeight * 2 + 45,-1426063361,11));
 	this.addChild(this._rightTextField = flixel.system.debug.DebuggerUtil.createTextField(gutter + 70,graphHeight * 2 + 45,-1,11));
 	this._leftTextField.set_multiline(this._rightTextField.set_multiline(true));
-	this._leftTextField.set_wordWrap(this._rightTextField.set_wordWrap(true));
+	this._leftTextField.wordWrap = this._rightTextField.wordWrap = true;
 	this._leftTextField.set_text("Update: \nDraw:" + "\nQuadTrees: \nLists:");
 	this._toggleSizeButton = new flixel.system.ui.FlxSystemButton(new flixel.system.debug._Stats.GraphicMaximizeButton(0,0),$bind(this,this.toggleSize));
 	this._toggleSizeButton.set_alpha(0.8);
@@ -16342,7 +16226,7 @@ flixel.system.debug.StatsGraph = function(X,Y,Width,Height,GraphColor,Unit,Label
 	this.minLabel = flixel.system.debug.DebuggerUtil.createTextField(0,this._height - 11,-1426063361,11);
 	this.avgLabel = flixel.system.debug.DebuggerUtil.createTextField(this._labelWidth + 20,this._height / 2 - 5.5 - 10,-1426063361,11);
 	this.avgLabel.set_width(this._width);
-	this.avgLabel.get_defaultTextFormat().align = "CENTER";
+	this.avgLabel.defaultTextFormat.align = "CENTER";
 	this.avgLabel.set_alpha(0.5);
 	this.addChild(this._axis);
 	this.addChild(this.maxLabel);
@@ -16754,15 +16638,16 @@ flixel.system.debug._VCR = {};
 flixel.system.debug._VCR.GraphicOpen = function(width,height,transparent,color) {
 	var o = flixel.system.debug._VCR.GraphicOpen.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._VCR.GraphicOpen"] = flixel.system.debug._VCR.GraphicOpen;
 flixel.system.debug._VCR.GraphicOpen.__name__ = ["flixel","system","debug","_VCR","GraphicOpen"];
 flixel.system.debug._VCR.GraphicOpen.image = null;
 flixel.system.debug._VCR.GraphicOpen.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._VCR.GraphicOpen.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFRJREFUeNqUkFEOwCAIQwu33AW5ZrclU5lW3V4CIaS8D4wkvuJpjqu4qLBkvgdbiOnJiJmxxUcOsUNtXRDiYAiXIMSBNMezC2V2/EFYZrz+vOUUYAADBegWpg9/XAAAAABJRU5ErkJggg==";
+	flixel.system.debug._VCR.GraphicOpen.image = o;
 };
 flixel.system.debug._VCR.GraphicOpen.__super__ = flash.display.BitmapData;
 flixel.system.debug._VCR.GraphicOpen.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16771,15 +16656,16 @@ flixel.system.debug._VCR.GraphicOpen.prototype = $extend(flash.display.BitmapDat
 flixel.system.debug._VCR.GraphicPause = function(width,height,transparent,color) {
 	var o = flixel.system.debug._VCR.GraphicPause.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._VCR.GraphicPause"] = flixel.system.debug._VCR.GraphicPause;
 flixel.system.debug._VCR.GraphicPause.__name__ = ["flixel","system","debug","_VCR","GraphicPause"];
 flixel.system.debug._VCR.GraphicPause.image = null;
 flixel.system.debug._VCR.GraphicPause.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._VCR.GraphicPause.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5JREFUeNpi/A8EDKiAEYmNIsfEQAIYVTwIFQMEGACRFQUSU0qVMQAAAABJRU5ErkJggg==";
+	flixel.system.debug._VCR.GraphicPause.image = o;
 };
 flixel.system.debug._VCR.GraphicPause.__super__ = flash.display.BitmapData;
 flixel.system.debug._VCR.GraphicPause.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16788,15 +16674,16 @@ flixel.system.debug._VCR.GraphicPause.prototype = $extend(flash.display.BitmapDa
 flixel.system.debug._VCR.GraphicRecordOff = function(width,height,transparent,color) {
 	var o = flixel.system.debug._VCR.GraphicRecordOff.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._VCR.GraphicRecordOff"] = flixel.system.debug._VCR.GraphicRecordOff;
 flixel.system.debug._VCR.GraphicRecordOff.__name__ = ["flixel","system","debug","_VCR","GraphicRecordOff"];
 flixel.system.debug._VCR.GraphicRecordOff.image = null;
 flixel.system.debug._VCR.GraphicRecordOff.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._VCR.GraphicRecordOff.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGhJREFUeNpi+P//PwMU2wBxHxBfAOKfULoPKg5WA1MYA8TX/2MH16HyDDATcSlE1mDDxMDAEATEGgz4AUg+CKTYiYE44MQI8gyQwUaE4l8gk68TafJ1kOJ9RCreR1JokBzORMcgQIABAPwC+DZ41JkCAAAAAElFTkSuQmCC";
+	flixel.system.debug._VCR.GraphicRecordOff.image = o;
 };
 flixel.system.debug._VCR.GraphicRecordOff.__super__ = flash.display.BitmapData;
 flixel.system.debug._VCR.GraphicRecordOff.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16805,15 +16692,16 @@ flixel.system.debug._VCR.GraphicRecordOff.prototype = $extend(flash.display.Bitm
 flixel.system.debug._VCR.GraphicRecordOn = function(width,height,transparent,color) {
 	var o = flixel.system.debug._VCR.GraphicRecordOn.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._VCR.GraphicRecordOn"] = flixel.system.debug._VCR.GraphicRecordOn;
 flixel.system.debug._VCR.GraphicRecordOn.__name__ = ["flixel","system","debug","_VCR","GraphicRecordOn"];
 flixel.system.debug._VCR.GraphicRecordOn.image = null;
 flixel.system.debug._VCR.GraphicRecordOn.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._VCR.GraphicRecordOn.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJ1JREFUeNp0UckRAyEMs/JILVuEq9j31pSStgZ+1JJ8iHyECeuEGYEPGYQtAyJDHEo86DeeT6K5H3Exnm/EwUAnxgSmbfEjyFYJrMSKTrLeyN/pbmKV/9fGW3dxbShPh43FbrDPsPLu9amr2LFeJqP/TI4ipRv5LElcPhDuaW3T2bZFJ741W14lG177LJc+f17PAs2JrRNETpB4CzAAE4qP2xD2F24AAAAASUVORK5CYII=";
+	flixel.system.debug._VCR.GraphicRecordOn.image = o;
 };
 flixel.system.debug._VCR.GraphicRecordOn.__super__ = flash.display.BitmapData;
 flixel.system.debug._VCR.GraphicRecordOn.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16822,15 +16710,16 @@ flixel.system.debug._VCR.GraphicRecordOn.prototype = $extend(flash.display.Bitma
 flixel.system.debug._VCR.GraphicRestart = function(width,height,transparent,color) {
 	var o = flixel.system.debug._VCR.GraphicRestart.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._VCR.GraphicRestart"] = flixel.system.debug._VCR.GraphicRestart;
 flixel.system.debug._VCR.GraphicRestart.__name__ = ["flixel","system","debug","_VCR","GraphicRestart"];
 flixel.system.debug._VCR.GraphicRestart.image = null;
 flixel.system.debug._VCR.GraphicRestart.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._VCR.GraphicRestart.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAE5JREFUeNpi+P///zIgZkDDWMVAxH8sCrGKoSuGKcQqhqwYWSFWMZhidIVYxRjBOogETFB6ORY5TDFy3ExyaBAMZxYsbovC4n6wGECAAQAGmT+TQ5qgFAAAAABJRU5ErkJggg==";
+	flixel.system.debug._VCR.GraphicRestart.image = o;
 };
 flixel.system.debug._VCR.GraphicRestart.__super__ = flash.display.BitmapData;
 flixel.system.debug._VCR.GraphicRestart.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16839,15 +16728,16 @@ flixel.system.debug._VCR.GraphicRestart.prototype = $extend(flash.display.Bitmap
 flixel.system.debug._VCR.GraphicStep = function(width,height,transparent,color) {
 	var o = flixel.system.debug._VCR.GraphicStep.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._VCR.GraphicStep"] = flixel.system.debug._VCR.GraphicStep;
 flixel.system.debug._VCR.GraphicStep.__name__ = ["flixel","system","debug","_VCR","GraphicStep"];
 flixel.system.debug._VCR.GraphicStep.image = null;
 flixel.system.debug._VCR.GraphicStep.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._VCR.GraphicStep.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEVJREFUeNpi+P///zIgjgRiBgJ4GYiAAUKa/iMrJqQJq2JcmvAqRtf0nxGsg0jARISa5UAcBWZR6maiQoOocCY6BgECDAAwYF4D9k59qQAAAABJRU5ErkJggg==";
+	flixel.system.debug._VCR.GraphicStep.image = o;
 };
 flixel.system.debug._VCR.GraphicStep.__super__ = flash.display.BitmapData;
 flixel.system.debug._VCR.GraphicStep.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16856,15 +16746,16 @@ flixel.system.debug._VCR.GraphicStep.prototype = $extend(flash.display.BitmapDat
 flixel.system.debug._VCR.GraphicStop = function(width,height,transparent,color) {
 	var o = flixel.system.debug._VCR.GraphicStop.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._VCR.GraphicStop"] = flixel.system.debug._VCR.GraphicStop;
 flixel.system.debug._VCR.GraphicStop.__name__ = ["flixel","system","debug","_VCR","GraphicStop"];
 flixel.system.debug._VCR.GraphicStop.image = null;
 flixel.system.debug._VCR.GraphicStop.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._VCR.GraphicStop.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAIAAAAmzuBxAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABdJREFUeNpi/P//PwNewDiqguoqAAIMAPunIOvGGRNOAAAAAElFTkSuQmCC";
+	flixel.system.debug._VCR.GraphicStop.image = o;
 };
 flixel.system.debug._VCR.GraphicStop.__super__ = flash.display.BitmapData;
 flixel.system.debug._VCR.GraphicStop.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -16938,7 +16829,7 @@ flixel.system.debug.WatchEntry = function(Y,NameWidth,ValueWidth,Obj,Field,Custo
 	this.nameDisplay.set_multiline(false);
 	this.nameDisplay.set_selectable(true);
 	this.nameDisplay.embedFonts = true;
-	this.nameDisplay.set_defaultTextFormat(this._whiteText);
+	this.nameDisplay.defaultTextFormat = this._whiteText;
 	this.valueDisplay = new flash.text.TextField();
 	this.valueDisplay.set_y(Y);
 	this.valueDisplay.set_height(20);
@@ -16952,7 +16843,7 @@ flixel.system.debug.WatchEntry = function(Y,NameWidth,ValueWidth,Obj,Field,Custo
 	this.valueDisplay.set_background(false);
 	this.valueDisplay.set_backgroundColor(16777215);
 	this.valueDisplay.embedFonts = true;
-	this.valueDisplay.set_defaultTextFormat(this._whiteText);
+	this.valueDisplay.defaultTextFormat = this._whiteText;
 	this.updateWidth(NameWidth,ValueWidth);
 };
 $hxClasses["flixel.system.debug.WatchEntry"] = flixel.system.debug.WatchEntry;
@@ -17063,7 +16954,7 @@ flixel.system.debug.WatchEntry.prototype = {
 	,doneEditing: function() {
 		this.valueDisplay.set_type("DYNAMIC");
 		this.valueDisplay.setTextFormat(this._whiteText);
-		this.valueDisplay.set_defaultTextFormat(this._whiteText);
+		this.valueDisplay.defaultTextFormat = this._whiteText;
 		this.valueDisplay.set_background(false);
 		this.editing = false;
 		flixel.FlxG.keys.enabled = true;
@@ -17074,15 +16965,16 @@ flixel.system.debug._Window = {};
 flixel.system.debug._Window.GraphicWindowHandle = function(width,height,transparent,color) {
 	var o = flixel.system.debug._Window.GraphicWindowHandle.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._Window.GraphicWindowHandle"] = flixel.system.debug._Window.GraphicWindowHandle;
 flixel.system.debug._Window.GraphicWindowHandle.__name__ = ["flixel","system","debug","_Window","GraphicWindowHandle"];
 flixel.system.debug._Window.GraphicWindowHandle.image = null;
 flixel.system.debug._Window.GraphicWindowHandle.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._Window.GraphicWindowHandle.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFBJREFUeNqMjwEKACAIAxX2yh7oNy2jQkypQbT0dESqSnYeEvhXNsDMYnXezVG4wA0NNVRZHjKPH2h6/5l1W0Oix3NTEl1CJ7qKC/4Lki7AAD5YfrvYLfRPAAAAAElFTkSuQmCC";
+	flixel.system.debug._Window.GraphicWindowHandle.image = o;
 };
 flixel.system.debug._Window.GraphicWindowHandle.__super__ = flash.display.BitmapData;
 flixel.system.debug._Window.GraphicWindowHandle.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -17091,15 +16983,16 @@ flixel.system.debug._Window.GraphicWindowHandle.prototype = $extend(flash.displa
 flixel.system.debug._Window.GraphicCloseButton = function(width,height,transparent,color) {
 	var o = flixel.system.debug._Window.GraphicCloseButton.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.system.debug._Window.GraphicCloseButton"] = flixel.system.debug._Window.GraphicCloseButton;
 flixel.system.debug._Window.GraphicCloseButton.__name__ = ["flixel","system","debug","_Window","GraphicCloseButton"];
 flixel.system.debug._Window.GraphicCloseButton.image = null;
 flixel.system.debug._Window.GraphicCloseButton.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.system.debug._Window.GraphicCloseButton.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAB/SURBVBiVTY0xCsJQEAXHbySewMulTWdva6OllWJpCCK2ik1OY+ctQsYiq/kDC8vs7lvUSu3UpUpWO7VC3TjSqWUMD+Gev+1tiJd6yvoyj9w78VAXKomRGbBiogcGANSkNnF5V4/R39SE2oa4qvN4dw53KYA30AD1PxbWQAF8vpaYrNWAaNV0AAAAAElFTkSuQmCC";
+	flixel.system.debug._Window.GraphicCloseButton.image = o;
 };
 flixel.system.debug._Window.GraphicCloseButton.__super__ = flash.display.BitmapData;
 flixel.system.debug._Window.GraphicCloseButton.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -17969,11 +17862,11 @@ flixel.system.ui.FlxSoundTray = function() {
 	text.set_width(tmp.get_width());
 	text.set_height(tmp.get_height());
 	text.set_multiline(true);
-	text.set_wordWrap(true);
+	text.wordWrap = true;
 	text.set_selectable(false);
 	var dtf = new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEFAULT,8,16777215);
 	dtf.align = "CENTER";
-	text.set_defaultTextFormat(dtf);
+	text.defaultTextFormat = dtf;
 	this.addChild(text);
 	text.set_text("VOLUME");
 	text.set_y(16);
@@ -18129,10 +18022,10 @@ flixel.text.FlxText = function(X,Y,FieldWidth,Text,Size,EmbeddedFont) {
 	this._textField = new flash.text.TextField();
 	this._textField.set_selectable(false);
 	this._textField.set_multiline(true);
-	this._textField.set_wordWrap(true);
+	this._textField.wordWrap = true;
 	this._defaultFormat = new flash.text.TextFormat(flixel.system.FlxAssets.FONT_DEFAULT,Size,16777215);
 	this._formatAdjusted = new flash.text.TextFormat();
-	this._textField.set_defaultTextFormat(this._defaultFormat);
+	this._textField.defaultTextFormat = this._defaultFormat;
 	this._textField.set_text(Text);
 	this.set_fieldWidth(FieldWidth);
 	this._textField.embedFonts = EmbeddedFont;
@@ -18227,7 +18120,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 		Color &= 16777215;
 		this._defaultFormat.color = Color;
 		this._defaultFormat.align = this.convertTextAlignmentFromString(Alignment);
-		this._textField.set_defaultTextFormat(this._defaultFormat);
+		this._textField.defaultTextFormat = this._defaultFormat;
 		this.set_borderStyle(BorderStyle);
 		this.set_borderColor(BorderColor);
 		this._textField.setTextFormat(this._defaultFormat,0,this._textField.get_text().length);
@@ -18322,7 +18215,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 	}
 	,set_size: function(Size) {
 		this._defaultFormat.size = Size;
-		this._textField.set_defaultTextFormat(this._defaultFormat);
+		this._textField.defaultTextFormat = this._defaultFormat;
 		this._textField.setTextFormat(this._defaultFormat,0,this._textField.get_text().length);
 		this.dirty = true;
 		return Size;
@@ -18332,7 +18225,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 		if(this._defaultFormat.color == Color) return Color;
 		this._defaultFormat.color = Color;
 		this.color = Color;
-		this._textField.set_defaultTextFormat(this._defaultFormat);
+		this._textField.defaultTextFormat = this._defaultFormat;
 		this._textField.setTextFormat(this._defaultFormat,0,this._textField.get_text().length);
 		this.dirty = true;
 		return Color;
@@ -18343,7 +18236,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 	,set_font: function(Font) {
 		this._textField.embedFonts = true;
 		this._defaultFormat.font = openfl.Assets.getFont(Font).fontName;
-		this._textField.set_defaultTextFormat(this._defaultFormat);
+		this._textField.defaultTextFormat = this._defaultFormat;
 		this._textField.setTextFormat(this._defaultFormat,0,this._textField.get_text().length);
 		this.dirty = true;
 		return Font;
@@ -18357,7 +18250,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 	,set_systemFont: function(Font) {
 		this._textField.embedFonts = false;
 		this._defaultFormat.font = Font;
-		this._textField.set_defaultTextFormat(this._defaultFormat);
+		this._textField.defaultTextFormat = this._defaultFormat;
 		this._textField.setTextFormat(this._defaultFormat,0,this._textField.get_text().length);
 		this.dirty = true;
 		return Font;
@@ -18368,7 +18261,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 	,set_bold: function(value) {
 		if(this._defaultFormat.bold != value) {
 			this._defaultFormat.bold = value;
-			this._textField.set_defaultTextFormat(this._defaultFormat);
+			this._textField.defaultTextFormat = this._defaultFormat;
 			this._textField.setTextFormat(this._defaultFormat,0,this._textField.get_text().length);
 			this.dirty = true;
 		}
@@ -18380,7 +18273,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 	,set_italic: function(value) {
 		if(this._defaultFormat.italic != value) {
 			this._defaultFormat.italic = value;
-			this._textField.set_defaultTextFormat(this._defaultFormat);
+			this._textField.defaultTextFormat = this._defaultFormat;
 			this._textField.setTextFormat(this._defaultFormat,0,this._textField.get_text().length);
 			this.dirty = true;
 		}
@@ -18391,7 +18284,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 	}
 	,set_wordWrap: function(value) {
 		if(this._textField.wordWrap != value) {
-			this._textField.set_wordWrap(value);
+			this._textField.wordWrap = value;
 			this.dirty = true;
 		}
 		return value;
@@ -18401,7 +18294,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 	}
 	,set_alignment: function(Alignment) {
 		this._defaultFormat.align = this.convertTextAlignmentFromString(Alignment);
-		this._textField.set_defaultTextFormat(this._defaultFormat);
+		this._textField.defaultTextFormat = this._defaultFormat;
 		this._textField.setTextFormat(this._defaultFormat,0,this._textField.get_text().length);
 		this.dirty = true;
 		return Alignment;
@@ -18470,7 +18363,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 	,calcFrame: function(RunOnCpp) {
 		if(RunOnCpp == null) RunOnCpp = false;
 		if(this._textField == null) return;
-		if(this._filters != null) this._textField.set_filters(this._filters);
+		if(this._filters != null) this._textField.filters = this._filters;
 		this.regenGraphics();
 		if(this._textField != null && this._textField.get_text() != null && this._textField.get_text().length > 0) {
 			this._formatAdjusted.font = this._defaultFormat.font;
@@ -18557,7 +18450,7 @@ flixel.text.FlxText.prototype = $extend(flixel.FlxSprite.prototype,{
 		if(this.useColorTransform) this.framePixels.colorTransform(this._flashRect,this.colorTransform);
 	}
 	,dtfCopy: function() {
-		var defaultTextFormat = this._textField.get_defaultTextFormat();
+		var defaultTextFormat = this._textField.defaultTextFormat;
 		return new flash.text.TextFormat(defaultTextFormat.font,defaultTextFormat.size,defaultTextFormat.color,defaultTextFormat.bold,defaultTextFormat.italic,defaultTextFormat.underline,defaultTextFormat.url,defaultTextFormat.target,defaultTextFormat.align);
 	}
 	,convertTextAlignmentFromString: function(StrAlign) {
@@ -18874,7 +18767,7 @@ flixel.text.pxText.PxBitmapFont.prototype = {
 			var charCode = HxOverrides.cca(PxText,i);
 			glyph = PxFontData[charCode];
 			if(glyph != null) {
-				PxBitmapData.copyPixels(glyph,glyph.__rect.clone(),this._point,null,null,true);
+				PxBitmapData.copyPixels(glyph,glyph.rect,this._point,null,null,true);
 				this._point.x += glyph.component.width + PxLetterSpacing;
 			}
 		}
@@ -19029,15 +18922,16 @@ flixel.tile.FlxTileblock.prototype = $extend(flixel.FlxSprite.prototype,{
 flixel.tile.GraphicAuto = function(width,height,transparent,color) {
 	var o = flixel.tile.GraphicAuto.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.tile.GraphicAuto"] = flixel.tile.GraphicAuto;
 flixel.tile.GraphicAuto.__name__ = ["flixel","tile","GraphicAuto"];
 flixel.tile.GraphicAuto.image = null;
 flixel.tile.GraphicAuto.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.tile.GraphicAuto.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAICAMAAAAGAwdMAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXXPues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgABeNMLCADATZvAMByH/w/qQplcAYCEAcB0kThLCIAUAEB6jkKmAEBGAYCdmCZTAKAEAGDLY2LjAFAtAGAnf+bTAICd+Jl7AQBblCEVAaCRACATZYhEAGg7AKzPVopFAFgwABRmS8Q5ANgtADBJV2ZIALC3AMDOEAuyAAgMADBRiIUpAAR7AGDIIyN4AISZABRG8lc88SuuEOcqAAB4mbI8uSQ5RYFbCC1xB1dXLh4ozkkXKxQ2YQJhmkAuwnmZGTKBNA/g88wAAKCRFRHgg/P9eM4Ors7ONo62Dl8t6r8G/yJiYuP+5c+rcEAAAOF0ftH+LC+zGoA7BoBt/qIl7gRoXgugdfeLZrIPQLUAoOnaV/Nw+H48PEWhkLnZ2eXk5NhKxEJbYcpXff5nwl/AV/1s+X48/Pf14L7iJIEyXYFHBPjgwsz0TKUcz5IJhGLc5o9H/LcL//wd0yLESWK5WCoU41EScY5EmozzMqUiiUKSKcUl0v9k4t8s+wM+3zUAsGo+AXuRLahdYwP2SycQWHTA4vcAAPK7b8HUKAgDgGiD4c93/+8//UegJQCAZkmScQAAXkQkLlTKsz/HCAAARKCBKrBBG/TBGCzABhzBBdzBC/xgNoRCJMTCQhBCCmSAHHJgKayCQiiGzbAdKmAv1EAdNMBRaIaTcA4uwlW4Dj1wD/phCJ7BKLyBCQRByAgTYSHaiAFiilgjjggXmYX4IcFIBBKLJCDJiBRRIkuRNUgxUopUIFVIHfI9cgI5h1xGupE7yAAygvyGvEcxlIGyUT3UDLVDuag3GoRGogvQZHQxmo8WoJvQcrQaPYw2oefQq2gP2o8+Q8cwwOgYBzPEbDAuxsNCsTgsCZNjy7EirAyrxhqwVqwDu4n1Y8+xdwQSgUXACTYEd0IgYR5BSFhMWE7YSKggHCQ0EdoJNwkDhFHCJyKTqEu0JroR+cQYYjIxh1hILCPWEo8TLxB7iEPENyQSiUMyJ7mQAkmxpFTSEtJG0m5SI+ksqZs0SBojk8naZGuyBzmULCAryIXkneTD5DPkG+Qh8lsKnWJAcaT4U+IoUspqShnlEOU05QZlmDJBVaOaUt2ooVQRNY9aQq2htlKvUYeoEzR1mjnNgxZJS6WtopXTGmgXaPdpr+h0uhHdlR5Ol9BX0svpR+iX6AP0dwwNhhWDx4hnKBmbGAcYZxl3GK+YTKYZ04sZx1QwNzHrmOeZD5lvVVgqtip8FZHKCpVKlSaVGyovVKmqpqreqgtV81XLVI+pXlN9rkZVM1PjqQnUlqtVqp1Q61MbU2epO6iHqmeob1Q/pH5Z/YkGWcNMw09DpFGgsV/jvMYgC2MZs3gsIWsNq4Z1gTXEJrHN2Xx2KruY/R27iz2qqaE5QzNKM1ezUvOUZj8H45hx+Jx0TgnnKKeX836K3hTvKeIpG6Y0TLkxZVxrqpaXllirSKtRq0frvTau7aedpr1Fu1n7gQ5Bx0onXCdHZ4/OBZ3nU9lT3acKpxZNPTr1ri6qa6UbobtEd79up+6Ynr5egJ5Mb6feeb3n+hx9L/1U/W36p/VHDFgGswwkBtsMzhg8xTVxbzwdL8fb8VFDXcNAQ6VhlWGX4YSRudE8o9VGjUYPjGnGXOMk423GbcajJgYmISZLTepN7ppSTbmmKaY7TDtMx83MzaLN1pk1mz0x1zLnm+eb15vft2BaeFostqi2uGVJsuRaplnutrxuhVo5WaVYVVpds0atna0l1rutu6cRp7lOk06rntZnw7Dxtsm2qbcZsOXYBtuutm22fWFnYhdnt8Wuw+6TvZN9un2N/T0HDYfZDqsdWh1+c7RyFDpWOt6azpzuP33F9JbpL2dYzxDP2DPjthPLKcRpnVOb00dnF2e5c4PziIuJS4LLLpc+Lpsbxt3IveRKdPVxXeF60vWdm7Obwu2o26/uNu5p7ofcn8w0nymeWTNz0MPIQ+BR5dE/C5+VMGvfrH5PQ0+BZ7XnIy9jL5FXrdewt6V3qvdh7xc+9j5yn+M+4zw33jLeWV/MN8C3yLfLT8Nvnl+F30N/I/9k/3r/0QCngCUBZwOJgUGBWwL7+Hp8Ib+OPzrbZfay2e1BjKC5QRVBj4KtguXBrSFoyOyQrSH355jOkc5pDoVQfujW0Adh5mGLw34MJ4WHhVeGP45wiFga0TGXNXfR3ENz30T6RJZE3ptnMU85ry1KNSo+qi5qPNo3ujS6P8YuZlnM1VidWElsSxw5LiquNm5svt/87fOH4p3iC+N7F5gvyF1weaHOwvSFpxapLhIsOpZATIhOOJTwQRAqqBaMJfITdyWOCnnCHcJnIi/RNtGI2ENcKh5O8kgqTXqS7JG8NXkkxTOlLOW5hCepkLxMDUzdmzqeFpp2IG0yPTq9MYOSkZBxQqohTZO2Z+pn5mZ2y6xlhbL+xW6Lty8elQfJa7OQrAVZLQq2QqboVFoo1yoHsmdlV2a/zYnKOZarnivN7cyzytuQN5zvn//tEsIS4ZK2pYZLVy0dWOa9rGo5sjxxedsK4xUFK4ZWBqw8uIq2Km3VT6vtV5eufr0mek1rgV7ByoLBtQFr6wtVCuWFfevc1+1dT1gvWd+1YfqGnRs+FYmKrhTbF5cVf9go3HjlG4dvyr+Z3JS0qavEuWTPZtJm6ebeLZ5bDpaql+aXDm4N2dq0Dd9WtO319kXbL5fNKNu7g7ZDuaO/PLi8ZafJzs07P1SkVPRU+lQ27tLdtWHX+G7R7ht7vPY07NXbW7z3/T7JvttVAVVN1WbVZftJ+7P3P66Jqun4lvttXa1ObXHtxwPSA/0HIw6217nU1R3SPVRSj9Yr60cOxx++/p3vdy0NNg1VjZzG4iNwRHnk6fcJ3/ceDTradox7rOEH0x92HWcdL2pCmvKaRptTmvtbYlu6T8w+0dbq3nr8R9sfD5w0PFl5SvNUyWna6YLTk2fyz4ydlZ19fi753GDborZ752PO32oPb++6EHTh0kX/i+c7vDvOXPK4dPKy2+UTV7hXmq86X23qdOo8/pPTT8e7nLuarrlca7nuer21e2b36RueN87d9L158Rb/1tWeOT3dvfN6b/fF9/XfFt1+cif9zsu72Xcn7q28T7xf9EDtQdlD3YfVP1v+3Njv3H9qwHeg89HcR/cGhYPP/pH1jw9DBY+Zj8uGDYbrnjg+OTniP3L96fynQ89kzyaeF/6i/suuFxYvfvjV69fO0ZjRoZfyl5O/bXyl/erA6xmv28bCxh6+yXgzMV70VvvtwXfcdx3vo98PT+R8IH8o/2j5sfVT0Kf7kxmTk/8EA5jz/GMzLdsAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAAAwBQTFRFAAAAXl5eAAAAAwMDBAQEBQUFBgYGBwcHCAgICQkJCgoKCwsLDAwMDQ0NDg4ODw8PEBAQEREREhISExMTFBQUFRUVFhYWFxcXGBgYGRkZGhoaGxsbHBwcHR0dHh4eHx8fICAgISEhIiIiIyMjJCQkJSUlJiYmJycnKCgoKSkpKioqKysrLCwsLS0tLi4uLy8vMDAwMTExMjIyMzMzNDQ0NTU1NjY2Nzc3ODg4OTk5Ojo6Ozs7PDw8PT09Pj4+Pz8/QEBAQUFBQkJCQ0NDRERERUVFRkZGR0dHSEhISUlJSkpKS0tLTExMTU1NTk5OT09PUFBQUVFRUlJSU1NTVFRUVVVVVlZWV1dXWFhYWVlZWlpaW1tbXFxcXV1dXl5eX19fYGBgYWFhYmJiY2NjZGRkZWVlZmZmZ2dnaGhoaWlpampqa2trbGxsbW1tbm5ub29vcHBwcXFxcnJyc3NzdHR0dXV1dnZ2d3d3eHh4eXl5enp6e3t7fHx8fX19fn5+f39/gICAgYGBgoKCg4ODhISEhYWFhoaGh4eHiIiIiYmJioqKi4uLjIyMjY2Njo6Oj4+PkJCQkZGRkpKSk5OTlJSUlZWVlpaWl5eXmJiYmZmZmpqam5ubnJycnZ2dnp6en5+foKCgoaGhoqKio6OjpKSkpaWlpqamp6enqKioqampqqqqq6urrKysra2trq6ur6+vsLCwsbGxsrKys7OztLS0tbW1tra2t7e3uLi4ubm5urq6u7u7vLy8vb29vr6+v7+/wMDAwcHBwsLCw8PDxMTExcXFxsbGx8fHyMjIycnJysrKy8vLzMzMzc3Nzs7Oz8/P0NDQ0dHR0tLS09PT1NTU1dXV1tbW19fX2NjY2dnZ2tra29vb3Nzc3d3d3t7e39/f4ODg4eHh4uLi4+Pj5OTk5eXl5ubm5+fn6Ojo6enp6urq6+vr7Ozs7e3t7u7u7+/v8PDw8fHx8vLy8/Pz9PT09fX19vb29/f3+Pj4+fn5+vr6+/v7/Pz8/f39/v7+////QkqfIwAAAAN0Uk5T//8A18oNQQAAAG1JREFUeNrsk7ESwCAIQ1/8/492UDyBVty61CUXEgU5oAFAQwBicgaHSsfZfPBOlyQJSzC5lrfQjVoC+UCpbw/vSMCDns1PvzzofwHfF2BD5lB+2N4LSPZwygJszQKGdas6QLp224EOAAD//wMA9PcA8aOpcyUAAAAASUVORK5CYII=";
+	flixel.tile.GraphicAuto.image = o;
 };
 flixel.tile.GraphicAuto.__super__ = flash.display.BitmapData;
 flixel.tile.GraphicAuto.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -19046,15 +18940,16 @@ flixel.tile.GraphicAuto.prototype = $extend(flash.display.BitmapData.prototype,{
 flixel.tile.GraphicAutoAlt = function(width,height,transparent,color) {
 	var o = flixel.tile.GraphicAutoAlt.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.tile.GraphicAutoAlt"] = flixel.tile.GraphicAutoAlt;
 flixel.tile.GraphicAutoAlt.__name__ = ["flixel","tile","GraphicAutoAlt"];
 flixel.tile.GraphicAutoAlt.image = null;
 flixel.tile.GraphicAutoAlt.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.tile.GraphicAutoAlt.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,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";
+	flixel.tile.GraphicAutoAlt.image = o;
 };
 flixel.tile.GraphicAutoAlt.__super__ = flash.display.BitmapData;
 flixel.tile.GraphicAutoAlt.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -21054,15 +20949,16 @@ flixel.ui._FlxTypedButton = {};
 flixel.ui._FlxTypedButton.GraphicButton = function(width,height,transparent,color) {
 	var o = flixel.ui._FlxTypedButton.GraphicButton.image;
 	flash.display.BitmapData.call(this,o.width,o.height,true,0);
-	this.__context.drawImage(o,0,0);
+	this.qContext.drawImage(o,0,0);
 };
 $hxClasses["flixel.ui._FlxTypedButton.GraphicButton"] = flixel.ui._FlxTypedButton.GraphicButton;
 flixel.ui._FlxTypedButton.GraphicButton.__name__ = ["flixel","ui","_FlxTypedButton","GraphicButton"];
 flixel.ui._FlxTypedButton.GraphicButton.image = null;
 flixel.ui._FlxTypedButton.GraphicButton.preload = function() {
 	var o = document.createElement("img");
-	ApplicationMain.loadEmbed(flixel.ui._FlxTypedButton.GraphicButton.image = o);
+	ApplicationMain.loadEmbed(o);
 	o.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAA8CAYAAADxJz2MAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAXZJREFUeF7tm0EKg0AMRedeXss7eA4F7+EJ3HgTty7SpkihMmNmSAcceEIK7cLF4/84zTdBRML70g+qkMHJLsi6rjJNE1XAQJmdogvS9710XYcCMxWorJTZD0D9ote+79QNA2WkrKIAl2URymYAQKdQAAhA22Y1WxEKRIEosOmnPRbGwlgYC9c8Jjz93vTAWj1wGAahbAZRBTLOyh8oR8dZ+iOVz+A7zmKkn6+8a+zxYQdAJ0ClSiZSngeRiWTmH7G08jYTOY5DqDSD20xk2zahbAbJfyLAs+EpIwA6nQZAAOZZrVZLQoEoEAU2fVzCwlgYC2PhWkeEFu6b7IHzPAtlMyATcYyyFB6ZyB/yHzIRpwrPd8rJRDz7MeyJFOyFXPdoyEQcFk5mItoYKZtB8hw4jqNQNgMAOoUCQADaNqvZilAgCkSBTT/tsTAWxsJYuOYx4en3pgfSAx/YA9kTyX/ZPDrOYoxlj7GujD7TbNYc8pUX2xN5AQkGeBPq5+BjAAAAAElFTkSuQmCC";
+	flixel.ui._FlxTypedButton.GraphicButton.image = o;
 };
 flixel.ui._FlxTypedButton.GraphicButton.__super__ = flash.display.BitmapData;
 flixel.ui._FlxTypedButton.GraphicButton.prototype = $extend(flash.display.BitmapData.prototype,{
@@ -21290,6 +21186,15 @@ flixel.util.FlxArrayUtil.fastSplice_flixel_tweens_FlxTween = function(array,elem
 	}
 	return array;
 };
+flixel.util.FlxArrayUtil.clearArray_flixel_util_FlxTimer = function(array,recursive) {
+	if(recursive == null) recursive = false;
+	if(array != null) {
+		if(!recursive) while(array.length > 0) array.pop(); else while(array.length > 0) {
+			var thing = array.pop();
+			if((thing instanceof Array) && thing.__enum__ == null) flixel.util.FlxArrayUtil.clearArray_clearArray_T(array,recursive);
+		}
+	}
+};
 flixel.util.FlxArrayUtil.fastSplice_flixel_util_FlxTimer = function(array,element) {
 	var index = HxOverrides.indexOf(array,element,0);
 	if(index != -1) {
@@ -21298,6 +21203,15 @@ flixel.util.FlxArrayUtil.fastSplice_flixel_util_FlxTimer = function(array,elemen
 		return array;
 	}
 	return array;
+};
+flixel.util.FlxArrayUtil.clearArray_flixel_util_FlxPath = function(array,recursive) {
+	if(recursive == null) recursive = false;
+	if(array != null) {
+		if(!recursive) while(array.length > 0) array.pop(); else while(array.length > 0) {
+			var thing = array.pop();
+			if((thing instanceof Array) && thing.__enum__ == null) flixel.util.FlxArrayUtil.clearArray_clearArray_T(array,recursive);
+		}
+	}
 };
 flixel.util.FlxArrayUtil.fastSplice_flixel_util_FlxPath = function(array,element) {
 	var index = HxOverrides.indexOf(array,element,0);
@@ -21308,10 +21222,28 @@ flixel.util.FlxArrayUtil.fastSplice_flixel_util_FlxPath = function(array,element
 	}
 	return array;
 };
+flixel.util.FlxArrayUtil.clearArray_flixel_group_FlxTypedGroup_T = function(array,recursive) {
+	if(recursive == null) recursive = false;
+	if(array != null) {
+		if(!recursive) while(array.length > 0) array.pop(); else while(array.length > 0) {
+			var thing = array.pop();
+			if((thing instanceof Array) && thing.__enum__ == null) flixel.util.FlxArrayUtil.clearArray_clearArray_T(array,recursive);
+		}
+	}
+};
 flixel.util.FlxArrayUtil.getRandom_flixel_group_FlxTypedGroup_T = function(Objects,StartIndex,EndIndex) {
 	if(EndIndex == null) EndIndex = 0;
 	if(StartIndex == null) StartIndex = 0;
 	return flixel.util.FlxRandom.getObject_getRandom_T(Objects,StartIndex,EndIndex);
+};
+flixel.util.FlxArrayUtil.clearArray_flixel_input_FlxSwipe = function(array,recursive) {
+	if(recursive == null) recursive = false;
+	if(array != null) {
+		if(!recursive) while(array.length > 0) array.pop(); else while(array.length > 0) {
+			var thing = array.pop();
+			if((thing instanceof Array) && thing.__enum__ == null) flixel.util.FlxArrayUtil.clearArray_clearArray_T(array,recursive);
+		}
+	}
 };
 flixel.util.FlxArrayUtil.fastSplice_flixel_system_debug_WatchEntry = function(array,element) {
 	var index = HxOverrides.indexOf(array,element,0);
@@ -21344,19 +21276,11 @@ flixel.util.FlxArrayUtil.setLength_flixel_input_keyboard_FlxKey = function(array
 		}
 	}
 };
+flixel.util.FlxArrayUtil.clearArray_clearArray_T = null;
 flixel.util.FlxArrayUtil.swapAndPop_fastSplice_T = function(array,index) {
 	array[index] = array[array.length - 1];
 	array.pop();
 	return array;
-};
-flixel.util.FlxArrayUtil.clearArray = function(array,recursive) {
-	if(recursive == null) recursive = false;
-	if(array != null) {
-		if(!recursive) while(array.length > 0) array.pop(); else while(array.length > 0) {
-			var thing = array.pop();
-			if((thing instanceof Array) && thing.__enum__ == null) flixel.util.FlxArrayUtil.clearArray(array,recursive);
-		}
-	}
 };
 flixel.util.FlxBitmapDataPool = function() { };
 $hxClasses["flixel.util.FlxBitmapDataPool"] = flixel.util.FlxBitmapDataPool;
@@ -21369,7 +21293,7 @@ flixel.util.FlxBitmapDataPool.get = function(w,h,transparent,fillColor,exactSize
 	var node = flixel.util.FlxBitmapDataPool._head;
 	while(node != null) {
 		var bmd = node.bmd;
-		if(bmd.__transparent == transparent && bmd.component.width >= w && bmd.component.height >= h && (!exactSize || exactSize && bmd.component.width == w && bmd.component.height == h)) {
+		if(bmd.qTransparent == transparent && bmd.component.width >= w && bmd.component.height >= h && (!exactSize || exactSize && bmd.component.width == w && bmd.component.height == h)) {
 			res = bmd;
 			if(node.prev != null) node.prev.next = node.next;
 			if(node.next != null) node.next.prev = node.prev;
@@ -22906,7 +22830,7 @@ flixel.util.FlxSpriteUtil.setLineStyle = function(lineStyle) {
 	}
 };
 flixel.util.FlxSpriteUtil.fill = function(sprite,Color) {
-	sprite.get_pixels().fillRect(sprite.get_pixels().get_rect(),Color);
+	sprite.get_pixels().fillRect(sprite.get_pixels().rect,Color);
 	if(sprite.get_pixels() != sprite.framePixels) sprite.dirty = true;
 	sprite.cachedGraphics.get_tilesheet().destroyFrameBitmapDatas();
 	return sprite;
@@ -23568,14 +23492,10 @@ haxe.CallStack.callStack = function() {
 		}
 		return stack;
 	};
-	try {
-		throw new Error();
-	} catch( e ) {
-		var a = haxe.CallStack.makeStack(e.stack);
-		if(a != null) a.shift();
-		Error.prepareStackTrace = oldValue;
-		return a;
-	}
+	var a = haxe.CallStack.makeStack(new Error().stack);
+	a.shift();
+	Error.prepareStackTrace = oldValue;
+	return a;
 };
 haxe.CallStack.exceptionStack = function() {
 	return [];
@@ -23631,20 +23551,12 @@ haxe.CallStack.itemToString = function(b,s) {
 haxe.CallStack.makeStack = function(s) {
 	if(typeof(s) == "string") {
 		var stack = s.split("\n");
-		if(stack[0] == "Error") stack.shift();
 		var m = [];
-		var rie10 = new EReg("^   at ([A-Za-z0-9_. ]+) \\(([^)]+):([0-9]+):([0-9]+)\\)$","");
 		var _g = 0;
 		while(_g < stack.length) {
 			var line = stack[_g];
 			++_g;
-			if(rie10.match(line)) {
-				var path = rie10.matched(1).split(".");
-				var meth = path.pop();
-				var file = rie10.matched(2);
-				var line1 = Std.parseInt(rie10.matched(3));
-				m.push(haxe.StackItem.FilePos(meth == "Anonymous function"?haxe.StackItem.LocalFunction():meth == "Global code"?null:haxe.StackItem.Method(path.join("."),meth),file,line1));
-			} else m.push(haxe.StackItem.Module(line));
+			m.push(haxe.StackItem.Module(line));
 		}
 		return m;
 	} else return s;
@@ -24347,19 +24259,6 @@ haxe.io.Eof.prototype = {
 	}
 	,__class__: haxe.io.Eof
 };
-js._Boot = {};
-js._Boot.HaxeError = function(val) {
-	Error.call(this);
-	this.val = val;
-	if(Error.captureStackTrace) Error.captureStackTrace(this,js._Boot.HaxeError);
-};
-$hxClasses["js._Boot.HaxeError"] = js._Boot.HaxeError;
-js._Boot.HaxeError.__name__ = ["js","_Boot","HaxeError"];
-js._Boot.HaxeError.__super__ = Error;
-js._Boot.HaxeError.prototype = $extend(Error.prototype,{
-	val: null
-	,__class__: js._Boot.HaxeError
-});
 js.Browser = function() { };
 $hxClasses["js.Browser"] = js.Browser;
 js.Browser.__name__ = ["js","Browser"];
@@ -24464,7 +24363,7 @@ openfl.Assets.exists = function(id,type) {
 	var ln = id.substring(0,i);
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
-	if(lr != null) r = lr != null && lr.exists(sn,type); else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+	if(lr != null) r = lr != null && lr.exists(sn,type); else null;
 	return r;
 };
 openfl.Assets.getBitmapData = function(id,useCache) {
@@ -24484,8 +24383,8 @@ openfl.Assets.getBitmapData = function(id,useCache) {
 			if(useCache) {
 				if(c.get_enabled()) c.bitmapData.set(id,r);
 			} else r = r.clone();
-		} else if(console) console.log("[openfl.Assets] There is no BitmapData asset with an ID of \"" + sn + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+		} else null;
+	} else null;
 	return r;
 };
 openfl.Assets.getBytes = function(id) {
@@ -24497,9 +24396,9 @@ openfl.Assets.getBytes = function(id) {
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
 		if(lr.exists(sn,openfl.AssetType.BINARY)) {
-			if(lr.isLocal(sn,openfl.AssetType.BINARY)) r = lr.getBytes(sn); else if(console) console.log("[openfl.Assets] Binary asset \"" + id + "\" exists, but only asynchronously");
-		} else if(console) console.log("[openfl.Assets] There is no binary asset with an id of \"" + sn + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+			if(lr.isLocal(sn,openfl.AssetType.BINARY)) r = lr.getBytes(sn); else null;
+		} else null;
+	} else null;
 	return r;
 };
 openfl.Assets.getFont = function(id,useCache) {
@@ -24516,9 +24415,9 @@ openfl.Assets.getFont = function(id,useCache) {
 			if(lr.isLocal(sn,openfl.AssetType.FONT)) {
 				r = lr.getFont(sn);
 				if(useCache && openfl.Assets.cache.get_enabled()) openfl.Assets.cache.font.set(id,r);
-			} else if(console) console.log("[openfl.Assets] Font asset \"" + id + "\" exists, but only asynchronously");
-		} else if(console) console.log("[openfl.Assets] There is no font asset with an id of \"" + sn + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+			} else null;
+		} else null;
+	} else null;
 	return r;
 };
 openfl.Assets.getLibrary = function(name) {
@@ -24533,9 +24432,9 @@ openfl.Assets.getMovieClip = function(id) {
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
 		if(lr.exists(sn,openfl.AssetType.MOVIE_CLIP)) {
-			if(lr.isLocal(sn,openfl.AssetType.MOVIE_CLIP)) r = lr.getMovieClip(sn); else if(console) console.log("[openfl.Assets] MovieClip asset \"" + id + "\" exists, but only asynchronously");
-		} else if(console) console.log("[openfl.Assets] There is no MovieClip asset with an ID of \"" + id + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+			if(lr.isLocal(sn,openfl.AssetType.MOVIE_CLIP)) r = lr.getMovieClip(sn); else null;
+		} else null;
+	} else null;
 	return r;
 };
 openfl.Assets.getMusic = function(id,useCache) {
@@ -24555,9 +24454,9 @@ openfl.Assets.getMusic = function(id,useCache) {
 			if(lr.isLocal(sn,openfl.AssetType.MUSIC)) {
 				r = lr.getMusic(sn);
 				if(useCache && openfl.Assets.cache.get_enabled()) openfl.Assets.cache.sound.set(id,r);
-			} else if(console) console.log("[openfl.Assets] Sound asset \"" + id + "\" exists, but only asynchronously");
-		} else if(console) console.log("[openfl.Assets] There is no Sound asset with an ID of \"" + id + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+			} else null;
+		} else null;
+	} else null;
 	return r;
 };
 openfl.Assets.getPath = function(id) {
@@ -24568,8 +24467,8 @@ openfl.Assets.getPath = function(id) {
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
-		if(lr.exists(sn,null)) r = lr.getPath(sn); else if(console) console.log("[openfl.Assets] There is no asset with an ID of \"" + id + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+		if(lr.exists(sn,null)) r = lr.getPath(sn); else null;
+	} else null;
 	return r;
 };
 openfl.Assets.getSound = function(id,useCache) {
@@ -24589,9 +24488,9 @@ openfl.Assets.getSound = function(id,useCache) {
 			if(lr.isLocal(sn,openfl.AssetType.SOUND)) {
 				r = lr.getMusic(sn);
 				if(useCache && openfl.Assets.cache.get_enabled()) openfl.Assets.cache.sound.set(id,r);
-			} else if(console) console.log("[openfl.Assets] Sound asset \"" + id + "\" exists, but only asynchronously");
-		} else if(console) console.log("[openfl.Assets] There is no Sound asset with an ID of \"" + id + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+			} else null;
+		} else null;
+	} else null;
 	return r;
 };
 openfl.Assets.getText = function(id) {
@@ -24603,9 +24502,9 @@ openfl.Assets.getText = function(id) {
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
 		if(lr.exists(sn,openfl.AssetType.TEXT)) {
-			if(lr.isLocal(sn,openfl.AssetType.TEXT)) r = lr.getText(sn); else if(console) console.log("[openfl.Assets] Text asset \"" + id + "\" exists, but only asynchronously");
-		} else if(console) console.log("[openfl.Assets] There is no text asset with an id of \"" + sn + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+			if(lr.isLocal(sn,openfl.AssetType.TEXT)) r = lr.getText(sn); else null;
+		} else null;
+	} else null;
 	return r;
 };
 openfl.Assets.initialize = function() {
@@ -24633,7 +24532,7 @@ openfl.Assets.isLocal = function(id,type,useCache) {
 	var ln = id.substring(0,i);
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
-	if(lr != null) r = lr.isLocal(sn,type); else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+	if(lr != null) r = lr.isLocal(sn,type); else null;
 	return r;
 };
 openfl.Assets.isValidBitmapData = function(bitmapData) {
@@ -24673,7 +24572,7 @@ openfl.Assets.loadBitmapData = function(id,handler,useCache) {
 			sn2 = sn;
 			lr2 = lr;
 		}
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+	} else null;
 	if(r != null) {
 		if(r) {
 			if(useCache && openfl.Assets.cache.get_enabled()) lr2.loadBitmapData(sn2,function(b1) {
@@ -24681,7 +24580,7 @@ openfl.Assets.loadBitmapData = function(id,handler,useCache) {
 				handler(b1);
 			}); else lr2.loadBitmapData(sn2,handler);
 			return;
-		} else if(console) console.log("[openfl.Assets] There is no BitmapData asset with an ID of \"" + id + "\"");
+		} else null;
 	}
 	handler(null);
 };
@@ -24693,8 +24592,8 @@ openfl.Assets.loadBytes = function(id,handler) {
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
-		if(r = lr.exists(sn,openfl.AssetType.BINARY)) lr.loadBytes(sn,handler); else if(console) console.log("[openfl.Assets] There is no binary asset with an ID of \"" + id + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+		if(r = lr.exists(sn,openfl.AssetType.BINARY)) lr.loadBytes(sn,handler); else null;
+	} else null;
 	if(r) return;
 	handler(null);
 };
@@ -24717,7 +24616,7 @@ openfl.Assets.loadFont = function(id,handler,useCache) {
 			lr2 = lr;
 			sn2 = sn;
 		}
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+	} else null;
 	if(r != null) {
 		if(r) {
 			if(useCache && openfl.Assets.cache.get_enabled()) lr2.loadFont(sn2,function(o) {
@@ -24725,7 +24624,7 @@ openfl.Assets.loadFont = function(id,handler,useCache) {
 				handler(o);
 			}); else lr2.loadFont(sn2,handler);
 			return;
-		} else if(console) console.log("[openfl.Assets] There is no font asset with an ID of \"" + id + "\"");
+		} else null;
 	}
 	handler(null);
 };
@@ -24738,7 +24637,7 @@ openfl.Assets.loadLibrary = function(name,handler) {
 		var library = unserializer.unserialize();
 		openfl.Assets.libraries.set(name,library);
 		library.load(handler);
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + name + "\"");
+	} else null;
 };
 openfl.Assets.loadMusic = function(id,handler,useCache) {
 	if(useCache == null) useCache = true;
@@ -24760,7 +24659,7 @@ openfl.Assets.loadMusic = function(id,handler,useCache) {
 			lr2 = lr;
 			sn2 = sn;
 		}
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+	} else null;
 	if(r != null) {
 		if(r) {
 			if(useCache && openfl.Assets.cache.get_enabled()) lr2.loadMusic(sn2,function(s) {
@@ -24768,7 +24667,7 @@ openfl.Assets.loadMusic = function(id,handler,useCache) {
 				handler(s);
 			}); else lr2.loadMusic(sn2,handler);
 			return;
-		} else if(console) console.log("[openfl.Assets] There is no sound asset with an ID of \"" + id + "\"");
+		} else null;
 	}
 	handler(null);
 };
@@ -24780,8 +24679,8 @@ openfl.Assets.loadMovieClip = function(id,handler) {
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
-		if(r = lr.exists(sn,openfl.AssetType.MOVIE_CLIP)) lr.loadMovieClip(sn,handler); else if(console) console.log("[openfl.Assets] There is no MovieClip asset with an ID of \"" + id + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+		if(r = lr.exists(sn,openfl.AssetType.MOVIE_CLIP)) lr.loadMovieClip(sn,handler); else null;
+	} else null;
 	if(r) return;
 	handler(null);
 };
@@ -24805,7 +24704,7 @@ openfl.Assets.loadSound = function(id,handler,useCache) {
 			lr2 = lr;
 			sn2 = sn;
 		}
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+	} else null;
 	if(r != null) {
 		if(r) {
 			if(useCache && openfl.Assets.cache.get_enabled()) lr2.loadSound(sn2,function(s) {
@@ -24813,7 +24712,7 @@ openfl.Assets.loadSound = function(id,handler,useCache) {
 				handler(s);
 			}); else lr2.loadSound(sn2,handler);
 			return;
-		} else if(console) console.log("[openfl.Assets] There is no sound asset with an ID of \"" + id + "\"");
+		} else null;
 	}
 	handler(null);
 };
@@ -24825,8 +24724,8 @@ openfl.Assets.loadText = function(id,handler) {
 	var sn = id.substring(i + 1);
 	var lr = openfl.Assets.getLibrary(ln);
 	if(lr != null) {
-		if(r = lr.exists(sn,openfl.AssetType.TEXT)) lr.loadText(sn,handler); else if(console) console.log("[openfl.Assets] There is no text asset with an ID of \"" + id + "\"");
-	} else if(console) console.log("[openfl.Assets] There is no asset library named \"" + ln + "\"");
+		if(r = lr.exists(sn,openfl.AssetType.TEXT)) lr.loadText(sn,handler); else null;
+	} else null;
 	if(r) return;
 	handler(null);
 };
@@ -24888,7 +24787,13 @@ openfl.AssetType.TEXT.__enum__ = openfl.AssetType;
 function $iterator(o) { if( o instanceof Array ) return function() { return HxOverrides.iter(o); }; return typeof(o.iterator) == 'function' ? $bind(o,o.iterator) : o.iterator; }
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-flash.display.DisplayObject.__init();
+(function() {
+	flash.display.DisplayObject.routedEvents = new haxe.ds.StringMap();
+	var m = ["mouseMove","mouseOver","mouseOut","mouseClick","mouseDown","mouseUp","rightClick","rightMouseDown","rightMouseUp","middleClick","middleMouseDown","middleMouseUp","mouseWheel"];
+	var i = -1;
+	var l = m.length;
+	while(++i < l) flash.display.DisplayObject.routedEvents.set(m[i],1);
+})();
 if(Array.prototype.indexOf) HxOverrides.indexOf = function(a,o,i) {
 	return Array.prototype.indexOf.call(a,o,i);
 };
@@ -24961,7 +24866,8 @@ flixel.system.debug._Window.GraphicCloseButton.preload();
 flixel.tile.GraphicAuto.preload();
 flixel.tile.GraphicAutoAlt.preload();
 flixel.ui._FlxTypedButton.GraphicButton.preload();
-ApplicationMain.config = { antialiasing : 0, background : 0, borderless : false, depthBuffer : false, fps : 60, fullscreen : false, height : 480, orientation : "", resizable : true, stencilBuffer : true, title : "FlixelExample", vsync : false, width : 800};
+ApplicationMain.config = { antialiasing : 0, background : 0, borderless : false, depthBuffer : false, fps : 60, fullscreen : false, height : 480, orientation : "", resizable : true, stencilBuffer : false, title : "FlixelExample", vsync : false, width : 800};
+ApplicationMain.embeds = 0;
 flixel.FlxBasic._ACTIVECOUNT = 0;
 flixel.FlxBasic._VISIBLECOUNT = 0;
 flixel.util.FlxRect._pool = new flixel.util.FlxPool_flixel_util_FlxRect(flixel.util.FlxRect);
@@ -24977,7 +24883,6 @@ flixel.FlxObject.WALL = 17;
 flixel.FlxObject.ANY = 4369;
 flixel.FlxObject._firstSeparateFlxRect = flixel.util.FlxRect.get(null,null,null,null);
 flixel.FlxObject._secondSeparateFlxRect = flixel.util.FlxRect.get(null,null,null,null);
-js.Boot.__toStr = {}.toString;
 flash.geom.Transform.DEG_TO_RAD = Math.PI / 180.0;
 flash.geom.Matrix.pool = [];
 haxe.ds.ObjectMap.count = 0;
@@ -24986,8 +24891,6 @@ flash.Lib.mouseX = 0;
 flash.Lib.mouseY = 0;
 flash.media.Sound.library = new haxe.ds.StringMap();
 flash.system.System.useCodePage = false;
-flash.text.TextField.padding = 1.5;
-flash.text.TextField.padding2 = 3.0;
 flash.ui.Multitouch.supportsTouchEvents = false;
 flash.ui.Multitouch.maxTouchPoints = 0;
 flixel.FlxCamera.STYLE_LOCKON = 0;
@@ -25006,6 +24909,7 @@ flixel.system.frontEnds.HTML5FrontEnd.CHROME = "Chrome";
 flixel.system.frontEnds.HTML5FrontEnd.FIREFOX = "Firefox";
 flixel.system.frontEnds.HTML5FrontEnd.SAFARI = "Safari";
 flixel.system.frontEnds.HTML5FrontEnd.OPERA = "Opera";
+js.Boot.__toStr = {}.toString;
 flixel.util.FlxPath.FORWARD = 0;
 flixel.util.FlxPath.BACKWARD = 1;
 flixel.util.FlxPath.LOOP_FORWARD = 16;
@@ -25026,7 +24930,7 @@ flixel.FlxG.autoPause = true;
 flixel.FlxG.fixedTimestep = true;
 flixel.FlxG.timeScale = 1;
 flixel.FlxG.worldDivisions = 6;
-flixel.FlxG.VERSION = new flixel.system.FlxVersion(3,3,8);
+flixel.FlxG.VERSION = new flixel.system.FlxVersion(3,3,6);
 flixel.FlxG.elapsed = 0;
 flixel.FlxG.maxElapsed = 0.1;
 flixel.FlxG.fullscreen = false;
@@ -25328,5 +25232,3 @@ openfl.Assets.libraries = new haxe.ds.StringMap();
 openfl.Assets.initialized = false;
 ApplicationMain.main();
 })();
-
-//# sourceMappingURL=FlixelExample.js.map

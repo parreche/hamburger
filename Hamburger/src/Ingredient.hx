@@ -10,10 +10,18 @@ import openfl.geom.Point;
 class Ingredient extends FlxSprite
 {
 	var mVelocity:Point = new Point();
+	var mBreadTop:Bread;
+	var mBreadBottom:Bread;
+	var mScore:Int;
+	inline private static var minDist = 45;
+	inline private static var minAng = 90;
 
-	public function new(X:Float, Y:Float, aImage:String) 
+	public function new(X:Float, Y:Float, aImage:String, aBreadTop:Bread, aBreadBottom:Bread, aScore:Int) 
 	{
 		super(X, Y);
+		mBreadTop = aBreadTop;
+		mBreadBottom = aBreadBottom;
+		mScore = aScore;
 		loadGraphic(Assets.getBitmapData(aImage), false);
 		maxVelocity.set(150, 150);
 		velocity.set(Math.random() > 0.5? -100:100, Math.random() > 0.5? -100:100);
@@ -25,10 +33,6 @@ class Ingredient extends FlxSprite
 	
 	override function update():Void
 	{
-		/*mVelocity.setTo(velocity.x, velocity.y);
-		mVelocity.normalize(150);
-		velocity.x = mVelocity.x;
-		velocity.y = mVelocity.y;*/
 		
 		if (x+width > 800 && velocity.x>0)
 		{
@@ -46,6 +50,36 @@ class Ingredient extends FlxSprite
 		{
 			velocity.y *= -1;
 		}
+		
+		eat();
+		
 		super.update();
+	}
+	
+	private function eat():Void
+	{
+		var vectorTop:Point = new Point(mBreadTop.x+mBreadTop.width - x, mBreadTop.y+mBreadTop.height/2 - y);
+		if (vectorTop.length > minDist)
+		{
+			return;
+		}
+		
+		var vectorBottom:Point = new Point(mBreadBottom.x - x, mBreadBottom.y+mBreadBottom.height/2 - y);
+		if (vectorBottom.length > minDist)
+		{
+			return;
+		}
+
+		vectorTop.normalize(1);
+		vectorBottom.normalize(1);
+		vectorTop.x *= -1;
+		vectorTop.y *= -1;
+		
+		var product = vectorTop.x * vectorBottom.x + vectorTop.y * vectorBottom.y;
+		
+		if (product < Math.cos(minAng)) 
+		{
+			kill();
+		}
 	}
 }
