@@ -30,6 +30,8 @@ class DefaultAssetLibrary extends openfl.AssetLibrary {
 		add("assets/sounds/flixel.ogg", SOUND);
 		add("img/BreadBottom.png", IMAGE);
 		add("img/BreadTop.png", IMAGE);
+		add("img/glass.png", IMAGE);
+		add("img/plate.png", IMAGE);
 		add("img/Tomato.png", IMAGE);
 		//
 	}
