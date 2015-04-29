@@ -16,12 +16,9 @@ class GameState extends FlxState
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
 	private var mIngredients = new FlxGroup();
-<<<<<<< HEAD
 	var mScoreText:FlxText;
-=======
 	private var mObstacles = new FlxGroup();
 	var gameScore:Int = 0;
->>>>>>> 0d233a192f5ceb257447c73d18f24b77c86d9545
 	
 	public function new() 
 	{
@@ -75,11 +72,7 @@ class GameState extends FlxState
 		FlxG.collide(mBreadTop, mIngredients);
 		FlxG.collide(mBreadBottom, mIngredients);
 		FlxG.collide(mIngredients, mIngredients);
-<<<<<<< HEAD
 		mScoreText.text = "Score: " + GameData.score;
-=======
 		FlxG.collide(mIngredients, mObstacles);
-		
->>>>>>> 0d233a192f5ceb257447c73d18f24b77c86d9545
 	}
 }
