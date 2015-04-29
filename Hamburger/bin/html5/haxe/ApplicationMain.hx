@@ -25,7 +25,7 @@ class ApplicationMain {
 		height: Std.int(480),
 		orientation: "",
 		resizable: true,
-		stencilBuffer: false,
+		stencilBuffer: true,
 		title: "FlixelExample",
 		vsync: false,
 		width: Std.int(800),
@@ -75,6 +75,8 @@ class ApplicationMain {
 		loadSound("assets/sounds/flixel.ogg");
 		loadFile("img/BreadBottom.png");
 		loadFile("img/BreadTop.png");
+		loadFile("img/glass.png");
+		loadFile("img/plate.png");
 		loadFile("img/Tomato.png");
 		
 		// bitmaps:
