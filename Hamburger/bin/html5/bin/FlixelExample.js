@@ -2423,6 +2423,11 @@ EReg.prototype = {
 	}
 	,__class__: EReg
 };
+var GameData = function() { };
+$hxClasses["GameData"] = GameData;
+GameData.__name__ = ["GameData"];
+GameData.clear = function() {
+};
 flixel.group = {};
 flixel.group.FlxTypedGroup = function(MaxSize) {
 	if(MaxSize == null) MaxSize = 0;
@@ -2822,12 +2827,6 @@ var GameState = function() {
 	this.time = 0;
 	this.mIngredients = new flixel.group.FlxGroup();
 	flixel.FlxState.call(this);
-	var _g = 0;
-	while(_g < 10) {
-		var i = _g++;
-		var ingredient = new Ingredient(100,100,"img/Tomato.png");
-		this.mIngredients.add(ingredient);
-	}
 };
 $hxClasses["GameState"] = GameState;
 GameState.__name__ = ["GameState"];
@@ -2836,14 +2835,23 @@ GameState.prototype = $extend(flixel.FlxState.prototype,{
 	mBreadTop: null
 	,mBreadBottom: null
 	,mIngredients: null
+	,mScoreText: null
 	,create: function() {
 		var pr = new PlayerInputRight();
 		var pl = new PlayerInputLeft();
 		this.mBreadTop = new Bread(150,200,pl,"img/BreadTop.png");
 		this.mBreadBottom = new Bread(600,200,pr,"img/BreadBottom.png");
+		this.mScoreText = new flixel.text.FlxText(0,0,100,"Score: ");
+		var _g = 0;
+		while(_g < 10) {
+			var i = _g++;
+			var ingredient = new Ingredient(100,100,"img/Tomato.png",this.mBreadTop,this.mBreadBottom,10);
+			this.mIngredients.add(ingredient);
+		}
 		this.add(this.mBreadTop);
 		this.add(this.mBreadBottom);
 		this.add(this.mIngredients);
+		this.add(this.mScoreText);
 	}
 	,time: null
 	,update: function() {
@@ -2856,6 +2864,7 @@ GameState.prototype = $extend(flixel.FlxState.prototype,{
 		flixel.FlxG.overlap(this.mBreadTop,this.mIngredients,null,flixel.FlxObject.separate);
 		flixel.FlxG.overlap(this.mBreadBottom,this.mIngredients,null,flixel.FlxObject.separate);
 		flixel.FlxG.overlap(this.mIngredients,this.mIngredients,null,flixel.FlxObject.separate);
+		this.mScoreText.set_text("Score: " + GameData.score);
 	}
 	,__class__: GameState
 });
@@ -2932,9 +2941,13 @@ HxOverrides.iter = function(a) {
 		return this.arr[this.cur++];
 	}};
 };
-var Ingredient = function(X,Y,aImage) {
+var Ingredient = function(X,Y,aImage,aBreadTop,aBreadBottom,aScore) {
 	this.mVelocity = new flash.geom.Point();
 	flixel.FlxSprite.call(this,X,Y);
+	this.mBreadTop = aBreadTop;
+	this.mBreadBottom = aBreadBottom;
+	this.mScore = aScore;
+	Ingredient.minAng = Math.PI / 2;
 	this.loadGraphic(openfl.Assets.getBitmapData(aImage),false);
 	this.maxVelocity.set(150,150);
 	this.velocity.set(Math.random() > 0.5?-100:100,Math.random() > 0.5?-100:100);
@@ -2944,9 +2957,13 @@ var Ingredient = function(X,Y,aImage) {
 };
 $hxClasses["Ingredient"] = Ingredient;
 Ingredient.__name__ = ["Ingredient"];
+Ingredient.minAng = null;
 Ingredient.__super__ = flixel.FlxSprite;
 Ingredient.prototype = $extend(flixel.FlxSprite.prototype,{
 	mVelocity: null
+	,mBreadTop: null
+	,mBreadBottom: null
+	,mScore: null
 	,update: function() {
 		if(this.x + this.get_width() > 800 && this.velocity.x > 0) {
 			var _g = this.velocity;
@@ -2964,7 +2981,23 @@ Ingredient.prototype = $extend(flixel.FlxSprite.prototype,{
 			var _g3 = this.velocity;
 			_g3.set_y(_g3.y * -1);
 		}
+		this.eat();
 		flixel.FlxSprite.prototype.update.call(this);
+	}
+	,eat: function() {
+		var vectorTop = new flash.geom.Point(this.mBreadTop.x + this.mBreadTop.get_width() - this.x,this.mBreadTop.y + this.mBreadTop.get_height() / 2 - this.y);
+		if(vectorTop.get_length() > 45) return;
+		var vectorBottom = new flash.geom.Point(this.mBreadBottom.x - this.x,this.mBreadBottom.y + this.mBreadBottom.get_height() / 2 - this.y);
+		if(vectorBottom.get_length() > 45) return;
+		vectorTop.normalize(1);
+		vectorBottom.normalize(1);
+		vectorTop.x *= -1;
+		vectorTop.y *= -1;
+		var product = vectorTop.x * vectorBottom.x + vectorTop.y * vectorBottom.y;
+		if(product < Math.cos(Ingredient.minAng)) {
+			GameData.score += this.mScore;
+			this.kill();
+		}
 	}
 	,__class__: Ingredient
 });
@@ -24883,6 +24916,8 @@ flixel.FlxObject.WALL = 17;
 flixel.FlxObject.ANY = 4369;
 flixel.FlxObject._firstSeparateFlxRect = flixel.util.FlxRect.get(null,null,null,null);
 flixel.FlxObject._secondSeparateFlxRect = flixel.util.FlxRect.get(null,null,null,null);
+GameData.score = 0;
+Ingredient.minDist = 45;
 flash.geom.Transform.DEG_TO_RAD = Math.PI / 180.0;
 flash.geom.Matrix.pool = [];
 haxe.ds.ObjectMap.count = 0;

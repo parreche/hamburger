@@ -14,7 +14,7 @@ class Ingredient extends FlxSprite
 	var mBreadBottom:Bread;
 	var mScore:Int;
 	inline private static var minDist = 45;
-	inline private static var minAng = 90;
+	private static var minAng;
 
 	public function new(X:Float, Y:Float, aImage:String, aBreadTop:Bread, aBreadBottom:Bread, aScore:Int) 
 	{
@@ -22,6 +22,7 @@ class Ingredient extends FlxSprite
 		mBreadTop = aBreadTop;
 		mBreadBottom = aBreadBottom;
 		mScore = aScore;
+		minAng = Math.PI/2;
 		loadGraphic(Assets.getBitmapData(aImage), false);
 		maxVelocity.set(150, 150);
 		velocity.set(Math.random() > 0.5? -100:100, Math.random() > 0.5? -100:100);
@@ -79,6 +80,7 @@ class Ingredient extends FlxSprite
 		
 		if (product < Math.cos(minAng)) 
 		{
+			GameData.score += mScore;
 			kill();
 		}
 	}
