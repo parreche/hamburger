@@ -5,6 +5,8 @@ import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import io.CsvImporter;
+import io.MyConstants;
 import openfl.geom.Point;
 
 /**
@@ -29,20 +31,11 @@ class GameState extends FlxState
 	{
 		var pr:PlayerInputRight = new PlayerInputRight();
 		var pl:PlayerInputLeft = new PlayerInputLeft();
-		mBreadTop = new Bread(150, 200, pl, "img/BreadTop.png");
-		mBreadBottom = new Bread(600, 200, pr, "img/BreadBottom.png");
+		mBreadTop = new Bread(MyConstants.topBreadStartPosition_x, MyConstants.topBreadStartPosition_y, pl, "img/BreadTop.png");
+		mBreadBottom = new Bread(MyConstants.bottomBreadStartPosition_x, MyConstants.bottomBreadStartPosition_y, pr, "img/BreadBottom.png");
 		mScoreText = new FlxText(0, 0, 100, "Score: ");
-		for (i in 0...10) 
-		{
-			var ingredient:Ingredient = new Ingredient(100, 100, "img/Tomato.png",mBreadTop, mBreadBottom, 10);
-			mIngredients.add(ingredient);
-		}
-		var plateCoords:Point = randomPointInScreen();
-		var glassCoords:Point = randomPointInScreen();
-		var plate:Obstacle = new Obstacle(plateCoords.x, plateCoords.y, "img/plate.png");
-		var glass:Obstacle = new Obstacle(glassCoords.x, glassCoords.y, "img/glass.png");
-		mObstacles.add(plate);
-		mObstacles.add(glass);
+		loadIngredients();
+		loadObstacles();
 		add(mObstacles);
 		add(mBreadTop);
 		add(mBreadBottom);
@@ -50,10 +43,49 @@ class GameState extends FlxState
 		add(mScoreText);
 	}
 	
+	function loadIngredients():Void
+	{
+		// Loading tomatoes
+		initIngredient(MyConstants.tomatoCount, "img/Tomato.png", MyConstants.tomatoValue, MyConstants.tomatoVelocity);
+	}
+	
+	function loadObstacles():Void
+	{
+		initObstacle("img/CANASTO.png");
+		initObstacle("img/cuchillo.png");
+		initObstacle("img/jarra.png");
+		initObstacle("img/moztaza_ketchup_.png");
+		initObstacle("img/pepinos_frasco.png");
+		initObstacle("img/platos.png");
+	}
+	
+	function initIngredient(aCount:Int,aPathToImage:String, aValue:Int, aVelocity:Int):Void
+	{
+		for (i in 0...aCount)
+		{
+			var ingredient:Ingredient = new Ingredient(100, 100, aPathToImage,mBreadTop, mBreadBottom, aValue,aVelocity);
+			mIngredients.add(ingredient);	
+		}
+	}
+	
+	function initObstacle(aImage:String):Void
+	{
+		var obstacleCoords:Point = null;
+		obstacleCoords = randomPointInScreen();
+		var obstacle:Obstacle = new Obstacle(obstacleCoords.x, obstacleCoords.y, aImage);
+		mObstacles.add(obstacle);
+	}
+	
+	function loadConfiguration():Void 
+	{
+		CsvImporter.load("1oifIDGgwAoLj5HSawo3qRq891xMUeMnbsROabRsKZbg",0);
+		
+	}
+	
 	function randomPointInScreen():Point 
 	{
-		var xCoord:Float = Math.random() * 1000;
-		var yCoord:Float = (Math.random() * 1000)/2;
+		var xCoord:Float = Math.random() * MyConstants.screenWidth;
+		var yCoord:Float = Math.random() * MyConstants.screenHeigth;
 		return new Point(xCoord, yCoord);
 	}
 	

@@ -1,5 +1,6 @@
 package;
 import flixel.FlxSprite;
+import io.MyConstants;
 import openfl.Assets;
 import openfl.geom.Point;
 
@@ -16,7 +17,7 @@ class Ingredient extends FlxSprite
 	inline private static var minDist = 45;
 	private static var minAng;
 
-	public function new(X:Float, Y:Float, aImage:String, aBreadTop:Bread, aBreadBottom:Bread, aScore:Int) 
+	public function new(X:Float, Y:Float, aImage:String, aBreadTop:Bread, aBreadBottom:Bread, aScore:Int,aVelocity:Int) 
 	{
 		super(X, Y);
 		mBreadTop = aBreadTop;
@@ -24,8 +25,8 @@ class Ingredient extends FlxSprite
 		mScore = aScore;
 		minAng = Math.PI/2;
 		loadGraphic(Assets.getBitmapData(aImage), false);
-		maxVelocity.set(150, 150);
-		velocity.set(Math.random() > 0.5? -100:100, Math.random() > 0.5? -100:100);
+		aVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
+		velocity.set(aVelocity,aVelocity);
 		elasticity = 1;
 		x = 100 + 300 * Math.random();
 		y = Math.random() * 200;
@@ -35,7 +36,7 @@ class Ingredient extends FlxSprite
 	override function update():Void
 	{
 		
-		if (x+width > 800 && velocity.x>0)
+		if (x+width > MyConstants.screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;
 		}
@@ -47,7 +48,7 @@ class Ingredient extends FlxSprite
 		{
 			velocity.y *= -1;
 		}
-		if (y+height > 480 && velocity.y>0)
+		if (y+height > MyConstants.screenHeigth && velocity.y>0)
 		{
 			velocity.y *= -1;
 		}

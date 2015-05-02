@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxGame;
+import io.MyConstants;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.Lib;
@@ -25,6 +26,6 @@ class Main extends Sprite
 	private function init(e:Event):Void 
 	{
 		removeEventListener(Event.ADDED_TO_STAGE, init);
-		addChild(new FlxGame(800, 480, GameState));
+		addChild(new FlxGame(MyConstants.screenWidth, MyConstants.screenHeigth, GameState));
 	}
 }
