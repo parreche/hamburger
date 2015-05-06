@@ -1,0 +1,12 @@
+screenWidth,1200
+screenHeigth,720
+ingredients,123
+topBreadStartPosition_x,200
+topBreadStartPosition_y,200
+bottomBreadStartPosition_x,600
+bottomBreadStartPosition_y,200
+breadVelocity,100
+breadAcceleration,1000
+tomatoCount,4
+tomatoValue,200
+tomatoVelocity,200

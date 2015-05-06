@@ -2,7 +2,9 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.input.gamepad.FlxGamepad;
 import flixel.util.FlxColor;
+import io.MyConstants;
 import openfl.Assets;
 
 /**
@@ -17,7 +19,7 @@ class Bread extends FlxSprite
 	{
 		super(X, Y);
 		loadGraphic(Assets.getBitmapData(aImage), false);
-		maxVelocity.set(100, 100);
+		maxVelocity.set(MyConstants.breadVelocity, MyConstants.breadVelocity);
 		drag.set(100, 100);
 		mPlayerInput = aPlayerInput;
 		immovable = true;
@@ -27,9 +29,9 @@ class Bread extends FlxSprite
 	
 	override function update():Void
 	{
-		trace(y);
-		
-		if (x+width > 800 && velocity.x>0)
+		super.update();
+	
+		if (x+width > MyConstants.screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;
 		}
@@ -41,7 +43,7 @@ class Bread extends FlxSprite
 		{
 			velocity.y *= -1;
 		}
-		if (y+height > 480 && velocity.y>0)
+		if (y+height > MyConstants.screenHeigth && velocity.y>0)
 		{
 			velocity.y *= -1;
 		}
@@ -49,20 +51,20 @@ class Bread extends FlxSprite
 		acceleration.set(0, 0);
 		if (mPlayerInput.left())
 		{
-			acceleration.x = -1000;
+			acceleration.x = -MyConstants.breadAcceleration;
 		}
 		if (mPlayerInput.right())
 		{
-			acceleration.x = 1000;
+			acceleration.x = MyConstants.breadAcceleration;
 		}
 		if (mPlayerInput.up())
 		{
-			acceleration.y = -1000;
+			acceleration.y = -MyConstants.breadAcceleration;
 		}
 		if (mPlayerInput.down())
 		{
-			acceleration.y = 1000;
+			acceleration.y = MyConstants.breadAcceleration;
 		}
-		super.update();
+		
 	}
 }
