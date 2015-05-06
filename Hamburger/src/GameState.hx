@@ -1,10 +1,12 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import openfl.Assets;
 import openfl.geom.Point;
 
 /**
@@ -25,13 +27,18 @@ class GameState extends FlxState
 		super();
 	}
 	
+	
+	
 	override function create():Void
 	{
+		var background:FlxSprite = new FlxSprite(-400, 0);
+		background.loadGraphic(Assets.getBitmapData("img/top.jpg"));
+		add(background);
 		var pr:PlayerInputRight = new PlayerInputRight();
 		var pl:PlayerInputLeft = new PlayerInputLeft();
-		mBreadTop = new Bread(150, 200, pl, "img/BreadTop.png");
-		mBreadBottom = new Bread(600, 200, pr, "img/BreadBottom.png");
-		mScoreText = new FlxText(0, 0, 100, "Score: ");
+		mBreadTop = new Bread(150, 200, pl, "img/BreadLeft.png");
+		mBreadBottom = new Bread(600, 200, pr, "img/BreadRight.png");
+		mScoreText = new FlxText(0, 0, 300, "Score: ",30);
 		for (i in 0...10) 
 		{
 			var ingredient:Ingredient = new Ingredient(100, 100, "img/Tomato.png",mBreadTop, mBreadBottom, 10);

@@ -33,6 +33,7 @@ class DefaultAssetLibrary extends openfl.AssetLibrary {
 		add("img/glass.png", IMAGE);
 		add("img/plate.png", IMAGE);
 		add("img/Tomato.png", IMAGE);
+		add("img/top.jpg", IMAGE);
 		//
 	}
 	

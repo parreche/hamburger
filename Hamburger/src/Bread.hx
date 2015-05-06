@@ -21,6 +21,8 @@ class Bread extends FlxSprite
 		drag.set(100, 100);
 		mPlayerInput = aPlayerInput;
 		immovable = true;
+		
+		
 	}
 	
 	override function update():Void

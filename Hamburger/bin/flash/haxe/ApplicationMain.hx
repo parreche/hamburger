@@ -37,11 +37,31 @@ class ApplicationMain {
 		types.push (AssetType.IMAGE);
 		
 		
+		urls.push ("img/BreadLeft.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/BreadRight.png");
+		types.push (AssetType.IMAGE);
+		
+		
 		urls.push ("img/BreadTop.png");
 		types.push (AssetType.IMAGE);
 		
 		
+		urls.push ("img/glass.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/plate.png");
+		types.push (AssetType.IMAGE);
+		
+		
 		urls.push ("img/Tomato.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/top.jpg");
 		types.push (AssetType.IMAGE);
 		
 		

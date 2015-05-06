@@ -50,10 +50,20 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/sounds/flixel.mp3", AssetType.MUSIC);
 		className.set ("img/BreadBottom.png", __ASSET__img_breadbottom_png);
 		type.set ("img/BreadBottom.png", AssetType.IMAGE);
+		className.set ("img/BreadLeft.png", __ASSET__img_breadleft_png);
+		type.set ("img/BreadLeft.png", AssetType.IMAGE);
+		className.set ("img/BreadRight.png", __ASSET__img_breadright_png);
+		type.set ("img/BreadRight.png", AssetType.IMAGE);
 		className.set ("img/BreadTop.png", __ASSET__img_breadtop_png);
 		type.set ("img/BreadTop.png", AssetType.IMAGE);
+		className.set ("img/glass.png", __ASSET__img_glass_png);
+		type.set ("img/glass.png", AssetType.IMAGE);
+		className.set ("img/plate.png", __ASSET__img_plate_png);
+		type.set ("img/plate.png", AssetType.IMAGE);
 		className.set ("img/Tomato.png", __ASSET__img_tomato_png);
 		type.set ("img/Tomato.png", AssetType.IMAGE);
+		className.set ("img/top.jpg", __ASSET__img_top_jpg);
+		type.set ("img/top.jpg", AssetType.IMAGE);
 		
 		
 		#elseif html5
@@ -71,11 +81,31 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "img/BreadLeft.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/BreadRight.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/BreadTop.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "img/glass.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/plate.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/Tomato.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/top.jpg";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -98,6 +128,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
 		#end
 		
 		#if (windows || mac || linux)
@@ -113,11 +148,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("img/BreadBottom.png", __ASSET__img_breadbottom_png);
 		type.set ("img/BreadBottom.png", AssetType.IMAGE);
 		
+		className.set ("img/BreadLeft.png", __ASSET__img_breadleft_png);
+		type.set ("img/BreadLeft.png", AssetType.IMAGE);
+		
+		className.set ("img/BreadRight.png", __ASSET__img_breadright_png);
+		type.set ("img/BreadRight.png", AssetType.IMAGE);
+		
 		className.set ("img/BreadTop.png", __ASSET__img_breadtop_png);
 		type.set ("img/BreadTop.png", AssetType.IMAGE);
 		
+		className.set ("img/glass.png", __ASSET__img_glass_png);
+		type.set ("img/glass.png", AssetType.IMAGE);
+		
+		className.set ("img/plate.png", __ASSET__img_plate_png);
+		type.set ("img/plate.png", AssetType.IMAGE);
+		
 		className.set ("img/Tomato.png", __ASSET__img_tomato_png);
 		type.set ("img/Tomato.png", AssetType.IMAGE);
+		
+		className.set ("img/top.jpg", __ASSET__img_top_jpg);
+		type.set ("img/top.jpg", AssetType.IMAGE);
 		
 		
 		if (useManifest) {
@@ -690,13 +740,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__img_breadbottom_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_breadleft_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_breadright_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_breadtop_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_glass_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_plate_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_tomato_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_top_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 
 
 #elseif html5
 
 #if openfl
+
+
+
+
+
 
 
 
@@ -717,8 +777,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends lime.audio.AudioSource {}
 @:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends lime.audio.AudioSource {}
 @:bitmap("assets/img/BreadBottom.png") class __ASSET__img_breadbottom_png extends lime.graphics.Image {}
+@:bitmap("assets/img/BreadLeft.png") class __ASSET__img_breadleft_png extends lime.graphics.Image {}
+@:bitmap("assets/img/BreadRight.png") class __ASSET__img_breadright_png extends lime.graphics.Image {}
 @:bitmap("assets/img/BreadTop.png") class __ASSET__img_breadtop_png extends lime.graphics.Image {}
+@:bitmap("assets/img/glass.png") class __ASSET__img_glass_png extends lime.graphics.Image {}
+@:bitmap("assets/img/plate.png") class __ASSET__img_plate_png extends lime.graphics.Image {}
 @:bitmap("assets/img/Tomato.png") class __ASSET__img_tomato_png extends lime.graphics.Image {}
+@:bitmap("assets/img/top.jpg") class __ASSET__img_top_jpg extends lime.graphics.Image {}
 
 
 

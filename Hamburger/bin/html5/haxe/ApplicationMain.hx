@@ -25,7 +25,7 @@ class ApplicationMain {
 		height: Std.int(480),
 		orientation: "",
 		resizable: true,
-		stencilBuffer: true,
+		stencilBuffer: false,
 		title: "FlixelExample",
 		vsync: false,
 		width: Std.int(800),
@@ -78,6 +78,7 @@ class ApplicationMain {
 		loadFile("img/glass.png");
 		loadFile("img/plate.png");
 		loadFile("img/Tomato.png");
+		loadFile("img/top.jpg");
 		
 		// bitmaps:
 		var resourcePrefix = "NME_:bitmap_";
