@@ -29,13 +29,15 @@ class GameState extends FlxState
 	
 	override function create():Void
 	{
-		var pr:PlayerInputRight = new PlayerInputRight();
-		var pl:PlayerInputLeft = new PlayerInputLeft();
+		//var pr:PlayerInputRight = new PlayerInputRight();
+		//var pl:PlayerInputLeft = new PlayerInputLeft();
+		var pr:PlayerInput = new JoystickInput(false);
+		var pl:PlayerInput = new JoystickInput(true);
 		mBreadTop = new Bread(MyConstants.topBreadStartPosition_x, MyConstants.topBreadStartPosition_y, pl, "img/BreadTop.png");
 		mBreadBottom = new Bread(MyConstants.bottomBreadStartPosition_x, MyConstants.bottomBreadStartPosition_y, pr, "img/BreadBottom.png");
 		mScoreText = new FlxText(0, 0, 100, "Score: ");
 		loadIngredients();
-		loadObstacles();
+		//loadObstacles();
 		add(mObstacles);
 		add(mBreadTop);
 		add(mBreadBottom);
@@ -46,7 +48,7 @@ class GameState extends FlxState
 	function loadIngredients():Void
 	{
 		// Loading tomatoes
-		initIngredient(MyConstants.tomatoCount, "img/Tomato.png", MyConstants.tomatoValue, MyConstants.tomatoVelocity);
+		initIngredient(MyConstants.tomatoCount, "img/Tomato.png", MyConstants.tomatoValue, MyConstants.tomatoVelocity, MyConstants.tomatoMaxVelocity);
 	}
 	
 	function loadObstacles():Void
@@ -59,11 +61,11 @@ class GameState extends FlxState
 		initObstacle("img/platos.png");
 	}
 	
-	function initIngredient(aCount:Int,aPathToImage:String, aValue:Int, aVelocity:Int):Void
+	function initIngredient(aCount:Int,aPathToImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int):Void
 	{
 		for (i in 0...aCount)
 		{
-			var ingredient:Ingredient = new Ingredient(100, 100, aPathToImage,mBreadTop, mBreadBottom, aValue,aVelocity);
+			var ingredient:Ingredient = new Ingredient(100, 100, aPathToImage,mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity);
 			mIngredients.add(ingredient);	
 		}
 	}

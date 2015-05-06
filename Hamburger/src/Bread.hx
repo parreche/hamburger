@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.input.gamepad.FlxGamepad;
 import flixel.util.FlxColor;
 import io.MyConstants;
 import openfl.Assets;
@@ -26,6 +27,8 @@ class Bread extends FlxSprite
 	
 	override function update():Void
 	{
+		super.update();
+	
 		if (x+width > MyConstants.screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;
@@ -60,6 +63,6 @@ class Bread extends FlxSprite
 		{
 			acceleration.y = MyConstants.breadAcceleration;
 		}
-		super.update();
+		
 	}
 }

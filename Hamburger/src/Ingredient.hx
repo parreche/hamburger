@@ -17,7 +17,7 @@ class Ingredient extends FlxSprite
 	inline private static var minDist = 45;
 	private static var minAng;
 
-	public function new(X:Float, Y:Float, aImage:String, aBreadTop:Bread, aBreadBottom:Bread, aScore:Int,aVelocity:Int) 
+	public function new(X:Float, Y:Float, aImage:String, aBreadTop:Bread, aBreadBottom:Bread, aScore:Int,aVelocity:Int,aMaxVelocity:Int) 
 	{
 		super(X, Y);
 		mBreadTop = aBreadTop;
@@ -26,7 +26,8 @@ class Ingredient extends FlxSprite
 		minAng = Math.PI/2;
 		loadGraphic(Assets.getBitmapData(aImage), false);
 		aVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
-		velocity.set(aVelocity,aVelocity);
+		velocity.set(aVelocity, aVelocity);
+		maxVelocity.set(aMaxVelocity, aMaxVelocity);
 		elasticity = 1;
 		x = 100 + 300 * Math.random();
 		y = Math.random() * 200;
