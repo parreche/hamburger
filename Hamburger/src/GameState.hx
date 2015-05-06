@@ -6,12 +6,9 @@ import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-<<<<<<< HEAD
 import openfl.Assets;
-=======
 import io.CsvImporter;
 import io.MyConstants;
->>>>>>> a82298f9a1ea4a779c0cd9348dde9c1bfa9a0162
 import openfl.geom.Point;
 
 /**
@@ -36,27 +33,9 @@ class GameState extends FlxState
 	
 	override function create():Void
 	{
-<<<<<<< HEAD
 		var background:FlxSprite = new FlxSprite(-400, 0);
 		background.loadGraphic(Assets.getBitmapData("img/top.jpg"));
 		add(background);
-		var pr:PlayerInputRight = new PlayerInputRight();
-		var pl:PlayerInputLeft = new PlayerInputLeft();
-		mBreadTop = new Bread(150, 200, pl, "img/BreadLeft.png");
-		mBreadBottom = new Bread(600, 200, pr, "img/BreadRight.png");
-		mScoreText = new FlxText(0, 0, 300, "Score: ",30);
-		for (i in 0...10) 
-		{
-			var ingredient:Ingredient = new Ingredient(100, 100, "img/Tomato.png",mBreadTop, mBreadBottom, 10);
-			mIngredients.add(ingredient);
-		}
-		var plateCoords:Point = randomPointInScreen();
-		var glassCoords:Point = randomPointInScreen();
-		var plate:Obstacle = new Obstacle(plateCoords.x, plateCoords.y, "img/plate.png");
-		var glass:Obstacle = new Obstacle(glassCoords.x, glassCoords.y, "img/glass.png");
-		mObstacles.add(plate);
-		mObstacles.add(glass);
-=======
 		//var pr:PlayerInputRight = new PlayerInputRight();
 		//var pl:PlayerInputLeft = new PlayerInputLeft();
 		var pr:PlayerInput = new JoystickInput(false);
@@ -66,7 +45,6 @@ class GameState extends FlxState
 		mScoreText = new FlxText(0, 0, 100, "Score: ");
 		loadIngredients();
 		//loadObstacles();
->>>>>>> a82298f9a1ea4a779c0cd9348dde9c1bfa9a0162
 		add(mObstacles);
 		add(mBreadTop);
 		add(mBreadBottom);
