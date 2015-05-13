@@ -28,17 +28,11 @@ class GameState extends FlxState
 	{
 		super();
 	}
-	
-	
-	
 	override function create():Void
 	{
-<<<<<<< HEAD
-=======
 		var background:FlxSprite = new FlxSprite(-350, 0);
 		background.loadGraphic(Assets.getBitmapData("img/top.jpg"));
 		add(background);
->>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 		var pr:PlayerInputRight = new PlayerInputRight();
 		var pl:PlayerInputLeft = new PlayerInputLeft();
 		//var pr:PlayerInput = new JoystickInput(false);
@@ -68,14 +62,11 @@ class GameState extends FlxState
 	{
 		
 		initObstacle("img/cuchillo.png");
-<<<<<<< HEAD
 		initObstacle("img/jarra.png");
 		initObstacle("img/moztaza_ketchup_.png");
 		//initObstacle("img/pepinos_frasco.png");
-=======
 		initObstacle("img/mostaza_ketchup.png");
 		initObstacle("img/pepinos_frasco.png");
->>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 		initObstacle("img/platos.png");
 	}
 	
