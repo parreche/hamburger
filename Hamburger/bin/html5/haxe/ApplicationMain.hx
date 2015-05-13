@@ -25,7 +25,7 @@ class ApplicationMain {
 		height: Std.int(480),
 		orientation: "",
 		resizable: true,
-		stencilBuffer: true,
+		stencilBuffer: false,
 		title: "FlixelExample",
 		vsync: false,
 		width: Std.int(800),
@@ -89,7 +89,11 @@ class ApplicationMain {
 		loadFile("img/platos_sombras.png");
 		loadFile("img/Stick.png");
 		loadFile("img/Tomato.png");
+<<<<<<< HEAD
 		loadFile("img/xbox360_gamepad.png");
+=======
+		loadFile("img/top.jpg");
+>>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 		
 		// bitmaps:
 		var resourcePrefix = "NME_:bitmap_";

@@ -16,7 +16,11 @@
 -D FLX_RENDER_BLIT
 -D fdb
 -D web
+<<<<<<< HEAD
 -swf-lib bin/flash/obj/assets.swf
+=======
+-swf-lib C:\Users\Pepe\Desktop\tomy\facultad\programacion de videojuegos\Hamburger\hamburger\hamburger\Hamburger\bin/flash/obj/assets.swf
+>>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 -swf-version 11.8
 -swf bin/flash/bin/FlixelExample.swf
 -swf-header 800:480:60:000000

@@ -44,7 +44,11 @@ class DefaultAssetLibrary extends openfl.AssetLibrary {
 		add("img/platos_sombras.png", IMAGE);
 		add("img/Stick.png", IMAGE);
 		add("img/Tomato.png", IMAGE);
+<<<<<<< HEAD
 		add("img/xbox360_gamepad.png", IMAGE);
+=======
+		add("img/top.jpg", IMAGE);
+>>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 		//
 	}
 	

@@ -14,7 +14,7 @@ class Ingredient extends FlxSprite
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
 	var mScore:Int;
-	inline private static var minDist = 45;
+	inline private static var minDist = 60;
 	private static var minAng;
 
 	public function new(X:Float, Y:Float, aImage:String, aBreadTop:Bread, aBreadBottom:Bread, aScore:Int,aVelocity:Int,aMaxVelocity:Int) 
@@ -61,29 +61,19 @@ class Ingredient extends FlxSprite
 	
 	private function eat():Void
 	{
-		var vectorTop:Point = new Point(mBreadTop.x+mBreadTop.width - x, mBreadTop.y+mBreadTop.height/2 - y);
+		var vectorTop:Point = new Point(mBreadTop.x+mBreadTop.width/2 - (x+width/2), mBreadTop.y+mBreadTop.height/2 - (y+height/2));
 		if (vectorTop.length > minDist)
 		{
 			return;
 		}
 		
-		var vectorBottom:Point = new Point(mBreadBottom.x - x, mBreadBottom.y+mBreadBottom.height/2 - y);
+		var vectorBottom:Point = new Point(mBreadBottom.x + mBreadBottom.width/2 - (x+width/2) , mBreadBottom.y+mBreadBottom.height/2 - (y+height/2));
 		if (vectorBottom.length > minDist)
 		{
 			return;
 		}
 
-		vectorTop.normalize(1);
-		vectorBottom.normalize(1);
-		vectorTop.x *= -1;
-		vectorTop.y *= -1;
-		
-		var product = vectorTop.x * vectorBottom.x + vectorTop.y * vectorBottom.y;
-		
-		if (product < Math.cos(minAng)) 
-		{
-			GameData.score += mScore;
-			kill();
-		}
+		GameData.score += mScore;
+		kill();
 	}
 }

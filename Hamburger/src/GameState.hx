@@ -1,10 +1,12 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import openfl.Assets;
 import io.CsvImporter;
 import io.MyConstants;
 import openfl.geom.Point;
@@ -27,15 +29,23 @@ class GameState extends FlxState
 		super();
 	}
 	
+	
+	
 	override function create():Void
 	{
+<<<<<<< HEAD
+=======
+		var background:FlxSprite = new FlxSprite(-350, 0);
+		background.loadGraphic(Assets.getBitmapData("img/top.jpg"));
+		add(background);
+>>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 		var pr:PlayerInputRight = new PlayerInputRight();
 		var pl:PlayerInputLeft = new PlayerInputLeft();
 		//var pr:PlayerInput = new JoystickInput(false);
 		//var pl:PlayerInput = new JoystickInput(true);
 		mBreadTop = new Bread(MyConstants.topBreadStartPosition_x, MyConstants.topBreadStartPosition_y, pl, "img/BreadTop.png");
 		mBreadBottom = new Bread(MyConstants.bottomBreadStartPosition_x, MyConstants.bottomBreadStartPosition_y, pr, "img/BreadBottom.png");
-		mScoreText = new FlxText(0, 0, 100, "Score: ");
+		mScoreText = new FlxText(0, 0, 350, "Score: ",35);
 		loadIngredients();
 		loadObstacles();
 		add(mObstacles);
@@ -49,15 +59,23 @@ class GameState extends FlxState
 	{
 		// Loading tomatoes
 		initIngredient(MyConstants.tomatoCount, "img/Tomato.png", MyConstants.tomatoValue, MyConstants.tomatoVelocity, MyConstants.tomatoMaxVelocity);
+		initIngredient(MyConstants.baconCount, "img/Bacon.png", MyConstants.baconValue, MyConstants.baconVelocity, MyConstants.baconMaxVelocity);
+		initIngredient(MyConstants.lettuceCount, "img/Lettuce.png", MyConstants.lettuceValue, MyConstants.lettuceVelocity, MyConstants.lettuceMaxVelocity);
+		initIngredient(MyConstants.burgerCount, "img/Burger.png", MyConstants.burgerValue, MyConstants.burgerVelocity, MyConstants.burgerMaxVelocity);
 	}
 	
 	function loadObstacles():Void
 	{
-		initObstacle("img/CANASTO.png");
+		
 		initObstacle("img/cuchillo.png");
+<<<<<<< HEAD
 		initObstacle("img/jarra.png");
 		initObstacle("img/moztaza_ketchup_.png");
 		//initObstacle("img/pepinos_frasco.png");
+=======
+		initObstacle("img/mostaza_ketchup.png");
+		initObstacle("img/pepinos_frasco.png");
+>>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 		initObstacle("img/platos.png");
 	}
 	
