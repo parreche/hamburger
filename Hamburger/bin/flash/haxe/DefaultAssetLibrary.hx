@@ -48,6 +48,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/sounds/beep.mp3", AssetType.MUSIC);
 		className.set ("assets/sounds/flixel.mp3", __ASSET__assets_sounds_flixel_mp3);
 		type.set ("assets/sounds/flixel.mp3", AssetType.MUSIC);
+		className.set ("img/Bacon.png", __ASSET__img_bacon_png);
+		type.set ("img/Bacon.png", AssetType.IMAGE);
 		className.set ("img/BreadBottom.png", __ASSET__img_breadbottom_png);
 		type.set ("img/BreadBottom.png", AssetType.IMAGE);
 		className.set ("img/BreadLeft.png", __ASSET__img_breadleft_png);
@@ -56,10 +58,38 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/BreadRight.png", AssetType.IMAGE);
 		className.set ("img/BreadTop.png", __ASSET__img_breadtop_png);
 		type.set ("img/BreadTop.png", AssetType.IMAGE);
+		className.set ("img/Burger.png", __ASSET__img_burger_png);
+		type.set ("img/Burger.png", AssetType.IMAGE);
+		className.set ("img/CANASTO.png", __ASSET__img_canasto_png);
+		type.set ("img/CANASTO.png", AssetType.IMAGE);
+		className.set ("img/canasto_SOMBRA.png", __ASSET__img_canasto_sombra_png);
+		type.set ("img/canasto_SOMBRA.png", AssetType.IMAGE);
+		className.set ("img/cuchillo.png", __ASSET__img_cuchillo_png);
+		type.set ("img/cuchillo.png", AssetType.IMAGE);
+		className.set ("img/cuchillo_SOMBRA.png", __ASSET__img_cuchillo_sombra_png);
+		type.set ("img/cuchillo_SOMBRA.png", AssetType.IMAGE);
 		className.set ("img/glass.png", __ASSET__img_glass_png);
 		type.set ("img/glass.png", AssetType.IMAGE);
+		className.set ("img/jarra.png", __ASSET__img_jarra_png);
+		type.set ("img/jarra.png", AssetType.IMAGE);
+		className.set ("img/jarra_SOMBRA.png", __ASSET__img_jarra_sombra_png);
+		type.set ("img/jarra_SOMBRA.png", AssetType.IMAGE);
+		className.set ("img/Lettuce.png", __ASSET__img_lettuce_png);
+		type.set ("img/Lettuce.png", AssetType.IMAGE);
+		className.set ("img/mostaza_ketchup.png", __ASSET__img_mostaza_ketchup_png);
+		type.set ("img/mostaza_ketchup.png", AssetType.IMAGE);
+		className.set ("img/moztaza_ketchup_smombra.png", __ASSET__img_moztaza_ketchup_smombra_png);
+		type.set ("img/moztaza_ketchup_smombra.png", AssetType.IMAGE);
+		className.set ("img/pepinos_frasco.png", __ASSET__img_pepinos_frasco_png);
+		type.set ("img/pepinos_frasco.png", AssetType.IMAGE);
+		className.set ("img/pepinos_frasco_SOMBRA.png", __ASSET__img_pepinos_frasco_sombra_png);
+		type.set ("img/pepinos_frasco_SOMBRA.png", AssetType.IMAGE);
 		className.set ("img/plate.png", __ASSET__img_plate_png);
 		type.set ("img/plate.png", AssetType.IMAGE);
+		className.set ("img/platos.png", __ASSET__img_platos_png);
+		type.set ("img/platos.png", AssetType.IMAGE);
+		className.set ("img/platos_sombras.png", __ASSET__img_platos_sombras_png);
+		type.set ("img/platos_sombras.png", AssetType.IMAGE);
 		className.set ("img/Tomato.png", __ASSET__img_tomato_png);
 		type.set ("img/Tomato.png", AssetType.IMAGE);
 		className.set ("img/top.jpg", __ASSET__img_top_jpg);
@@ -77,6 +107,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.MUSIC);
+		id = "img/Bacon.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/BreadBottom.png";
 		path.set (id, id);
 		
@@ -93,11 +127,67 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "img/Burger.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/CANASTO.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/canasto_SOMBRA.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/cuchillo.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/cuchillo_SOMBRA.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/glass.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "img/jarra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/jarra_SOMBRA.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/Lettuce.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/mostaza_ketchup.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/moztaza_ketchup_smombra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/pepinos_frasco.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/pepinos_frasco_SOMBRA.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/plate.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/platos.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/platos_sombras.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -133,6 +223,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		#end
 		
 		#if (windows || mac || linux)
@@ -144,6 +249,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/sounds/flixel.mp3", __ASSET__assets_sounds_flixel_mp3);
 		type.set ("assets/sounds/flixel.mp3", AssetType.MUSIC);
+		
+		className.set ("img/Bacon.png", __ASSET__img_bacon_png);
+		type.set ("img/Bacon.png", AssetType.IMAGE);
 		
 		className.set ("img/BreadBottom.png", __ASSET__img_breadbottom_png);
 		type.set ("img/BreadBottom.png", AssetType.IMAGE);
@@ -157,11 +265,53 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("img/BreadTop.png", __ASSET__img_breadtop_png);
 		type.set ("img/BreadTop.png", AssetType.IMAGE);
 		
+		className.set ("img/Burger.png", __ASSET__img_burger_png);
+		type.set ("img/Burger.png", AssetType.IMAGE);
+		
+		className.set ("img/CANASTO.png", __ASSET__img_canasto_png);
+		type.set ("img/CANASTO.png", AssetType.IMAGE);
+		
+		className.set ("img/canasto_SOMBRA.png", __ASSET__img_canasto_sombra_png);
+		type.set ("img/canasto_SOMBRA.png", AssetType.IMAGE);
+		
+		className.set ("img/cuchillo.png", __ASSET__img_cuchillo_png);
+		type.set ("img/cuchillo.png", AssetType.IMAGE);
+		
+		className.set ("img/cuchillo_SOMBRA.png", __ASSET__img_cuchillo_sombra_png);
+		type.set ("img/cuchillo_SOMBRA.png", AssetType.IMAGE);
+		
 		className.set ("img/glass.png", __ASSET__img_glass_png);
 		type.set ("img/glass.png", AssetType.IMAGE);
 		
+		className.set ("img/jarra.png", __ASSET__img_jarra_png);
+		type.set ("img/jarra.png", AssetType.IMAGE);
+		
+		className.set ("img/jarra_SOMBRA.png", __ASSET__img_jarra_sombra_png);
+		type.set ("img/jarra_SOMBRA.png", AssetType.IMAGE);
+		
+		className.set ("img/Lettuce.png", __ASSET__img_lettuce_png);
+		type.set ("img/Lettuce.png", AssetType.IMAGE);
+		
+		className.set ("img/mostaza_ketchup.png", __ASSET__img_mostaza_ketchup_png);
+		type.set ("img/mostaza_ketchup.png", AssetType.IMAGE);
+		
+		className.set ("img/moztaza_ketchup_smombra.png", __ASSET__img_moztaza_ketchup_smombra_png);
+		type.set ("img/moztaza_ketchup_smombra.png", AssetType.IMAGE);
+		
+		className.set ("img/pepinos_frasco.png", __ASSET__img_pepinos_frasco_png);
+		type.set ("img/pepinos_frasco.png", AssetType.IMAGE);
+		
+		className.set ("img/pepinos_frasco_SOMBRA.png", __ASSET__img_pepinos_frasco_sombra_png);
+		type.set ("img/pepinos_frasco_SOMBRA.png", AssetType.IMAGE);
+		
 		className.set ("img/plate.png", __ASSET__img_plate_png);
 		type.set ("img/plate.png", AssetType.IMAGE);
+		
+		className.set ("img/platos.png", __ASSET__img_platos_png);
+		type.set ("img/platos.png", AssetType.IMAGE);
+		
+		className.set ("img/platos_sombras.png", __ASSET__img_platos_sombras_png);
+		type.set ("img/platos_sombras.png", AssetType.IMAGE);
 		
 		className.set ("img/Tomato.png", __ASSET__img_tomato_png);
 		type.set ("img/Tomato.png", AssetType.IMAGE);
@@ -739,12 +889,27 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__img_bacon_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_breadbottom_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_breadleft_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_breadright_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_breadtop_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_burger_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_canasto_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_canasto_sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_cuchillo_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_cuchillo_sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_glass_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_jarra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_jarra_sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_lettuce_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_mostaza_ketchup_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_moztaza_ketchup_smombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_pepinos_frasco_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_pepinos_frasco_sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_plate_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_platos_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_platos_sombras_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_tomato_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_top_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 
@@ -752,6 +917,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 #elseif html5
 
 #if openfl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -776,12 +956,27 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 @:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends lime.audio.AudioSource {}
 @:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends lime.audio.AudioSource {}
+@:bitmap("assets/img/Bacon.png") class __ASSET__img_bacon_png extends lime.graphics.Image {}
 @:bitmap("assets/img/BreadBottom.png") class __ASSET__img_breadbottom_png extends lime.graphics.Image {}
 @:bitmap("assets/img/BreadLeft.png") class __ASSET__img_breadleft_png extends lime.graphics.Image {}
 @:bitmap("assets/img/BreadRight.png") class __ASSET__img_breadright_png extends lime.graphics.Image {}
 @:bitmap("assets/img/BreadTop.png") class __ASSET__img_breadtop_png extends lime.graphics.Image {}
+@:bitmap("assets/img/Burger.png") class __ASSET__img_burger_png extends lime.graphics.Image {}
+@:bitmap("assets/img/CANASTO.png") class __ASSET__img_canasto_png extends lime.graphics.Image {}
+@:bitmap("assets/img/canasto_SOMBRA.png") class __ASSET__img_canasto_sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/cuchillo.png") class __ASSET__img_cuchillo_png extends lime.graphics.Image {}
+@:bitmap("assets/img/cuchillo_SOMBRA.png") class __ASSET__img_cuchillo_sombra_png extends lime.graphics.Image {}
 @:bitmap("assets/img/glass.png") class __ASSET__img_glass_png extends lime.graphics.Image {}
+@:bitmap("assets/img/jarra.png") class __ASSET__img_jarra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/jarra_SOMBRA.png") class __ASSET__img_jarra_sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/Lettuce.png") class __ASSET__img_lettuce_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mostaza_ketchup.png") class __ASSET__img_mostaza_ketchup_png extends lime.graphics.Image {}
+@:bitmap("assets/img/moztaza_ketchup_smombra.png") class __ASSET__img_moztaza_ketchup_smombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/pepinos_frasco.png") class __ASSET__img_pepinos_frasco_png extends lime.graphics.Image {}
+@:bitmap("assets/img/pepinos_frasco_SOMBRA.png") class __ASSET__img_pepinos_frasco_sombra_png extends lime.graphics.Image {}
 @:bitmap("assets/img/plate.png") class __ASSET__img_plate_png extends lime.graphics.Image {}
+@:bitmap("assets/img/platos.png") class __ASSET__img_platos_png extends lime.graphics.Image {}
+@:bitmap("assets/img/platos_sombras.png") class __ASSET__img_platos_sombras_png extends lime.graphics.Image {}
 @:bitmap("assets/img/Tomato.png") class __ASSET__img_tomato_png extends lime.graphics.Image {}
 @:bitmap("assets/img/top.jpg") class __ASSET__img_top_jpg extends lime.graphics.Image {}
 
