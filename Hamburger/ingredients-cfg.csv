@@ -8,11 +8,6 @@ bottomBreadStartPosition_y,200
 breadVelocity,200
 breadAcceleration,500
 tomatoCount,4
-<<<<<<< HEAD
-tomatoValue,200
-tomatoVelocity,200
-tomatoMaxVelocity,200
-=======
 tomatoValue,10
 tomatoVelocity,100
 tomatoMaxVelocity,100
@@ -28,4 +23,3 @@ burgerCount,2
 burgerValue,50
 burgerVelocity,250
 burgerMaxVelocity,250
->>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
