@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.util.FlxColor;
@@ -57,6 +58,7 @@ class Bread extends FlxSprite
 		}
 		if (mPlayerInput.up())
 		{
+			//angle = 90;
 			acceleration.y = -MyConstants.breadAcceleration;
 		}
 		if (mPlayerInput.down())

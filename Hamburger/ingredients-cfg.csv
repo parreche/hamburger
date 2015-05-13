@@ -5,8 +5,9 @@ topBreadStartPosition_x,200
 topBreadStartPosition_y,200
 bottomBreadStartPosition_x,600
 bottomBreadStartPosition_y,200
-breadVelocity,100
-breadAcceleration,1000
+breadVelocity,200
+breadAcceleration,500
 tomatoCount,4
 tomatoValue,200
 tomatoVelocity,200
+tomatoMaxVelocity,200

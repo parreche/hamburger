@@ -29,15 +29,15 @@ class GameState extends FlxState
 	
 	override function create():Void
 	{
-		//var pr:PlayerInputRight = new PlayerInputRight();
-		//var pl:PlayerInputLeft = new PlayerInputLeft();
-		var pr:PlayerInput = new JoystickInput(false);
-		var pl:PlayerInput = new JoystickInput(true);
+		var pr:PlayerInputRight = new PlayerInputRight();
+		var pl:PlayerInputLeft = new PlayerInputLeft();
+		//var pr:PlayerInput = new JoystickInput(false);
+		//var pl:PlayerInput = new JoystickInput(true);
 		mBreadTop = new Bread(MyConstants.topBreadStartPosition_x, MyConstants.topBreadStartPosition_y, pl, "img/BreadTop.png");
 		mBreadBottom = new Bread(MyConstants.bottomBreadStartPosition_x, MyConstants.bottomBreadStartPosition_y, pr, "img/BreadBottom.png");
 		mScoreText = new FlxText(0, 0, 100, "Score: ");
 		loadIngredients();
-		//loadObstacles();
+		loadObstacles();
 		add(mObstacles);
 		add(mBreadTop);
 		add(mBreadBottom);
@@ -57,7 +57,7 @@ class GameState extends FlxState
 		initObstacle("img/cuchillo.png");
 		initObstacle("img/jarra.png");
 		initObstacle("img/moztaza_ketchup_.png");
-		initObstacle("img/pepinos_frasco.png");
+		//initObstacle("img/pepinos_frasco.png");
 		initObstacle("img/platos.png");
 	}
 	
@@ -72,10 +72,22 @@ class GameState extends FlxState
 	
 	function initObstacle(aImage:String):Void
 	{
-		var obstacleCoords:Point = null;
-		obstacleCoords = randomPointInScreen();
-		var obstacle:Obstacle = new Obstacle(obstacleCoords.x, obstacleCoords.y, aImage);
-		mObstacles.add(obstacle);
+		// Determinamos randomicamente si se agrega o no 
+		if (Math.random() > 0.5) {
+			var validCoords : Bool = false;
+			var tries:Int = 0;
+			while (!validCoords && tries < 4) {
+				var obstacleCoords:Point = null;
+				obstacleCoords = randomPointInScreen();
+				var obstacle:Obstacle = new Obstacle(obstacleCoords.x, obstacleCoords.y, aImage);
+				validCoords = !FlxG.overlap(obstacle, mBreadBottom) && !FlxG.overlap(obstacle, mBreadTop) && !FlxG.overlap(obstacle, mObstacles);
+				if (validCoords) {
+					mObstacles.add(obstacle);
+				}else {
+					tries++;
+				}
+			}
+		}
 	}
 	
 	function loadConfiguration():Void 
