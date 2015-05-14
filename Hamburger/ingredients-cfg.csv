@@ -1,5 +1,9 @@
 screenWidth,1200
 screenHeigth,720
+HUD_x,200
+HUD_y,0
+HUD_width,680
+HUD_heigth,150
 ingredients,123
 topBreadStartPosition_x,200
 topBreadStartPosition_y,200

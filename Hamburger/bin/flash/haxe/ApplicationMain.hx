@@ -43,7 +43,7 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/Bacon.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/BreadBottom.png");
@@ -51,14 +51,18 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/BreadLeft.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/BreadRight.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/BreadTop.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/Burger.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -83,6 +87,10 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/jarra_SOMBRA.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/Lettuce.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -110,76 +118,12 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("img/Burger.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/CANASTO.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/canasto_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/cuchillo.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/cuchillo_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/glass.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/jarra.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/jarra_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/Lettuce.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/mostaza_ketchup.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/moztaza_ketchup_smombra.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/pepinos_frasco.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/pepinos_frasco_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/plate.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/platos.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/platos_sombras.png");
-		types.push (AssetType.IMAGE);
-		
-		
 		urls.push ("img/Tomato.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/top.jpg");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		

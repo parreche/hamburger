@@ -32,6 +32,10 @@ class Bread extends FlxSprite
 	{
 		super.update();
 	
+		if (this.mPlayerInput == null) 
+		{
+			return;
+		}
 		if (x+width > MyConstants.screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;

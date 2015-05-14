@@ -74,6 +74,7 @@ class Ingredient extends FlxSprite
 		}
 
 		GameData.score += mScore;
+		HUD.addEatenIngredient(this);
 		kill();
 	}
 }

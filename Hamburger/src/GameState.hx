@@ -19,15 +19,18 @@ class GameState extends FlxState
 {
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
-	private var mIngredients = new FlxGroup();
+	var mIngredients = new FlxGroup();
 	var mScoreText:FlxText;
-	private var mObstacles = new FlxGroup();
+	var mObstacles = new FlxGroup();
 	var gameScore:Int = 0;
+	
+	
 	
 	public function new() 
 	{
 		super();
 	}
+	
 	override function create():Void
 	{
 		var background:FlxSprite = new FlxSprite(-350, 0);
@@ -39,7 +42,8 @@ class GameState extends FlxState
 		//var pl:PlayerInput = new JoystickInput(true);
 		mBreadTop = new Bread(MyConstants.topBreadStartPosition_x, MyConstants.topBreadStartPosition_y, pl, "img/BreadTop.png");
 		mBreadBottom = new Bread(MyConstants.bottomBreadStartPosition_x, MyConstants.bottomBreadStartPosition_y, pr, "img/BreadBottom.png");
-		mScoreText = new FlxText(0, 0, 350, "Score: ",35);
+		mScoreText = new FlxText(0, 0, 350, "Score: ", 35);
+		
 		loadIngredients();
 		loadObstacles();
 		add(mObstacles);
@@ -47,6 +51,13 @@ class GameState extends FlxState
 		add(mBreadBottom);
 		add(mIngredients);
 		add(mScoreText);
+		
+		// HUD init
+		HUD.create();
+		add(HUD.getHUDBackground());
+		add(HUD.getTopBread());
+		add(HUD.getBottomBread());
+		
 	}
 	
 	function loadIngredients():Void
@@ -60,13 +71,12 @@ class GameState extends FlxState
 	
 	function loadObstacles():Void
 	{
-		
+		initObstacle("img/CANASTO.png");
 		initObstacle("img/cuchillo.png");
 		initObstacle("img/jarra.png");
 		initObstacle("img/moztaza_ketchup_.png");
 		//initObstacle("img/pepinos_frasco.png");
-		initObstacle("img/mostaza_ketchup.png");
-		initObstacle("img/pepinos_frasco.png");
+		initObstacle("img/moztaza_ketchup_.png");
 		initObstacle("img/platos.png");
 	}
 	
@@ -129,5 +139,24 @@ class GameState extends FlxState
 		FlxG.collide(mIngredients, mIngredients);
 		mScoreText.text = "Score: " + GameData.score;
 		FlxG.collide(mIngredients, mObstacles);
+		
+		if (HUD.mHasEaten)
+		{
+			var lastX:Float = HUD.getBottomBread().x;
+			var ingredients:List<FlxSprite> = HUD.getEatenIngredients();
+			for(item in ingredients) 
+			{
+				item.x = lastX - 50;
+				item.y = 50;
+				item.alpha = 0.7;
+				add(item);
+				lastX = item.x;
+			}
+			
+			HUD.setTopBreadXCoord(lastX - 50);
+		}
+		HUD.mHasEaten = false;
 	}
+	
+	
 }
