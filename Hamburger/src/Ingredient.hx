@@ -1,4 +1,5 @@
 package;
+import flixel.FlxG;
 import flixel.FlxSprite;
 import io.MyConstants;
 import openfl.Assets;
@@ -76,5 +77,6 @@ class Ingredient extends FlxSprite
 		GameData.score += mScore;
 		HUD.addEatenIngredient(this);
 		kill();
+		FlxG.sound.play("sound/eat.wav");
 	}
 }

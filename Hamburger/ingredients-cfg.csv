@@ -27,3 +27,10 @@ burgerCount,2
 burgerValue,50
 burgerVelocity,250
 burgerMaxVelocity,250
+<<<<<<< HEAD
+cucumberCount,5
+cucumberValue,5
+cucumberVelocity,100
+cucumberMaxVelocity,100
+=======
+>>>>>>> c3b2563ae84cf3602697d14989a17046ac329459

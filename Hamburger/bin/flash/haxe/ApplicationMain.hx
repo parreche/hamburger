@@ -118,12 +118,99 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+<<<<<<< HEAD
+=======
+		urls.push ("img/Burger.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/CANASTO.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/canasto_SOMBRA.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/cuchillo.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/cuchillo_SOMBRA.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/Cucumber.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/glass.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/jarra.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/jarra_SOMBRA.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/Lettuce.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/mostaza_ketchup.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/moztaza_ketchup_smombra.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/pepinos_frasco_SOMBRA.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/plate.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/platos.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/platos_sombras.png");
+		types.push (AssetType.IMAGE);
+		
+		
+>>>>>>> 724e5ddf89fa3e1858e851a5a3515147c7682085
 		urls.push ("img/Tomato.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/top.jpg");
 		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("sound/breadCollide.wav");
+		types.push (AssetType.SOUND);
+		
+		
+		urls.push ("sound/eat.wav");
+		types.push (AssetType.SOUND);
+		
+		
+		urls.push ("sound/gameTheme.wav");
+		types.push (AssetType.SOUND);
+		
+		
+		urls.push ("sound/menuTheme.wav");
+		types.push (AssetType.SOUND);
+		
+		
+		urls.push ("sound/tick.wav");
+		types.push (AssetType.SOUND);
 		
 		
 		
