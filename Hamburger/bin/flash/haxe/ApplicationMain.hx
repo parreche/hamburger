@@ -73,6 +73,10 @@ class ApplicationMain {
 		types.push (AssetType.IMAGE);
 		
 		
+		urls.push ("img/Cucumber.png");
+		types.push (AssetType.IMAGE);
+		
+		
 		urls.push ("img/glass.png");
 		types.push (AssetType.IMAGE);
 		
@@ -94,10 +98,6 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/moztaza_ketchup_smombra.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/pepinos_frasco.png");
 		types.push (AssetType.IMAGE);
 		
 		
@@ -123,6 +123,26 @@ class ApplicationMain {
 		
 		urls.push ("img/top.jpg");
 		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("sound/breadCollide.wav");
+		types.push (AssetType.SOUND);
+		
+		
+		urls.push ("sound/eat.wav");
+		types.push (AssetType.SOUND);
+		
+		
+		urls.push ("sound/gameTheme.wav");
+		types.push (AssetType.SOUND);
+		
+		
+		urls.push ("sound/menuTheme.wav");
+		types.push (AssetType.SOUND);
+		
+		
+		urls.push ("sound/tick.wav");
+		types.push (AssetType.SOUND);
 		
 		
 		
