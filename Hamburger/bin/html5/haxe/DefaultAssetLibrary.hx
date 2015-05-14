@@ -30,10 +30,25 @@ class DefaultAssetLibrary extends openfl.AssetLibrary {
 		add("assets/sounds/flixel.ogg", SOUND);
 		add("img/BreadBottom.png", IMAGE);
 		add("img/BreadTop.png", IMAGE);
-		add("img/glass.png", IMAGE);
-		add("img/plate.png", IMAGE);
+		add("img/CANASTO.png", IMAGE);
+		add("img/canasto_SOMBRA.png", IMAGE);
+		add("img/cuchillo.png", IMAGE);
+		add("img/cuchillo_SOMBRA.png", IMAGE);
+		add("img/jarra.png", IMAGE);
+		add("img/jarra_SOMBRA.png", IMAGE);
+		add("img/moztaza_ketchup_.png", IMAGE);
+		add("img/moztaza_ketchup_smombra.png", IMAGE);
+		add("img/pepinos_frasco.png", IMAGE);
+		add("img/pepinos_frasco_SOMBRA.png", IMAGE);
+		add("img/platos.png", IMAGE);
+		add("img/platos_sombras.png", IMAGE);
+		add("img/Stick.png", IMAGE);
 		add("img/Tomato.png", IMAGE);
+<<<<<<< HEAD
+		add("img/xbox360_gamepad.png", IMAGE);
+=======
 		add("img/top.jpg", IMAGE);
+>>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 		//
 	}
 	

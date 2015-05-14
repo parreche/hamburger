@@ -5,8 +5,8 @@ topBreadStartPosition_x,200
 topBreadStartPosition_y,200
 bottomBreadStartPosition_x,600
 bottomBreadStartPosition_y,200
-breadVelocity,100
-breadAcceleration,1000
+breadVelocity,200
+breadAcceleration,500
 tomatoCount,4
 tomatoValue,10
 tomatoVelocity,100
@@ -23,7 +23,10 @@ burgerCount,2
 burgerValue,50
 burgerVelocity,250
 burgerMaxVelocity,250
+<<<<<<< HEAD
 cucumberCount,5
 cucumberValue,5
 cucumberVelocity,100
 cucumberMaxVelocity,100
+=======
+>>>>>>> c3b2563ae84cf3602697d14989a17046ac329459

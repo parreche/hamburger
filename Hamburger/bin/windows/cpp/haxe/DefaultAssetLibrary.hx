@@ -57,6 +57,30 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/BreadBottom.png", AssetType.IMAGE);
 		path.set ("img/BreadTop.png", "img/BreadTop.png");
 		type.set ("img/BreadTop.png", AssetType.IMAGE);
+		path.set ("img/CANASTO.png", "img/CANASTO.png");
+		type.set ("img/CANASTO.png", AssetType.IMAGE);
+		path.set ("img/canasto_SOMBRA.png", "img/canasto_SOMBRA.png");
+		type.set ("img/canasto_SOMBRA.png", AssetType.IMAGE);
+		path.set ("img/cuchillo.png", "img/cuchillo.png");
+		type.set ("img/cuchillo.png", AssetType.IMAGE);
+		path.set ("img/cuchillo_SOMBRA.png", "img/cuchillo_SOMBRA.png");
+		type.set ("img/cuchillo_SOMBRA.png", AssetType.IMAGE);
+		path.set ("img/jarra.png", "img/jarra.png");
+		type.set ("img/jarra.png", AssetType.IMAGE);
+		path.set ("img/jarra_SOMBRA.png", "img/jarra_SOMBRA.png");
+		type.set ("img/jarra_SOMBRA.png", AssetType.IMAGE);
+		path.set ("img/moztaza_ketchup_.png", "img/moztaza_ketchup_.png");
+		type.set ("img/moztaza_ketchup_.png", AssetType.IMAGE);
+		path.set ("img/moztaza_ketchup_smombra.png", "img/moztaza_ketchup_smombra.png");
+		type.set ("img/moztaza_ketchup_smombra.png", AssetType.IMAGE);
+		path.set ("img/pepinos_frasco.png", "img/pepinos_frasco.png");
+		type.set ("img/pepinos_frasco.png", AssetType.IMAGE);
+		path.set ("img/pepinos_frasco_SOMBRA.png", "img/pepinos_frasco_SOMBRA.png");
+		type.set ("img/pepinos_frasco_SOMBRA.png", AssetType.IMAGE);
+		path.set ("img/platos.png", "img/platos.png");
+		type.set ("img/platos.png", AssetType.IMAGE);
+		path.set ("img/platos_sombras.png", "img/platos_sombras.png");
+		type.set ("img/platos_sombras.png", AssetType.IMAGE);
 		path.set ("img/Tomato.png", "img/Tomato.png");
 		type.set ("img/Tomato.png", AssetType.IMAGE);
 		
@@ -76,6 +100,42 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "img/BreadTop.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "img/CANASTO.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/canasto_SOMBRA.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/cuchillo.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/cuchillo_SOMBRA.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/jarra.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/jarra_SOMBRA.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/moztaza_ketchup_.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/moztaza_ketchup_smombra.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/pepinos_frasco.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/pepinos_frasco_SOMBRA.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/platos.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/platos_sombras.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "img/Tomato.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -91,9 +151,33 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -723,7 +807,31 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 #elseif html5
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -810,6 +918,30 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/BreadBottom.png", AssetType.IMAGE);
 		path.set ("img/BreadTop.png", "img/BreadTop.png");
 		type.set ("img/BreadTop.png", AssetType.IMAGE);
+		path.set ("img/CANASTO.png", "img/CANASTO.png");
+		type.set ("img/CANASTO.png", AssetType.IMAGE);
+		path.set ("img/canasto_SOMBRA.png", "img/canasto_SOMBRA.png");
+		type.set ("img/canasto_SOMBRA.png", AssetType.IMAGE);
+		path.set ("img/cuchillo.png", "img/cuchillo.png");
+		type.set ("img/cuchillo.png", AssetType.IMAGE);
+		path.set ("img/cuchillo_SOMBRA.png", "img/cuchillo_SOMBRA.png");
+		type.set ("img/cuchillo_SOMBRA.png", AssetType.IMAGE);
+		path.set ("img/jarra.png", "img/jarra.png");
+		type.set ("img/jarra.png", AssetType.IMAGE);
+		path.set ("img/jarra_SOMBRA.png", "img/jarra_SOMBRA.png");
+		type.set ("img/jarra_SOMBRA.png", AssetType.IMAGE);
+		path.set ("img/moztaza_ketchup_.png", "img/moztaza_ketchup_.png");
+		type.set ("img/moztaza_ketchup_.png", AssetType.IMAGE);
+		path.set ("img/moztaza_ketchup_smombra.png", "img/moztaza_ketchup_smombra.png");
+		type.set ("img/moztaza_ketchup_smombra.png", AssetType.IMAGE);
+		path.set ("img/pepinos_frasco.png", "img/pepinos_frasco.png");
+		type.set ("img/pepinos_frasco.png", AssetType.IMAGE);
+		path.set ("img/pepinos_frasco_SOMBRA.png", "img/pepinos_frasco_SOMBRA.png");
+		type.set ("img/pepinos_frasco_SOMBRA.png", AssetType.IMAGE);
+		path.set ("img/platos.png", "img/platos.png");
+		type.set ("img/platos.png", AssetType.IMAGE);
+		path.set ("img/platos_sombras.png", "img/platos_sombras.png");
+		type.set ("img/platos_sombras.png", AssetType.IMAGE);
 		path.set ("img/Tomato.png", "img/Tomato.png");
 		type.set ("img/Tomato.png", AssetType.IMAGE);
 		
@@ -827,6 +959,42 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "img/BreadTop.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/CANASTO.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/canasto_SOMBRA.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/cuchillo.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/cuchillo_SOMBRA.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/jarra.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/jarra_SOMBRA.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/moztaza_ketchup_.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/moztaza_ketchup_smombra.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/pepinos_frasco.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/pepinos_frasco_SOMBRA.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/platos.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "img/platos_sombras.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "img/Tomato.png";
@@ -851,11 +1019,35 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		#end
 		
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1469,7 +1661,31 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 #elseif html5
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

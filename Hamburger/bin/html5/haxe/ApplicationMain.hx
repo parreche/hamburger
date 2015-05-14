@@ -75,10 +75,25 @@ class ApplicationMain {
 		loadSound("assets/sounds/flixel.ogg");
 		loadFile("img/BreadBottom.png");
 		loadFile("img/BreadTop.png");
-		loadFile("img/glass.png");
-		loadFile("img/plate.png");
+		loadFile("img/CANASTO.png");
+		loadFile("img/canasto_SOMBRA.png");
+		loadFile("img/cuchillo.png");
+		loadFile("img/cuchillo_SOMBRA.png");
+		loadFile("img/jarra.png");
+		loadFile("img/jarra_SOMBRA.png");
+		loadFile("img/moztaza_ketchup_.png");
+		loadFile("img/moztaza_ketchup_smombra.png");
+		loadFile("img/pepinos_frasco.png");
+		loadFile("img/pepinos_frasco_SOMBRA.png");
+		loadFile("img/platos.png");
+		loadFile("img/platos_sombras.png");
+		loadFile("img/Stick.png");
 		loadFile("img/Tomato.png");
+<<<<<<< HEAD
+		loadFile("img/xbox360_gamepad.png");
+=======
 		loadFile("img/top.jpg");
+>>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
 		
 		// bitmaps:
 		var resourcePrefix = "NME_:bitmap_";
