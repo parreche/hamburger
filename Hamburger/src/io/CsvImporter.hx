@@ -1,5 +1,5 @@
 package io;
-import io.MyConstants;
+import io.GeneralConstants;
 import openfl.Assets;
 import openfl.display.Loader;
 import openfl.events.Event;
@@ -19,9 +19,9 @@ class CsvImporter
 		var loader:URLLoader = new URLLoader();
 		loader.addEventListener(Event.COMPLETE, onLoad);
 		loader.addEventListener(IOErrorEvent.IO_ERROR, handleLoadRemoteError);
-		//loader.addEventListener(IOErrorEvent.NETWORK_ERROR, handleLoadRemoteError);
 		loader.load(new URLRequest("https://docs.google.com/spreadsheets/d/"+tableId+"/export?format=csv"));
 	}
+	
 	private static function  handleLoadRemoteError(e:IOErrorEvent ) {
 		trace("ERROR: loading remote data failed");
 		trace(e.text);
@@ -29,6 +29,7 @@ class CsvImporter
 		//trace(e.errorID);
 		trace("ERROR end");
 	}
+	
 	private static function onLoad(e:Event):Void 
 	{
 		var loader:URLLoader = cast e.target;
@@ -42,7 +43,7 @@ class CsvImporter
 			var parts:Array<String> = couple.split(",");
 			if (parts.length > 1)
 			{
-				MyConstants.setValue(parts[0], Std.parseFloat(parts[1]));
+				GeneralConstants.setValue(parts[0], Std.parseFloat(parts[1]));
 			}
 		}
 	}

@@ -4,8 +4,12 @@ import openfl.Assets;
 import openfl.geom.Point;
 
 /**
- * ...
- * @author Pablo Arreche
+ * 
+ * This class represents the obstacles in the stage.
+ * Each obstacle has a image and X,Y coords.
+ * 
+ * @author Arreche-Piaggio
+ * 
  */
 class Obstacle extends FlxSprite
 {

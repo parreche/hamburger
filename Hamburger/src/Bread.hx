@@ -1,16 +1,16 @@
 package;
 
-import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.input.gamepad.FlxGamepad;
-import flixel.util.FlxColor;
-import io.MyConstants;
+import io.GeneralConstants;
 import openfl.Assets;
 
 /**
- * ...
- * @author tomas
+ * This class represents a bread in the game. 
+ * 
+ * It contains initialization parameters and logic to avoid the bread going off the screen
+ *  
+ * @author Arreche-Piaggio
+ * 
  */
 class Bread extends FlxSprite
 {
@@ -20,12 +20,10 @@ class Bread extends FlxSprite
 	{
 		super(X, Y);
 		loadGraphic(Assets.getBitmapData(aImage), false);
-		maxVelocity.set(MyConstants.breadVelocity, MyConstants.breadVelocity);
+		maxVelocity.set(GeneralConstants.breadVelocity, GeneralConstants.breadVelocity);
 		drag.set(100, 100);
 		mPlayerInput = aPlayerInput;
 		immovable = true;
-		
-		
 	}
 	
 	override function update():Void
@@ -36,7 +34,7 @@ class Bread extends FlxSprite
 		{
 			return;
 		}
-		if (x+width > MyConstants.screenWidth && velocity.x>0)
+		if (x+width > GeneralConstants.screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;
 		}
@@ -48,7 +46,7 @@ class Bread extends FlxSprite
 		{
 			velocity.y *= -1;
 		}
-		if (y+height > MyConstants.screenHeigth && velocity.y>0)
+		if (y+height > GeneralConstants.screenHeigth && velocity.y>0)
 		{
 			velocity.y *= -1;
 		}
@@ -56,20 +54,19 @@ class Bread extends FlxSprite
 		acceleration.set(0, 0);
 		if (mPlayerInput.left())
 		{
-			acceleration.x = -MyConstants.breadAcceleration;
+			acceleration.x = -GeneralConstants.breadAcceleration;
 		}
 		if (mPlayerInput.right())
 		{
-			acceleration.x = MyConstants.breadAcceleration;
+			acceleration.x = GeneralConstants.breadAcceleration;
 		}
 		if (mPlayerInput.up())
 		{
-			//angle = 90;
-			acceleration.y = -MyConstants.breadAcceleration;
+			acceleration.y = -GeneralConstants.breadAcceleration;
 		}
 		if (mPlayerInput.down())
 		{
-			acceleration.y = MyConstants.breadAcceleration;
+			acceleration.y = GeneralConstants.breadAcceleration;
 		}
 		
 	}

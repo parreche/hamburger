@@ -3,9 +3,13 @@ package;
 import flixel.input.gamepad.PS4ButtonID;
 import flixel.input.gamepad.OUYAButtonID;
 import flixel.input.gamepad.XboxButtonID;
+
 /**
- * ...
+ * 
+ * This helper class has the XBOX IDs for analogues sticks
+ * 
  * @author Arreche-Piaggio
+ * 
  */
 class GamepadIDs
 {

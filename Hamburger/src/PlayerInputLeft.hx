@@ -2,8 +2,11 @@ package;
 import flixel.FlxG;
 
 /**
- * ...
- * @author tomas
+ *
+ * Implementation of the movements for left bread using keyboard as gamepad.
+ * 
+ * @author Arreche-Piaggio
+ * 
  */
 class PlayerInputLeft implements PlayerInput
 {

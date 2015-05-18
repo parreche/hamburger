@@ -1,13 +1,20 @@
 package;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import io.MyConstants;
+import io.GeneralConstants;
 import openfl.Assets;
 import openfl.geom.Point;
 
 /**
- * ...
- * @author tomas
+ * This class represents each of the ingredients of the game.
+ * 
+ * Each ingredients initializes with certain values that are different in each ingredient type.
+ * 
+ * This class contains the logic to know when a ingredient has been eaten by the breads. 
+ * It is calculated using vectors to the center of the "face" of each bread.
+ * 
+ * @author Arreche-Piaggio
+ * 
  */
 class Ingredient extends FlxSprite
 {
@@ -38,7 +45,7 @@ class Ingredient extends FlxSprite
 	override function update():Void
 	{
 		
-		if (x+width > MyConstants.screenWidth && velocity.x>0)
+		if (x+width > GeneralConstants.screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;
 		}
@@ -50,7 +57,7 @@ class Ingredient extends FlxSprite
 		{
 			velocity.y *= -1;
 		}
-		if (y+height > MyConstants.screenHeigth && velocity.y>0)
+		if (y+height > GeneralConstants.screenHeigth && velocity.y>0)
 		{
 			velocity.y *= -1;
 		}

@@ -8,29 +8,33 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import openfl.Assets;
 import io.CsvImporter;
-import io.MyConstants;
+import io.GeneralConstants;
 import openfl.geom.Point;
 import utils.SequenceCode;
 
 /**
- * ...
- * @author tomas
+ * 
+ * This class represents the game.
+ * It contains all variables that are used during the game and updates them.
+ * 
+ * @author Arreche-Piaggio
+ * 
  */
 class GameState extends FlxState
 {
+	var mIngredients = new FlxGroup();
+	var mObstacles = new FlxGroup();
+	
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
-	var mIngredients = new FlxGroup();
 	var mScoreText:FlxText;
-	var mObstacles = new FlxGroup();
+	
 	var gameScore:Int = 0;
 	var mTimerText:FlxText;
 	var mTimer:Float = 90;
 	var mLastSecondSound:Int = -1;
 	var mSimulationStop:Bool = false;
 	var mSequence:SequenceCode;
-	
-	
 	
 	public function new() 
 	{
@@ -44,19 +48,26 @@ class GameState extends FlxState
 		background.loadGraphic(Assets.getBitmapData("img/top.jpg"));
 		add(background);
 		FlxG.sound.playMusic("sound/gameTheme.wav");
-		var pr:PlayerInputRight = new PlayerInputRight();
-		var pl:PlayerInputLeft = new PlayerInputLeft();
-		//var pr:PlayerInput = new JoystickInput(false);
-		//var pl:PlayerInput = new JoystickInput(true);
-		mBreadTop = new Bread(MyConstants.topBreadStartPosition_x, MyConstants.topBreadStartPosition_y, pl, "img/BreadTop.png");
-		mBreadBottom = new Bread(MyConstants.bottomBreadStartPosition_x, MyConstants.bottomBreadStartPosition_y, pr, "img/BreadBottom.png");
-		mScoreText = new FlxText(0, 0, 350, "Score: ", 35);
-<<<<<<< HEAD
+		var enableJoystick:Bool = GeneralConstants.enableJoystick == 1;
 		
-=======
-		mTimerText = new FlxText(950, 0, 350, "", 35);
+		var pr:PlayerInput;
+		var pl:PlayerInput;
+		if (enableJoystick) 
+		{	
+			pr = new JoystickInput(false);
+			pl = new JoystickInput(true);
+		} 
+		else 
+		{
+			pr = new PlayerInputRight();
+			pl = new PlayerInputLeft();
+		}
+		
+		mBreadTop = new Bread(GeneralConstants.topBreadStartPosition_x, GeneralConstants.topBreadStartPosition_y, pl, "img/BreadTop.png");
+		mBreadBottom = new Bread(GeneralConstants.bottomBreadStartPosition_x, GeneralConstants.bottomBreadStartPosition_y, pr, "img/BreadBottom.png");
+		mScoreText = new FlxText(GeneralConstants.score_x, GeneralConstants.score_y, 350, "Score: ", GeneralConstants.scoreSize);
+		mTimerText = new FlxText(GeneralConstants.timer_x, GeneralConstants.timer_y, 350, "", GeneralConstants.timerSize);
 		updateTimer();
->>>>>>> 724e5ddf89fa3e1858e851a5a3515147c7682085
 		loadIngredients();
 		loadObstacles();
 		add(mObstacles);
@@ -64,7 +75,6 @@ class GameState extends FlxState
 		add(mBreadBottom);
 		add(mIngredients);
 		add(mScoreText);
-<<<<<<< HEAD
 		
 		// HUD init
 		HUD.create();
@@ -72,19 +82,17 @@ class GameState extends FlxState
 		add(HUD.getTopBread());
 		add(HUD.getBottomBread());
 		
-=======
 		add(mTimerText);
->>>>>>> 724e5ddf89fa3e1858e851a5a3515147c7682085
 	}
 	
 	function loadIngredients():Void
 	{
 		// Loading tomatoes
-		initIngredient(MyConstants.tomatoCount, "img/Tomato.png", MyConstants.tomatoValue, MyConstants.tomatoVelocity, MyConstants.tomatoMaxVelocity);
-		initIngredient(MyConstants.baconCount, "img/Bacon.png", MyConstants.baconValue, MyConstants.baconVelocity, MyConstants.baconMaxVelocity);
-		initIngredient(MyConstants.lettuceCount, "img/Lettuce.png", MyConstants.lettuceValue, MyConstants.lettuceVelocity, MyConstants.lettuceMaxVelocity);
-		initIngredient(MyConstants.burgerCount, "img/Burger.png", MyConstants.burgerValue, MyConstants.burgerVelocity, MyConstants.burgerMaxVelocity);
-		//initIngredient(MyConstants.cucumberCount, "img/Cucumber.png", MyConstants.cucumberValue, MyConstants.cucumberVelocity, MyConstants.cucumberMaxVelocity);
+		initIngredient(GeneralConstants.tomatoCount, "img/Tomato.png", GeneralConstants.tomatoValue, GeneralConstants.tomatoVelocity, GeneralConstants.tomatoMaxVelocity);
+		initIngredient(GeneralConstants.baconCount, "img/Bacon.png", GeneralConstants.baconValue, GeneralConstants.baconVelocity, GeneralConstants.baconMaxVelocity);
+		initIngredient(GeneralConstants.lettuceCount, "img/Lettuce.png", GeneralConstants.lettuceValue, GeneralConstants.lettuceVelocity, GeneralConstants.lettuceMaxVelocity);
+		initIngredient(GeneralConstants.burgerCount, "img/Burger.png", GeneralConstants.burgerValue, GeneralConstants.burgerVelocity, GeneralConstants.burgerMaxVelocity);
+		initIngredient(GeneralConstants.cucumberCount, "img/Cucumber.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity);
 	}
 	
 	function loadObstacles():Void
@@ -93,12 +101,6 @@ class GameState extends FlxState
 		initObstacle("img/cuchillo.png");
 		initObstacle("img/jarra.png");
 		initObstacle("img/moztaza_ketchup_.png");
-		//initObstacle("img/pepinos_frasco.png");
-<<<<<<< HEAD
-		initObstacle("img/moztaza_ketchup_.png");
-=======
-		initObstacle("img/mostaza_ketchup.png");
->>>>>>> 724e5ddf89fa3e1858e851a5a3515147c7682085
 		initObstacle("img/platos.png");
 	}
 	
@@ -139,8 +141,8 @@ class GameState extends FlxState
 	
 	function randomPointInScreen():Point 
 	{
-		var xCoord:Float = Math.random() * MyConstants.screenWidth;
-		var yCoord:Float = Math.random() * MyConstants.screenHeigth;
+		var xCoord:Float = Math.random() * GeneralConstants.screenWidth;
+		var yCoord:Float = Math.random() * GeneralConstants.screenHeigth;
 		return new Point(xCoord, yCoord);
 	}
 	
@@ -206,8 +208,6 @@ class GameState extends FlxState
 		HUD.mHasEaten = false;
 	}
 	
-<<<<<<< HEAD
-=======
 	private function diffSecond(aDt:Float):Bool 
 	{
 		mTimer --;
@@ -240,6 +240,5 @@ class GameState extends FlxState
 		
 		return "" + seconds;
 	}
->>>>>>> 724e5ddf89fa3e1858e851a5a3515147c7682085
 	
 }

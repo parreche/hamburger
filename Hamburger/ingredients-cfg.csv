@@ -1,6 +1,21 @@
+enableJoystick,0
 screenWidth,1200
 screenHeigth,720
-HUD_x,200
+menu_startButton_x,600
+menu_startButton_y,200
+menu_startButton_heigth,128
+menu_startButton_width,128
+menu_optionsButton_x,600
+menu_optionsButton_y,400
+menu_optionsButton_heigth,100
+menu_optionsButton_width,100
+scoreSize,35
+score_x,0
+score_y,0
+timerSize,35
+timer_x,950
+timer_y,0
+HUD_x,250
 HUD_y,0
 HUD_width,680
 HUD_heigth,150
@@ -27,10 +42,7 @@ burgerCount,2
 burgerValue,50
 burgerVelocity,250
 burgerMaxVelocity,250
-<<<<<<< HEAD
 cucumberCount,5
 cucumberValue,5
 cucumberVelocity,100
 cucumberMaxVelocity,100
-=======
->>>>>>> c3b2563ae84cf3602697d14989a17046ac329459

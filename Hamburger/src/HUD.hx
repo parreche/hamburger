@@ -1,15 +1,19 @@
 package;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
-import io.MyConstants;
+import io.GeneralConstants;
+
 /**
- * ...
- * @author Pablo Arreche
+ * This helper class represents the HUD of the screen. 
+ * 
+ * It contains the list of ingredients that had been eaten
+ * 
+ * @author Arreche-Piaggio
+ * 
  */
 class HUD
 {
 	
-	// HUD attributes
 	private static var hudBackground:FlxSprite;  
 	private static var mIngredientsEaten = new List<FlxSprite>();
 	private static var mBreadTopHUD:Bread;
@@ -19,14 +23,14 @@ class HUD
 	
 	public static function create():Void
 	{
-		hudBackground = new FlxSprite(MyConstants.HUD_x,MyConstants.HUD_y);
-		hudBackground.makeGraphic(MyConstants.HUD_width, MyConstants.HUD_heigth, FlxColor.GRAY);
+		hudBackground = new FlxSprite(GeneralConstants.HUD_x,GeneralConstants.HUD_y);
+		hudBackground.makeGraphic(GeneralConstants.HUD_width, GeneralConstants.HUD_heigth, FlxColor.GRAY);
 		hudBackground.alpha = 0.4;
 
-		var lastX:Float = MyConstants.HUD_x + MyConstants.HUD_width - 70;
-		mBreadBottomHUD = new Bread(lastX, MyConstants.HUD_y + 20, null, "img/BreadBottom.png");
+		var lastX:Float = GeneralConstants.HUD_x + GeneralConstants.HUD_width - 70;
+		mBreadBottomHUD = new Bread(lastX, GeneralConstants.HUD_y + 20, null, "img/BreadBottom.png");
 		mBreadBottomHUD.alpha = 0.7;
-		mBreadTopHUD = new Bread(lastX, MyConstants.HUD_y + 20, null, "img/BreadTop.png");
+		mBreadTopHUD = new Bread(lastX, GeneralConstants.HUD_y + 20, null, "img/BreadTop.png");
 		mBreadTopHUD.alpha = 0.7;
 	}
 	
@@ -60,6 +64,5 @@ class HUD
 		mIngredientsEaten.add(ingredient.clone());
 		mHasEaten = true;
 	}
-	
 	
 }

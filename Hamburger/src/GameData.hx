@@ -1,8 +1,11 @@
 package;
 
 /**
- * ...
- * @author tomas
+ * 
+ * This class represents the player's score during the game.
+ * This should be integrated with HUD class in next version.
+ * 
+ * @author Arreche-Piaggio
  */
 class GameData
 {

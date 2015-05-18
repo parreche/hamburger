@@ -1,9 +1,13 @@
 package;
 
 /**
- * @author tomas
+ * 
+ * This interface is used for implementing severtal gampads.
+ * Everyone of them should implement up, down, left and rigth movements.
+ * 
+ * @author Arreche-Piaggio
+ * 
  */
-
 interface PlayerInput 
 {
 	function up():Bool;

@@ -3,8 +3,13 @@ import flixel.FlxG;
 import flixel.input.gamepad.FlxGamepad;
 
 /**
- * ...
- * @author Pablo Arreche
+ * 
+ * Implementing of the movements for left and rigth bread using XBOX sticks as gamepad.
+ * 
+ * The 'isLeft' paramenter in the constructor determines which bread is instanced.
+ * 
+ * @author Arreche-Piaggio
+ * 
  */
 class JoystickInput implements PlayerInput
 {
