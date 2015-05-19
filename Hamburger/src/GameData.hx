@@ -13,7 +13,7 @@ class GameData
 	
 	public static function clear():Void
 	{
-		
+		score = 0;
 	}
 	
 }

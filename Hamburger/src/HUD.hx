@@ -32,6 +32,8 @@ class HUD
 		mBreadBottomHUD.alpha = 0.7;
 		mBreadTopHUD = new Bread(lastX, GeneralConstants.HUD_y + 20, null, "img/BreadTop.png");
 		mBreadTopHUD.alpha = 0.7;
+		
+		mIngredientsEaten.clear();
 	}
 	
 	public static function getEatenIngredients():List<FlxSprite>

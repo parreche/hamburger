@@ -21,7 +21,7 @@ class Bread extends FlxSprite
 		super(X, Y);
 		loadGraphic(Assets.getBitmapData(aImage), false);
 		maxVelocity.set(GeneralConstants.breadVelocity, GeneralConstants.breadVelocity);
-		drag.set(100, 100);
+		drag.set(GeneralConstants.breadDrag, GeneralConstants.breadDrag);
 		mPlayerInput = aPlayerInput;
 		immovable = true;
 	}

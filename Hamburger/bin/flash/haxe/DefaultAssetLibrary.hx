@@ -4,16 +4,15 @@ package;
 import haxe.Timer;
 import haxe.Unserializer;
 import lime.app.Preloader;
-import lime.audio.AudioSource;
 import lime.audio.openal.AL;
 import lime.audio.AudioBuffer;
+import lime.graphics.Font;
 import lime.graphics.Image;
-import lime.text.Font;
 import lime.utils.ByteArray;
 import lime.utils.UInt8Array;
 import lime.Assets;
 
-#if sys
+#if (sys || nodejs)
 import sys.FileSystem;
 #end
 
@@ -73,12 +72,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/cuchillo_SOMBRA.png", AssetType.IMAGE);
 		className.set ("img/Cucumber.png", __ASSET__img_cucumber_png);
 		type.set ("img/Cucumber.png", AssetType.IMAGE);
+		className.set ("img/glass.png", __ASSET__img_glass_png);
+		type.set ("img/glass.png", AssetType.IMAGE);
 		className.set ("img/jarra.png", __ASSET__img_jarra_png);
 		type.set ("img/jarra.png", AssetType.IMAGE);
 		className.set ("img/jarra_SOMBRA.png", __ASSET__img_jarra_sombra_png);
 		type.set ("img/jarra_SOMBRA.png", AssetType.IMAGE);
 		className.set ("img/Lettuce.png", __ASSET__img_lettuce_png);
 		type.set ("img/Lettuce.png", AssetType.IMAGE);
+		className.set ("img/mostaza_ketchup.png", __ASSET__img_mostaza_ketchup_png);
+		type.set ("img/mostaza_ketchup.png", AssetType.IMAGE);
 		className.set ("img/moztaza_ketchup_.png", __ASSET__img_moztaza_ketchup__png);
 		type.set ("img/moztaza_ketchup_.png", AssetType.IMAGE);
 		className.set ("img/moztaza_ketchup_smombra.png", __ASSET__img_moztaza_ketchup_smombra_png);
@@ -89,6 +92,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/pepinos_frasco.png", AssetType.IMAGE);
 		className.set ("img/pepinos_frasco_SOMBRA.png", __ASSET__img_pepinos_frasco_sombra_png);
 		type.set ("img/pepinos_frasco_SOMBRA.png", AssetType.IMAGE);
+		className.set ("img/plate.png", __ASSET__img_plate_png);
+		type.set ("img/plate.png", AssetType.IMAGE);
 		className.set ("img/platos.png", __ASSET__img_platos_png);
 		type.set ("img/platos.png", AssetType.IMAGE);
 		className.set ("img/platos_sombras.png", __ASSET__img_platos_sombras_png);
@@ -103,6 +108,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("sound/breadCollide.wav", AssetType.SOUND);
 		className.set ("sound/eat.wav", __ASSET__sound_eat_wav);
 		type.set ("sound/eat.wav", AssetType.SOUND);
+		className.set ("sound/endTheme.wav", __ASSET__sound_endtheme_wav);
+		type.set ("sound/endTheme.wav", AssetType.SOUND);
 		className.set ("sound/gameTheme.wav", __ASSET__sound_gametheme_wav);
 		type.set ("sound/gameTheme.wav", AssetType.SOUND);
 		className.set ("sound/menuTheme.wav", __ASSET__sound_menutheme_wav);
@@ -170,6 +177,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "img/glass.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/jarra.png";
 		path.set (id, id);
 		
@@ -179,6 +190,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.IMAGE);
 		id = "img/Lettuce.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/mostaza_ketchup.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -199,6 +214,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.IMAGE);
 		id = "img/pepinos_frasco_SOMBRA.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/plate.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -230,6 +249,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.SOUND);
+		id = "sound/endTheme.wav";
+		path.set (id, id);
+		
+		type.set (id, AssetType.SOUND);
 		id = "sound/gameTheme.wav";
 		path.set (id, id);
 		
@@ -254,6 +277,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#else
 		
 		#if openfl
+		
+		
+		
+		
 		
 		
 		
@@ -336,6 +363,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("img/Cucumber.png", __ASSET__img_cucumber_png);
 		type.set ("img/Cucumber.png", AssetType.IMAGE);
 		
+		className.set ("img/glass.png", __ASSET__img_glass_png);
+		type.set ("img/glass.png", AssetType.IMAGE);
+		
 		className.set ("img/jarra.png", __ASSET__img_jarra_png);
 		type.set ("img/jarra.png", AssetType.IMAGE);
 		
@@ -344,6 +374,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("img/Lettuce.png", __ASSET__img_lettuce_png);
 		type.set ("img/Lettuce.png", AssetType.IMAGE);
+		
+		className.set ("img/mostaza_ketchup.png", __ASSET__img_mostaza_ketchup_png);
+		type.set ("img/mostaza_ketchup.png", AssetType.IMAGE);
 		
 		className.set ("img/moztaza_ketchup_.png", __ASSET__img_moztaza_ketchup__png);
 		type.set ("img/moztaza_ketchup_.png", AssetType.IMAGE);
@@ -359,6 +392,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("img/pepinos_frasco_SOMBRA.png", __ASSET__img_pepinos_frasco_sombra_png);
 		type.set ("img/pepinos_frasco_SOMBRA.png", AssetType.IMAGE);
+		
+		className.set ("img/plate.png", __ASSET__img_plate_png);
+		type.set ("img/plate.png", AssetType.IMAGE);
 		
 		className.set ("img/platos.png", __ASSET__img_platos_png);
 		type.set ("img/platos.png", AssetType.IMAGE);
@@ -380,6 +416,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("sound/eat.wav", __ASSET__sound_eat_wav);
 		type.set ("sound/eat.wav", AssetType.SOUND);
+		
+		className.set ("sound/endTheme.wav", __ASSET__sound_endtheme_wav);
+		type.set ("sound/endTheme.wav", AssetType.SOUND);
 		
 		className.set ("sound/gameTheme.wav", __ASSET__sound_gametheme_wav);
 		type.set ("sound/gameTheme.wav", AssetType.SOUND);
@@ -449,11 +488,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 			
 			#if flash
 			
-			if (requestedType == BINARY && (assetType == BINARY || assetType == TEXT || assetType == IMAGE)) {
+			if ((assetType == BINARY || assetType == TEXT) && requestedType == BINARY) {
 				
 				return true;
 				
-			} else if (requestedType == null || path.exists (id)) {
+			} else if (path.exists (id)) {
 				
 				return true;
 				
@@ -491,8 +530,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#else
 		
-		if (className.exists(id)) return AudioBuffer.fromBytes (cast (Type.createInstance (className.get (id), []), ByteArray));
-		else return AudioBuffer.fromFile (path.get (id));
+		return AudioBuffer.fromFile (path.get (id));
+		//if (className.exists(id)) return cast (Type.createInstance (className.get (id), []), Sound);
+		//else return new Sound (new URLRequest (path.get (id)), null, type.get (id) == MUSIC);
 		
 		#end
 		
@@ -502,23 +542,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 	public override function getBytes (id:String):ByteArray {
 		
 		#if flash
-		
-		switch (type.get (id)) {
-			
-			case TEXT, BINARY:
-				
-				return cast (Type.createInstance (className.get (id), []), ByteArray);
-			
-			case IMAGE:
-				
-				var bitmapData = cast (Type.createInstance (className.get (id), []), BitmapData);
-				return bitmapData.getPixels (bitmapData.rect);
-			
-			default:
-				
-				return null;
-			
-		}
 		
 		return cast (Type.createInstance (className.get (id), []), ByteArray);
 		
@@ -562,34 +585,33 @@ class DefaultAssetLibrary extends AssetLibrary {
 	}
 	
 	
-	public override function getFont (id:String):Font {
+	public override function getFont (id:String):Dynamic /*Font*/ {
 		
-		#if flash
+		// TODO: Complete Lime Font API
 		
-		var src = Type.createInstance (className.get (id), []);
+		#if openfl
+		#if (flash || js)
 		
-		var font = new Font (src.fontName);
-		font.src = src;
-		return font;
-		
-		#elseif html5
-		
-		return cast (Type.createInstance (className.get (id), []), Font);
+		return cast (Type.createInstance (className.get (id), []), openfl.text.Font);
 		
 		#else
 		
 		if (className.exists (id)) {
 			
 			var fontClass = className.get (id);
-			return cast (Type.createInstance (fontClass, []), Font);
+			openfl.text.Font.registerFont (fontClass);
+			return cast (Type.createInstance (fontClass, []), openfl.text.Font);
 			
 		} else {
 			
-			return Font.fromFile (path.get (id));
+			return new openfl.text.Font (path.get (id));
 			
 		}
 		
 		#end
+		#end
+		
+		return null;
 		
 	}
 	
@@ -606,16 +628,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#else
 		
-		if (className.exists (id)) {
-			
-			var fontClass = className.get (id);
-			return cast (Type.createInstance (fontClass, []), Image);
-			
-		} else {
-			
-			return Image.fromFile (path.get (id));
-			
-		}
+		return Image.fromFile (path.get (id));
 		
 		#end
 		
@@ -723,11 +736,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		//if (requestedType != AssetType.MUSIC && requestedType != AssetType.SOUND) {
+		if (requestedType != AssetType.MUSIC && requestedType != AssetType.SOUND) {
 			
 			return className.exists (id);
 			
-		//}
+		}
 		
 		#end
 		
@@ -859,8 +872,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 			var bytes = ByteArray.readFile ("assets/manifest");
 			#elseif (mac && java)
 			var bytes = ByteArray.readFile ("../Resources/manifest");
-			#elseif ios
-			var bytes = ByteArray.readFile ("assets/manifest");
 			#else
 			var bytes = ByteArray.readFile ("manifest");
 			#end
@@ -881,11 +892,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 							
 							if (!className.exists (asset.id)) {
 								
-								#if ios
-								path.set (asset.id, "assets/" + asset.path);
-								#else
 								path.set (asset.id, asset.path);
-								#end
 								type.set (asset.id, cast (asset.type, AssetType));
 								
 							}
@@ -914,7 +921,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 	
 	/*public override function loadMusic (id:String, handler:Dynamic -> Void):Void {
 		
-		#if (flash || html5)
+		#if (flash || js)
 		
 		//if (path.exists (id)) {
 			
@@ -1004,14 +1011,17 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_cuchillo_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_cuchillo_sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_cucumber_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_glass_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_jarra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_jarra_sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_lettuce_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_mostaza_ketchup_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_moztaza_ketchup__png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_moztaza_ketchup_smombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_options_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_pepinos_frasco_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_pepinos_frasco_sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_plate_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_platos_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_platos_sombras_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_start_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1019,6 +1029,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_top_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__sound_breadcollide_wav extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__sound_eat_wav extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__sound_endtheme_wav extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__sound_gametheme_wav extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__sound_menutheme_wav extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__sound_tick_wav extends flash.media.Sound { }
@@ -1026,6 +1037,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 #elseif html5
 
+#if openfl
 
 
 
@@ -1060,51 +1072,58 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
-#else
-
-
-
-#if (windows || mac || linux)
-
-
-@:file("C:/HaxeToolkit/haxe/lib/flixel/3,3,8/assets/sounds/beep.mp3") #if display private #end class __ASSET__assets_sounds_beep_mp3 extends lime.utils.ByteArray {}
-@:file("C:/HaxeToolkit/haxe/lib/flixel/3,3,8/assets/sounds/flixel.mp3") #if display private #end class __ASSET__assets_sounds_flixel_mp3 extends lime.utils.ByteArray {}
-@:image("assets/img/background_menu.png") #if display private #end class __ASSET__img_background_menu_png extends lime.graphics.Image {}
-@:image("assets/img/Bacon.png") #if display private #end class __ASSET__img_bacon_png extends lime.graphics.Image {}
-@:image("assets/img/BreadBottom.png") #if display private #end class __ASSET__img_breadbottom_png extends lime.graphics.Image {}
-@:image("assets/img/BreadLeft.png") #if display private #end class __ASSET__img_breadleft_png extends lime.graphics.Image {}
-@:image("assets/img/BreadRight.png") #if display private #end class __ASSET__img_breadright_png extends lime.graphics.Image {}
-@:image("assets/img/BreadTop.png") #if display private #end class __ASSET__img_breadtop_png extends lime.graphics.Image {}
-@:image("assets/img/Burger.png") #if display private #end class __ASSET__img_burger_png extends lime.graphics.Image {}
-@:image("assets/img/CANASTO.png") #if display private #end class __ASSET__img_canasto_png extends lime.graphics.Image {}
-@:image("assets/img/canasto_SOMBRA.png") #if display private #end class __ASSET__img_canasto_sombra_png extends lime.graphics.Image {}
-@:image("assets/img/cuchillo.png") #if display private #end class __ASSET__img_cuchillo_png extends lime.graphics.Image {}
-@:image("assets/img/cuchillo_SOMBRA.png") #if display private #end class __ASSET__img_cuchillo_sombra_png extends lime.graphics.Image {}
-@:image("assets/img/Cucumber.png") #if display private #end class __ASSET__img_cucumber_png extends lime.graphics.Image {}
-@:image("assets/img/jarra.png") #if display private #end class __ASSET__img_jarra_png extends lime.graphics.Image {}
-@:image("assets/img/jarra_SOMBRA.png") #if display private #end class __ASSET__img_jarra_sombra_png extends lime.graphics.Image {}
-@:image("assets/img/Lettuce.png") #if display private #end class __ASSET__img_lettuce_png extends lime.graphics.Image {}
-@:image("assets/img/moztaza_ketchup_.png") #if display private #end class __ASSET__img_moztaza_ketchup__png extends lime.graphics.Image {}
-@:image("assets/img/moztaza_ketchup_smombra.png") #if display private #end class __ASSET__img_moztaza_ketchup_smombra_png extends lime.graphics.Image {}
-@:image("assets/img/options_button.png") #if display private #end class __ASSET__img_options_button_png extends lime.graphics.Image {}
-@:image("assets/img/pepinos_frasco.png") #if display private #end class __ASSET__img_pepinos_frasco_png extends lime.graphics.Image {}
-@:image("assets/img/pepinos_frasco_SOMBRA.png") #if display private #end class __ASSET__img_pepinos_frasco_sombra_png extends lime.graphics.Image {}
-@:image("assets/img/platos.png") #if display private #end class __ASSET__img_platos_png extends lime.graphics.Image {}
-@:image("assets/img/platos_sombras.png") #if display private #end class __ASSET__img_platos_sombras_png extends lime.graphics.Image {}
-@:image("assets/img/start_button.png") #if display private #end class __ASSET__img_start_button_png extends lime.graphics.Image {}
-@:image("assets/img/Tomato.png") #if display private #end class __ASSET__img_tomato_png extends lime.graphics.Image {}
-@:image("assets/img/top.jpg") #if display private #end class __ASSET__img_top_jpg extends lime.graphics.Image {}
-@:file("assets/sound/breadCollide.wav") #if display private #end class __ASSET__sound_breadcollide_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/eat.wav") #if display private #end class __ASSET__sound_eat_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/gameTheme.wav") #if display private #end class __ASSET__sound_gametheme_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/menuTheme.wav") #if display private #end class __ASSET__sound_menutheme_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/tick.wav") #if display private #end class __ASSET__sound_tick_wav extends lime.utils.ByteArray {}
 
 
 
 #end
 
+#else
+
 #if openfl
+
+#end
+
+#if (windows || mac || linux)
+
+
+@:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends lime.audio.AudioSource {}
+@:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends lime.audio.AudioSource {}
+@:bitmap("assets/img/background_menu.png") class __ASSET__img_background_menu_png extends lime.graphics.Image {}
+@:bitmap("assets/img/Bacon.png") class __ASSET__img_bacon_png extends lime.graphics.Image {}
+@:bitmap("assets/img/BreadBottom.png") class __ASSET__img_breadbottom_png extends lime.graphics.Image {}
+@:bitmap("assets/img/BreadLeft.png") class __ASSET__img_breadleft_png extends lime.graphics.Image {}
+@:bitmap("assets/img/BreadRight.png") class __ASSET__img_breadright_png extends lime.graphics.Image {}
+@:bitmap("assets/img/BreadTop.png") class __ASSET__img_breadtop_png extends lime.graphics.Image {}
+@:bitmap("assets/img/Burger.png") class __ASSET__img_burger_png extends lime.graphics.Image {}
+@:bitmap("assets/img/CANASTO.png") class __ASSET__img_canasto_png extends lime.graphics.Image {}
+@:bitmap("assets/img/canasto_SOMBRA.png") class __ASSET__img_canasto_sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/cuchillo.png") class __ASSET__img_cuchillo_png extends lime.graphics.Image {}
+@:bitmap("assets/img/cuchillo_SOMBRA.png") class __ASSET__img_cuchillo_sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/Cucumber.png") class __ASSET__img_cucumber_png extends lime.graphics.Image {}
+@:bitmap("assets/img/glass.png") class __ASSET__img_glass_png extends lime.graphics.Image {}
+@:bitmap("assets/img/jarra.png") class __ASSET__img_jarra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/jarra_SOMBRA.png") class __ASSET__img_jarra_sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/Lettuce.png") class __ASSET__img_lettuce_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mostaza_ketchup.png") class __ASSET__img_mostaza_ketchup_png extends lime.graphics.Image {}
+@:bitmap("assets/img/moztaza_ketchup_.png") class __ASSET__img_moztaza_ketchup__png extends lime.graphics.Image {}
+@:bitmap("assets/img/moztaza_ketchup_smombra.png") class __ASSET__img_moztaza_ketchup_smombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/options_button.png") class __ASSET__img_options_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/pepinos_frasco.png") class __ASSET__img_pepinos_frasco_png extends lime.graphics.Image {}
+@:bitmap("assets/img/pepinos_frasco_SOMBRA.png") class __ASSET__img_pepinos_frasco_sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/plate.png") class __ASSET__img_plate_png extends lime.graphics.Image {}
+@:bitmap("assets/img/platos.png") class __ASSET__img_platos_png extends lime.graphics.Image {}
+@:bitmap("assets/img/platos_sombras.png") class __ASSET__img_platos_sombras_png extends lime.graphics.Image {}
+@:bitmap("assets/img/start_button.png") class __ASSET__img_start_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/Tomato.png") class __ASSET__img_tomato_png extends lime.graphics.Image {}
+@:bitmap("assets/img/top.jpg") class __ASSET__img_top_jpg extends lime.graphics.Image {}
+@:sound("assets/sound/breadCollide.wav") class __ASSET__sound_breadcollide_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/eat.wav") class __ASSET__sound_eat_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/endTheme.wav") class __ASSET__sound_endtheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/gameTheme.wav") class __ASSET__sound_gametheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/menuTheme.wav") class __ASSET__sound_menutheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/tick.wav") class __ASSET__sound_tick_wav extends lime.audio.AudioSource {}
+
+
 
 #end
 

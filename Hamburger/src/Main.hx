@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxGame;
+import flixel.util.FlxSave;
 import io.GeneralConstants;
 import menu.MainMenu;
 import openfl.display.Sprite;
@@ -24,7 +25,11 @@ class Main extends Sprite
 	
 	private function init(e:Event):Void 
 	{
+		var save:FlxSave = new FlxSave();
+		save.bind("Hamburger");
+		
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		addChild(new FlxGame(GeneralConstants.screenWidth, GeneralConstants.screenHeigth, MainMenu));
+		
 	}
 }

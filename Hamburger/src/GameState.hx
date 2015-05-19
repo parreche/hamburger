@@ -51,6 +51,7 @@ class GameState extends FlxState
 		add(background);
 		FlxG.sound.playMusic("sound/gameTheme.wav");
 		var enableJoystick:Bool = GeneralConstants.enableJoystick == 1;
+		GameData.clear();
 		
 		var pr:PlayerInput;
 		var pl:PlayerInput;
@@ -156,14 +157,12 @@ class GameState extends FlxState
 		mSimulationStop = noIngredients || timerOut;
 		if (mSimulationStop)
 		{
-			if (noIngredients && !timerOut) {
-				for(i in 0...Std.int(mTimer)){
-					mSequence.addFunction(diffSecond);
-					mSequence.addWait(1);
-				}
-			}
-			FlxG.sound.music.stop();
-			return;
+			//FlxG.sound.music.stop();
+			//return;
+			FlxG.camera.fade(FlxColor.BLACK, 0.9, false, function() {
+				FlxG.switchState(new EndState(noIngredients, GameData.score, Std.int(mTimer)));
+				FlxG.sound.music.stop();
+			});
 		}
 		
 		super.update();
@@ -206,13 +205,6 @@ class GameState extends FlxState
 			HUD.setTopBreadXCoord(lastX - 50);
 		}
 		HUD.mHasEaten = false;
-	}
-	
-	private function diffSecond(aDt:Float):Bool 
-	{
-		mTimer --;
-		GameData.score += 4;
-		return true;
 	}
 	
 	private function updateTimer() 

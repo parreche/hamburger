@@ -2,6 +2,7 @@ package menu;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
 import flixel.util.FlxSort;
 import io.GeneralConstants;
@@ -38,13 +39,16 @@ class MainMenu extends FlxState
 		startBtn.setPosition(GeneralConstants.menu_startButton_x, GeneralConstants.menu_startButton_y);
 		add(startBtn);
 		
-		FlxG.sound.playMusic("sound/gameTheme.wav");
+		FlxG.sound.playMusic("sound/menuTheme.wav");
+		
 	}
 	
 	function onClick(aButton:MenuButton) :Void
 	{
-		FlxG.switchState(new GameState());
-		FlxG.sound.music.stop();
+		FlxG.camera.fade(FlxColor.BLACK, 0.6, false, function() {
+			FlxG.switchState(new GameState());
+			FlxG.sound.music.stop();
+		});
 	}
 	
 }

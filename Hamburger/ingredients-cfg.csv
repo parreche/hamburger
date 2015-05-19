@@ -1,6 +1,7 @@
 enableJoystick,0
 screenWidth,1200
 screenHeigth,720
+endStateMessage_x,450
 menu_startButton_x,435
 menu_startButton_y,165
 menu_startButton_heigth,300
@@ -25,6 +26,7 @@ topBreadStartPosition_y,200
 bottomBreadStartPosition_x,600
 bottomBreadStartPosition_y,200
 breadVelocity,200
+breadDrag,500
 breadAcceleration,500
 tomatoCount,5
 tomatoValue,100
