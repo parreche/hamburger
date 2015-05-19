@@ -44,8 +44,10 @@ class GameState extends FlxState
 	override function create():Void
 	{
 		mSequence = new SequenceCode();
-		var background:FlxSprite = new FlxSprite(-350, 0);
+		var background:FlxSprite = new FlxSprite(0, 0);
 		background.loadGraphic(Assets.getBitmapData("img/top.jpg"));
+		background.setGraphicSize(GeneralConstants.screenWidth, GeneralConstants.screenHeigth);
+		background.updateHitbox();
 		add(background);
 		FlxG.sound.playMusic("sound/gameTheme.wav");
 		var enableJoystick:Bool = GeneralConstants.enableJoystick == 1;
@@ -145,8 +147,6 @@ class GameState extends FlxState
 		var yCoord:Float = Math.random() * GeneralConstants.screenHeigth;
 		return new Point(xCoord, yCoord);
 	}
-	
-	private var time:Int = 0;
 	
 	override function update():Void
 	{

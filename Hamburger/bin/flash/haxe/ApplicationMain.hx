@@ -42,6 +42,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
+		urls.push ("img/background_menu.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("img/Bacon.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -95,10 +99,6 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/Lettuce.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/mostaza_ketchup.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		

@@ -2,6 +2,7 @@ package menu;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxPoint;
+import io.GeneralConstants;
 import openfl.Assets;
 
 /**
@@ -26,6 +27,9 @@ class MenuButton extends FlxSprite
 	{
 		super();
 		loadGraphic(Assets.getBitmapData(aImagePath), true, aAnimationWidth, aAnimationHeight);
+		setGraphicSize(aAnimationWidth-200, aAnimationHeight-100);
+		updateHitbox();
+		
 		hMousePosition = new FlxPoint();
 		onPressed = aOnPressed;
 	}

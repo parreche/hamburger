@@ -1,7 +1,11 @@
 package menu;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.util.FlxPoint;
+import flixel.util.FlxSort;
 import io.GeneralConstants;
+import openfl.Assets;
 
 /**
  * This class initializes the game's main menu
@@ -21,10 +25,16 @@ class MainMenu extends FlxState
 	
 	override public function create():Void 
 	{
+		var background:FlxSprite = new FlxSprite(0, 0);
+		background.loadGraphic(Assets.getBitmapData("img/background_menu.png"));
+		background.setGraphicSize(GeneralConstants.screenWidth, GeneralConstants.screenHeigth);
+		background.updateHitbox();
+		add(background);
+		
 		var startBtn:MenuButton = new MenuButton("img/start_button.png", GeneralConstants.menu_startButton_width, GeneralConstants.menu_startButton_heigth, onClick);
-		startBtn.setOver([0]);
+		startBtn.setOver([1]);
 		startBtn.setUp([0]);
-		startBtn.setDown([0]);
+		startBtn.setDown([1]);
 		startBtn.setPosition(GeneralConstants.menu_startButton_x, GeneralConstants.menu_startButton_y);
 		add(startBtn);
 		
