@@ -18,12 +18,10 @@ import openfl.geom.Point;
  */
 class Ingredient extends FlxSprite
 {
-	var mVelocity:Point = new Point();
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
 	var mScore:Int;
 	inline private static var minDist = 60;
-	private static var minAng;
 
 	public function new(X:Float, Y:Float, aImage:String, aBreadTop:Bread, aBreadBottom:Bread, aScore:Int,aVelocity:Int,aMaxVelocity:Int) 
 	{
@@ -31,7 +29,6 @@ class Ingredient extends FlxSprite
 		mBreadTop = aBreadTop;
 		mBreadBottom = aBreadBottom;
 		mScore = aScore;
-		minAng = Math.PI/2;
 		loadGraphic(Assets.getBitmapData(aImage), false);
 		aVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
 		velocity.set(aVelocity, aVelocity);

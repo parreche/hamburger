@@ -3,10 +3,10 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="FlixelExample" package="FlixelExample" version="1.0.0" company="tomas" />
+	<meta title="Hamburger" package="Hamburger" version="1.0.0" company="Arreche-Piaggio" />
 	
 	<!-- output -->
-	<app main="Main" file="FlixelExample" path="bin" />
+	<app main="Main" file="Hamburger" path="bin" />
 	
 	<window background="#000000" fps="60" />
 	<window width="800" height="480" unless="mobile" />

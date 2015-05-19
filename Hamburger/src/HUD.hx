@@ -30,7 +30,7 @@ class HUD
 		var lastX:Float = GeneralConstants.HUD_x + GeneralConstants.HUD_width - 70;
 		mBreadBottomHUD = new Bread(lastX, GeneralConstants.HUD_y + 20, null, "img/BreadBottom.png");
 		mBreadBottomHUD.alpha = 0.7;
-		mBreadTopHUD = new Bread(lastX, GeneralConstants.HUD_y + 20, null, "img/BreadTop.png");
+		mBreadTopHUD = new Bread(lastX - 50, GeneralConstants.HUD_y + 20, null, "img/BreadTop.png");
 		mBreadTopHUD.alpha = 0.7;
 		
 		mIngredientsEaten.clear();

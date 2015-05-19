@@ -1,5 +1,7 @@
-import lime.Assets;
 #if !macro
+
+
+@:access(lime.Assets)
 
 
 class ApplicationMain {
@@ -11,8 +13,15 @@ class ApplicationMain {
 	
 	public static function create ():Void {
 		
-		var app = new openfl.display.Application ();
+		var app = new lime.app.Application ();
 		app.create (config);
+		openfl.Lib.application = app;
+		
+		#if !flash
+		var stage = new openfl.display.Stage (app.window.width, app.window.height, config.background);
+		stage.addChild (openfl.Lib.current);
+		app.addModule (stage);
+		#end
 		
 		var display = new NMEPreloader ();
 		
@@ -26,147 +35,135 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/sounds/beep.mp3");
-		types.push (AssetType.MUSIC);
+		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
 		urls.push ("assets/sounds/flixel.mp3");
-		types.push (AssetType.MUSIC);
+		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
 		urls.push ("img/background_menu.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/Bacon.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/BreadBottom.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/BreadLeft.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/BreadRight.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/BreadTop.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/Burger.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/CANASTO.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/canasto_SOMBRA.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/cuchillo.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/cuchillo_SOMBRA.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/Cucumber.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/glass.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/jarra.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/jarra_SOMBRA.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/Lettuce.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/mostaza_ketchup.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/moztaza_ketchup_.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/moztaza_ketchup_smombra.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/options_button.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/pepinos_frasco.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/pepinos_frasco_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/plate.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/platos.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/platos_sombras.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/start_button.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/Tomato.png");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/top.jpg");
-		types.push (AssetType.IMAGE);
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("sound/breadCollide.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/eat.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/endTheme.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/gameTheme.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/menuTheme.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/tick.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		
@@ -174,7 +171,7 @@ class ApplicationMain {
 			
 			for (i in 0...urls.length) {
 				
-				if (types[i] != AssetType.FONT) {
+				if (types[i] != lime.Assets.AssetType.FONT) {
 					
 					urls[i] = config.assetsPrefix + urls[i];
 					
@@ -189,7 +186,7 @@ class ApplicationMain {
 		
 		var result = app.exec ();
 		
-		#if (sys && !emscripten)
+		#if (sys && !nodejs && !emscripten)
 		Sys.exit (result);
 		#end
 		
@@ -232,22 +229,26 @@ class ApplicationMain {
 			antialiasing: Std.int (0),
 			background: Std.int (0),
 			borderless: false,
+			company: "Arreche-Piaggio",
 			depthBuffer: false,
+			file: "Hamburger",
 			fps: Std.int (60),
 			fullscreen: false,
 			height: Std.int (480),
 			orientation: "",
+			packageName: "Hamburger",
 			resizable: true,
-			stencilBuffer: false,
-			title: "FlixelExample",
+			stencilBuffer: true,
+			title: "Hamburger",
+			version: "1.0.0",
 			vsync: false,
 			width: Std.int (800),
 			
 		}
 		
-		#if js
+		#if (js && html5)
 		#if (munit || utest)
-		flash.Lib.embed (null, 800, 480, "000000");
+		openfl.Lib.embed (null, 800, 480, "000000");
 		#end
 		#else
 		create ();
@@ -271,6 +272,8 @@ class ApplicationMain {
 			}
 			
 		}
+		
+		lime.Assets.initialize ();
 		
 		if (hasMain) {
 			

@@ -111,14 +111,13 @@ class GameState extends FlxState
 	{
 		for (i in 0...aCount)
 		{
-			var ingredient:Ingredient = new Ingredient(100, 100, aPathToImage,mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity);
+			var ingredient:Ingredient = new Ingredient(GeneralConstants.ingredientStartPosition_x, GeneralConstants.ingredientStartPosition_y, aPathToImage,mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity);
 			mIngredients.add(ingredient);	
 		}
 	}
 	
 	function initObstacle(aImage:String):Void
 	{
-		// Determinamos randomicamente si se agrega o no 
 		if (Math.random() > 0.5) {
 			var validCoords : Bool = false;
 			var tries:Int = 0;
@@ -157,8 +156,6 @@ class GameState extends FlxState
 		mSimulationStop = noIngredients || timerOut;
 		if (mSimulationStop)
 		{
-			//FlxG.sound.music.stop();
-			//return;
 			FlxG.camera.fade(FlxColor.BLACK, 0.9, false, function() {
 				FlxG.switchState(new EndState(noIngredients, GameData.score, Std.int(mTimer)));
 				FlxG.sound.music.stop();

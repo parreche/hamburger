@@ -9,8 +9,12 @@ import io.GeneralConstants;
 import menu.MainMenu;
 
 /**
- * ...
- * @author tomas
+ * 
+ * This class represents the final state of the game.
+ * It shows the final score and other things.
+ * 
+ * @author Arreche-Piaggio
+ * 
  */
 class EndState extends FlxState
 {
@@ -79,9 +83,6 @@ class EndState extends FlxState
 		}
 		add(mTxtHiScore);
 		
-		//mTxtHiScore = new FlxText(GeneralConstants.endStateMessage_x - 120, (FlxG.height / 3)*2 , 0, hiScoreText(), 45);
-		//add(mTxtHiScore);
-		
 		mBtnMainMenu = new FlxButton(GeneralConstants.endStateMessage_x - 200, FlxG.height - 100, "", goMainMenu);
 		mBtnMainMenu.scale.x = mBtnMainMenu.scale.y = 3;
 		mBtnMainMenu.updateHitbox();
@@ -144,18 +145,6 @@ class EndState extends FlxState
 		save.close();
 		return hiScore;
 	}
-	
-	/*private function hiScoreText():String
-	{
-		var score:Int = mScore + mTime*30;
-		var hiScore:Int = hiScore();
-		var text = "Hi-Score: " + hiScore;
-		if (hiScore > score || hiScore==0) {
-			text = "New " + text + " !";
-		}
-		
-		return text;
-	}*/
 	
 	private function timeFormat():String
 	{
