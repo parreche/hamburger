@@ -5,7 +5,8 @@ import flixel.FlxState;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
 import flixel.util.FlxSort;
-import io.GeneralConstants;
+import gameplay.GameState;
+import configuration.GeneralConstants;
 import openfl.Assets;
 
 /**

@@ -2,7 +2,7 @@ package menu;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxPoint;
-import io.GeneralConstants;
+import configuration.GeneralConstants;
 import openfl.Assets;
 
 /**
@@ -10,7 +10,7 @@ import openfl.Assets;
  * 
  * Thanks to Joaquin Bello for the code
  * 
- * @author Arreche-Piaggio
+ * @author Joaquin Bello
  * 
  */
 class MenuButton extends FlxSprite

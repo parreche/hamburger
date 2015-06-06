@@ -111,6 +111,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("sound/menuTheme.wav", AssetType.SOUND);
 		className.set ("sound/tick.wav", __ASSET__sound_tick_wav);
 		type.set ("sound/tick.wav", AssetType.SOUND);
+		className.set ("config/ingredients-cfg.csv", __ASSET__config_ingredients_cfg_csv);
+		type.set ("config/ingredients-cfg.csv", AssetType.TEXT);
 		
 		
 		#elseif html5
@@ -248,6 +250,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.SOUND);
+		id = "config/ingredients-cfg.csv";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
 		
 		
 		var assetsPrefix = ApplicationMain.config.assetsPrefix;
@@ -260,6 +266,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#else
 		
 		#if openfl
+		
 		
 		
 		
@@ -399,6 +406,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("sound/tick.wav", __ASSET__sound_tick_wav);
 		type.set ("sound/tick.wav", AssetType.SOUND);
+		
+		className.set ("config/ingredients-cfg.csv", __ASSET__config_ingredients_cfg_csv);
+		type.set ("config/ingredients-cfg.csv", AssetType.TEXT);
 		
 		
 		if (useManifest) {
@@ -1033,9 +1043,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__sound_gametheme_wav extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__sound_menutheme_wav extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__sound_tick_wav extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__config_ingredients_cfg_csv extends flash.utils.ByteArray { }
 
 
 #elseif html5
+
 
 
 
@@ -1112,6 +1124,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/sound/gameTheme.wav") #if display private #end class __ASSET__sound_gametheme_wav extends lime.utils.ByteArray {}
 @:file("assets/sound/menuTheme.wav") #if display private #end class __ASSET__sound_menutheme_wav extends lime.utils.ByteArray {}
 @:file("assets/sound/tick.wav") #if display private #end class __ASSET__sound_tick_wav extends lime.utils.ByteArray {}
+@:file("assets/config/ingredients-cfg.csv") #if display private #end class __ASSET__config_ingredients_cfg_csv extends lime.utils.ByteArray {}
 
 
 

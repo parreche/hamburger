@@ -166,6 +166,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.SOUND);
 		
 		
+		urls.push ("config/ingredients-cfg.csv");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		
 		if (config.assetsPrefix != null) {
 			

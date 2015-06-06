@@ -11,11 +11,11 @@ class HelpFunction
 	{
 		
 	}
-	public static function clear(arr:Array<Dynamic>){
+	public static function clear(aArray:Array<Dynamic>){
         #if (cpp||php)
-           arr.splice(0,arr.length);           
+           aArray.splice(0,aArray.length);           
         #else
-           untyped arr.length = 0;
+           untyped aArray.length = 0;
         #end
     }
 	

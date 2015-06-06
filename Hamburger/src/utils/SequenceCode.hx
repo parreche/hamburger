@@ -24,26 +24,30 @@ class SequenceCode
 		mCondition = new Array();
 		mInstant = new Array();
 	}
-	public function pushInstantFunction(func:Function, instant:Bool = false):Void
+	
+	public function pushInstantFunction(aFunc:Function, aInstant:Bool = false):Void
 	{
 		if (mCurrentFunction!=null)
 		{
 			mFunctions.unshift(mCurrentFunction);
-			mInstant.unshift(instant);
+			mInstant.unshift(aInstant);
 		}
-		mCurrentFunction = func;
+		mCurrentFunction = aFunc;
 	}
-	public function addFunction(func:Function,instant:Bool=false):Void
+	
+	public function addFunction(aFunc:Function, aInstant:Bool=false):Void
 	{
-		mFunctions.push(func);
-		mInstant.push(instant);
+		mFunctions.push(aFunc);
+		mInstant.push(aInstant);
 	}
-	public function addDoFor(func:Function, time:Float):Void
+	
+	public function addDoFor(aFunc:Function, aTime:Float):Void
 	{
-		mWaitTimes.push(time);
-		mDoForFunctions.push(func);
+		mWaitTimes.push(aTime);
+		mDoForFunctions.push(aFunc);
 		addFunction(doFor);
 	}
+	
 	private function doFor(aDt:Float):Bool
 	{
 		mWaitTimes[0] -= aDt;
@@ -56,11 +60,13 @@ class SequenceCode
 		mDoForFunctions[0](aDt);
 		return false;
 	}
+	
 	public function addWaitCondition(aCondition:Function):Void 
 	{
 		mCondition.push(aCondition);
 		addFunction(doWhileCondition);
 	}
+	
 	private function doWhileCondition(aDt:Float):Bool
 	{
 		if (!mCondition[0](aDt))
@@ -70,12 +76,14 @@ class SequenceCode
 		mCondition.shift();
 		return true;
 	}
+	
 	public function addWhile(aWhile:Function, aDo:Function):Void
 	{
 		mDoForFunctions.push(aDo);
 		mCondition.push(aWhile);
 		addFunction(doWhile);
 	}
+	
 	private function doWhile(aDt:Float):Bool
 	{
 		if (mCondition[0](aDt))
@@ -87,7 +95,9 @@ class SequenceCode
 		mDoForFunctions.shift();
 		return true;
 	}
+	
 	public static var execute:Bool;
+	
 	public function update(aDt:Float):Void
 	{
 		do
@@ -106,12 +116,14 @@ class SequenceCode
 		while (execute);
 		
 	}
+	
 	public function addIf(aCondition:Function, aDo:Function,aInstant:Bool=false):Void
 	{
 		mCondition.push(aCondition);
 		addFunction(_if, true);
 		addFunction(aDo, aInstant);
 	}
+	
 	public function addIfelse(aCondition:Function, aDo:Function,aElse:Function,aInstant:Bool=false,aInstantElse:Bool=false):Void
 	{
 		mCondition.push(aCondition);
@@ -119,18 +131,20 @@ class SequenceCode
 		addFunction(aDo, aInstant);
 		addFunction(aElse, aInstantElse);
 	}
-	public function addWait(time:Float,breakCond:Function=null):Void
+	
+	public function addWait(aTime:Float,aBreakCond:Function=null):Void
 	{
-		if (breakCond == null)
+		if (aBreakCond == null)
 		{
-		mWaitTimes.push(time);
+		mWaitTimes.push(aTime);
 		addFunction(wait);
 		}else {
-			mWaitTimes.push(time);
-			mCondition.push(breakCond);
+			mWaitTimes.push(aTime);
+			mCondition.push(aBreakCond);
 			addFunction(waitBrak);
 		}
 	}
+	
 	private function _if(aDt:Float):Bool
 	{
 		if (mCondition[0](aDt))
@@ -143,6 +157,7 @@ class SequenceCode
 		mInstant.shift();
 		return true;
 	}
+	
 	private function _if_else(aDt:Float):Bool
 	{
 		if (mCondition[0](aDt))
@@ -157,6 +172,7 @@ class SequenceCode
 		mInstant.shift();
 		return true;
 	}
+	
 	private function waitBrak(aDt:Float):Bool
 	{
 		mWaitTimes[0] -= aDt;
@@ -168,6 +184,7 @@ class SequenceCode
 		}
 		return false;
 	}
+	
 	private function wait(aDt:Float):Bool
 	{
 		mWaitTimes[0] -= aDt;
@@ -197,10 +214,4 @@ class SequenceCode
 		HelpFunction.clear(mCondition);
 		mCurrentFunction=null;
 	}
-	
-	
-	
-	
-	
 }
-
