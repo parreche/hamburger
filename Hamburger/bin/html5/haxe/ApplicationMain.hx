@@ -26,7 +26,7 @@ class ApplicationMain {
 		orientation: "",
 		resizable: true,
 		stencilBuffer: false,
-		title: "FlixelExample",
+		title: "Hamburger",
 		vsync: false,
 		width: Std.int(800),
 	};
@@ -73,27 +73,38 @@ class ApplicationMain {
 		loadSound("assets/sounds/flixel.mp3");
 		loadSound("assets/sounds/beep.ogg");
 		loadSound("assets/sounds/flixel.ogg");
+		loadFile("img/background_menu.png");
+		loadFile("img/Bacon.png");
 		loadFile("img/BreadBottom.png");
+		loadFile("img/BreadLeft.png");
+		loadFile("img/BreadRight.png");
 		loadFile("img/BreadTop.png");
+		loadFile("img/Burger.png");
 		loadFile("img/CANASTO.png");
 		loadFile("img/canasto_SOMBRA.png");
 		loadFile("img/cuchillo.png");
 		loadFile("img/cuchillo_SOMBRA.png");
+		loadFile("img/Cucumber.png");
 		loadFile("img/jarra.png");
 		loadFile("img/jarra_SOMBRA.png");
+		loadFile("img/Lettuce.png");
 		loadFile("img/moztaza_ketchup_.png");
 		loadFile("img/moztaza_ketchup_smombra.png");
+		loadFile("img/options_button.png");
 		loadFile("img/pepinos_frasco.png");
 		loadFile("img/pepinos_frasco_SOMBRA.png");
 		loadFile("img/platos.png");
 		loadFile("img/platos_sombras.png");
-		loadFile("img/Stick.png");
+		loadFile("img/start_button.png");
 		loadFile("img/Tomato.png");
-<<<<<<< HEAD
-		loadFile("img/xbox360_gamepad.png");
-=======
 		loadFile("img/top.jpg");
->>>>>>> 0c4b0e71d636992cf4c099813a59505ce93a9515
+		loadSound("sound/breadCollide.wav");
+		loadSound("sound/eat.wav");
+		loadSound("sound/endTheme.wav");
+		loadSound("sound/gameTheme.wav");
+		loadSound("sound/menuTheme.wav");
+		loadSound("sound/tick.wav");
+		loadBinary("config/ingredients-cfg.csv");
 		
 		// bitmaps:
 		var resourcePrefix = "NME_:bitmap_";
