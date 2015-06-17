@@ -1,5 +1,6 @@
 package gameplay;
 
+import domain.AnimationEnum;
 import domain.Bread;
 import domain.Ingredient;
 import domain.Obstacle;
@@ -44,7 +45,7 @@ class GameState extends FlxState
 	override function create():Void
 	{	
 		var background:FlxSprite = new FlxSprite(0, 0);
-		background.loadGraphic(Assets.getBitmapData("img/top.jpg"));
+		background.loadGraphic(Assets.getBitmapData("img/game/game_background.png"));
 		background.setGraphicSize(GeneralConstants.screenWidth, GeneralConstants.screenHeigth);
 		background.updateHitbox();
 		add(background);
@@ -66,11 +67,11 @@ class GameState extends FlxState
 			pl = new KeyboardInput(GamepadIDs.LEFT_CONTROL);
 		}
 		
-		mBreadTop = new Bread(GeneralConstants.topBreadStartPosition_x, GeneralConstants.topBreadStartPosition_y, pl, "img/BreadTop.png");
-		mBreadBottom = new Bread(GeneralConstants.bottomBreadStartPosition_x, GeneralConstants.bottomBreadStartPosition_y, pr, "img/BreadBottom.png");
+		mBreadTop = new Bread(GeneralConstants.topBreadStartPosition_x, GeneralConstants.topBreadStartPosition_y, pl, Bread.TOP_BREAD);
+		mBreadBottom = new Bread(GeneralConstants.bottomBreadStartPosition_x, GeneralConstants.bottomBreadStartPosition_y, pr, Bread.BOTTOM_BREAD);
 		
 		loadIngredients();
-		loadObstacles();
+		//loadObstacles();
 		
 		add(mObstacles);
 		add(mBreadTop);
@@ -81,18 +82,17 @@ class GameState extends FlxState
 		HUD.create();
 		add(HUD.getHUDBackground());
 		add(HUD.getTopBread());
-		add(HUD.getBottomBread());
 		add(HUD.getScoreText());
 		add(HUD.getTimerText());
 	}
 	
 	function loadIngredients():Void
 	{
-		initIngredient(GeneralConstants.tomatoCount, "img/Tomato.png", GeneralConstants.tomatoValue, GeneralConstants.tomatoVelocity, GeneralConstants.tomatoMaxVelocity);
-		initIngredient(GeneralConstants.baconCount, "img/Bacon.png", GeneralConstants.baconValue, GeneralConstants.baconVelocity, GeneralConstants.baconMaxVelocity);
-		initIngredient(GeneralConstants.lettuceCount, "img/Lettuce.png", GeneralConstants.lettuceValue, GeneralConstants.lettuceVelocity, GeneralConstants.lettuceMaxVelocity);
-		initIngredient(GeneralConstants.burgerCount, "img/Burger.png", GeneralConstants.burgerValue, GeneralConstants.burgerVelocity, GeneralConstants.burgerMaxVelocity);
-		initIngredient(GeneralConstants.cucumberCount, "img/Cucumber.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity);
+		initIngredient(GeneralConstants.tomatoCount, "img/static/Tomato.png", GeneralConstants.tomatoValue, GeneralConstants.tomatoVelocity, GeneralConstants.tomatoMaxVelocity, AnimationEnum.TOMATO);
+		initIngredient(GeneralConstants.baconCount, "img/static/Bacon.png", GeneralConstants.baconValue, GeneralConstants.baconVelocity, GeneralConstants.baconMaxVelocity,AnimationEnum.BACON);
+		initIngredient(GeneralConstants.lettuceCount, "img/static/Lettuce.png", GeneralConstants.lettuceValue, GeneralConstants.lettuceVelocity, GeneralConstants.lettuceMaxVelocity,AnimationEnum.LETTUCE);
+		initIngredient(GeneralConstants.burgerCount, "img/static/Burger.png", GeneralConstants.burgerValue, GeneralConstants.burgerVelocity, GeneralConstants.burgerMaxVelocity,AnimationEnum.HAMBURGER);
+		initIngredient(GeneralConstants.cucumberCount, "img/static/Cucumber.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity,AnimationEnum.CUCUMBER);
 	}
 	
 	function loadObstacles():Void
@@ -104,11 +104,11 @@ class GameState extends FlxState
 		initObstacle("img/platos.png");
 	}
 	
-	function initIngredient(aCount:Int,aPathToImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int):Void
+	function initIngredient(aCount:Int,aPathToImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum):Void
 	{
 		for (i in 0...aCount)
 		{
-			var ingredient:domain.Ingredient = new domain.Ingredient(GeneralConstants.ingredientStartPosition_x, GeneralConstants.ingredientStartPosition_y, aPathToImage,mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity);
+			var ingredient:Ingredient = new domain.Ingredient(GeneralConstants.ingredientStartPosition_x, GeneralConstants.ingredientStartPosition_y, aPathToImage,mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity,aIngredientType);
 			mIngredients.add(ingredient);	
 		}
 	}
@@ -180,28 +180,29 @@ class GameState extends FlxState
 		if (simulationStop)
 		{
 			FlxG.camera.fade(FlxColor.BLACK, 0.9, false, function() {
-				FlxG.switchState(new gameplay.EndState(noIngredients, HUD.getScore(), HUD.getTime()));
+				FlxG.switchState(new EndState(noIngredients, HUD.getScore(), HUD.getTime()));
 				FlxG.sound.music.stop();
 			});
 		}
 	}
 	
-	private function drawEatenIngredients() 
+	private function drawEatenIngredients() : Void
 	{
 		if (HUD.sHasEaten)
 		{
-			var lastX:Float = HUD.getBottomBread().x;
+			var lastX:Float = GeneralConstants.HUD_x + GeneralConstants.HUD_width;
+			var lastY:Float = GeneralConstants.HUD_y + GeneralConstants.HUD_heigth;
 			var ingredients:List<FlxSprite> = HUD.getEatenIngredients();
 			for(item in ingredients) 
 			{
-				item.x = lastX - 50;
-				item.y = 50;
+				item.x = lastX;
+				item.y = lastY - GeneralConstants.HUD_ingredientsDistance;
 				item.alpha = 0.7;
 				add(item);
-				lastX = item.x;
+				lastY = item.y;
 			}
 			
-			HUD.setTopBreadXCoord(lastX - 50);
+			HUD.setTopBreadYCoord(lastY - GeneralConstants.HUD_ingredientsDistance - 20);
 		}
 		HUD.sHasEaten = false;
 	}

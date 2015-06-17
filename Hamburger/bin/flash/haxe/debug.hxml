@@ -19,6 +19,6 @@
 -swf-lib bin/flash/obj/assets.swf
 -swf-version 11.8
 -swf bin/flash/bin/Hamburger.swf
--swf-header 800:480:60:000000
+-swf-header 1920:1080:60:000000
 -cp bin/flash/haxe
 -debug

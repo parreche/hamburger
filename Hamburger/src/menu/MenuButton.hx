@@ -27,7 +27,7 @@ class MenuButton extends FlxSprite
 	{
 		super();
 		loadGraphic(Assets.getBitmapData(aImagePath), true, aAnimationWidth, aAnimationHeight);
-		setGraphicSize(aAnimationWidth-200, aAnimationHeight-100);
+		setGraphicSize(aAnimationWidth, aAnimationHeight);
 		updateHitbox();
 		
 		hMousePosition = new FlxPoint();

@@ -6,8 +6,8 @@
     <movie input="" />
     <movie path="project.xml" />
     <movie fps="60" />
-    <movie width="800" />
-    <movie height="480" />
+    <movie width="1920" />
+    <movie height="1080" />
     <movie version="1" />
     <movie minorVersion="0" />
     <movie platform="Lime" />
@@ -30,7 +30,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="-swf-version 11.8" />
+    <option additional="-swf-version 11.8&#xA;-debug " />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

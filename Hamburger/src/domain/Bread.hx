@@ -1,6 +1,9 @@
 package domain;
 
+import configuration.AnimationFactory;
 import flixel.FlxSprite;
+import flixel.util.FlxPoint;
+import flixel.util.loaders.SparrowData;
 import gamepad.PlayerInput;
 import configuration.GeneralConstants;
 import openfl.Assets;
@@ -15,16 +18,29 @@ import openfl.Assets;
  */
 class Bread extends FlxSprite
 {
+	public static inline var TOP_BREAD = true;
+	public static inline var BOTTOM_BREAD = false;
+	
 	var mPlayerInput:PlayerInput;
 
-	public function new(aX:Float=0, aY:Float=0, aPlayerInput:PlayerInput, aImage:String) 
+	public function new(aX:Float=0, aY:Float=0, aPlayerInput:PlayerInput = null, aIsTopBread:Bool = null, aImage:String = null) 
 	{
 		super(aX, aY);
-		loadGraphic(Assets.getBitmapData(aImage), false);
-		maxVelocity.set(GeneralConstants.breadVelocity, GeneralConstants.breadVelocity);
-		drag.set(GeneralConstants.breadDrag, GeneralConstants.breadDrag);
-		mPlayerInput = aPlayerInput;
+		if (aImage == null)
+		{
+			AnimationFactory.loadGraphics(this, aIsTopBread ? AnimationEnum.TOP_BREAD : AnimationEnum.BOTTOM_BREAD); 
+			width = GeneralConstants.collisionBox_width;
+			height = GeneralConstants.collisionBox_heigth;
+			maxVelocity.set(GeneralConstants.breadVelocity, GeneralConstants.breadVelocity);
+			drag.set(GeneralConstants.breadDrag, GeneralConstants.breadDrag);
+			mPlayerInput = aPlayerInput;
+			offset.x = GeneralConstants.collisionBox_offset_x;
+			offset.y = GeneralConstants.collisionBox_offset_y;
+		} else {
+			loadGraphic(Assets.getBitmapData(aImage), false);
+		}
 		immovable = true;
+		
 	}
 	
 	override function update():Void
@@ -52,23 +68,42 @@ class Bread extends FlxSprite
 			velocity.y *= -1;
 		}
 		
-		acceleration.set(0, 0);
 		if (mPlayerInput.left())
 		{
-			acceleration.x = -GeneralConstants.breadAcceleration;
+			velocity.x = -GeneralConstants.breadAcceleration;
+			animation.play(AnimationFactory.ANIMATION_LEFT);
 		}
 		if (mPlayerInput.right())
 		{
-			acceleration.x = GeneralConstants.breadAcceleration;
+			velocity.x = GeneralConstants.breadAcceleration;
+			animation.play(AnimationFactory.ANIMATION_RIGHT);
 		}
 		if (mPlayerInput.up())
 		{
-			acceleration.y = -GeneralConstants.breadAcceleration;
+			velocity.y = -GeneralConstants.breadAcceleration;
+			animation.play(AnimationFactory.ANIMATION_UP);
 		}
 		if (mPlayerInput.down())
 		{
-			acceleration.y = GeneralConstants.breadAcceleration;
+			velocity.y = GeneralConstants.breadAcceleration;
+			animation.play(AnimationFactory.ANIMATION_DOWN);
 		}
 		
+		if (mPlayerInput.left() && mPlayerInput.up()) 
+		{
+			animation.play(AnimationFactory.ANIMATION_45_LEFT_UP);
+		}
+		if (mPlayerInput.right() && mPlayerInput.up()) 
+		{
+			animation.play(AnimationFactory.ANIMATION_45_RIGHT_UP);
+		}
+		if (mPlayerInput.left() && mPlayerInput.down()) 
+		{
+			animation.play(AnimationFactory.ANIMATION_45_LEFT_DOWN);
+		}
+		if (mPlayerInput.right() && mPlayerInput.down()) 
+		{
+			animation.play(AnimationFactory.ANIMATION_45_RIGHT_DOWN);
+		}
 	}
 }

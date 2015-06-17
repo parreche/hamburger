@@ -36,7 +36,7 @@ class Timer
 				mLastSecondSound = seconds;
 			}
 			
-			return "Time " + minutes + ":" + secondFormat(seconds);
+			return minutes + ":" + secondFormat(seconds);
 		}
 		return "";
 	}
