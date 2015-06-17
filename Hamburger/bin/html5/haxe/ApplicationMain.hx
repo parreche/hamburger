@@ -25,7 +25,11 @@ class ApplicationMain {
 		height: Std.int(1080),
 		orientation: "",
 		resizable: true,
+<<<<<<< HEAD
 		stencilBuffer: true,
+=======
+		stencilBuffer: false,
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 		title: "Hamburger",
 		vsync: false,
 		width: Std.int(1920),
@@ -74,6 +78,7 @@ class ApplicationMain {
 		loadSound("assets/sounds/beep.ogg");
 		loadSound("assets/sounds/flixel.ogg");
 		loadFile("img/background_menu.png");
+<<<<<<< HEAD
 		loadFile("img/game/game_background.png");
 		loadFile("img/game/hud_background.png");
 		loadFile("img/hamburguesa/45 abajo derecha/45 abajo derecha0001.png");
@@ -262,6 +267,32 @@ class ApplicationMain {
 		loadFile("img/static/Lettuce.png");
 		loadFile("img/static/Tomato.png");
 		loadFile("img/static/TopBread.png");
+=======
+		loadFile("img/Bacon.png");
+		loadFile("img/BreadBottom.png");
+		loadFile("img/BreadLeft.png");
+		loadFile("img/BreadRight.png");
+		loadFile("img/BreadTop.png");
+		loadFile("img/Burger.png");
+		loadFile("img/CANASTO.png");
+		loadFile("img/canasto_SOMBRA.png");
+		loadFile("img/cuchillo.png");
+		loadFile("img/cuchillo_SOMBRA.png");
+		loadFile("img/Cucumber.png");
+		loadFile("img/jarra.png");
+		loadFile("img/jarra_SOMBRA.png");
+		loadFile("img/Lettuce.png");
+		loadFile("img/moztaza_ketchup_.png");
+		loadFile("img/moztaza_ketchup_smombra.png");
+		loadFile("img/options_button.png");
+		loadFile("img/pepinos_frasco.png");
+		loadFile("img/pepinos_frasco_SOMBRA.png");
+		loadFile("img/platos.png");
+		loadFile("img/platos_sombras.png");
+		loadFile("img/start_button.png");
+		loadFile("img/Tomato.png");
+		loadFile("img/top.jpg");
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 		loadSound("sound/breadCollide.wav");
 		loadSound("sound/eat.wav");
 		loadSound("sound/endTheme.wav");

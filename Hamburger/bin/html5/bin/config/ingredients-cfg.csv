@@ -1,4 +1,5 @@
 enableJoystick,0
+<<<<<<< HEAD
 screenWidth,1920
 screenHeigth,1080
 endStateMessage_x,450
@@ -6,10 +7,20 @@ menu_startButton_x,435
 menu_startButton_y,165
 menu_startButton_heigth,152
 menu_startButton_width,468
+=======
+screenWidth,1200
+screenHeigth,720
+endStateMessage_x,450
+menu_startButton_x,435
+menu_startButton_y,165
+menu_startButton_heigth,300
+menu_startButton_width,538
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 menu_optionsButton_x,600
 menu_optionsButton_y,400
 menu_optionsButton_heigth,100
 menu_optionsButton_width,100
+<<<<<<< HEAD
 scoreSize,50
 score_x,1580
 score_y,950
@@ -21,11 +32,24 @@ HUD_y,0
 HUD_width,300
 HUD_heigth,840
 HUD_ingredientsDistance,35
+=======
+scoreSize,35
+score_x,0
+score_y,0
+timerSize,35
+timer_x,950
+timer_y,0
+HUD_x,250
+HUD_y,0
+HUD_width,700
+HUD_heigth,150
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 ingredients,123
 topBreadStartPosition_x,200
 topBreadStartPosition_y,200
 bottomBreadStartPosition_x,600
 bottomBreadStartPosition_y,200
+<<<<<<< HEAD
 breadVelocity,100
 breadDrag,300
 breadAcceleration,200
@@ -44,11 +68,32 @@ cucumberValue,200
 cucumberVelocity,400
 cucumberMaxVelocity,410
 baconCount,0
+=======
+breadVelocity,300
+breadDrag,500
+breadAcceleration,400
+ingredientStartPosition_x,100
+ingredientStartPosition_y,100
+lettuceCount,8
+lettuceValue,50
+lettuceVelocity,100
+lettuceMaxVelocity,110
+tomatoCount,5
+tomatoValue,100
+tomatoVelocity,200
+tomatoMaxVelocity,210
+cucumberCount,5
+cucumberValue,200
+cucumberVelocity,400
+cucumberMaxVelocity,410
+baconCount,5
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 baconValue,300
 baconVelocity,700
 baconMaxVelocity,710
 burgerCount,3
 burgerValue,500
+<<<<<<< HEAD
 burgerVelocity,100
 burgerMaxVelocity,110
 animationFrameRate,30
@@ -57,3 +102,8 @@ collisionBox_heigth,80
 collisionBox_offset_x,145
 collisionBox_offset_y,185
 collisionBox_minDistance,90
+=======
+burgerVelocity,1000
+burgerMaxVelocity,1010
+
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b

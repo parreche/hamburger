@@ -29,6 +29,7 @@ class DefaultAssetLibrary extends openfl.AssetLibrary {
 		add("assets/sounds/beep.ogg", SOUND);
 		add("assets/sounds/flixel.ogg", SOUND);
 		add("img/background_menu.png", IMAGE);
+<<<<<<< HEAD
 		add("img/game/game_background.png", IMAGE);
 		add("img/game/hud_background.png", IMAGE);
 		add("img/hamburguesa/45 abajo derecha/45 abajo derecha0001.png", IMAGE);
@@ -217,6 +218,32 @@ class DefaultAssetLibrary extends openfl.AssetLibrary {
 		add("img/static/Lettuce.png", IMAGE);
 		add("img/static/Tomato.png", IMAGE);
 		add("img/static/TopBread.png", IMAGE);
+=======
+		add("img/Bacon.png", IMAGE);
+		add("img/BreadBottom.png", IMAGE);
+		add("img/BreadLeft.png", IMAGE);
+		add("img/BreadRight.png", IMAGE);
+		add("img/BreadTop.png", IMAGE);
+		add("img/Burger.png", IMAGE);
+		add("img/CANASTO.png", IMAGE);
+		add("img/canasto_SOMBRA.png", IMAGE);
+		add("img/cuchillo.png", IMAGE);
+		add("img/cuchillo_SOMBRA.png", IMAGE);
+		add("img/Cucumber.png", IMAGE);
+		add("img/jarra.png", IMAGE);
+		add("img/jarra_SOMBRA.png", IMAGE);
+		add("img/Lettuce.png", IMAGE);
+		add("img/moztaza_ketchup_.png", IMAGE);
+		add("img/moztaza_ketchup_smombra.png", IMAGE);
+		add("img/options_button.png", IMAGE);
+		add("img/pepinos_frasco.png", IMAGE);
+		add("img/pepinos_frasco_SOMBRA.png", IMAGE);
+		add("img/platos.png", IMAGE);
+		add("img/platos_sombras.png", IMAGE);
+		add("img/start_button.png", IMAGE);
+		add("img/Tomato.png", IMAGE);
+		add("img/top.jpg", IMAGE);
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 		add("sound/breadCollide.wav", SOUND);
 		add("sound/eat.wav", SOUND);
 		add("sound/endTheme.wav", SOUND);
@@ -224,7 +251,10 @@ class DefaultAssetLibrary extends openfl.AssetLibrary {
 		add("sound/menuTheme.wav", SOUND);
 		add("sound/tick.wav", SOUND);
 		add("config/ingredients-cfg.csv", TEXT);
+<<<<<<< HEAD
 		add("fonts/Barrio-Regular.ttf", FONT);
+=======
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 		//
 	}
 	

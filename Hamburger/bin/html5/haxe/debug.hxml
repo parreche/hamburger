@@ -23,7 +23,10 @@
 -D html5
 -D web
 --remap flash:openfl
+<<<<<<< HEAD
 -resource C:\Users\Toshiba\Desktop\Videojuegos\Hamburger\code\hamburger\Hamburger\assets\fonts\Barrio-Regular.ttf.hash@__ASSET__fonts_barrio_regular_ttf
+=======
+>>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 -js bin/html5/bin/Hamburger.js
 -cp bin/html5/haxe
 -D html5

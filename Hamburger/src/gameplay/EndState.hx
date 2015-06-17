@@ -7,6 +7,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxSave;
 import configuration.GeneralConstants;
 import menu.MainMenu;
+import openfl.utils.Object;
 
 /**
  * 
@@ -120,7 +121,7 @@ class EndState extends FlxState
 	
 	
 	/**
-	 * This function modifies the hgh score and then returns it
+	 * This function modifies the high score and then returns it
 	 * @param	Score	the final score the player just obtained
 	 * @return	hi score
 	 */
@@ -131,17 +132,42 @@ class EndState extends FlxState
 		save.bind("Hamburger");
 		if (save.data.hiscore == null)
 		{
-			save.data.hiscore = 0;
-		}	
-		if (save.data.hiscore > hiScore)
+			//save.data.hiscore = 0;
+			save.data.hiscore = new Array();
+			save.data.hiscore.push(new HighScore(hiScore, "name"));
+			save.data.hiscore.push(new HighScore(0, " "));
+			save.data.hiscore.push(new HighScore(0, " "));
+			save.data.hiscore.push(new HighScore(0, " "));
+			save.data.hiscore.push(new HighScore(0, " "));
+		} else {
+			var remove:Bool = true;
+			for (i in 0...save.data.hiscore.length) {
+				if (save.data.hiscore[i].mScore < hiScore && remove) {
+					save.data.hiscore.pop();
+					save.data.hiscore.push(new HighScore(hiScore, "name"));
+					remove = false;
+				}
+			}
+		}
+		save.data.hiscore.sort( function(a:Object, b:Object):Int
+		{
+			if (a.mScore < b.mScore) return 1;
+			if (a.mScore > b.mScore) return -1;
+			return 0;
+		} );
+		for (i in 0...save.data.hiscore.length){
+			trace(save.data.hiscore[i]);
+		}
+		/*if (save.data.hiscore > hiScore)
 		{
 			hiScore = save.data.hiscore;
 		}
 		else
 		{
 			save.data.hiscore = hiScore;
-		}
+		}*/
 		
+		hiScore = save.data.hiscore[0].mScore;
 		save.close();
 		return hiScore;
 	}

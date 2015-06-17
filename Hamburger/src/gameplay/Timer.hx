@@ -12,7 +12,7 @@ import utils.SequenceCode;
  */
 class Timer
 {
-	var mTimer:Float = 90;
+	var mTimer:Float = 30;
 	var mLastSecondSound:Int = -1;
 	var mIsHurryUp:Bool = false;
 	var mSequence:SequenceCode;
