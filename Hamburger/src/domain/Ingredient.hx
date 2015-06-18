@@ -1,5 +1,5 @@
 package domain;
-import configuration.AnimationFactory;
+import domain.AnimationFactory;
 import domain.Bread;
 import flixel.FlxG;
 import flixel.FlxSprite;

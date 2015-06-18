@@ -1,6 +1,6 @@
 package domain;
 
-import configuration.AnimationFactory;
+import domain.AnimationFactory;
 import flixel.FlxSprite;
 import flixel.util.FlxPoint;
 import flixel.util.loaders.SparrowData;
@@ -68,6 +68,18 @@ class Bread extends FlxSprite
 			velocity.y *= -1;
 		}
 		
+		var isPressingKey:Bool = mPlayerInput.left() || mPlayerInput.down() || mPlayerInput.right() || mPlayerInput.up();
+		
+		if(isPressingKey)
+		{
+			moveBread();
+		} else {
+			stopBread();
+		}
+	}
+	
+	function moveBread():Void 
+	{
 		if (mPlayerInput.left())
 		{
 			velocity.x = -GeneralConstants.breadAcceleration;
@@ -104,6 +116,50 @@ class Bread extends FlxSprite
 		if (mPlayerInput.right() && mPlayerInput.down()) 
 		{
 			animation.play(AnimationFactory.ANIMATION_45_RIGHT_DOWN);
+		}
+	}
+	
+	function stopBread():Void 
+	{
+		var lastX = x - last.x;
+		var lastY = y - last.y;
+		if (lastX > 0)
+		{
+			if (lastY > 0)
+			{
+				animation.play(AnimationFactory.ANIMATION_STOP_45_RIGHT_DOWN);
+			} else if (lastY < 0)
+			{
+				animation.play(AnimationFactory.ANIMATION_STOP_45_RIGHT_UP);
+			} else
+			{
+				animation.play(AnimationFactory.ANIMATION_STOP_RIGHT);
+			}
+		}
+		
+		if (lastX < 0)
+		{
+			if (lastY > 0)
+			{
+				animation.play(AnimationFactory.ANIMATION_STOP_45_LEFT_DOWN);
+			}else if (lastY < 0)
+			{
+				animation.play(AnimationFactory.ANIMATION_STOP_45_LEFT_UP);
+			} else
+			{
+				animation.play(AnimationFactory.ANIMATION_STOP_LEFT);
+			}
+		}
+		
+		if (lastX == 0)
+		{
+			if (lastY > 0)
+			{
+				animation.play(AnimationFactory.ANIMATION_STOP_DOWN);
+			}else if (lastY < 0)
+			{
+				animation.play(AnimationFactory.ANIMATION_STOP_UP);
+			}
 		}
 	}
 }

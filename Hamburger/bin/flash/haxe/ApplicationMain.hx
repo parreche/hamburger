@@ -1,5 +1,7 @@
-import lime.Assets;
 #if !macro
+
+
+@:access(lime.Assets)
 
 
 class ApplicationMain {
@@ -11,8 +13,15 @@ class ApplicationMain {
 	
 	public static function create ():Void {
 		
-		var app = new openfl.display.Application ();
+		var app = new lime.app.Application ();
 		app.create (config);
+		openfl.Lib.application = app;
+		
+		#if !flash
+		var stage = new openfl.display.Stage (app.window.width, app.window.height, config.background);
+		stage.addChild (openfl.Lib.current);
+		app.addModule (stage);
+		#end
 		
 		var display = new NMEPreloader ();
 		
@@ -26,635 +35,18 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/sounds/beep.mp3");
-		types.push (AssetType.MUSIC);
+		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
 		urls.push ("assets/sounds/flixel.mp3");
-		types.push (AssetType.MUSIC);
+		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
-<<<<<<< HEAD
 		urls.push ("img/game/game_background.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/hud_background.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0001.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0002.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0003.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0004.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0005.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0006.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0007.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0008.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0009.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0010.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0011.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0012.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0013.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0014.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0015.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0016.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0017.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0018.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0019.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0020.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0021.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo derecha/45 abajo derecha0022.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0001.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0002.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0003.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0004.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0005.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0006.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0007.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0008.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0009.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0010.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0011.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0012.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0013.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0014.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0015.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0016.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0017.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0018.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0019.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0020.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0021.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 abajo izquierda/45 abajo izquierda0022.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0001.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0002.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0003.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0004.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0005.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0006.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0007.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0008.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0009.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0010.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0011.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0012.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0013.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0014.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0015.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0016.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0017.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0018.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0019.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0020.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0021.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba derecha/45 arriba derecha0022.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0001.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0002.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0003.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0004.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0005.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0006.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0007.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0008.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0009.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0010.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0011.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0012.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0013.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0014.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0015.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0016.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0017.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0018.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0019.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0020.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0021.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/45 arriba izquierda/45 arriba izquierda0022.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0001.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0002.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0003.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0004.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0005.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0006.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0007.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0008.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0009.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0010.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0011.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0012.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0013.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0014.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0015.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0016.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0017.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0018.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0019.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0020.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0021.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/abajo/abajo0022.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0001.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0002.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0003.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0004.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0005.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0006.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0007.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0008.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0009.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0010.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0011.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0012.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0013.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0014.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0015.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0016.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0017.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0018.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0019.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0020.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0021.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/arriba/arriba0022.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0001.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0002.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0003.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0004.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0005.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0006.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0007.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0008.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0009.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0010.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0011.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0012.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0013.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0014.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0015.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0016.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0017.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0018.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0019.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0020.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0021.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/derecha/derecha0022.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -666,96 +58,12 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("img/hamburguesa/izquierda/izquierda0001.png");
+		urls.push ("img/lechuga/lechuga xml data sprite.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("img/hamburguesa/izquierda/izquierda0002.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0003.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0004.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0005.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0006.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0007.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0008.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0009.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0010.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0011.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0012.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0013.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0014.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0015.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0016.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0017.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0018.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0019.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0020.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0021.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/izquierda/izquierda0022.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/hamburguesa/para hamburguesa.max");
-		types.push (lime.Assets.AssetType.BINARY);
+		urls.push ("img/lechuga/lechuga xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
 		
 		
 		urls.push ("img/mainMenu/background_menu.png");
@@ -790,6 +98,38 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("img/panceta/panceta xml data sprite.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/panceta/panceta xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/pan_garganta/pan garganta xml data sprite.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/pan_garganta/pan garganta xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/pan_lengua/pan lengua xml data sprite.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/pan_lengua/pan lengua xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/pepinos/pepino xml data sprite.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/pepinos/pepino xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("img/static/Bacon.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -812,134 +152,42 @@ class ApplicationMain {
 		
 		urls.push ("img/static/TopBread.png");
 		types.push (lime.Assets.AssetType.IMAGE);
-=======
-		urls.push ("img/background_menu.png");
-		types.push (AssetType.IMAGE);
 		
 		
-		urls.push ("img/Bacon.png");
-		types.push (AssetType.IMAGE);
+		urls.push ("img/tomate/tomate xml data sprite.png");
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("img/BreadBottom.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/BreadLeft.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/BreadRight.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/BreadTop.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/Burger.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/CANASTO.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/canasto_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/cuchillo.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/cuchillo_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/Cucumber.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/jarra.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/jarra_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/Lettuce.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/moztaza_ketchup_.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/moztaza_ketchup_smombra.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/options_button.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/pepinos_frasco.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/pepinos_frasco_SOMBRA.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/platos.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/platos_sombras.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/start_button.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/Tomato.png");
-		types.push (AssetType.IMAGE);
-		
-		
-		urls.push ("img/top.jpg");
-		types.push (AssetType.IMAGE);
->>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
+		urls.push ("img/tomate/tomate xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
 		
 		
 		urls.push ("sound/breadCollide.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/eat.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/endTheme.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/gameTheme.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/menuTheme.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("sound/tick.wav");
-		types.push (AssetType.SOUND);
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("config/ingredients-cfg.csv");
-		types.push (AssetType.TEXT);
+		types.push (lime.Assets.AssetType.TEXT);
 		
 		
 		urls.push ("Barrio");
@@ -951,7 +199,7 @@ class ApplicationMain {
 			
 			for (i in 0...urls.length) {
 				
-				if (types[i] != AssetType.FONT) {
+				if (types[i] != lime.Assets.AssetType.FONT) {
 					
 					urls[i] = config.assetsPrefix + urls[i];
 					
@@ -966,7 +214,7 @@ class ApplicationMain {
 		
 		var result = app.exec ();
 		
-		#if (sys && !emscripten)
+		#if (sys && !nodejs && !emscripten)
 		Sys.exit (result);
 		#end
 		
@@ -1009,26 +257,26 @@ class ApplicationMain {
 			antialiasing: Std.int (0),
 			background: Std.int (0),
 			borderless: false,
+			company: "Arreche-Piaggio",
 			depthBuffer: false,
+			file: "Hamburger",
 			fps: Std.int (60),
 			fullscreen: false,
 			height: Std.int (1080),
 			orientation: "",
+			packageName: "Hamburger",
 			resizable: true,
-			stencilBuffer: false,
+			stencilBuffer: true,
 			title: "Hamburger",
+			version: "1.0.0",
 			vsync: false,
 			width: Std.int (1920),
 			
 		}
 		
-		#if js
+		#if (js && html5)
 		#if (munit || utest)
-<<<<<<< HEAD
 		openfl.Lib.embed (null, 1920, 1080, "000000");
-=======
-		flash.Lib.embed (null, 800, 480, "000000");
->>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
 		#end
 		#else
 		create ();
@@ -1052,6 +300,8 @@ class ApplicationMain {
 			}
 			
 		}
+		
+		lime.Assets.initialize ();
 		
 		if (hasMain) {
 			

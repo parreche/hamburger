@@ -23,12 +23,8 @@
 	<icon path="assets/openfl.svg" />
 	<assets path="assets/img" rename="img" />
 	<assets path="assets/sound" rename="sound" />
-<<<<<<< HEAD
-	<assets path="assets/config" rename="config" />
-	<assets path="assets/fonts" rename="fonts" />
-=======
 	<assets path="assets/config" rename="config" include="*.csv" />
->>>>>>> 79b689b3cf3ea341d4eb942446847d2d73b5919b
+	<assets path="assets/fonts" rename="fonts" />
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
 	

@@ -1,4 +1,5 @@
 package gameplay;
+import configuration.GeneralConstants;
 import flixel.FlxG;
 import flixel.text.FlxText;
 import utils.SequenceCode;
@@ -12,7 +13,7 @@ import utils.SequenceCode;
  */
 class Timer
 {
-	var mTimer:Float = 30;
+	var mTimer:Float = Std.parseFloat(GeneralConstants.timer_value + "");
 	var mLastSecondSound:Int = -1;
 	var mIsHurryUp:Bool = false;
 	var mSequence:SequenceCode;
