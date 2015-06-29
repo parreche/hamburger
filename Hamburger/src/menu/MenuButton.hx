@@ -23,11 +23,11 @@ class MenuButton extends FlxSprite
 	//helper position
 	private var hMousePosition:FlxPoint;
 	
-	public function new(aImagePath:String,aAnimationWidth:Int,aAnimationHeight:Int,?aOnPressed:MenuButton->Void) 
+	public function new(aImagePath:String,aAnimationWidth:Int,aAnimationHeight:Int,?aOnPressed:MenuButton->Void, aAdjustX:Int=0,aAdjustY:Int=0) 
 	{
 		super();
 		loadGraphic(Assets.getBitmapData(aImagePath), true, aAnimationWidth, aAnimationHeight);
-		setGraphicSize(aAnimationWidth, aAnimationHeight);
+		setGraphicSize(aAnimationWidth - aAdjustX, aAnimationHeight - aAdjustY);
 		updateHitbox();
 		
 		hMousePosition = new FlxPoint();

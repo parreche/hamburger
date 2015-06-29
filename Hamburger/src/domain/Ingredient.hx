@@ -1,5 +1,6 @@
 package domain;
-import domain.AnimationFactory;
+import flixel.group.FlxGroup;
+import utils.AnimationFactory;
 import domain.Bread;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -9,6 +10,7 @@ import gameplay.HUD;
 import configuration.GeneralConstants;
 import openfl.Assets;
 import openfl.geom.Point;
+import utils.AnimationEnum;
 
 /**
  * This class represents each of the ingredients of the game.
@@ -28,37 +30,57 @@ class Ingredient extends FlxSprite
 	var mScore:Int;
 	var minDist:Int;
 	var mStaticImage:String;
+	var mEndImage:String;
+	var mEatenAnimation : FlxSprite;
 	
-	public function new(aX:Float, aY:Float, aImage:String, aBreadTop:domain.Bread, aBreadBottom:domain.Bread, aScore:Int,aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum = null) 
+	public function new(aX:Float, aY:Float, aImage:String, aEndImage:String, aBreadTop:domain.Bread, aBreadBottom:domain.Bread, aScore:Int,aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum = null, aStage:FlxGroup = null) 
 	{
 		super(aX, aY);
 		minDist= GeneralConstants.collisionBox_minDistance;
 		mStaticImage = aImage;
+		mEndImage = aEndImage;
 		if (aIngredientType != null)
 		{
 			mBreadTop = aBreadTop;
 			mBreadBottom = aBreadBottom;
 			mScore = aScore;
-			AnimationFactory.loadGraphics(this, aIngredientType); 
+			AnimationFactory.loadAnimations(this, aIngredientType);
 			width = GeneralConstants.collisionBox_width;
 			height = GeneralConstants.collisionBox_heigth;
-			aVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
+			//aVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
 			velocity.set(aVelocity, aVelocity);
+			acceleration.x = 0;
+			acceleration.y = 0;
 			maxVelocity.set(aMaxVelocity, aMaxVelocity);
 			elasticity = 1;
 			x = 100 + 300 * Math.random();
 			y = Math.random() * 200;
 			offset.x = GeneralConstants.collisionBox_offset_x;
 			offset.y = GeneralConstants.collisionBox_offset_y;
+			
+			mEatenAnimation = new FlxSprite(aX,aY);
+			AnimationFactory.loadAnimations(mEatenAnimation, aIngredientType, true);
+			aStage.add(mEatenAnimation);
 		}
 		else
 		{
-			loadGraphic(Assets.getBitmapData(aImage), false);
+			//loadGraphic(Assets.getBitmapData(aImage), false);
 		}
 	}
 	
 	override function update():Void
 	{	
+		
+		if (mEatenAnimation != null)
+		{
+			mEatenAnimation.update();
+			if (mEatenAnimation.animation.finished)
+			{
+				mEatenAnimation.visible = false;
+			}
+			
+		}
+		
 		if (x+width > GeneralConstants.screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;
@@ -119,6 +141,7 @@ class Ingredient extends FlxSprite
 		{
 			eat();
 		}
+		
 		super.update();
 	}
 	
@@ -138,6 +161,10 @@ class Ingredient extends FlxSprite
 		
 		HUD.addEatenIngredient(this);
 		kill();
+		mEatenAnimation.x = x - 250;
+		mEatenAnimation.y = y - 500;
+		mEatenAnimation.visible = true;
+		mEatenAnimation.animation.play(AnimationFactory.EATEN_ANIMATION);
 		FlxG.sound.play("sound/eat.wav");
 	}
 	
@@ -149,5 +176,10 @@ class Ingredient extends FlxSprite
 	public function getStaticImage() : String 
 	{
 		return mStaticImage;
+	}
+	
+	public function getEndImage() : String 
+	{
+		return mEndImage;
 	}
 }

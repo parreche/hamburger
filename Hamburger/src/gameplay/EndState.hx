@@ -1,4 +1,5 @@
 package gameplay;
+import domain.Ingredient;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
@@ -7,7 +8,9 @@ import flixel.util.FlxColor;
 import flixel.util.FlxSave;
 import configuration.GeneralConstants;
 import menu.MainMenu;
+import menu.MenuButton;
 import openfl.utils.Object;
+import utils.MenuHelper;
 
 /**
  * 
@@ -41,7 +44,6 @@ class EndState extends FlxState
 	 * @param	Score	the score from the ingredients collected
 	 * @param	Time	the time left before reaching 0 when we win, 0 if we lost
 	 */
-	
 	public function new(aWin:Bool, aScore:Int, aTime:Int) 
 	{
 		super();
@@ -52,58 +54,31 @@ class EndState extends FlxState
 	
 	override function create():Void
 	{
-		mTxtTitle = new FlxText(GeneralConstants.endStateMessage_x - 90, 20, 0, mWin ? "Completed!" : "Game Over!", 70);
-		add(mTxtTitle);
-		
-		mTxtScoreMessage = new FlxText(GeneralConstants.endStateMessage_x - 260, (FlxG.height / 3) - 50, 0, "Score:", 40);
-		add(mTxtScoreMessage);
-		
-		mTxtScore = new FlxText(GeneralConstants.endStateMessage_x - 100, (FlxG.height / 3) - 50, 0, Std.string(mScore), 40);
-		add(mTxtScore);
-		
-		mTxtTimeMessage = new FlxText(GeneralConstants.endStateMessage_x + 200, (FlxG.height / 3) - 50, 0, "Time ", 40);
-		add(mTxtTimeMessage);
-		
-		mTxtTime = new FlxText(GeneralConstants.endStateMessage_x + 350, (FlxG.height / 3) - 50, 0, timeFormat(), 40);
-		add(mTxtTime);
-		
-		mTxtFinalMessage = new FlxText(GeneralConstants.endStateMessage_x - 100, (FlxG.height / 2)-50, 0, "Final Score:", 45);
-		add(mTxtFinalMessage);
-		
-		mTxtFinalScore = new FlxText(GeneralConstants.endStateMessage_x + 240, (FlxG.height / 2)-50, 0, Std.string(mScore + mTime*30), 45);
-		add(mTxtFinalScore);
-		
-		var score:Int = mScore + mTime*30;
-		var hiScore:Int = hiScore();
-		var text = "Hi-Score: " + hiScore;
-		if (score == hiScore) {
-			text = "New " + text + " !";
-			mTxtHiScore = new FlxText(GeneralConstants.endStateMessage_x - 130, (FlxG.height / 3)*2 -50, 0, text, 45);
-		} else {
-			mTxtHiScore = new FlxText(GeneralConstants.endStateMessage_x - 80, (FlxG.height / 3)*2 -50, 0, text, 45);
-		}
-		add(mTxtHiScore);
-		
-		mBtnMainMenu = new FlxButton(GeneralConstants.endStateMessage_x - 200, FlxG.height - 100, "", goMainMenu);
-		mBtnMainMenu.scale.x = mBtnMainMenu.scale.y = 3;
-		mBtnMainMenu.updateHitbox();
-		mBtnMainMenu.label = new FlxText(0, 20, mBtnMainMenu.width, "Main Menu");
-		mBtnMainMenu.label.offset.y = -10;
-		mBtnMainMenu.label.setFormat(null,20,FlxColor.CHARCOAL,"center");
-		add(mBtnMainMenu);
-		
-		mBtnRestart = new FlxButton(GeneralConstants.endStateMessage_x + 200, FlxG.height - 100, "", restart);
-		mBtnRestart.scale.x = mBtnRestart.scale.y = 3;
-		mBtnRestart.updateHitbox();
-		mBtnRestart.label = new FlxText(0, 20, mBtnMainMenu.width, "Restart");
-		mBtnRestart.label.offset.y = -10;
-		mBtnRestart.label.setFormat(null,20,FlxColor.CHARCOAL,"center");
-		add(mBtnRestart);
-		
 		FlxG.sound.playMusic("sound/endTheme.wav");
+		
+		add(MenuHelper.loadStaticImage("img/game/end/background_end_game.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
+		
+		add(MenuHelper.createMenuButton("img/game/end/mainMenu_button.png", GeneralConstants.end_game_main_menu_button_width, GeneralConstants.end_game_main_menu_button_heigth, GeneralConstants.end_game_main_menu_button_x, GeneralConstants.end_game_main_menu_button_y, goToMainMenu));
+		add(MenuHelper.createMenuButton("img/game/end/playAgain_button.png", GeneralConstants.end_game_restart_button_width, GeneralConstants.end_game_restart_button_heigth, GeneralConstants.end_game_restart_button_x, GeneralConstants.end_game_restart_button_y, restart));
+		
+		if (isHighScore())
+		{
+			add(MenuHelper.loadStaticImage("img/game/end/High_Score.png", GeneralConstants.end_game_main_menu_button_width, GeneralConstants.end_game_main_menu_button_heigth, GeneralConstants.end_game_high_score_x, GeneralConstants.end_game_high_score_y));
+		}
+		
+		add(MenuHelper.generateMenuText(GeneralConstants.end_game_score_text_x, GeneralConstants.end_game_score_text_y,  (mScore + mTime*30) + "", GeneralConstants.end_game_score_text_size));
+	
+		var eatenIngredients:List<Ingredient> = cast HUD.getEatenIngredients();
+		var lastY: Int = 900;
+		for (ingredient in eatenIngredients)
+		{
+			add(MenuHelper.loadStaticImage(ingredient.getEndImage(), 0, 0, 800, lastY));
+			lastY = lastY - 50;
+		}
+		add(MenuHelper.loadStaticImage("img/game/end/ingredients/topBread.png", 0, 0, 800, lastY));
 	}
 	
-	private function restart():Void 
+	private function restart(aButton:MenuButton) : Void
 	{
 		FlxG.camera.fade(FlxColor.BLACK, .66, false, function() {
 			FlxG.switchState(new GameState());
@@ -111,7 +86,7 @@ class EndState extends FlxState
 		});
 	}
 	
-	private function goMainMenu():Void 
+	private function goToMainMenu(aButton:MenuButton) : Void
 	{
 		FlxG.camera.fade(FlxColor.BLACK, .66, false, function() {
 			FlxG.switchState(new MainMenu());
@@ -119,6 +94,12 @@ class EndState extends FlxState
 		});
 	}
 	
+	private function isHighScore() : Bool
+	{
+		var score:Int = mScore + mTime*30;
+		var hiScore:Int = hiScore();
+		return score == hiScore;
+	}
 	
 	/**
 	 * This function modifies the high score and then returns it
@@ -129,7 +110,7 @@ class EndState extends FlxState
 	{
 		var hiScore:Int = mScore + mTime*30;
 		var save:FlxSave = new FlxSave();
-		save.bind("Hamburger");
+		save.bind("HamburgerDB");
 		if (save.data.hiscore == null)
 		{
 			//save.data.hiscore = 0;
@@ -158,15 +139,6 @@ class EndState extends FlxState
 		for (i in 0...save.data.hiscore.length){
 			trace(save.data.hiscore[i]);
 		}
-		/*if (save.data.hiscore > hiScore)
-		{
-			hiScore = save.data.hiscore;
-		}
-		else
-		{
-			save.data.hiscore = hiScore;
-		}*/
-		
 		hiScore = save.data.hiscore[0].mScore;
 		save.close();
 		return hiScore;

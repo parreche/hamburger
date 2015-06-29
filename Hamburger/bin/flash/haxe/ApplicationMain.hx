@@ -42,11 +42,79 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
-		urls.push ("img/game/game_background.png");
+		urls.push ("img/game/end/background_end_game.jpg");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/High_Score.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/ingredients/Chedar.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/ingredients/Hamburguesa.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/ingredients/Lechuga.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/ingredients/Panceta.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/ingredients/Pepino.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/ingredients/Tomate.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/ingredients/topBread.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/mainMenu_button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/playAgain_button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/game_background.jpg");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/hud_background.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/mainMenu_button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/obstacles/ketchup.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/obstacles/ketchupSombra.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/pause.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/pause_button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/resume_button.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -58,11 +126,47 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("img/hamburguesa/hamburg_comer_xml.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/hamburguesa/hamburg_comer_xml.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("img/lechuga/lechuga xml data sprite.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/lechuga/lechuga xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/lechuga/lechuga_comer_xml.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/lechuga/lechuga_comer_xml.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/mainMenu/animation/background_title.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/mainMenu/animation/menuAnimacion0.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/mainMenu/animation/menuAnimacion0.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/mainMenu/animation/menuAnimacion1.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/mainMenu/animation/menuAnimacion1.xml");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -74,15 +178,15 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("img/mainMenu/credits_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
 		urls.push ("img/mainMenu/exit_button.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/options_button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/mainMenu/ranking_button.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -98,11 +202,39 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("img/optionsMenu/close_button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/optionsMenu/credits_button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/optionsMenu/cross.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/optionsMenu/options.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/optionsMenu/slider.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("img/panceta/panceta xml data sprite.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/panceta/panceta xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/panceta/panceta_comer_xml.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/panceta/panceta_comer_xml.xml");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -127,6 +259,14 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/pepinos/pepino xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/pepinos/pepino_comer_xml.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/pepinos/pepino_comer_xml.xml");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -159,6 +299,14 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/tomate/tomate xml data sprite.xml");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/tomate/tomate_comer_xml.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/tomate/tomate_comer_xml.xml");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		

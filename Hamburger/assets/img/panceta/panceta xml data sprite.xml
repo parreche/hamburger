@@ -1,189 +1,189 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:ac7230a09efc04e29a40cd56ab854855:d2011535d26c458149b24c6b8d09b074:94a4e706153928afff48b4b23b72011d$ -->
+<!-- $TexturePacker:SmartUpdate:892ae8ecbddbdd38bb7a506cd056b9b4:e934795f98c065f87c5d320cec983002:94a4e706153928afff48b4b23b72011d$ -->
 <TextureAtlas imagePath="panceta xml data sprite.png">
-    <SubTexture name="45 abajo derecha/45 abajo derecha0001" x="1199" y="211" width="119" height="213" frameX="-127" frameY="-35" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0002" x="164" y="196" width="106" height="229" frameX="-134" frameY="-29" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0003" x="297" y="644" width="104" height="234" frameX="-129" frameY="-26" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0004" x="526" y="190" width="103" height="230" frameX="-120" frameY="-27" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0005" x="506" y="636" width="100" height="226" frameX="-114" frameY="-30" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0006" x="848" y="430" width="101" height="222" frameX="-110" frameY="-35" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0007" x="951" y="657" width="99" height="212" frameX="-114" frameY="-28" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0008" x="1753" y="816" width="101" height="199" frameX="-115" frameY="-23" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0009" x="2579" y="812" width="110" height="198" frameX="-112" frameY="-21" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0010" x="1199" y="426" width="126" height="198" frameX="-108" frameY="-23" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0011" x="1320" y="208" width="146" height="198" frameX="-104" frameY="-27" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0012" x="1099" y="2" width="168" height="207" frameX="-100" frameY="-34" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0013" x="2" y="196" width="160" height="219" frameX="-104" frameY="-27" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0014" x="2" y="417" width="149" height="226" frameX="-110" frameY="-23" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0015" x="385" y="190" width="139" height="229" frameX="-115" frameY="-21" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0016" x="736" y="196" width="125" height="225" frameX="-119" frameY="-22" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0017" x="1052" y="657" width="114" height="218" frameX="-119" frameY="-26" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0018" x="2209" y="203" width="107" height="211" frameX="-115" frameY="-32" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0019" x="1746" y="397" width="92" height="201" frameX="-119" frameY="-27" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0020" x="731" y="638" width="87" height="224" frameX="-124" frameY="-25" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0021" x="287" y="425" width="91" height="217" frameX="-120" frameY="-26" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0022" x="1291" y="626" width="101" height="214" frameX="-119" frameY="-29" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo derecha/45 abajo derecha0023" x="1632" y="600" width="119" height="209" frameX="-119" frameY="-35" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0001" x="1439" y="2" width="166" height="204" frameX="-101" frameY="-37" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0002" x="2" y="645" width="152" height="221" frameX="-109" frameY="-31" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0003" x="156" y="644" width="139" height="226" frameX="-116" frameY="-28" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0004" x="922" y="202" width="125" height="221" frameX="-128" frameY="-29" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0005" x="1168" y="626" width="121" height="214" frameX="-138" frameY="-32" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0006" x="1958" y="599" width="114" height="210" frameX="-149" frameY="-37" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0007" x="3511" y="207" width="97" height="201" frameX="-162" frameY="-30" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0008" x="1753" y="600" width="91" height="214" frameX="-162" frameY="-25" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0009" x="1109" y="411" width="88" height="211" frameX="-162" frameY="-24" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0010" x="2520" y="407" width="91" height="209" frameX="-160" frameY="-25" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0011" x="2318" y="202" width="111" height="208" frameX="-142" frameY="-29" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0012" x="476" y="422" width="132" height="212" frameX="-123" frameY="-36" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0013" x="608" y="638" width="121" height="223" frameX="-129" frameY="-29" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0014" x="272" y="192" width="111" height="231" frameX="-133" frameY="-25" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0015" x="631" y="188" width="103" height="239" frameX="-138" frameY="-23" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0016" x="403" y="644" width="101" height="236" frameX="-148" frameY="-24" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0017" x="951" y="425" width="94" height="230" frameX="-160" frameY="-28" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0018" x="1394" y="613" width="95" height="222" frameX="-162" frameY="-34" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0019" x="380" y="429" width="94" height="213" frameX="-160" frameY="-29" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0020" x="1978" y="811" width="109" height="208" frameX="-150" frameY="-27" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0021" x="1631" y="811" width="120" height="203" frameX="-143" frameY="-28" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0022" x="1612" y="397" width="132" height="201" frameX="-132" frameY="-31" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 abajo izquierda/45 abajo izquierda0023" x="3262" y="2" width="152" height="198" frameX="-116" frameY="-37" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0001" x="2596" y="2" width="167" height="185" frameX="-102" frameY="-57" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0002" x="2606" y="189" width="153" height="173" frameX="-108" frameY="-64" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0003" x="2" y="868" width="139" height="162" frameX="-114" frameY="-70" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0004" x="2937" y="190" width="125" height="168" frameX="-117" frameY="-74" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0005" x="3310" y="413" width="120" height="170" frameX="-111" frameY="-79" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0006" x="506" y="864" width="115" height="166" frameX="-106" frameY="-84" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0007" x="3227" y="761" width="91" height="181" frameX="-111" frameY="-77" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0008" x="2433" y="412" width="85" height="204" frameX="-117" frameY="-71" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0009" x="3826" y="412" width="83" height="206" frameX="-119" frameY="-65" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0010" x="3768" y="201" width="91" height="209" frameX="-118" frameY="-57" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0011" x="1846" y="600" width="110" height="213" frameX="-117" frameY="-49" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0012" x="153" y="427" width="132" height="215" frameX="-114" frameY="-42" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0013" x="610" y="429" width="122" height="207" frameX="-119" frameY="-47" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0014" x="2205" y="416" width="111" height="197" frameX="-125" frameY="-55" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0015" x="2836" y="361" width="104" height="189" frameX="-128" frameY="-61" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0016" x="3171" y="559" width="100" height="182" frameX="-121" frameY="-65" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0017" x="3381" y="774" width="94" height="176" frameX="-116" frameY="-70" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0018" x="852" y="859" width="90" height="170" frameX="-112" frameY="-75" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0019" x="3694" y="604" width="93" height="175" frameX="-116" frameY="-71" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0020" x="2577" y="618" width="109" height="192" frameX="-111" frameY="-68" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0021" x="2196" y="814" width="119" height="191" frameX="-107" frameY="-66" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0022" x="2317" y="817" width="133" height="192" frameX="-105" frameY="-61" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba derecha/45 arriba derecha0023" x="3866" y="2" width="152" height="193" frameX="-102" frameY="-56" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0001" x="2196" y="615" width="120" height="197" frameX="-123" frameY="-59" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0002" x="1288" y="842" width="105" height="187" frameX="-130" frameY="-66" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0003" x="3382" y="595" width="104" height="177" frameX="-137" frameY="-72" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0004" x="3488" y="601" width="103" height="169" frameX="-146" frameY="-76" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0005" x="691" y="864" width="99" height="163" frameX="-156" frameY="-81" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0006" x="143" y="872" width="100" height="157" frameX="-160" frameY="-86" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0007" x="3593" y="604" width="99" height="170" frameX="-156" frameY="-79" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0008" x="3614" y="410" width="100" height="192" frameX="-154" frameY="-73" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0009" x="1840" y="404" width="110" height="194" frameX="-148" frameY="-67" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0010" x="2318" y="618" width="125" height="197" frameX="-136" frameY="-59" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0011" x="3567" y="2" width="146" height="202" frameX="-119" frameY="-50" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0012" x="1269" y="2" width="168" height="204" frameX="-101" frameY="-44" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0013" x="2435" y="2" width="159" height="197" frameX="-106" frameY="-49" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0014" x="1610" y="208" width="150" height="187" frameX="-110" frameY="-56" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0015" x="3064" y="191" width="139" height="176" frameX="-115" frameY="-63" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0016" x="3205" y="202" width="125" height="174" frameX="-125" frameY="-67" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0017" x="2821" y="184" width="114" height="175" frameX="-136" frameY="-72" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0018" x="3273" y="585" width="107" height="174" frameX="-147" frameY="-77" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0019" x="2748" y="364" width="86" height="186" frameX="-164" frameY="-73" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0020" x="1862" y="196" width="81" height="206" frameX="-164" frameY="-70" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0021" x="3921" y="197" width="86" height="204" frameX="-164" frameY="-68" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0022" x="1527" y="794" width="102" height="204" frameX="-149" frameY="-63" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="45 arriba izquierda/45 arriba izquierda0023" x="2074" y="599" width="120" height="205" frameX="-131" frameY="-58" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0001" x="3911" y="411" width="62" height="211" frameX="-155" frameY="-40" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0002" x="2691" y="796" width="62" height="229" frameX="-156" frameY="-32" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0003" x="4020" y="2" width="66" height="234" frameX="-157" frameY="-26" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0004" x="2755" y="792" width="64" height="233" frameX="-157" frameY="-23" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0005" x="1047" y="425" width="60" height="230" frameX="-158" frameY="-24" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0006" x="2821" y="787" width="58" height="226" frameX="-158" frameY="-29" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0007" x="2431" y="202" width="61" height="208" frameX="-159" frameY="-23" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0008" x="3332" y="202" width="66" height="209" frameX="-159" frameY="-20" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0009" x="3108" y="766" width="59" height="207" frameX="-159" frameY="-21" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0010" x="3861" y="201" width="58" height="208" frameX="-159" frameY="-25" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0011" x="3477" y="774" width="57" height="205" frameX="-159" frameY="-32" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0012" x="3050" y="762" width="56" height="210" frameX="-159" frameY="-42" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0013" x="3169" y="766" width="56" height="222" frameX="-159" frameY="-32" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0014" x="863" y="196" width="57" height="232" frameX="-159" frameY="-25" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0015" x="2688" y="553" width="57" height="241" frameX="-159" frameY="-21" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0016" x="2747" y="553" width="57" height="237" frameX="-159" frameY="-20" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0017" x="2806" y="552" width="58" height="233" frameX="-158" frameY="-22" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0018" x="2881" y="774" width="58" height="225" frameX="-158" frameY="-27" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0019" x="3108" y="556" width="61" height="208" frameX="-155" frameY="-23" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0020" x="2866" y="552" width="65" height="220" frameX="-151" frameY="-23" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0021" x="1856" y="815" width="60" height="215" frameX="-156" frameY="-26" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0022" x="1918" y="815" width="58" height="212" frameX="-158" frameY="-32" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="abajo/abajo0023" x="3536" y="776" width="57" height="206" frameX="-159" frameY="-41" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0001" x="3894" y="624" width="61" height="191" frameX="-153" frameY="-69" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0002" x="3891" y="817" width="62" height="176" frameX="-151" frameY="-79" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0003" x="623" y="863" width="66" height="167" frameX="-147" frameY="-83" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0004" x="944" y="871" width="63" height="156" frameX="-149" frameY="-89" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0005" x="1069" y="877" width="61" height="152" frameX="-151" frameY="-95" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0006" x="1009" y="877" width="58" height="153" frameX="-153" frameY="-96" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0007" x="4019" y="802" width="62" height="160" frameX="-149" frameY="-94" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0008" x="3432" y="401" width="66" height="192" frameX="-144" frameY="-86" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0009" x="3712" y="781" width="58" height="197" frameX="-152" frameY="-78" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0010" x="3049" y="561" width="57" height="199" frameX="-153" frameY="-72" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0011" x="3595" y="776" width="57" height="206" frameX="-153" frameY="-61" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0012" x="3654" y="781" width="56" height="212" frameX="-154" frameY="-52" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0013" x="3710" y="206" width="56" height="202" frameX="-154" frameY="-59" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0014" x="3957" y="624" width="56" height="189" frameX="-154" frameY="-69" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0015" x="4015" y="618" width="57" height="182" frameX="-154" frameY="-73" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0016" x="2761" y="190" width="58" height="172" frameX="-153" frameY="-79" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0017" x="3831" y="816" width="58" height="164" frameX="-153" frameY="-85" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0018" x="792" y="871" width="58" height="159" frameX="-153" frameY="-89" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0019" x="3955" y="817" width="62" height="170" frameX="-153" frameY="-87" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0020" x="4009" y="238" width="65" height="193" frameX="-153" frameY="-82" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0021" x="3831" y="620" width="61" height="194" frameX="-153" frameY="-78" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0022" x="3320" y="761" width="59" height="193" frameX="-153" frameY="-76" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="arriba/arriba0023" x="3772" y="781" width="57" height="197" frameX="-153" frameY="-68" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0001" x="382" y="2" width="179" height="186" frameX="-98" frameY="-42" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0002" x="2274" y="2" width="159" height="198" frameX="-107" frameY="-42" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0003" x="1468" y="208" width="140" height="202" frameX="-116" frameY="-45" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0004" x="1945" y="202" width="131" height="199" frameX="-113" frameY="-51" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0005" x="2452" y="812" width="125" height="195" frameX="-105" frameY="-54" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0006" x="1952" y="403" width="119" height="194" frameX="-98" frameY="-57" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0007" x="2089" y="806" width="105" height="199" frameX="-105" frameY="-53" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0008" x="2494" y="201" width="110" height="204" frameX="-101" frameY="-47" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0009" x="734" y="430" width="112" height="206" frameX="-98" frameY="-40" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0010" x="1327" y="408" width="133" height="203" frameX="-96" frameY="-36" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0011" x="2111" y="2" width="161" height="199" frameX="-92" frameY="-34" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0012" x="2" y="2" width="188" height="192" frameX="-87" frameY="-34" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0013" x="745" y="2" width="175" height="192" frameX="-94" frameY="-33" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0014" x="1946" y="2" width="163" height="198" frameX="-102" frameY="-34" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0015" x="3715" y="2" width="149" height="197" frameX="-110" frameY="-38" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0016" x="1395" y="837" width="130" height="193" frameX="-115" frameY="-44" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0017" x="1168" y="842" width="118" height="188" frameX="-111" frameY="-48" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0018" x="3716" y="412" width="108" height="183" frameX="-106" frameY="-50" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0019" x="1762" y="208" width="98" height="187" frameX="-111" frameY="-49" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0020" x="2933" y="561" width="114" height="200" frameX="-97" frameY="-47" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0021" x="2445" y="618" width="130" height="192" frameX="-91" frameY="-43" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0022" x="1462" y="412" width="148" height="186" frameX="-91" frameY="-41" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="derecha/derecha0023" x="2765" y="2" width="171" height="180" frameX="-92" frameY="-42" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0001" x="563" y="2" width="180" height="184" frameX="-92" frameY="-45" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0002" x="3101" y="2" width="159" height="187" frameX="-103" frameY="-45" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0003" x="1491" y="600" width="139" height="192" frameX="-114" frameY="-48" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0004" x="2073" y="406" width="130" height="191" frameX="-126" frameY="-53" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0005" x="3062" y="369" width="126" height="185" frameX="-139" frameY="-57" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0006" x="3190" y="378" width="118" height="179" frameX="-153" frameY="-59" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0007" x="3975" y="433" width="106" height="183" frameX="-159" frameY="-55" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0008" x="3400" y="207" width="109" height="192" frameX="-159" frameY="-50" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0009" x="3500" y="410" width="112" height="189" frameX="-159" frameY="-43" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0010" x="2613" y="364" width="133" height="187" frameX="-140" frameY="-39" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0011" x="2938" y="2" width="161" height="186" frameX="-117" frameY="-37" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0012" x="192" y="2" width="188" height="188" frameX="-95" frameY="-37" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0013" x="922" y="2" width="175" height="198" frameX="-101" frameY="-36" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0014" x="1607" y="2" width="163" height="204" frameX="-105" frameY="-37" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0015" x="3416" y="2" width="149" height="203" frameX="-110" frameY="-41" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0016" x="2078" y="203" width="129" height="201" frameX="-125" frameY="-46" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0017" x="2942" y="360" width="118" height="199" frameX="-140" frameY="-51" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0018" x="2941" y="763" width="107" height="200" frameX="-156" frameY="-53" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0019" x="3610" y="206" width="98" height="202" frameX="-160" frameY="-52" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0020" x="2318" y="412" width="113" height="204" frameX="-159" frameY="-50" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0021" x="820" y="654" width="129" height="203" frameX="-149" frameY="-46" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0022" x="1049" y="211" width="148" height="198" frameX="-130" frameY="-44" frameWidth="350" frameHeight="350"/>
-    <SubTexture name="izquierda/izquierda0023" x="1772" y="2" width="172" height="192" frameX="-106" frameY="-44" frameWidth="350" frameHeight="350"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0001" x="2" y="3114" width="85" height="147" frameX="-83" frameY="-22" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0002" x="91" y="3743" width="74" height="158" frameX="-89" frameY="-18" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0003" x="143" y="3917" width="74" height="161" frameX="-85" frameY="-16" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0004" x="167" y="3756" width="74" height="159" frameX="-79" frameY="-16" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0005" x="182" y="3598" width="71" height="156" frameX="-75" frameY="-18" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0006" x="2" y="3414" width="69" height="153" frameX="-74" frameY="-22" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0007" x="206" y="2990" width="71" height="147" frameX="-75" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0008" x="433" y="1569" width="71" height="138" frameX="-76" frameY="-14" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0009" x="248" y="1552" width="78" height="137" frameX="-73" frameY="-13" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0010" x="404" y="1848" width="88" height="138" frameX="-71" frameY="-13" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0011" x="126" y="1684" width="99" height="137" frameX="-69" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0012" x="126" y="2680" width="115" height="143" frameX="-66" frameY="-21" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0013" x="296" y="3294" width="111" height="150" frameX="-69" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0014" x="255" y="3601" width="104" height="156" frameX="-72" frameY="-13" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0015" x="243" y="3759" width="97" height="158" frameX="-76" frameY="-12" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0016" x="93" y="3586" width="87" height="155" frameX="-79" frameY="-13" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0017" x="409" y="3295" width="79" height="150" frameX="-80" frameY="-16" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0018" x="46" y="2966" width="75" height="146" frameX="-76" frameY="-19" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0019" x="436" y="1988" width="63" height="139" frameX="-80" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0020" x="138" y="3274" width="61" height="155" frameX="-82" frameY="-15" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0021" x="420" y="3144" width="64" height="149" frameX="-79" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0022" x="201" y="3139" width="71" height="148" frameX="-79" frameY="-18" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo derecha/45 abajo derecha0023" x="126" y="2825" width="84" height="144" frameX="-78" frameY="-22" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0001" x="2" y="2385" width="116" height="141" frameX="-66" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0002" x="187" y="3443" width="106" height="153" frameX="-72" frameY="-19" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0003" x="361" y="3603" width="97" height="156" frameX="-77" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0004" x="295" y="3446" width="87" height="153" frameX="-85" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0005" x="2" y="3263" width="85" height="149" frameX="-91" frameY="-19" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0006" x="123" y="2971" width="81" height="146" frameX="-98" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0007" x="219" y="1830" width="68" height="138" frameX="-108" frameY="-19" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0008" x="354" y="3144" width="64" height="148" frameX="-108" frameY="-15" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0009" x="325" y="2994" width="62" height="147" frameX="-108" frameY="-14" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0010" x="212" y="2843" width="65" height="145" frameX="-106" frameY="-15" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0011" x="46" y="2820" width="78" height="144" frameX="-94" frameY="-18" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0012" x="389" y="2996" width="93" height="146" frameX="-81" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0013" x="384" y="3447" width="86" height="154" frameX="-85" frameY="-18" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0014" x="342" y="3761" width="79" height="159" frameX="-88" frameY="-15" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0015" x="336" y="3922" width="73" height="165" frameX="-91" frameY="-14" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0016" x="219" y="3919" width="71" height="163" frameX="-98" frameY="-14" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0017" x="423" y="3764" width="67" height="159" frameX="-106" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0018" x="118" y="3431" width="67" height="153" frameX="-108" frameY="-21" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0019" x="89" y="3119" width="67" height="147" frameX="-106" frameY="-18" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0020" x="2" y="2671" width="77" height="143" frameX="-99" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0021" x="268" y="2125" width="84" height="141" frameX="-95" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0022" x="74" y="2102" width="93" height="139" frameX="-87" frameY="-19" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 abajo izquierda/45 abajo izquierda0023" x="307" y="1707" width="106" height="137" frameX="-76" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0001" x="141" y="611" width="116" height="128" frameX="-67" frameY="-37" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0002" x="186" y="234" width="107" height="120" frameX="-71" frameY="-41" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0003" x="305" y="2" width="97" height="112" frameX="-75" frameY="-46" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0004" x="205" y="115" width="88" height="117" frameX="-77" frameY="-48" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0005" x="390" y="117" width="85" height="118" frameX="-73" frameY="-52" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0006" x="47" y="113" width="81" height="115" frameX="-70" frameY="-55" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0007" x="2" y="474" width="65" height="126" frameX="-73" frameY="-50" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0008" x="447" y="2129" width="61" height="141" frameX="-77" frameY="-46" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0009" x="248" y="2411" width="59" height="142" frameX="-79" frameY="-42" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0010" x="326" y="2847" width="65" height="145" frameX="-78" frameY="-37" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0011" x="274" y="3143" width="78" height="147" frameX="-77" frameY="-31" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0012" x="201" y="3292" width="93" height="149" frameX="-75" frameY="-27" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0013" x="243" y="2698" width="85" height="143" frameX="-79" frameY="-30" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0014" x="227" y="1691" width="78" height="137" frameX="-83" frameY="-35" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0015" x="323" y="877" width="73" height="131" frameX="-85" frameY="-39" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0016" x="69" y="478" width="71" height="126" frameX="-80" frameY="-42" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0017" x="170" y="356" width="67" height="123" frameX="-76" frameY="-45" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0018" x="120" y="233" width="64" height="119" frameX="-74" frameY="-48" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0019" x="2" y="350" width="67" height="122" frameX="-76" frameY="-46" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0020" x="2" y="1131" width="77" height="133" frameX="-73" frameY="-44" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0021" x="87" y="1004" width="85" height="132" frameX="-70" frameY="-43" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0022" x="174" y="1141" width="93" height="132" frameX="-69" frameY="-40" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba derecha/45 arriba derecha0023" x="159" y="1275" width="106" height="134" frameX="-67" frameY="-36" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0001" x="415" y="1709" width="85" height="137" frameX="-81" frameY="-38" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0002" x="303" y="614" width="74" height="129" frameX="-86" frameY="-43" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0003" x="239" y="359" width="73" height="123" frameX="-91" frameY="-47" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0004" x="130" y="114" width="73" height="117" frameX="-97" frameY="-50" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0005" x="404" y="2" width="71" height="113" frameX="-103" frameY="-53" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0006" x="141" y="2" width="71" height="110" frameX="-106" frameY="-56" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0007" x="47" y="230" width="71" height="118" frameX="-103" frameY="-52" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0008" x="434" y="1028" width="71" height="133" frameX="-102" frameY="-47" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0009" x="79" y="1273" width="78" height="134" frameX="-98" frameY="-44" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0010" x="257" y="1414" width="88" height="136" frameX="-90" frameY="-38" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0011" x="66" y="2243" width="101" height="140" frameX="-79" frameY="-32" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0012" x="309" y="2412" width="117" height="141" frameX="-66" frameY="-28" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0013" x="2" y="1820" width="110" height="137" frameX="-70" frameY="-31" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0014" x="2" y="866" width="104" height="130" frameX="-73" frameY="-36" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0015" x="71" y="354" width="97" height="122" frameX="-76" frameY="-41" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0016" x="295" y="236" width="87" height="121" frameX="-83" frameY="-43" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0017" x="314" y="360" width="81" height="123" frameX="-90" frameY="-46" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0018" x="384" y="237" width="76" height="121" frameX="-97" frameY="-50" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0019" x="2" y="602" width="63" height="129" frameX="-108" frameY="-48" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0020" x="428" y="2415" width="59" height="142" frameX="-108" frameY="-46" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0021" x="2" y="2241" width="62" height="141" frameX="-108" frameY="-44" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0022" x="264" y="2268" width="72" height="141" frameX="-99" frameY="-41" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="45 arriba izquierda/45 arriba izquierda0023" x="378" y="2702" width="84" height="143" frameX="-87" frameY="-37" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0001" x="279" y="2843" width="45" height="146" frameX="-103" frameY="-25" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0002" x="460" y="3603" width="46" height="159" frameX="-103" frameY="-19" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0003" x="93" y="3903" width="48" height="162" frameX="-104" frameY="-16" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0004" x="45" y="3903" width="46" height="160" frameX="-104" frameY="-14" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0005" x="46" y="3579" width="45" height="158" frameX="-104" frameY="-15" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0006" x="2" y="3569" width="42" height="157" frameX="-105" frameY="-17" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0007" x="120" y="2385" width="44" height="143" frameX="-105" frameY="-14" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0008" x="330" y="2700" width="46" height="144" frameX="-106" frameY="-12" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0009" x="464" y="2702" width="43" height="144" frameX="-106" frameY="-12" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0010" x="2" y="2816" width="42" height="144" frameX="-106" frameY="-15" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0011" x="347" y="1425" width="41" height="141" frameX="-106" frameY="-20" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0012" x="393" y="2847" width="41" height="146" frameX="-106" frameY="-26" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0013" x="158" y="3119" width="41" height="153" frameX="-106" frameY="-20" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0014" x="2" y="3728" width="42" height="160" frameX="-105" frameY="-15" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0015" x="292" y="3919" width="42" height="166" frameX="-105" frameY="-12" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0016" x="2" y="3890" width="41" height="164" frameX="-105" frameY="-11" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0017" x="46" y="3739" width="43" height="161" frameX="-105" frameY="-13" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0018" x="73" y="3422" width="43" height="155" frameX="-105" frameY="-16" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0019" x="117" y="2530" width="44" height="143" frameX="-104" frameY="-14" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0020" x="89" y="3268" width="47" height="152" frameX="-100" frameY="-14" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0021" x="279" y="2991" width="44" height="148" frameX="-104" frameY="-16" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0022" x="436" y="2848" width="43" height="146" frameX="-105" frameY="-20" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="abajo/abajo0023" x="351" y="2555" width="42" height="143" frameX="-106" frameY="-25" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0001" x="461" y="758" width="45" height="132" frameX="-101" frameY="-45" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0002" x="462" y="237" width="46" height="122" frameX="-100" frameY="-52" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0003" x="295" y="116" width="47" height="117" frameX="-98" frameY="-54" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0004" x="94" y="2" width="45" height="109" frameX="-100" frameY="-58" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0005" x="2" y="2" width="45" height="106" frameX="-100" frameY="-62" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0006" x="49" y="2" width="43" height="107" frameX="-101" frameY="-63" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0007" x="214" y="2" width="44" height="111" frameX="-100" frameY="-62" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0008" x="180" y="872" width="46" height="133" frameX="-97" frameY="-56" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0009" x="368" y="1148" width="44" height="136" frameX="-100" frameY="-51" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0010" x="360" y="1286" width="43" height="137" frameX="-101" frameY="-47" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0011" x="81" y="2675" width="43" height="143" frameX="-101" frameY="-39" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0012" x="2" y="2962" width="42" height="147" frameX="-102" frameY="-33" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0013" x="468" y="616" width="42" height="140" frameX="-102" frameY="-38" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0014" x="259" y="611" width="42" height="131" frameX="-102" frameY="-45" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0015" x="142" y="481" width="42" height="126" frameX="-102" frameY="-48" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0016" x="2" y="226" width="43" height="120" frameX="-101" frameY="-51" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0017" x="2" y="110" width="43" height="114" frameX="-101" frameY="-56" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0018" x="260" y="2" width="43" height="111" frameX="-101" frameY="-58" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0019" x="344" y="116" width="44" height="118" frameX="-101" frameY="-57" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0020" x="398" y="877" width="48" height="133" frameX="-101" frameY="-54" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0021" x="448" y="892" width="45" height="134" frameX="-101" frameY="-51" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0022" x="388" y="1012" width="44" height="134" frameX="-101" frameY="-49" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="arriba/arriba0023" x="2" y="1401" width="43" height="137" frameX="-101" frameY="-44" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0001" x="2" y="735" width="125" height="129" frameX="-64" frameY="-27" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0002" x="135" y="1546" width="111" height="136" frameX="-70" frameY="-27" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0003" x="169" y="2110" width="97" height="139" frameX="-77" frameY="-29" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0004" x="354" y="2129" width="91" height="139" frameX="-75" frameY="-32" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0005" x="405" y="1297" width="88" height="135" frameX="-69" frameY="-35" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0006" x="47" y="1409" width="84" height="135" frameX="-64" frameY="-36" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0007" x="2" y="1959" width="73" height="138" frameX="-69" frameY="-34" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0008" x="430" y="2272" width="77" height="141" frameX="-67" frameY="-30" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0009" x="163" y="2536" width="80" height="142" frameX="-64" frameY="-25" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0010" x="169" y="2251" width="93" height="140" frameX="-63" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0011" x="77" y="1962" width="112" height="138" frameX="-60" frameY="-21" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0012" x="2" y="1546" width="131" height="134" frameX="-56" frameY="-21" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0013" x="133" y="1411" width="122" height="133" frameX="-61" frameY="-21" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0014" x="289" y="1846" width="113" height="137" frameX="-67" frameY="-21" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0015" x="328" y="1569" width="103" height="136" frameX="-73" frameY="-24" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0016" x="267" y="1278" width="91" height="134" frameX="-76" frameY="-28" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0017" x="2" y="998" width="83" height="131" frameX="-73" frameY="-30" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0018" x="307" y="485" width="76" height="127" frameX="-70" frameY="-32" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0019" x="108" y="872" width="70" height="130" frameX="-73" frameY="-31" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0020" x="191" y="1970" width="80" height="138" frameX="-64" frameY="-30" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0021" x="81" y="1138" width="91" height="133" frameX="-60" frameY="-27" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0022" x="129" y="741" width="103" height="129" frameX="-60" frameY="-26" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="derecha/derecha0023" x="186" y="484" width="119" height="125" frameX="-60" frameY="-26" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0001" x="385" y="487" width="125" height="127" frameX="-60" frameY="-29" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0002" x="234" y="745" width="111" height="129" frameX="-68" frameY="-29" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0003" x="269" y="1144" width="97" height="132" frameX="-75" frameY="-31" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0004" x="414" y="1163" width="92" height="132" frameX="-83" frameY="-34" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0005" x="379" y="616" width="87" height="128" frameX="-92" frameY="-37" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0006" x="397" y="361" width="83" height="124" frameX="-101" frameY="-38" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0007" x="67" y="606" width="72" height="127" frameX="-107" frameY="-35" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0008" x="2" y="1266" width="75" height="133" frameX="-107" frameY="-32" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0009" x="306" y="1010" width="80" height="132" frameX="-105" frameY="-27" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0010" x="228" y="876" width="93" height="130" frameX="-93" frameY="-25" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0011" x="347" y="746" width="112" height="129" frameX="-77" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0012" x="174" y="1008" width="130" height="131" frameX="-62" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0013" x="2" y="1682" width="122" height="136" frameX="-66" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0014" x="2" y="2528" width="113" height="141" frameX="-69" frameY="-23" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0015" x="245" y="2555" width="104" height="141" frameX="-73" frameY="-26" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0016" x="338" y="2270" width="90" height="140" frameX="-83" frameY="-29" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0017" x="273" y="1985" width="83" height="138" frameX="-93" frameY="-32" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0018" x="358" y="1988" width="76" height="138" frameX="-103" frameY="-34" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0019" x="2" y="2099" width="70" height="140" frameX="-106" frameY="-33" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0020" x="166" y="2393" width="80" height="141" frameX="-105" frameY="-32" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0021" x="395" y="2559" width="91" height="141" frameX="-98" frameY="-29" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0022" x="114" y="1823" width="103" height="137" frameX="-86" frameY="-28" frameWidth="236" frameHeight="236"/>
+    <SubTexture name="izquierda/izquierda0023" x="390" y="1434" width="119" height="133" frameX="-70" frameY="-28" frameWidth="236" frameHeight="236"/>
 </TextureAtlas>

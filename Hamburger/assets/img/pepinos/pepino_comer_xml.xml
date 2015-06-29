@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:e76b0acdabd78ec07504eb26afd901ca:c28223050298eeeb84b3c5511813dbe6:90c812e0e73704141146462469b6240b$ -->
+<TextureAtlas imagePath="pepino_comer_xml.png">
+    <SubTexture name="splashhpepino0001" x="463" y="1827" width="79" height="145" frameX="-262" frameY="-491" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0002" x="463" y="1450" width="264" height="375" frameX="-173" frameY="-335" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0003" x="2" y="1450" width="459" height="485" frameX="-96" frameY="-257" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0004" x="1565" y="1386" width="519" height="593" frameX="-16" frameY="-158" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0005" x="1565" y="726" width="519" height="658" frameX="-16" frameY="-93" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0006" x="1044" y="726" width="519" height="699" frameX="-16" frameY="-52" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0007" x="2" y="2" width="519" height="722" frameX="-16" frameY="-29" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0008" x="2" y="726" width="519" height="722" frameX="-16" frameY="-29" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0009" x="523" y="2" width="519" height="722" frameX="-16" frameY="-29" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0010" x="523" y="726" width="519" height="722" frameX="-16" frameY="-29" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0011" x="1044" y="2" width="519" height="722" frameX="-16" frameY="-29" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhpepino0012" x="1565" y="2" width="519" height="722" frameX="-16" frameY="-29" frameWidth="600" frameHeight="800"/>
+</TextureAtlas>

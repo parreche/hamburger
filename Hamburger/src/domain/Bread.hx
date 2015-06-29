@@ -1,12 +1,13 @@
 package domain;
 
-import domain.AnimationFactory;
+import utils.AnimationFactory;
 import flixel.FlxSprite;
 import flixel.util.FlxPoint;
 import flixel.util.loaders.SparrowData;
 import gamepad.PlayerInput;
 import configuration.GeneralConstants;
 import openfl.Assets;
+import utils.AnimationEnum;
 
 /**
  * This class represents a bread in the game. 
@@ -28,7 +29,7 @@ class Bread extends FlxSprite
 		super(aX, aY);
 		if (aImage == null)
 		{
-			AnimationFactory.loadGraphics(this, aIsTopBread ? AnimationEnum.TOP_BREAD : AnimationEnum.BOTTOM_BREAD); 
+			AnimationFactory.loadAnimations(this, aIsTopBread ? AnimationEnum.TOP_BREAD : AnimationEnum.BOTTOM_BREAD); 
 			width = GeneralConstants.collisionBox_width;
 			height = GeneralConstants.collisionBox_heigth;
 			maxVelocity.set(GeneralConstants.breadVelocity, GeneralConstants.breadVelocity);

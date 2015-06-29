@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:35e47623a40d6745e798aec19c2997d3:7bdd970d385e03b90043f940807778a7:c862e2807bde9fdde4d90a07a779eab8$ -->
+<TextureAtlas imagePath="lechuga_comer_xml.png">
+    <SubTexture name="splashhlechuga0001" x="268" y="1410" width="79" height="145" frameX="-262" frameY="-491" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0002" x="2" y="1410" width="264" height="376" frameX="-173" frameY="-334" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0003" x="1044" y="1373" width="459" height="538" frameX="-96" frameY="-204" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0004" x="1565" y="1342" width="519" height="581" frameX="-16" frameY="-170" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0005" x="1565" y="706" width="519" height="634" frameX="-16" frameY="-117" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0006" x="1044" y="706" width="519" height="665" frameX="-16" frameY="-86" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0007" x="2" y="2" width="519" height="702" frameX="-16" frameY="-49" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0008" x="2" y="706" width="519" height="702" frameX="-16" frameY="-49" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0009" x="523" y="2" width="519" height="702" frameX="-16" frameY="-49" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0010" x="523" y="706" width="519" height="702" frameX="-16" frameY="-49" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0011" x="1044" y="2" width="519" height="702" frameX="-16" frameY="-49" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhlechuga0012" x="1565" y="2" width="519" height="702" frameX="-16" frameY="-49" frameWidth="600" frameHeight="800"/>
+</TextureAtlas>

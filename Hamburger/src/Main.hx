@@ -20,7 +20,7 @@ class Main extends Sprite
 
 	public function new() 
 	{
-		loadConfiguration();
+		//loadConfiguration();
 		super();
 		addEventListener(Event.ADDED_TO_STAGE, init);
 		

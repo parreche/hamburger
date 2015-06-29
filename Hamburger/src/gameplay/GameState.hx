@@ -1,6 +1,8 @@
 package gameplay;
 
-import domain.AnimationEnum;
+import flixel.util.FlxSort;
+import menu.MainMenu;
+import utils.AnimationEnum;
 import domain.Bread;
 import domain.Ingredient;
 import domain.Obstacle;
@@ -16,10 +18,12 @@ import gamepad.PlayerInput;
 import gamepad.KeyboardInput;
 import gameplay.EndState;
 import gameplay.GameScore;
+import menu.MenuButton;
 import openfl.Assets;
 import configuration.CsvImporter;
 import configuration.GeneralConstants;
 import openfl.geom.Point;
+import utils.MenuHelper;
 import utils.SequenceCode;
 
 /**
@@ -36,6 +40,8 @@ class GameState extends FlxState
 	var mObstacles = new FlxGroup();
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
+	public var mPausedGame:Bool = false;
+	var mPauseState:PauseState;
 	
 	public function new() 
 	{
@@ -44,11 +50,9 @@ class GameState extends FlxState
 	
 	override function create():Void
 	{	
-		var background:FlxSprite = new FlxSprite(0, 0);
-		background.loadGraphic(Assets.getBitmapData("img/game/game_background.png"));
-		background.setGraphicSize(GeneralConstants.screenWidth, GeneralConstants.screenHeigth);
-		background.updateHitbox();
-		add(background);
+		add(MenuHelper.loadStaticImage("img/game/game_background.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
+		
+		
 		
 		FlxG.sound.playMusic("sound/gameTheme.wav");
 		
@@ -70,13 +74,18 @@ class GameState extends FlxState
 		mBreadTop = new Bread(GeneralConstants.topBreadStartPosition_x, GeneralConstants.topBreadStartPosition_y, pl, Bread.TOP_BREAD);
 		mBreadBottom = new Bread(GeneralConstants.bottomBreadStartPosition_x, GeneralConstants.bottomBreadStartPosition_y, pr, Bread.BOTTOM_BREAD);
 		
+		var pauseButton:FlxSprite = MenuHelper.createMenuButton("img/game/pause_button.png", GeneralConstants.game_pause_button_width, GeneralConstants.game_pause_button_heigth, GeneralConstants.game_pause_button_x, GeneralConstants.game_pause_button_y, pauseGame);
+		pauseButton.alpha = 0.4;
+		add(pauseButton);
 		loadIngredients();
 		//loadObstacles();
 		
-		add(mObstacles);
+		
 		add(mBreadTop);
 		add(mBreadBottom);
 		add(mIngredients);
+		add(mObstacles);
+		//add(mPauseState);
 		
 		// HUD init
 		HUD.create();
@@ -84,52 +93,56 @@ class GameState extends FlxState
 		add(HUD.getTopBread());
 		add(HUD.getScoreText());
 		add(HUD.getTimerText());
+		
+		// Pause menu
+		mPauseState = new PauseState(this);		
+		add(mPauseState);
+		mPauseState.visible = false;
 	}
 	
 	function loadIngredients():Void
 	{
-		initIngredient(GeneralConstants.tomatoCount, "img/static/Tomato.png", GeneralConstants.tomatoValue, GeneralConstants.tomatoVelocity, GeneralConstants.tomatoMaxVelocity, AnimationEnum.TOMATO);
-		initIngredient(GeneralConstants.baconCount, "img/static/Bacon.png", GeneralConstants.baconValue, GeneralConstants.baconVelocity, GeneralConstants.baconMaxVelocity,AnimationEnum.BACON);
-		initIngredient(GeneralConstants.lettuceCount, "img/static/Lettuce.png", GeneralConstants.lettuceValue, GeneralConstants.lettuceVelocity, GeneralConstants.lettuceMaxVelocity,AnimationEnum.LETTUCE);
-		initIngredient(GeneralConstants.burgerCount, "img/static/Burger.png", GeneralConstants.burgerValue, GeneralConstants.burgerVelocity, GeneralConstants.burgerMaxVelocity,AnimationEnum.HAMBURGER);
-		initIngredient(GeneralConstants.cucumberCount, "img/static/Cucumber.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity,AnimationEnum.CUCUMBER);
+		initIngredient(GeneralConstants.tomatoCount, "img/static/Tomato.png","img/game/end/ingredients/Tomate.png", GeneralConstants.tomatoValue, GeneralConstants.tomatoVelocity, GeneralConstants.tomatoMaxVelocity, AnimationEnum.TOMATO);
+		initIngredient(GeneralConstants.baconCount, "img/static/Bacon.png","img/game/end/ingredients/Panceta.png", GeneralConstants.baconValue, GeneralConstants.baconVelocity, GeneralConstants.baconMaxVelocity,AnimationEnum.BACON);
+		initIngredient(GeneralConstants.lettuceCount, "img/static/Lettuce.png","img/game/end/ingredients/Lechuga.png", GeneralConstants.lettuceValue, GeneralConstants.lettuceVelocity, GeneralConstants.lettuceMaxVelocity,AnimationEnum.LETTUCE);
+		initIngredient(GeneralConstants.burgerCount, "img/static/Burger.png","img/game/end/ingredients/Hamburguesa.png", GeneralConstants.burgerValue, GeneralConstants.burgerVelocity, GeneralConstants.burgerMaxVelocity,AnimationEnum.HAMBURGER);
+		initIngredient(GeneralConstants.cucumberCount, "img/static/Cucumber.png","img/game/end/ingredients/Pepino.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity,AnimationEnum.CUCUMBER);
 	}
 	
 	function loadObstacles():Void
 	{
-		initObstacle("img/CANASTO.png");
-		initObstacle("img/cuchillo.png");
-		initObstacle("img/jarra.png");
-		initObstacle("img/moztaza_ketchup_.png");
-		initObstacle("img/platos.png");
+		initObstacle("img/game/obstacles/ketchupSombra.png");
+		initObstacle("img/game/obstacles/ketchup.png");
+		
 	}
 	
-	function initIngredient(aCount:Int,aPathToImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum):Void
+	function initIngredient(aCount:Int,aPathToImage:String,aPathToEndImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum):Void
 	{
 		for (i in 0...aCount)
 		{
-			var ingredient:Ingredient = new domain.Ingredient(GeneralConstants.ingredientStartPosition_x, GeneralConstants.ingredientStartPosition_y, aPathToImage,mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity,aIngredientType);
-			mIngredients.add(ingredient);	
+			var coords:Point = randomPointInScreen();
+			var ingredient:Ingredient = new domain.Ingredient(coords.x, coords.y, aPathToImage, aPathToEndImage, mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity,aIngredientType,this);
+			mIngredients.add(ingredient);
 		}
 	}
 	
 	function initObstacle(aImage:String):Void
 	{
-		if (Math.random() > 0.5) {
-			var validCoords : Bool = false;
-			var tries:Int = 0;
-			while (!validCoords && tries < 4) {
-				var obstacleCoords:Point = null;
-				obstacleCoords = randomPointInScreen();
-				var obstacle:domain.Obstacle = new domain.Obstacle(obstacleCoords.x, obstacleCoords.y, aImage);
-				validCoords = !FlxG.overlap(obstacle, mBreadBottom) && !FlxG.overlap(obstacle, mBreadTop) && !FlxG.overlap(obstacle, mObstacles);
-				if (validCoords) {
+		//if (Math.random() > 0.5) {
+		//	var validCoords : Bool = false;
+		//	var tries:Int = 0;
+		//	while (!validCoords && tries < 4) {
+				//var obstacleCoords:Point = null;
+				//obstacleCoords = randomPointInScreen();
+				var obstacle:domain.Obstacle = new domain.Obstacle(0,0, aImage);
+				//validCoords = !FlxG.overlap(obstacle, mBreadBottom) && !FlxG.overlap(obstacle, mBreadTop) && !FlxG.overlap(obstacle, mObstacles);
+				//if (validCoords) {
 					mObstacles.add(obstacle);
-				}else {
-					tries++;
-				}
-			}
-		}
+				//}else {
+				//	tries++;
+				//}
+			//}
+		//}
 	}
 	
 	private function randomPointInScreen():Point 
@@ -141,35 +154,48 @@ class GameState extends FlxState
 	
 	override function update():Void
 	{
-		HUD.update();
-		checkGameOver();
-		if (HUD.isHurryUp()) {
-			FlxG.sound.play("sound/tick.wav",2);
-		}
-		drawEatenIngredients();
-		
-		mBreadTop.immovable = false;
-		mBreadBottom.immovable = false;
-		if (FlxG.collide(mBreadTop, mBreadBottom)) 
+		mPauseState.update();
+		//sort(FlxSort.byY, FlxSort.ASCENDING);
+		if (FlxG.keys.pressed.ENTER)
+			pauseGame(null);
+			
+		if (!mPausedGame)
 		{
-			FlxG.sound.play("sound/breadCollide.wav");
+			mPauseState.visible = false;
+			FlxG.sound.music.resume();
+			HUD.update();
+			checkGameOver();
+			if (HUD.isHurryUp()) {
+				FlxG.sound.play("sound/tick.wav",2);
+			}
+			drawEatenIngredients();
+			
+			mBreadTop.immovable = false;
+			mBreadBottom.immovable = false;
+			if (FlxG.collide(mBreadTop, mBreadBottom)) 
+			{
+				FlxG.sound.play("sound/breadCollide.wav");
+			}
+			if (FlxG.collide(mBreadTop, mObstacles))
+			{
+				FlxG.sound.play("sound/breadCollide.wav");
+			}
+			if (FlxG.collide(mBreadBottom, mObstacles))
+			{
+				FlxG.sound.play("sound/breadCollide.wav");
+			}
+			mBreadTop.immovable = true;
+			mBreadBottom.immovable = true;
+			FlxG.collide(mBreadTop, mIngredients);
+			FlxG.collide(mBreadBottom, mIngredients);
+			FlxG.collide(mIngredients, mIngredients);
+			FlxG.collide(mIngredients, mObstacles);
+			
+			super.update();
+		} else {
+			FlxG.sound.music.pause();
+			mPauseState.visible = true;
 		}
-		if (FlxG.collide(mBreadTop, mObstacles))
-		{
-			FlxG.sound.play("sound/breadCollide.wav");
-		}
-		if (FlxG.collide(mBreadBottom, mObstacles))
-		{
-			FlxG.sound.play("sound/breadCollide.wav");
-		}
-		mBreadTop.immovable = true;
-		mBreadBottom.immovable = true;
-		FlxG.collide(mBreadTop, mIngredients);
-		FlxG.collide(mBreadBottom, mIngredients);
-		FlxG.collide(mIngredients, mIngredients);
-		FlxG.collide(mIngredients, mObstacles);
-		
-		super.update();
 	}
 	
 	private function checkGameOver() : Void
@@ -184,6 +210,14 @@ class GameState extends FlxState
 				FlxG.sound.music.stop();
 			});
 		}
+	}
+	
+	public function quitGame() : Void
+	{
+		FlxG.camera.fade(FlxColor.BLACK, 0.9, false, function() {
+			FlxG.switchState(new MainMenu());
+			FlxG.sound.music.stop();
+		});
 	}
 	
 	private function drawEatenIngredients() : Void
@@ -206,4 +240,10 @@ class GameState extends FlxState
 		}
 		HUD.sHasEaten = false;
 	}
+	
+	private function pauseGame(aButton:MenuButton)
+	{
+		mPausedGame = !mPausedGame;
+	}
+	
 }
