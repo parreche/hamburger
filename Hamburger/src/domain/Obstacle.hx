@@ -1,4 +1,5 @@
 package domain;
+import configuration.GeneralConstants;
 import flixel.FlxSprite;
 import openfl.Assets;
 import openfl.geom.Point;
@@ -14,17 +15,19 @@ import openfl.geom.Point;
 class Obstacle extends FlxSprite
 {
 
-	public function new(aX:Float, aY:Float, aImage:String) 
+	public function new(aX:Float, aY:Float, aImage:String, aCollisionBoxWidth:Int, aCollisionBoxHeigth:Int, aCollisionBoxX:Int, aCollisionBoxY:Int) 
 	{
 		super(aX, aY);
 		loadGraphic(Assets.getBitmapData(aImage), false);
+		width = aCollisionBoxWidth;
+		height = aCollisionBoxHeigth;
 		immovable = true;
+		offset.x = aCollisionBoxX;
+		offset.y = aCollisionBoxY;
 	}
 	
 	override function update():Void
 	{	
 		super.update();
 	}
-	
-	
 }

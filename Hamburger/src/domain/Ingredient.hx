@@ -81,7 +81,7 @@ class Ingredient extends FlxSprite
 			
 		}
 		
-		if (x+width > GeneralConstants.screenWidth && velocity.x>0)
+		if (x+width > GeneralConstants.game_screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;
 		}
@@ -93,7 +93,7 @@ class Ingredient extends FlxSprite
 		{
 			velocity.y *= -1;
 		}
-		if (y+height > GeneralConstants.screenHeigth && velocity.y>0)
+		if (y+height > GeneralConstants.game_screenHeigth && velocity.y>0)
 		{
 			velocity.y *= -1;
 		}

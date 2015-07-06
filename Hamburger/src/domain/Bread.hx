@@ -52,7 +52,17 @@ class Bread extends FlxSprite
 		{
 			return;
 		}
-		if (x+width > GeneralConstants.screenWidth && velocity.x>0)
+		
+		var isPressingKey:Bool = mPlayerInput.left() || mPlayerInput.down() || mPlayerInput.right() || mPlayerInput.up();
+		
+		if(isPressingKey)
+		{
+			moveBread();
+		} else {
+			stopBread();
+		}
+		
+		if (x+width > GeneralConstants.game_screenWidth && velocity.x>0)
 		{
 			velocity.x *= -1;
 		}
@@ -64,18 +74,9 @@ class Bread extends FlxSprite
 		{
 			velocity.y *= -1;
 		}
-		if (y+height > GeneralConstants.screenHeigth && velocity.y>0)
+		if (y+height > GeneralConstants.game_screenHeigth && velocity.y>0)
 		{
 			velocity.y *= -1;
-		}
-		
-		var isPressingKey:Bool = mPlayerInput.left() || mPlayerInput.down() || mPlayerInput.right() || mPlayerInput.up();
-		
-		if(isPressingKey)
-		{
-			moveBread();
-		} else {
-			stopBread();
 		}
 	}
 	

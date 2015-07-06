@@ -77,10 +77,34 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/game/hud_background.png", AssetType.IMAGE);
 		className.set ("img/game/mainMenu_button.png", __ASSET__img_game_mainmenu_button_png);
 		type.set ("img/game/mainMenu_button.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/canasta.png", __ASSET__img_game_obstacles_canasta_png);
+		type.set ("img/game/obstacles/canasta.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/canastaSombra.png", __ASSET__img_game_obstacles_canastasombra_png);
+		type.set ("img/game/obstacles/canastaSombra.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/cuchillo.png", __ASSET__img_game_obstacles_cuchillo_png);
+		type.set ("img/game/obstacles/cuchillo.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/cuchilloSombra.png", __ASSET__img_game_obstacles_cuchillosombra_png);
+		type.set ("img/game/obstacles/cuchilloSombra.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/frasco.png", __ASSET__img_game_obstacles_frasco_png);
+		type.set ("img/game/obstacles/frasco.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/frasco2.png", __ASSET__img_game_obstacles_frasco2_png);
+		type.set ("img/game/obstacles/frasco2.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/frasco2Sombra.png", __ASSET__img_game_obstacles_frasco2sombra_png);
+		type.set ("img/game/obstacles/frasco2Sombra.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/frascoSombra.png", __ASSET__img_game_obstacles_frascosombra_png);
+		type.set ("img/game/obstacles/frascoSombra.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/jarra.png", __ASSET__img_game_obstacles_jarra_png);
+		type.set ("img/game/obstacles/jarra.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/jarraSombra.png", __ASSET__img_game_obstacles_jarrasombra_png);
+		type.set ("img/game/obstacles/jarraSombra.png", AssetType.IMAGE);
 		className.set ("img/game/obstacles/ketchup.png", __ASSET__img_game_obstacles_ketchup_png);
 		type.set ("img/game/obstacles/ketchup.png", AssetType.IMAGE);
 		className.set ("img/game/obstacles/ketchupSombra.png", __ASSET__img_game_obstacles_ketchupsombra_png);
 		type.set ("img/game/obstacles/ketchupSombra.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/plato sombra.png", __ASSET__img_game_obstacles_plato_sombra_png);
+		type.set ("img/game/obstacles/plato sombra.png", AssetType.IMAGE);
+		className.set ("img/game/obstacles/plato.png", __ASSET__img_game_obstacles_plato_png);
+		type.set ("img/game/obstacles/plato.png", AssetType.IMAGE);
 		className.set ("img/game/pause.png", __ASSET__img_game_pause_png);
 		type.set ("img/game/pause.png", AssetType.IMAGE);
 		className.set ("img/game/pause_button.png", __ASSET__img_game_pause_button_png);
@@ -268,11 +292,59 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/canasta.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/canastaSombra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/cuchillo.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/cuchilloSombra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/frasco.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/frasco2.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/frasco2Sombra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/frascoSombra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/jarra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/jarraSombra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/game/obstacles/ketchup.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
 		id = "img/game/obstacles/ketchupSombra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/plato sombra.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/obstacles/plato.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -601,6 +673,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__fonts_barrio_regular_ttf);
 		
 		#end
@@ -657,11 +741,47 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("img/game/mainMenu_button.png", __ASSET__img_game_mainmenu_button_png);
 		type.set ("img/game/mainMenu_button.png", AssetType.IMAGE);
 		
+		className.set ("img/game/obstacles/canasta.png", __ASSET__img_game_obstacles_canasta_png);
+		type.set ("img/game/obstacles/canasta.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/canastaSombra.png", __ASSET__img_game_obstacles_canastasombra_png);
+		type.set ("img/game/obstacles/canastaSombra.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/cuchillo.png", __ASSET__img_game_obstacles_cuchillo_png);
+		type.set ("img/game/obstacles/cuchillo.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/cuchilloSombra.png", __ASSET__img_game_obstacles_cuchillosombra_png);
+		type.set ("img/game/obstacles/cuchilloSombra.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/frasco.png", __ASSET__img_game_obstacles_frasco_png);
+		type.set ("img/game/obstacles/frasco.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/frasco2.png", __ASSET__img_game_obstacles_frasco2_png);
+		type.set ("img/game/obstacles/frasco2.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/frasco2Sombra.png", __ASSET__img_game_obstacles_frasco2sombra_png);
+		type.set ("img/game/obstacles/frasco2Sombra.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/frascoSombra.png", __ASSET__img_game_obstacles_frascosombra_png);
+		type.set ("img/game/obstacles/frascoSombra.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/jarra.png", __ASSET__img_game_obstacles_jarra_png);
+		type.set ("img/game/obstacles/jarra.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/jarraSombra.png", __ASSET__img_game_obstacles_jarrasombra_png);
+		type.set ("img/game/obstacles/jarraSombra.png", AssetType.IMAGE);
+		
 		className.set ("img/game/obstacles/ketchup.png", __ASSET__img_game_obstacles_ketchup_png);
 		type.set ("img/game/obstacles/ketchup.png", AssetType.IMAGE);
 		
 		className.set ("img/game/obstacles/ketchupSombra.png", __ASSET__img_game_obstacles_ketchupsombra_png);
 		type.set ("img/game/obstacles/ketchupSombra.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/plato sombra.png", __ASSET__img_game_obstacles_plato_sombra_png);
+		type.set ("img/game/obstacles/plato sombra.png", AssetType.IMAGE);
+		
+		className.set ("img/game/obstacles/plato.png", __ASSET__img_game_obstacles_plato_png);
+		type.set ("img/game/obstacles/plato.png", AssetType.IMAGE);
 		
 		className.set ("img/game/pause.png", __ASSET__img_game_pause_png);
 		type.set ("img/game/pause.png", AssetType.IMAGE);
@@ -1456,8 +1576,20 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_game_game_background_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_hud_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_mainmenu_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_canasta_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_canastasombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_cuchillo_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_cuchillosombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_frasco_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_frasco2_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_frasco2sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_frascosombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_jarra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_jarrasombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_obstacles_ketchup_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_obstacles_ketchupsombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_plato_sombra_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_obstacles_plato_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_pause_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_pause_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_resume_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1597,6 +1729,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 @:keep #if display private #end class __ASSET__fonts_barrio_regular_ttf extends lime.text.Font { public function new () { super (); name = "Barrio"; } } 
 
 
@@ -1623,8 +1767,20 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/img/game/game_background.jpg") #if display private #end class __ASSET__img_game_game_background_jpg extends lime.graphics.Image {}
 @:image("assets/img/game/hud_background.png") #if display private #end class __ASSET__img_game_hud_background_png extends lime.graphics.Image {}
 @:image("assets/img/game/mainMenu_button.png") #if display private #end class __ASSET__img_game_mainmenu_button_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/canasta.png") #if display private #end class __ASSET__img_game_obstacles_canasta_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/canastaSombra.png") #if display private #end class __ASSET__img_game_obstacles_canastasombra_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/cuchillo.png") #if display private #end class __ASSET__img_game_obstacles_cuchillo_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/cuchilloSombra.png") #if display private #end class __ASSET__img_game_obstacles_cuchillosombra_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/frasco.png") #if display private #end class __ASSET__img_game_obstacles_frasco_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/frasco2.png") #if display private #end class __ASSET__img_game_obstacles_frasco2_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/frasco2Sombra.png") #if display private #end class __ASSET__img_game_obstacles_frasco2sombra_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/frascoSombra.png") #if display private #end class __ASSET__img_game_obstacles_frascosombra_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/jarra.png") #if display private #end class __ASSET__img_game_obstacles_jarra_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/jarraSombra.png") #if display private #end class __ASSET__img_game_obstacles_jarrasombra_png extends lime.graphics.Image {}
 @:image("assets/img/game/obstacles/ketchup.png") #if display private #end class __ASSET__img_game_obstacles_ketchup_png extends lime.graphics.Image {}
 @:image("assets/img/game/obstacles/ketchupSombra.png") #if display private #end class __ASSET__img_game_obstacles_ketchupsombra_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/plato sombra.png") #if display private #end class __ASSET__img_game_obstacles_plato_sombra_png extends lime.graphics.Image {}
+@:image("assets/img/game/obstacles/plato.png") #if display private #end class __ASSET__img_game_obstacles_plato_png extends lime.graphics.Image {}
 @:image("assets/img/game/pause.png") #if display private #end class __ASSET__img_game_pause_png extends lime.graphics.Image {}
 @:image("assets/img/game/pause_button.png") #if display private #end class __ASSET__img_game_pause_button_png extends lime.graphics.Image {}
 @:image("assets/img/game/resume_button.png") #if display private #end class __ASSET__img_game_resume_button_png extends lime.graphics.Image {}

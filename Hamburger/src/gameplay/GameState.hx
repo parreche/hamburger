@@ -51,9 +51,6 @@ class GameState extends FlxState
 	override function create():Void
 	{	
 		add(MenuHelper.loadStaticImage("img/game/game_background.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
-		
-		
-		
 		FlxG.sound.playMusic("sound/gameTheme.wav");
 		
 		var enableJoystick:Bool = GeneralConstants.enableJoystick == 1;
@@ -78,14 +75,12 @@ class GameState extends FlxState
 		pauseButton.alpha = 0.4;
 		add(pauseButton);
 		loadIngredients();
-		//loadObstacles();
-		
+		loadObstacles();
 		
 		add(mBreadTop);
 		add(mBreadBottom);
 		add(mIngredients);
 		add(mObstacles);
-		//add(mPauseState);
 		
 		// HUD init
 		HUD.create();
@@ -111,9 +106,11 @@ class GameState extends FlxState
 	
 	function loadObstacles():Void
 	{
-		initObstacle("img/game/obstacles/ketchupSombra.png");
-		initObstacle("img/game/obstacles/ketchup.png");
-		
+		initObstacle("img/game/obstacles/ketchup.png", "img/game/obstacles/ketchupSombra.png", GeneralConstants.ketchup_collisionBox_width, GeneralConstants.ketchup_collisionBox_heigth, GeneralConstants.ketchup_collisionBox_offset_x, GeneralConstants.ketchup_collisionBox_offset_y);		
+		initObstacle("img/game/obstacles/canasta.png", "img/game/obstacles/canastaSombra.png", GeneralConstants.canasta_collisionBox_width, GeneralConstants.canasta_collisionBox_heigth, GeneralConstants.canasta_collisionBox_offset_x, GeneralConstants.canasta_collisionBox_offset_y);
+		initObstacle("img/game/obstacles/cuchillo.png", "img/game/obstacles/cuchilloSombra.png", GeneralConstants.cuchillo_collisionBox_width, GeneralConstants.cuchillo_collisionBox_heigth, GeneralConstants.cuchillo_collisionBox_offset_x, GeneralConstants.cuchillo_collisionBox_offset_y);
+		initObstacle("img/game/obstacles/frasco.png","img/game/obstacles/frascoSombra.png", GeneralConstants.frasco_collisionBox_width, GeneralConstants.frasco_collisionBox_heigth, GeneralConstants.frasco_collisionBox_offset_x, GeneralConstants.frasco_collisionBox_offset_y);
+		initObstacle("img/game/obstacles/frasco2.png", "img/game/obstacles/frasco2Sombra.png", GeneralConstants.frasco2_collisionBox_width, GeneralConstants.frasco2_collisionBox_heigth, GeneralConstants.frasco2_collisionBox_offset_x, GeneralConstants.frasco2_collisionBox_offset_y);
 	}
 	
 	function initIngredient(aCount:Int,aPathToImage:String,aPathToEndImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum):Void
@@ -126,29 +123,30 @@ class GameState extends FlxState
 		}
 	}
 	
-	function initObstacle(aImage:String):Void
+	function initObstacle(aImage:String,aImageShadow:String, aCollisionBoxWidth:Int, aCollisionBoxHeigth:Int, aCollisionBoxX:Int, aCollisionBoxY:Int):Void
 	{
-		//if (Math.random() > 0.5) {
+		if (Math.random() > 0.5) {
 		//	var validCoords : Bool = false;
 		//	var tries:Int = 0;
 		//	while (!validCoords && tries < 4) {
-				//var obstacleCoords:Point = null;
-				//obstacleCoords = randomPointInScreen();
-				var obstacle:domain.Obstacle = new domain.Obstacle(0,0, aImage);
+				var obstacleCoords:Point = randomPointInScreen();
+				var obstacle:domain.Obstacle = new domain.Obstacle(obstacleCoords.x,obstacleCoords.y, aImage, aCollisionBoxWidth, aCollisionBoxHeigth, aCollisionBoxX, aCollisionBoxY);
+				var obstacleShadow:domain.Obstacle = new domain.Obstacle(obstacleCoords.x,obstacleCoords.y, aImageShadow, aCollisionBoxWidth, aCollisionBoxHeigth, aCollisionBoxX, aCollisionBoxY);
 				//validCoords = !FlxG.overlap(obstacle, mBreadBottom) && !FlxG.overlap(obstacle, mBreadTop) && !FlxG.overlap(obstacle, mObstacles);
 				//if (validCoords) {
 					mObstacles.add(obstacle);
+					mObstacles.add(obstacleShadow);
 				//}else {
 				//	tries++;
 				//}
 			//}
-		//}
+		}
 	}
 	
 	private function randomPointInScreen():Point 
 	{
-		var xCoord:Float = Math.random() * GeneralConstants.screenWidth;
-		var yCoord:Float = Math.random() * GeneralConstants.screenHeigth;
+		var xCoord:Float = Math.random() * GeneralConstants.game_screenWidth;
+		var yCoord:Float = Math.random() * GeneralConstants.game_screenHeigth;
 		return new Point(xCoord, yCoord);
 	}
 	
