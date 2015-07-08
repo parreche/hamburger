@@ -26,10 +26,13 @@ class MenuButton extends FlxSprite
 	public function new(aImagePath:String,aAnimationWidth:Int,aAnimationHeight:Int,?aOnPressed:MenuButton->Void, aAdjustX:Int=0,aAdjustY:Int=0) 
 	{
 		super();
-		loadGraphic(Assets.getBitmapData(aImagePath), true, aAnimationWidth, aAnimationHeight);
-		setGraphicSize(aAnimationWidth - aAdjustX, aAnimationHeight - aAdjustY);
-		updateHitbox();
-		
+		if (aImagePath != null) {
+			loadGraphic(Assets.getBitmapData(aImagePath), true, aAnimationWidth, aAnimationHeight);
+		}
+		//setGraphicSize(aAnimationWidth - aAdjustX, aAnimationHeight - aAdjustY);
+		//updateHitbox();
+		//width = aAnimationWidth - aAdjustX;
+		//height = aAnimationHeight - aAdjustY;
 		hMousePosition = new FlxPoint();
 		onPressed = aOnPressed;
 	}

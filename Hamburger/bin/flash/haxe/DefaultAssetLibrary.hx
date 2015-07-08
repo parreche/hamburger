@@ -129,14 +129,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/lechuga/lechuga_comer_xml.xml", AssetType.TEXT);
 		className.set ("img/mainMenu/animation/background_title.png", __ASSET__img_mainmenu_animation_background_title_png);
 		type.set ("img/mainMenu/animation/background_title.png", AssetType.IMAGE);
-		className.set ("img/mainMenu/animation/menuAnimacion0.png", __ASSET__img_mainmenu_animation_menuanimacion0_png);
-		type.set ("img/mainMenu/animation/menuAnimacion0.png", AssetType.IMAGE);
-		className.set ("img/mainMenu/animation/menuAnimacion0.xml", __ASSET__img_mainmenu_animation_menuanimacion0_xml);
-		type.set ("img/mainMenu/animation/menuAnimacion0.xml", AssetType.TEXT);
-		className.set ("img/mainMenu/animation/menuAnimacion1.png", __ASSET__img_mainmenu_animation_menuanimacion1_png);
-		type.set ("img/mainMenu/animation/menuAnimacion1.png", AssetType.IMAGE);
-		className.set ("img/mainMenu/animation/menuAnimacion1.xml", __ASSET__img_mainmenu_animation_menuanimacion1_xml);
-		type.set ("img/mainMenu/animation/menuAnimacion1.xml", AssetType.TEXT);
 		className.set ("img/mainMenu/background_menu.png", __ASSET__img_mainmenu_background_menu_png);
 		type.set ("img/mainMenu/background_menu.png", AssetType.IMAGE);
 		className.set ("img/mainMenu/bottomBread.png", __ASSET__img_mainmenu_bottombread_png);
@@ -153,6 +145,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/mainMenu/topBread.png", AssetType.IMAGE);
 		className.set ("img/mainMenu/tutorial_button.png", __ASSET__img_mainmenu_tutorial_button_png);
 		type.set ("img/mainMenu/tutorial_button.png", AssetType.IMAGE);
+		className.set ("img/optionsMenu/check.png", __ASSET__img_optionsmenu_check_png);
+		type.set ("img/optionsMenu/check.png", AssetType.IMAGE);
 		className.set ("img/optionsMenu/close_button.png", __ASSET__img_optionsmenu_close_button_png);
 		type.set ("img/optionsMenu/close_button.png", AssetType.IMAGE);
 		className.set ("img/optionsMenu/credits_button.png", __ASSET__img_optionsmenu_credits_button_png);
@@ -396,22 +390,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
-		id = "img/mainMenu/animation/menuAnimacion0.png";
-		path.set (id, id);
-		
-		type.set (id, AssetType.IMAGE);
-		id = "img/mainMenu/animation/menuAnimacion0.xml";
-		path.set (id, id);
-		
-		type.set (id, AssetType.TEXT);
-		id = "img/mainMenu/animation/menuAnimacion1.png";
-		path.set (id, id);
-		
-		type.set (id, AssetType.IMAGE);
-		id = "img/mainMenu/animation/menuAnimacion1.xml";
-		path.set (id, id);
-		
-		type.set (id, AssetType.TEXT);
 		id = "img/mainMenu/background_menu.png";
 		path.set (id, id);
 		
@@ -441,6 +419,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.IMAGE);
 		id = "img/mainMenu/tutorial_button.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/optionsMenu/check.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -682,9 +664,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-		
-		
-		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__fonts_barrio_regular_ttf);
 		
 		#end
@@ -819,18 +798,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("img/mainMenu/animation/background_title.png", __ASSET__img_mainmenu_animation_background_title_png);
 		type.set ("img/mainMenu/animation/background_title.png", AssetType.IMAGE);
 		
-		className.set ("img/mainMenu/animation/menuAnimacion0.png", __ASSET__img_mainmenu_animation_menuanimacion0_png);
-		type.set ("img/mainMenu/animation/menuAnimacion0.png", AssetType.IMAGE);
-		
-		className.set ("img/mainMenu/animation/menuAnimacion0.xml", __ASSET__img_mainmenu_animation_menuanimacion0_xml);
-		type.set ("img/mainMenu/animation/menuAnimacion0.xml", AssetType.TEXT);
-		
-		className.set ("img/mainMenu/animation/menuAnimacion1.png", __ASSET__img_mainmenu_animation_menuanimacion1_png);
-		type.set ("img/mainMenu/animation/menuAnimacion1.png", AssetType.IMAGE);
-		
-		className.set ("img/mainMenu/animation/menuAnimacion1.xml", __ASSET__img_mainmenu_animation_menuanimacion1_xml);
-		type.set ("img/mainMenu/animation/menuAnimacion1.xml", AssetType.TEXT);
-		
 		className.set ("img/mainMenu/background_menu.png", __ASSET__img_mainmenu_background_menu_png);
 		type.set ("img/mainMenu/background_menu.png", AssetType.IMAGE);
 		
@@ -854,6 +821,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("img/mainMenu/tutorial_button.png", __ASSET__img_mainmenu_tutorial_button_png);
 		type.set ("img/mainMenu/tutorial_button.png", AssetType.IMAGE);
+		
+		className.set ("img/optionsMenu/check.png", __ASSET__img_optionsmenu_check_png);
+		type.set ("img/optionsMenu/check.png", AssetType.IMAGE);
 		
 		className.set ("img/optionsMenu/close_button.png", __ASSET__img_optionsmenu_close_button_png);
 		type.set ("img/optionsMenu/close_button.png", AssetType.IMAGE);
@@ -1602,10 +1572,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_lechuga_lechuga_comer_xml_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_lechuga_lechuga_comer_xml_xml extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_animation_background_title_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__img_mainmenu_animation_menuanimacion0_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__img_mainmenu_animation_menuanimacion0_xml extends flash.utils.ByteArray { }
-@:keep @:bind #if display private #end class __ASSET__img_mainmenu_animation_menuanimacion1_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__img_mainmenu_animation_menuanimacion1_xml extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_background_menu_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_bottombread_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_exit_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1614,6 +1580,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_start_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_topbread_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_tutorial_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_optionsmenu_check_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_optionsmenu_close_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_optionsmenu_credits_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_optionsmenu_cross_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1652,9 +1619,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
-
-
-
 
 
 
@@ -1793,10 +1757,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/img/lechuga/lechuga_comer_xml.png") #if display private #end class __ASSET__img_lechuga_lechuga_comer_xml_png extends lime.graphics.Image {}
 @:file("assets/img/lechuga/lechuga_comer_xml.xml") #if display private #end class __ASSET__img_lechuga_lechuga_comer_xml_xml extends lime.utils.ByteArray {}
 @:image("assets/img/mainMenu/animation/background_title.png") #if display private #end class __ASSET__img_mainmenu_animation_background_title_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/animation/menuAnimacion0.png") #if display private #end class __ASSET__img_mainmenu_animation_menuanimacion0_png extends lime.graphics.Image {}
-@:file("assets/img/mainMenu/animation/menuAnimacion0.xml") #if display private #end class __ASSET__img_mainmenu_animation_menuanimacion0_xml extends lime.utils.ByteArray {}
-@:image("assets/img/mainMenu/animation/menuAnimacion1.png") #if display private #end class __ASSET__img_mainmenu_animation_menuanimacion1_png extends lime.graphics.Image {}
-@:file("assets/img/mainMenu/animation/menuAnimacion1.xml") #if display private #end class __ASSET__img_mainmenu_animation_menuanimacion1_xml extends lime.utils.ByteArray {}
 @:image("assets/img/mainMenu/background_menu.png") #if display private #end class __ASSET__img_mainmenu_background_menu_png extends lime.graphics.Image {}
 @:image("assets/img/mainMenu/bottomBread.png") #if display private #end class __ASSET__img_mainmenu_bottombread_png extends lime.graphics.Image {}
 @:image("assets/img/mainMenu/exit_button.png") #if display private #end class __ASSET__img_mainmenu_exit_button_png extends lime.graphics.Image {}
@@ -1805,6 +1765,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/img/mainMenu/start_button.png") #if display private #end class __ASSET__img_mainmenu_start_button_png extends lime.graphics.Image {}
 @:image("assets/img/mainMenu/topBread.png") #if display private #end class __ASSET__img_mainmenu_topbread_png extends lime.graphics.Image {}
 @:image("assets/img/mainMenu/tutorial_button.png") #if display private #end class __ASSET__img_mainmenu_tutorial_button_png extends lime.graphics.Image {}
+@:image("assets/img/optionsMenu/check.png") #if display private #end class __ASSET__img_optionsmenu_check_png extends lime.graphics.Image {}
 @:image("assets/img/optionsMenu/close_button.png") #if display private #end class __ASSET__img_optionsmenu_close_button_png extends lime.graphics.Image {}
 @:image("assets/img/optionsMenu/credits_button.png") #if display private #end class __ASSET__img_optionsmenu_credits_button_png extends lime.graphics.Image {}
 @:image("assets/img/optionsMenu/cross.png") #if display private #end class __ASSET__img_optionsmenu_cross_png extends lime.graphics.Image {}

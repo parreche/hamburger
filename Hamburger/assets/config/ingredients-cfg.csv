@@ -8,8 +8,8 @@ menu_topImage_x,735
 menu_topImage_y,20
 menu_topImage_heigth,237
 menu_topImage_width,451
-menu_tutorialButton_x_adjust,0
-menu_tutorialButton_y_adjust,20
+menu_tutorialButton_x_adjust,500
+menu_tutorialButton_y_adjust,50
 menu_tutorialButton_x,598
 menu_tutorialButton_y,167
 menu_tutorialButton_heigth,284
@@ -87,7 +87,7 @@ score_y,50
 timerSize,60
 timer_x,1780
 timer_y,990
-timer_value,120
+timer_value,10
 HUD_x,1488
 HUD_y,1
 HUD_width,290
@@ -109,8 +109,8 @@ lettuceVelocity,0
 lettuceMaxVelocity,10
 tomatoCount,1
 tomatoValue,200
-tomatoVelocity,0
-tomatoMaxVelocity,10
+tomatoVelocity,1000
+tomatoMaxVelocity,1010
 cucumberCount,1
 cucumberValue,100
 cucumberVelocity,0

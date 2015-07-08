@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:11beffa46aaeff5f90fdffab56a9be27:f72bd5f21b02ba83c2893cb7f597ee2a:673ba6d9051378a83a24a1a97d99abdc$ -->
-<TextureAtlas imagePath="menuAnimacion1.png">
-    <SubTexture name="Menus 2_00001" x="2" y="2" width="602" height="508" frameX="-706" frameY="-120" frameWidth="1920" frameHeight="1080"/>
-    <SubTexture name="Menus 2_00002" x="606" y="2" width="602" height="508" frameX="-706" frameY="-117" frameWidth="1920" frameHeight="1080"/>
-    <SubTexture name="Menus 2_00003" x="1853" y="2" width="641" height="477" frameX="-690" frameY="-573" frameWidth="1920" frameHeight="1080"/>
-    <SubTexture name="Menus 2_00004" x="1210" y="2" width="641" height="494" frameX="-690" frameY="-556" frameWidth="1920" frameHeight="1080"/>
-</TextureAtlas>

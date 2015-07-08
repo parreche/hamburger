@@ -202,22 +202,6 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("img/mainMenu/animation/menuAnimacion0.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/mainMenu/animation/menuAnimacion0.xml");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("img/mainMenu/animation/menuAnimacion1.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/mainMenu/animation/menuAnimacion1.xml");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
 		urls.push ("img/mainMenu/background_menu.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -247,6 +231,10 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/mainMenu/tutorial_button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/optionsMenu/check.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		

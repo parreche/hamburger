@@ -35,12 +35,11 @@ class MainMenu extends FlxState
 	override public function create():Void 
 	{
 		add(MenuHelper.loadStaticImage("img/mainMenu/background_menu.png", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
-		
+		FlxG.sound.playMusic("sound/menuTheme.wav");
 		if (sPlayAnimiation)
 		{
 			//mAnimation = AnimationFactory.loadAnimations(mAnimation, AnimationEnum.MAIN_MENU);
 			add(MenuHelper.createMenuButton("img/mainMenu/animation/background_title.png", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0, showMenu, false));
-			FlxG.sound.playMusic("sound/menuTheme.wav");
 		} else {
 			initMainMenu();
 		}

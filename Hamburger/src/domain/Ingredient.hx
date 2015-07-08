@@ -47,14 +47,14 @@ class Ingredient extends FlxSprite
 			AnimationFactory.loadAnimations(this, aIngredientType);
 			width = GeneralConstants.collisionBox_width;
 			height = GeneralConstants.collisionBox_heigth;
-			//aVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
+			aVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
 			velocity.set(aVelocity, aVelocity);
-			acceleration.x = 0;
-			acceleration.y = 0;
+			//acceleration.x = 0;
+			//acceleration.y = 0;
 			maxVelocity.set(aMaxVelocity, aMaxVelocity);
-			elasticity = 1;
-			x = 100 + 300 * Math.random();
-			y = Math.random() * 200;
+			elasticity = 0.5;
+			//x = 100 + 300 * Math.random();
+			//y = Math.random() * 200;
 			offset.x = GeneralConstants.collisionBox_offset_x;
 			offset.y = GeneralConstants.collisionBox_offset_y;
 			
