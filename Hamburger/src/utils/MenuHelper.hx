@@ -12,9 +12,9 @@ import openfl.Assets;
 class MenuHelper
 {
 
-	public static function createMenuButton(aImage:String,aWidth:Int,aHeigth:Int, aXCoord:Int, aYCoord:Int,?aOnPressed:MenuButton->Void, aHasAnimation:Bool = true, aAdjustX:Int=0,aAdjustY:Int=0): FlxSprite 
+	public static function createMenuButton(aImage:String,aWidth:Int,aHeigth:Int, aXCoord:Int, aYCoord:Int,?aOnPressed:MenuButton->Void, aHasAnimation:Bool = true): FlxSprite 
 	{
-		var btn:MenuButton = new MenuButton(aImage,aWidth,aHeigth,aOnPressed, aAdjustX, aAdjustY);
+		var btn:MenuButton = new MenuButton(aImage,aWidth,aHeigth,aOnPressed);
 		btn.setOver([(aHasAnimation ? 1 : 0)]);
 		btn.setUp([0]);
 		btn.setDown([(aHasAnimation ? 1 : 0)]);

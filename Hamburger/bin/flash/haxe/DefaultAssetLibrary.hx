@@ -61,6 +61,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/game/end/ingredients/Lechuga.png", AssetType.IMAGE);
 		className.set ("img/game/end/ingredients/Panceta.png", __ASSET__img_game_end_ingredients_panceta_png);
 		type.set ("img/game/end/ingredients/Panceta.png", AssetType.IMAGE);
+		className.set ("img/game/end/ingredients/Pan_de_Arriba.png", __ASSET__img_game_end_ingredients_pan_de_arriba_png);
+		type.set ("img/game/end/ingredients/Pan_de_Arriba.png", AssetType.IMAGE);
 		className.set ("img/game/end/ingredients/Pepino.png", __ASSET__img_game_end_ingredients_pepino_png);
 		type.set ("img/game/end/ingredients/Pepino.png", AssetType.IMAGE);
 		className.set ("img/game/end/ingredients/Tomate.png", __ASSET__img_game_end_ingredients_tomate_png);
@@ -251,6 +253,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.IMAGE);
 		id = "img/game/end/ingredients/Panceta.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/game/end/ingredients/Pan_de_Arriba.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -664,6 +670,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__fonts_barrio_regular_ttf);
 		
 		#end
@@ -695,6 +702,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("img/game/end/ingredients/Panceta.png", __ASSET__img_game_end_ingredients_panceta_png);
 		type.set ("img/game/end/ingredients/Panceta.png", AssetType.IMAGE);
+		
+		className.set ("img/game/end/ingredients/Pan_de_Arriba.png", __ASSET__img_game_end_ingredients_pan_de_arriba_png);
+		type.set ("img/game/end/ingredients/Pan_de_Arriba.png", AssetType.IMAGE);
 		
 		className.set ("img/game/end/ingredients/Pepino.png", __ASSET__img_game_end_ingredients_pepino_png);
 		type.set ("img/game/end/ingredients/Pepino.png", AssetType.IMAGE);
@@ -1538,6 +1548,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_hamburguesa_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_lechuga_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_panceta_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_pan_de_arriba_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_pepino_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_tomate_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_topbread_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1705,6 +1716,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
 @:keep #if display private #end class __ASSET__fonts_barrio_regular_ttf extends lime.text.Font { public function new () { super (); name = "Barrio"; } } 
 
 
@@ -1723,6 +1735,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/img/game/end/ingredients/Hamburguesa.png") #if display private #end class __ASSET__img_game_end_ingredients_hamburguesa_png extends lime.graphics.Image {}
 @:image("assets/img/game/end/ingredients/Lechuga.png") #if display private #end class __ASSET__img_game_end_ingredients_lechuga_png extends lime.graphics.Image {}
 @:image("assets/img/game/end/ingredients/Panceta.png") #if display private #end class __ASSET__img_game_end_ingredients_panceta_png extends lime.graphics.Image {}
+@:image("assets/img/game/end/ingredients/Pan_de_Arriba.png") #if display private #end class __ASSET__img_game_end_ingredients_pan_de_arriba_png extends lime.graphics.Image {}
 @:image("assets/img/game/end/ingredients/Pepino.png") #if display private #end class __ASSET__img_game_end_ingredients_pepino_png extends lime.graphics.Image {}
 @:image("assets/img/game/end/ingredients/Tomate.png") #if display private #end class __ASSET__img_game_end_ingredients_tomate_png extends lime.graphics.Image {}
 @:image("assets/img/game/end/ingredients/topBread.png") #if display private #end class __ASSET__img_game_end_ingredients_topbread_png extends lime.graphics.Image {}

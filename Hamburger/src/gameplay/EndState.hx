@@ -69,13 +69,14 @@ class EndState extends FlxState
 		add(MenuHelper.generateMenuText(GeneralConstants.end_game_score_text_x, GeneralConstants.end_game_score_text_y,  (mScore + mTime*30) + "", GeneralConstants.end_game_score_text_size));
 	
 		var eatenIngredients:List<Ingredient> = cast HUD.getEatenIngredients();
-		var lastY: Int = 900;
+		var lastY: Int = GeneralConstants.end_game_ingredients_y;
 		for (ingredient in eatenIngredients)
 		{
-			add(MenuHelper.loadStaticImage(ingredient.getEndImage(), 0, 0, 800, lastY));
-			lastY = lastY - 50;
+			add(MenuHelper.loadStaticImage(ingredient.getEndImage(), 0, 0, GeneralConstants.end_game_ingredients_x, lastY));
+			lastY = lastY - GeneralConstants.end_game_ingredients_separation;
 		}
-		add(MenuHelper.loadStaticImage("img/game/end/ingredients/topBread.png", 0, 0, 800, lastY));
+		lastY = lastY - GeneralConstants.end_game_ingredients_separation;
+		add(MenuHelper.loadStaticImage("img/game/end/ingredients/topBread.png", 0, 0, GeneralConstants.end_game_ingredients_x, lastY));
 	}
 	
 	private function restart(aButton:MenuButton) : Void

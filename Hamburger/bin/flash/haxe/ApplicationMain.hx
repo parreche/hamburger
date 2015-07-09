@@ -66,6 +66,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("img/game/end/ingredients/Pan_de_Arriba.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("img/game/end/ingredients/Pepino.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
