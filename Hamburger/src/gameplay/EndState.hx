@@ -63,7 +63,7 @@ class EndState extends FlxState
 		
 		if (isHighScore())
 		{
-			add(MenuHelper.loadStaticImage("img/game/end/High_Score.png", GeneralConstants.end_game_main_menu_button_width, GeneralConstants.end_game_main_menu_button_heigth, GeneralConstants.end_game_high_score_x, GeneralConstants.end_game_high_score_y));
+			add(MenuHelper.loadStaticImage("img/game/end/High_Score.png", GeneralConstants.end_game_high_score_width, GeneralConstants.end_game_high_score_heigth, GeneralConstants.end_game_high_score_x, GeneralConstants.end_game_high_score_y));
 		}
 		
 		add(MenuHelper.generateMenuText(GeneralConstants.end_game_score_text_x, GeneralConstants.end_game_score_text_y,  (mScore + mTime*30) + "", GeneralConstants.end_game_score_text_size));

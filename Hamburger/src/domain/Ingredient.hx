@@ -32,6 +32,7 @@ class Ingredient extends FlxSprite
 	var mStaticImage:String;
 	var mEndImage:String;
 	var mEatenAnimation : FlxSprite;
+	var mHasBeenEaten:Bool;
 	
 	public function new(aX:Float, aY:Float, aImage:String, aEndImage:String, aBreadTop:domain.Bread, aBreadBottom:domain.Bread, aScore:Int,aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum = null, aStage:FlxGroup = null) 
 	{
@@ -39,6 +40,7 @@ class Ingredient extends FlxSprite
 		minDist= GeneralConstants.collisionBox_minDistance;
 		mStaticImage = aImage;
 		mEndImage = aEndImage;
+		mHasBeenEaten = false;
 		if (aIngredientType != null)
 		{
 			mBreadTop = aBreadTop;
@@ -62,10 +64,6 @@ class Ingredient extends FlxSprite
 			AnimationFactory.loadAnimations(mEatenAnimation, aIngredientType, true);
 			aStage.add(mEatenAnimation);
 		}
-		else
-		{
-			//loadGraphic(Assets.getBitmapData(aImage), false);
-		}
 	}
 	
 	override function update():Void
@@ -77,8 +75,12 @@ class Ingredient extends FlxSprite
 			if (mEatenAnimation.animation.finished)
 			{
 				mEatenAnimation.visible = false;
+				if (mHasBeenEaten)
+				{
+					mEatenAnimation.kill();
+					kill();
+				}
 			}
-			
 		}
 		
 		if (x+width > GeneralConstants.game_screenWidth && velocity.x>0)
@@ -137,7 +139,7 @@ class Ingredient extends FlxSprite
 			}
 		}
 		
-		if (mBreadBottom != null && mBreadTop != null)
+		if (mBreadBottom != null && mBreadTop != null && !mHasBeenEaten)
 		{
 			eat();
 		}
@@ -158,9 +160,9 @@ class Ingredient extends FlxSprite
 		{
 			return;
 		}
-		
+		this.visible = false;
 		HUD.addEatenIngredient(this);
-		kill();
+		mHasBeenEaten = true;
 		mEatenAnimation.x = x - 250;
 		mEatenAnimation.y = y - 500;
 		mEatenAnimation.visible = true;

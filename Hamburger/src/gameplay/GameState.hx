@@ -38,6 +38,7 @@ class GameState extends FlxState
 {
 	var mIngredients = new FlxGroup();
 	var mObstacles = new FlxGroup();
+	var mObstaclesShadows = new FlxGroup();
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
 	public var mPausedGame:Bool = false;
@@ -77,6 +78,7 @@ class GameState extends FlxState
 		loadIngredients();
 		loadObstacles();
 		
+		add(mObstaclesShadows);
 		add(mBreadTop);
 		add(mBreadBottom);
 		add(mIngredients);
@@ -142,10 +144,9 @@ class GameState extends FlxState
 					validCoords = validCoords && ((obstacleCoords.x > 200) || (obstacleCoords.x < 1500));
 				}
 				if (validCoords) {
-					mObstacles.add(obstacleShadow);
+					mObstaclesShadows.add(obstacleShadow);
 					mObstacles.add(obstacle);
-					
-				}else {
+				} else {
 					tries++;
 				}
 			}

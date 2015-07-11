@@ -1,4 +1,9 @@
 package menu;
+import openfl.Lib;
+import openfl.media.Video;
+import openfl.net.NetConnection;
+import openfl.net.NetStream;
+import openfl.system.System;
 import utils.AnimationEnum;
 import utils.AnimationFactory;
 import flixel.FlxG;
@@ -39,6 +44,7 @@ class MainMenu extends FlxState
 		if (sPlayAnimiation)
 		{
 			//mAnimation = AnimationFactory.loadAnimations(mAnimation, AnimationEnum.MAIN_MENU);
+			//showAnimation();
 			add(MenuHelper.createMenuButton("img/mainMenu/animation/background_title.png", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0, showMenu, false));
 		} else {
 			initMainMenu();
@@ -52,7 +58,7 @@ class MainMenu extends FlxState
 		add(MenuHelper.createMenuButton("img/mainMenu/start_button.png", GeneralConstants.menu_startButton_width, GeneralConstants.menu_startButton_heigth,GeneralConstants.menu_startButton_x, GeneralConstants.menu_startButton_y, startGame, true));
 		add(MenuHelper.createMenuButton("img/mainMenu/options_button.png", GeneralConstants.menu_optionsButton_width, GeneralConstants.menu_optionsButton_heigth, GeneralConstants.menu_optionsButton_x, GeneralConstants.menu_optionsButton_y, goToOptions,true));
 		add(MenuHelper.createMenuButton("img/mainMenu/ranking_button.png", GeneralConstants.menu_creditsButton_width, GeneralConstants.menu_creditsButton_heigth, GeneralConstants.menu_creditsButton_x, GeneralConstants.menu_creditsButton_y, startGame,true));
-		add(MenuHelper.createMenuButton("img/mainMenu/exit_button.png", GeneralConstants.menu_exitButton_width, GeneralConstants.menu_exitButton_heigth,GeneralConstants.menu_exitButton_x, GeneralConstants.menu_exitButton_y, startGame,true));
+		add(MenuHelper.createMenuButton("img/mainMenu/exit_button.png", GeneralConstants.menu_exitButton_width, GeneralConstants.menu_exitButton_heigth,GeneralConstants.menu_exitButton_x, GeneralConstants.menu_exitButton_y, quitGame,true));
 		add(MenuHelper.loadStaticImage("img/mainMenu/topBread.png", GeneralConstants.menu_topImage_width, GeneralConstants.menu_topImage_heigth, GeneralConstants.menu_topImage_x, GeneralConstants.menu_topImage_y));
 	}
 	
@@ -77,4 +83,20 @@ class MainMenu extends FlxState
 		FlxG.switchState(new OptionsMenu());
 	}
 	
+	function quitGame(aButton:MenuButton)
+	{
+		System.exit(0);
+	}
+	
+	private function showAnimation()
+	{
+		var screen = new Video();
+		var connection = new NetConnection();
+		connection.connect(null);
+		var stream = new NetStream(connection);
+		screen = new Video(160,120);
+		screen.attachNetStream(stream);
+		stream.play("video1.mp4");
+		Lib.current.addChild(screen);
+	}
 }

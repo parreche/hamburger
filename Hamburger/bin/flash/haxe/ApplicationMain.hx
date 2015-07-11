@@ -66,10 +66,6 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("img/game/end/ingredients/Pan_de_Arriba.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
 		urls.push ("img/game/end/ingredients/Pepino.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -348,6 +344,30 @@ class ApplicationMain {
 		
 		urls.push ("img/tomate/tomate_comer_xml.xml");
 		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("img/tutorial/Boton_Next.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/tutorial/Boton_Skip.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/tutorial/Tutorial_1.jpg");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/tutorial/Tutorial_2.jpg");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/tutorial/Tutorial_3.jpg");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/tutorial/Tutorial_4.jpg");
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("sound/breadCollide.wav");
