@@ -74,6 +74,13 @@ end_game_score_text_size,40
 end_game_ingredients_x,880
 end_game_ingredients_y,910
 end_game_ingredients_separation,60
+end_game_input_name_x,330
+end_game_input_name_y,840
+end_game_input_name_size,40
+end_game_ranking_name_x,240
+end_game_ranking_score_x,520
+end_game_ranking_y,325
+end_game_ranking_size,35
 scoreSize,48
 score_x,1790
 score_y,50
@@ -113,7 +120,7 @@ baconValue,500
 baconVelocity,0
 baconMaxVelocity,10
 burgerCount,1
-burgerValue,0
+burgerValue,1000
 burgerVelocity,10
 burgerMaxVelocity,10
 animationFrameRate,30

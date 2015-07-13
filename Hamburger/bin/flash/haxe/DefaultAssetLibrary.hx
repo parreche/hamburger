@@ -4,16 +4,15 @@ package;
 import haxe.Timer;
 import haxe.Unserializer;
 import lime.app.Preloader;
-import lime.audio.AudioSource;
 import lime.audio.openal.AL;
 import lime.audio.AudioBuffer;
+import lime.graphics.Font;
 import lime.graphics.Image;
-import lime.text.Font;
 import lime.utils.ByteArray;
 import lime.utils.UInt8Array;
 import lime.Assets;
 
-#if sys
+#if (sys || nodejs)
 import sys.FileSystem;
 #end
 
@@ -61,8 +60,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/game/end/ingredients/Lechuga.png", AssetType.IMAGE);
 		className.set ("img/game/end/ingredients/Panceta.png", __ASSET__img_game_end_ingredients_panceta_png);
 		type.set ("img/game/end/ingredients/Panceta.png", AssetType.IMAGE);
-		className.set ("img/game/end/ingredients/Pan_de_Arriba.png", __ASSET__img_game_end_ingredients_pan_de_arriba_png);
-		type.set ("img/game/end/ingredients/Pan_de_Arriba.png", AssetType.IMAGE);
 		className.set ("img/game/end/ingredients/Pepino.png", __ASSET__img_game_end_ingredients_pepino_png);
 		type.set ("img/game/end/ingredients/Pepino.png", AssetType.IMAGE);
 		className.set ("img/game/end/ingredients/Tomate.png", __ASSET__img_game_end_ingredients_tomate_png);
@@ -253,10 +250,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.IMAGE);
 		id = "img/game/end/ingredients/Panceta.png";
-		path.set (id, id);
-		
-		type.set (id, AssetType.IMAGE);
-		id = "img/game/end/ingredients/Pan_de_Arriba.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -670,8 +663,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-		
-		openfl.text.Font.registerFont (__ASSET__OPENFL__fonts_barrio_regular_ttf);
+		openfl.text.Font.registerFont (__ASSET__fonts_barrio_regular_ttf);
 		
 		#end
 		
@@ -702,9 +694,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("img/game/end/ingredients/Panceta.png", __ASSET__img_game_end_ingredients_panceta_png);
 		type.set ("img/game/end/ingredients/Panceta.png", AssetType.IMAGE);
-		
-		className.set ("img/game/end/ingredients/Pan_de_Arriba.png", __ASSET__img_game_end_ingredients_pan_de_arriba_png);
-		type.set ("img/game/end/ingredients/Pan_de_Arriba.png", AssetType.IMAGE);
 		
 		className.set ("img/game/end/ingredients/Pepino.png", __ASSET__img_game_end_ingredients_pepino_png);
 		type.set ("img/game/end/ingredients/Pepino.png", AssetType.IMAGE);
@@ -999,11 +988,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 			
 			#if flash
 			
-			if (requestedType == BINARY && (assetType == BINARY || assetType == TEXT || assetType == IMAGE)) {
+			if ((assetType == BINARY || assetType == TEXT) && requestedType == BINARY) {
 				
 				return true;
 				
-			} else if (requestedType == null || path.exists (id)) {
+			} else if (path.exists (id)) {
 				
 				return true;
 				
@@ -1041,8 +1030,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#else
 		
-		if (className.exists(id)) return AudioBuffer.fromBytes (cast (Type.createInstance (className.get (id), []), ByteArray));
-		else return AudioBuffer.fromFile (path.get (id));
+		return AudioBuffer.fromFile (path.get (id));
+		//if (className.exists(id)) return cast (Type.createInstance (className.get (id), []), Sound);
+		//else return new Sound (new URLRequest (path.get (id)), null, type.get (id) == MUSIC);
 		
 		#end
 		
@@ -1052,23 +1042,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 	public override function getBytes (id:String):ByteArray {
 		
 		#if flash
-		
-		switch (type.get (id)) {
-			
-			case TEXT, BINARY:
-				
-				return cast (Type.createInstance (className.get (id), []), ByteArray);
-			
-			case IMAGE:
-				
-				var bitmapData = cast (Type.createInstance (className.get (id), []), BitmapData);
-				return bitmapData.getPixels (bitmapData.rect);
-			
-			default:
-				
-				return null;
-			
-		}
 		
 		return cast (Type.createInstance (className.get (id), []), ByteArray);
 		
@@ -1112,34 +1085,33 @@ class DefaultAssetLibrary extends AssetLibrary {
 	}
 	
 	
-	public override function getFont (id:String):Font {
+	public override function getFont (id:String):Dynamic /*Font*/ {
 		
-		#if flash
+		// TODO: Complete Lime Font API
 		
-		var src = Type.createInstance (className.get (id), []);
+		#if openfl
+		#if (flash || js)
 		
-		var font = new Font (src.fontName);
-		font.src = src;
-		return font;
-		
-		#elseif html5
-		
-		return cast (Type.createInstance (className.get (id), []), Font);
+		return cast (Type.createInstance (className.get (id), []), openfl.text.Font);
 		
 		#else
 		
 		if (className.exists (id)) {
 			
 			var fontClass = className.get (id);
-			return cast (Type.createInstance (fontClass, []), Font);
+			openfl.text.Font.registerFont (fontClass);
+			return cast (Type.createInstance (fontClass, []), openfl.text.Font);
 			
 		} else {
 			
-			return Font.fromFile (path.get (id));
+			return new openfl.text.Font (path.get (id));
 			
 		}
 		
 		#end
+		#end
+		
+		return null;
 		
 	}
 	
@@ -1156,16 +1128,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#else
 		
-		if (className.exists (id)) {
-			
-			var fontClass = className.get (id);
-			return cast (Type.createInstance (fontClass, []), Image);
-			
-		} else {
-			
-			return Image.fromFile (path.get (id));
-			
-		}
+		return Image.fromFile (path.get (id));
 		
 		#end
 		
@@ -1273,11 +1236,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		//if (requestedType != AssetType.MUSIC && requestedType != AssetType.SOUND) {
+		if (requestedType != AssetType.MUSIC && requestedType != AssetType.SOUND) {
 			
 			return className.exists (id);
 			
-		//}
+		}
 		
 		#end
 		
@@ -1409,8 +1372,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 			var bytes = ByteArray.readFile ("assets/manifest");
 			#elseif (mac && java)
 			var bytes = ByteArray.readFile ("../Resources/manifest");
-			#elseif ios
-			var bytes = ByteArray.readFile ("assets/manifest");
 			#else
 			var bytes = ByteArray.readFile ("manifest");
 			#end
@@ -1431,11 +1392,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 							
 							if (!className.exists (asset.id)) {
 								
-								#if ios
-								path.set (asset.id, "assets/" + asset.path);
-								#else
 								path.set (asset.id, asset.path);
-								#end
 								type.set (asset.id, cast (asset.type, AssetType));
 								
 							}
@@ -1464,7 +1421,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 	
 	/*public override function loadMusic (id:String, handler:Dynamic -> Void):Void {
 		
-		#if (flash || html5)
+		#if (flash || js)
 		
 		//if (path.exists (id)) {
 			
@@ -1548,7 +1505,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_hamburguesa_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_lechuga_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_panceta_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_pan_de_arriba_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_pepino_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_tomate_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_topbread_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1631,6 +1587,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 #elseif html5
 
+#if openfl
 
 
 
@@ -1716,111 +1673,108 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+@:keep #if display private #end class __ASSET__fonts_barrio_regular_ttf extends openfl.text.Font { public function new () { super (); fontName = "Barrio"; } } 
 
-@:keep #if display private #end class __ASSET__fonts_barrio_regular_ttf extends lime.text.Font { public function new () { super (); name = "Barrio"; } } 
-
+#end
 
 #else
 
+#if openfl
+@:keep class __ASSET__fonts_barrio_regular_ttf extends openfl.text.Font { public function new () { super (); __fontPath = "fonts/Barrio-Regular.ttf"; fontName = "Barrio"; }}
 
+#end
 
 #if (windows || mac || linux)
 
 
-@:file("C:/HaxeToolkit/haxe/lib/flixel/3,3,8/assets/sounds/beep.mp3") #if display private #end class __ASSET__assets_sounds_beep_mp3 extends lime.utils.ByteArray {}
-@:file("C:/HaxeToolkit/haxe/lib/flixel/3,3,8/assets/sounds/flixel.mp3") #if display private #end class __ASSET__assets_sounds_flixel_mp3 extends lime.utils.ByteArray {}
-@:image("assets/img/game/end/background_end_game.jpg") #if display private #end class __ASSET__img_game_end_background_end_game_jpg extends lime.graphics.Image {}
-@:image("assets/img/game/end/High_Score.png") #if display private #end class __ASSET__img_game_end_high_score_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/ingredients/Chedar.png") #if display private #end class __ASSET__img_game_end_ingredients_chedar_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/ingredients/Hamburguesa.png") #if display private #end class __ASSET__img_game_end_ingredients_hamburguesa_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/ingredients/Lechuga.png") #if display private #end class __ASSET__img_game_end_ingredients_lechuga_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/ingredients/Panceta.png") #if display private #end class __ASSET__img_game_end_ingredients_panceta_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/ingredients/Pan_de_Arriba.png") #if display private #end class __ASSET__img_game_end_ingredients_pan_de_arriba_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/ingredients/Pepino.png") #if display private #end class __ASSET__img_game_end_ingredients_pepino_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/ingredients/Tomate.png") #if display private #end class __ASSET__img_game_end_ingredients_tomate_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/ingredients/topBread.png") #if display private #end class __ASSET__img_game_end_ingredients_topbread_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/mainMenu_button.png") #if display private #end class __ASSET__img_game_end_mainmenu_button_png extends lime.graphics.Image {}
-@:image("assets/img/game/end/playAgain_button.png") #if display private #end class __ASSET__img_game_end_playagain_button_png extends lime.graphics.Image {}
-@:image("assets/img/game/game_background.jpg") #if display private #end class __ASSET__img_game_game_background_jpg extends lime.graphics.Image {}
-@:image("assets/img/game/hud_background.png") #if display private #end class __ASSET__img_game_hud_background_png extends lime.graphics.Image {}
-@:image("assets/img/game/mainMenu_button.png") #if display private #end class __ASSET__img_game_mainmenu_button_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/canasta.png") #if display private #end class __ASSET__img_game_obstacles_canasta_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/canastaSombra.png") #if display private #end class __ASSET__img_game_obstacles_canastasombra_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/cuchillo.png") #if display private #end class __ASSET__img_game_obstacles_cuchillo_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/cuchilloSombra.png") #if display private #end class __ASSET__img_game_obstacles_cuchillosombra_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/frasco.png") #if display private #end class __ASSET__img_game_obstacles_frasco_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/frasco2.png") #if display private #end class __ASSET__img_game_obstacles_frasco2_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/frasco2Sombra.png") #if display private #end class __ASSET__img_game_obstacles_frasco2sombra_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/frascoSombra.png") #if display private #end class __ASSET__img_game_obstacles_frascosombra_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/jarra.png") #if display private #end class __ASSET__img_game_obstacles_jarra_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/jarraSombra.png") #if display private #end class __ASSET__img_game_obstacles_jarrasombra_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/ketchup.png") #if display private #end class __ASSET__img_game_obstacles_ketchup_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/ketchupSombra.png") #if display private #end class __ASSET__img_game_obstacles_ketchupsombra_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/plato sombra.png") #if display private #end class __ASSET__img_game_obstacles_plato_sombra_png extends lime.graphics.Image {}
-@:image("assets/img/game/obstacles/plato.png") #if display private #end class __ASSET__img_game_obstacles_plato_png extends lime.graphics.Image {}
-@:image("assets/img/game/pause.png") #if display private #end class __ASSET__img_game_pause_png extends lime.graphics.Image {}
-@:image("assets/img/game/pause_button.png") #if display private #end class __ASSET__img_game_pause_button_png extends lime.graphics.Image {}
-@:image("assets/img/game/resume_button.png") #if display private #end class __ASSET__img_game_resume_button_png extends lime.graphics.Image {}
-@:image("assets/img/hamburguesa/hamburgusa xml data sprite.png") #if display private #end class __ASSET__img_hamburguesa_hamburgusa_xml_data_sprite_png extends lime.graphics.Image {}
-@:file("assets/img/hamburguesa/hamburgusa xml data sprite.xml") #if display private #end class __ASSET__img_hamburguesa_hamburgusa_xml_data_sprite_xml extends lime.utils.ByteArray {}
-@:image("assets/img/hamburguesa/hamburg_comer_xml.png") #if display private #end class __ASSET__img_hamburguesa_hamburg_comer_xml_png extends lime.graphics.Image {}
-@:file("assets/img/hamburguesa/hamburg_comer_xml.xml") #if display private #end class __ASSET__img_hamburguesa_hamburg_comer_xml_xml extends lime.utils.ByteArray {}
-@:image("assets/img/lechuga/lechuga xml data sprite.png") #if display private #end class __ASSET__img_lechuga_lechuga_xml_data_sprite_png extends lime.graphics.Image {}
-@:file("assets/img/lechuga/lechuga xml data sprite.xml") #if display private #end class __ASSET__img_lechuga_lechuga_xml_data_sprite_xml extends lime.utils.ByteArray {}
-@:image("assets/img/lechuga/lechuga_comer_xml.png") #if display private #end class __ASSET__img_lechuga_lechuga_comer_xml_png extends lime.graphics.Image {}
-@:file("assets/img/lechuga/lechuga_comer_xml.xml") #if display private #end class __ASSET__img_lechuga_lechuga_comer_xml_xml extends lime.utils.ByteArray {}
-@:image("assets/img/mainMenu/animation/background_title.png") #if display private #end class __ASSET__img_mainmenu_animation_background_title_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/background_menu.png") #if display private #end class __ASSET__img_mainmenu_background_menu_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/bottomBread.png") #if display private #end class __ASSET__img_mainmenu_bottombread_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/exit_button.png") #if display private #end class __ASSET__img_mainmenu_exit_button_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/options_button.png") #if display private #end class __ASSET__img_mainmenu_options_button_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/ranking_button.png") #if display private #end class __ASSET__img_mainmenu_ranking_button_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/start_button.png") #if display private #end class __ASSET__img_mainmenu_start_button_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/topBread.png") #if display private #end class __ASSET__img_mainmenu_topbread_png extends lime.graphics.Image {}
-@:image("assets/img/mainMenu/tutorial_button.png") #if display private #end class __ASSET__img_mainmenu_tutorial_button_png extends lime.graphics.Image {}
-@:image("assets/img/optionsMenu/check.png") #if display private #end class __ASSET__img_optionsmenu_check_png extends lime.graphics.Image {}
-@:image("assets/img/optionsMenu/close_button.png") #if display private #end class __ASSET__img_optionsmenu_close_button_png extends lime.graphics.Image {}
-@:image("assets/img/optionsMenu/credits_button.png") #if display private #end class __ASSET__img_optionsmenu_credits_button_png extends lime.graphics.Image {}
-@:image("assets/img/optionsMenu/cross.png") #if display private #end class __ASSET__img_optionsmenu_cross_png extends lime.graphics.Image {}
-@:image("assets/img/optionsMenu/options.png") #if display private #end class __ASSET__img_optionsmenu_options_png extends lime.graphics.Image {}
-@:image("assets/img/optionsMenu/slider.png") #if display private #end class __ASSET__img_optionsmenu_slider_png extends lime.graphics.Image {}
-@:image("assets/img/panceta/panceta xml data sprite.png") #if display private #end class __ASSET__img_panceta_panceta_xml_data_sprite_png extends lime.graphics.Image {}
-@:file("assets/img/panceta/panceta xml data sprite.xml") #if display private #end class __ASSET__img_panceta_panceta_xml_data_sprite_xml extends lime.utils.ByteArray {}
-@:image("assets/img/panceta/panceta_comer_xml.png") #if display private #end class __ASSET__img_panceta_panceta_comer_xml_png extends lime.graphics.Image {}
-@:file("assets/img/panceta/panceta_comer_xml.xml") #if display private #end class __ASSET__img_panceta_panceta_comer_xml_xml extends lime.utils.ByteArray {}
-@:image("assets/img/pan_garganta/pan garganta xml data sprite.png") #if display private #end class __ASSET__img_pan_garganta_pan_garganta_xml_data_sprite_png extends lime.graphics.Image {}
-@:file("assets/img/pan_garganta/pan garganta xml data sprite.xml") #if display private #end class __ASSET__img_pan_garganta_pan_garganta_xml_data_sprite_xml extends lime.utils.ByteArray {}
-@:image("assets/img/pan_lengua/pan lengua xml data sprite.png") #if display private #end class __ASSET__img_pan_lengua_pan_lengua_xml_data_sprite_png extends lime.graphics.Image {}
-@:file("assets/img/pan_lengua/pan lengua xml data sprite.xml") #if display private #end class __ASSET__img_pan_lengua_pan_lengua_xml_data_sprite_xml extends lime.utils.ByteArray {}
-@:image("assets/img/pepinos/pepino xml data sprite.png") #if display private #end class __ASSET__img_pepinos_pepino_xml_data_sprite_png extends lime.graphics.Image {}
-@:file("assets/img/pepinos/pepino xml data sprite.xml") #if display private #end class __ASSET__img_pepinos_pepino_xml_data_sprite_xml extends lime.utils.ByteArray {}
-@:image("assets/img/pepinos/pepino_comer_xml.png") #if display private #end class __ASSET__img_pepinos_pepino_comer_xml_png extends lime.graphics.Image {}
-@:file("assets/img/pepinos/pepino_comer_xml.xml") #if display private #end class __ASSET__img_pepinos_pepino_comer_xml_xml extends lime.utils.ByteArray {}
-@:image("assets/img/static/Bacon.png") #if display private #end class __ASSET__img_static_bacon_png extends lime.graphics.Image {}
-@:image("assets/img/static/Burger.png") #if display private #end class __ASSET__img_static_burger_png extends lime.graphics.Image {}
-@:image("assets/img/static/Cucumber.png") #if display private #end class __ASSET__img_static_cucumber_png extends lime.graphics.Image {}
-@:image("assets/img/static/Lettuce.png") #if display private #end class __ASSET__img_static_lettuce_png extends lime.graphics.Image {}
-@:image("assets/img/static/Tomato.png") #if display private #end class __ASSET__img_static_tomato_png extends lime.graphics.Image {}
-@:image("assets/img/static/TopBread.png") #if display private #end class __ASSET__img_static_topbread_png extends lime.graphics.Image {}
-@:image("assets/img/tomate/tomate xml data sprite.png") #if display private #end class __ASSET__img_tomate_tomate_xml_data_sprite_png extends lime.graphics.Image {}
-@:file("assets/img/tomate/tomate xml data sprite.xml") #if display private #end class __ASSET__img_tomate_tomate_xml_data_sprite_xml extends lime.utils.ByteArray {}
-@:image("assets/img/tomate/tomate_comer_xml.png") #if display private #end class __ASSET__img_tomate_tomate_comer_xml_png extends lime.graphics.Image {}
-@:file("assets/img/tomate/tomate_comer_xml.xml") #if display private #end class __ASSET__img_tomate_tomate_comer_xml_xml extends lime.utils.ByteArray {}
-@:file("assets/sound/breadCollide.wav") #if display private #end class __ASSET__sound_breadcollide_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/eat.wav") #if display private #end class __ASSET__sound_eat_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/endTheme.wav") #if display private #end class __ASSET__sound_endtheme_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/gameTheme.wav") #if display private #end class __ASSET__sound_gametheme_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/menuTheme.wav") #if display private #end class __ASSET__sound_menutheme_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/tick.wav") #if display private #end class __ASSET__sound_tick_wav extends lime.utils.ByteArray {}
-@:file("assets/config/ingredients-cfg.csv") #if display private #end class __ASSET__config_ingredients_cfg_csv extends lime.utils.ByteArray {}
-@:font("assets/fonts/Barrio-Regular.ttf") #if display private #end class __ASSET__fonts_barrio_regular_ttf extends lime.text.Font {}
+@:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends lime.audio.AudioSource {}
+@:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends lime.audio.AudioSource {}
+@:bitmap("assets/img/game/end/background_end_game.jpg") class __ASSET__img_game_end_background_end_game_jpg extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/High_Score.png") class __ASSET__img_game_end_high_score_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Chedar.png") class __ASSET__img_game_end_ingredients_chedar_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Hamburguesa.png") class __ASSET__img_game_end_ingredients_hamburguesa_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Lechuga.png") class __ASSET__img_game_end_ingredients_lechuga_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Panceta.png") class __ASSET__img_game_end_ingredients_panceta_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Pepino.png") class __ASSET__img_game_end_ingredients_pepino_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Tomate.png") class __ASSET__img_game_end_ingredients_tomate_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/topBread.png") class __ASSET__img_game_end_ingredients_topbread_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/mainMenu_button.png") class __ASSET__img_game_end_mainmenu_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/playAgain_button.png") class __ASSET__img_game_end_playagain_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/game_background.jpg") class __ASSET__img_game_game_background_jpg extends lime.graphics.Image {}
+@:bitmap("assets/img/game/hud_background.png") class __ASSET__img_game_hud_background_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/mainMenu_button.png") class __ASSET__img_game_mainmenu_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/canasta.png") class __ASSET__img_game_obstacles_canasta_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/canastaSombra.png") class __ASSET__img_game_obstacles_canastasombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/cuchillo.png") class __ASSET__img_game_obstacles_cuchillo_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/cuchilloSombra.png") class __ASSET__img_game_obstacles_cuchillosombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/frasco.png") class __ASSET__img_game_obstacles_frasco_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/frasco2.png") class __ASSET__img_game_obstacles_frasco2_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/frasco2Sombra.png") class __ASSET__img_game_obstacles_frasco2sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/frascoSombra.png") class __ASSET__img_game_obstacles_frascosombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/jarra.png") class __ASSET__img_game_obstacles_jarra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/jarraSombra.png") class __ASSET__img_game_obstacles_jarrasombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/ketchup.png") class __ASSET__img_game_obstacles_ketchup_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/ketchupSombra.png") class __ASSET__img_game_obstacles_ketchupsombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/plato sombra.png") class __ASSET__img_game_obstacles_plato_sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/plato.png") class __ASSET__img_game_obstacles_plato_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/pause.png") class __ASSET__img_game_pause_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/pause_button.png") class __ASSET__img_game_pause_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/resume_button.png") class __ASSET__img_game_resume_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/hamburguesa/hamburgusa xml data sprite.png") class __ASSET__img_hamburguesa_hamburgusa_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/hamburguesa/hamburgusa xml data sprite.xml") class __ASSET__img_hamburguesa_hamburgusa_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/hamburguesa/hamburg_comer_xml.png") class __ASSET__img_hamburguesa_hamburg_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/hamburguesa/hamburg_comer_xml.xml") class __ASSET__img_hamburguesa_hamburg_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/lechuga/lechuga xml data sprite.png") class __ASSET__img_lechuga_lechuga_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/lechuga/lechuga xml data sprite.xml") class __ASSET__img_lechuga_lechuga_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/lechuga/lechuga_comer_xml.png") class __ASSET__img_lechuga_lechuga_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/lechuga/lechuga_comer_xml.xml") class __ASSET__img_lechuga_lechuga_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/mainMenu/animation/background_title.png") class __ASSET__img_mainmenu_animation_background_title_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/background_menu.png") class __ASSET__img_mainmenu_background_menu_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/bottomBread.png") class __ASSET__img_mainmenu_bottombread_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/exit_button.png") class __ASSET__img_mainmenu_exit_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/options_button.png") class __ASSET__img_mainmenu_options_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/ranking_button.png") class __ASSET__img_mainmenu_ranking_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/start_button.png") class __ASSET__img_mainmenu_start_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/topBread.png") class __ASSET__img_mainmenu_topbread_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/tutorial_button.png") class __ASSET__img_mainmenu_tutorial_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/check.png") class __ASSET__img_optionsmenu_check_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/close_button.png") class __ASSET__img_optionsmenu_close_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/credits_button.png") class __ASSET__img_optionsmenu_credits_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/cross.png") class __ASSET__img_optionsmenu_cross_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/options.png") class __ASSET__img_optionsmenu_options_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/slider.png") class __ASSET__img_optionsmenu_slider_png extends lime.graphics.Image {}
+@:bitmap("assets/img/panceta/panceta xml data sprite.png") class __ASSET__img_panceta_panceta_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/panceta/panceta xml data sprite.xml") class __ASSET__img_panceta_panceta_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/panceta/panceta_comer_xml.png") class __ASSET__img_panceta_panceta_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/panceta/panceta_comer_xml.xml") class __ASSET__img_panceta_panceta_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/pan_garganta/pan garganta xml data sprite.png") class __ASSET__img_pan_garganta_pan_garganta_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/pan_garganta/pan garganta xml data sprite.xml") class __ASSET__img_pan_garganta_pan_garganta_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/pan_lengua/pan lengua xml data sprite.png") class __ASSET__img_pan_lengua_pan_lengua_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/pan_lengua/pan lengua xml data sprite.xml") class __ASSET__img_pan_lengua_pan_lengua_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/pepinos/pepino xml data sprite.png") class __ASSET__img_pepinos_pepino_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/pepinos/pepino xml data sprite.xml") class __ASSET__img_pepinos_pepino_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/pepinos/pepino_comer_xml.png") class __ASSET__img_pepinos_pepino_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/pepinos/pepino_comer_xml.xml") class __ASSET__img_pepinos_pepino_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/static/Bacon.png") class __ASSET__img_static_bacon_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Burger.png") class __ASSET__img_static_burger_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Cucumber.png") class __ASSET__img_static_cucumber_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Lettuce.png") class __ASSET__img_static_lettuce_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Tomato.png") class __ASSET__img_static_tomato_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/TopBread.png") class __ASSET__img_static_topbread_png extends lime.graphics.Image {}
+@:bitmap("assets/img/tomate/tomate xml data sprite.png") class __ASSET__img_tomate_tomate_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/tomate/tomate xml data sprite.xml") class __ASSET__img_tomate_tomate_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/tomate/tomate_comer_xml.png") class __ASSET__img_tomate_tomate_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/tomate/tomate_comer_xml.xml") class __ASSET__img_tomate_tomate_comer_xml_xml extends lime.utils.ByteArray {}
+@:sound("assets/sound/breadCollide.wav") class __ASSET__sound_breadcollide_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/eat.wav") class __ASSET__sound_eat_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/endTheme.wav") class __ASSET__sound_endtheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/gameTheme.wav") class __ASSET__sound_gametheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/menuTheme.wav") class __ASSET__sound_menutheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/tick.wav") class __ASSET__sound_tick_wav extends lime.audio.AudioSource {}
+@:file("assets/config/ingredients-cfg.csv") class __ASSET__config_ingredients_cfg_csv extends lime.utils.ByteArray {}
+@:font("assets/fonts/Barrio-Regular.ttf") class __ASSET__fonts_barrio_regular_ttf extends lime.graphics.Font {}
 
 
-
-#end
-
-#if openfl
-@:keep #if display private #end class __ASSET__OPENFL__fonts_barrio_regular_ttf extends openfl.text.Font { public function new () { __fontPath = "fonts/Barrio-Regular.ttf"; name = "Barrio"; super (); }}
 
 #end
 
