@@ -1,9 +1,11 @@
 package utils;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
+import flixel.text.FlxTextField;
 import flixel.util.FlxColor;
 import menu.MenuButton;
 import openfl.Assets;
+import openfl.text.TextFieldType;
 
 /**
  * ...
@@ -40,6 +42,18 @@ class MenuHelper
 		var text = new FlxText(aXCoord, aYCoord, 350, aText, aFontSize);
 		text.font = "fonts/Barrio-Regular.ttf";
 		text.color = FlxColor.BLACK;
+		return text;
+	}
+	
+	public static function generateInputText(aXCoord:Int, aYCoord:Int, aText:String, aFontSize:Int) : FlxText
+	{
+		var text = new FlxTextField(aXCoord, aYCoord, 350, aText, aFontSize);
+		text.font = "fonts/Barrio-Regular.ttf";
+		text.color = FlxColor.BLACK;
+		text.textField.type = TextFieldType.INPUT;
+		text.textField.selectable = true;
+		text.textField.maxChars = 10;
+		
 		return text;
 	}
 	

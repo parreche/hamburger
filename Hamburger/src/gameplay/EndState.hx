@@ -22,21 +22,12 @@ import utils.MenuHelper;
  */
 class EndState extends FlxState
 {
-	
-	private var mScore:Int = 0;				// the score we achieved
-	private var mTime:Int = 0;				// time left before reaching 0 (only if we win)
-	private var mWin:Bool;					// if we catch all ingredients or not
-	private var mFinalScore:Int = 0;		// the final score (score + timeleft*5)
-	private var mTxtTitle:FlxText;			// the title text
-	private var mTxtScoreMessage:FlxText;	// the score message text
-	private var mTxtTimeMessage:FlxText;	// the time message text
-	private var mTxtFinalMessage:FlxText;	// the final score message text
-	private var mTxtScore:FlxText;			// text of the score
-	private var mTxtTime:FlxText;			// text of the time
-	private var mTxtFinalScore:FlxText;		// text of the final score
-	private var mTxtHiScore:FlxText;		// text to show the hi-score
-	private var mBtnMainMenu:FlxButton;		// button to go to main menu
-	private var mBtnRestart:FlxButton;		// button to restart
+	private var mDBName = "HamburgerDB";
+	private var mScore:Int = 0;
+	private var mTime:Int = 0;
+	private var mNameTextField:FlxText;
+	private var mWin:Bool;
+
 	
 	/**
 	 * Called from GameState, win, score and time variables
@@ -54,6 +45,7 @@ class EndState extends FlxState
 	
 	override function create():Void
 	{
+		
 		FlxG.sound.playMusic("sound/endTheme.wav");
 		
 		add(MenuHelper.loadStaticImage("img/game/end/background_end_game.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
@@ -77,10 +69,26 @@ class EndState extends FlxState
 		}
 		lastY = lastY - GeneralConstants.end_game_ingredients_separation;
 		add(MenuHelper.loadStaticImage("img/game/end/ingredients/topBread.png", 0, 0, GeneralConstants.end_game_ingredients_x, lastY));
+	
+		var save:FlxSave = new FlxSave();
+		save.bind(mDBName);
+		var name:String = " ";
+		if (save.data.name != null) 
+		{
+			name = save.data.name; 
+		}
+		save.close();
+		
+		mNameTextField = MenuHelper.generateInputText(GeneralConstants.end_game_input_name_x, GeneralConstants.end_game_input_name_y, name, GeneralConstants.end_game_input_name_size);
+		add(mNameTextField);
+		
+		showHighScores();
+				
 	}
 	
 	private function restart(aButton:MenuButton) : Void
 	{
+		updateHighScore();
 		FlxG.camera.fade(FlxColor.BLACK, .66, false, function() {
 			FlxG.switchState(new GameState());
 			FlxG.sound.music.stop();
@@ -89,6 +97,7 @@ class EndState extends FlxState
 	
 	private function goToMainMenu(aButton:MenuButton) : Void
 	{
+		updateHighScore();
 		FlxG.camera.fade(FlxColor.BLACK, .66, false, function() {
 			FlxG.switchState(new MainMenu());
 			FlxG.sound.music.stop();
@@ -98,8 +107,25 @@ class EndState extends FlxState
 	private function isHighScore() : Bool
 	{
 		var score:Int = mScore + mTime*30;
-		var hiScore:Int = hiScore();
+		var hiScore:Int = getHighScore();
 		return score == hiScore;
+	}
+	
+	private function showHighScores():Void
+	{
+		var save:FlxSave = new FlxSave();
+		save.bind(mDBName);
+		if (save.data.hiscore != null)
+		{
+			for (i in 0...5) {
+				if (save.data.hiscore[i].mScore > 0) {
+					add(MenuHelper.generateMenuText(GeneralConstants.end_game_ranking_name_x, GeneralConstants.end_game_ranking_y + i*40, save.data.hiscore[i].mName, GeneralConstants.end_game_ranking_size));
+					add(MenuHelper.generateMenuText(GeneralConstants.end_game_ranking_score_x, GeneralConstants.end_game_ranking_y + i*40, save.data.hiscore[i].mScore, GeneralConstants.end_game_ranking_size));
+				}
+			}
+			
+		}
+		save.close();
 	}
 	
 	/**
@@ -107,16 +133,16 @@ class EndState extends FlxState
 	 * @param	Score	the final score the player just obtained
 	 * @return	hi score
 	 */
-	private function hiScore():Int
+	private function updateHighScore():Int
 	{
 		var hiScore:Int = mScore + mTime*30;
 		var save:FlxSave = new FlxSave();
-		save.bind("HamburgerDB");
+		save.bind(mDBName);
+		save.data.name = mNameTextField.text;
 		if (save.data.hiscore == null)
 		{
-			//save.data.hiscore = 0;
 			save.data.hiscore = new Array();
-			save.data.hiscore.push(new HighScore(hiScore, "name"));
+			save.data.hiscore.push(new HighScore(hiScore, mNameTextField.text));
 			save.data.hiscore.push(new HighScore(0, " "));
 			save.data.hiscore.push(new HighScore(0, " "));
 			save.data.hiscore.push(new HighScore(0, " "));
@@ -126,7 +152,7 @@ class EndState extends FlxState
 			for (i in 0...save.data.hiscore.length) {
 				if (save.data.hiscore[i].mScore < hiScore && remove) {
 					save.data.hiscore.pop();
-					save.data.hiscore.push(new HighScore(hiScore, "name"));
+					save.data.hiscore.push(new HighScore(hiScore, mNameTextField.text));
 					remove = false;
 				}
 			}
@@ -137,12 +163,28 @@ class EndState extends FlxState
 			if (a.mScore > b.mScore) return -1;
 			return 0;
 		} );
-		for (i in 0...save.data.hiscore.length){
-			trace(save.data.hiscore[i]);
-		}
 		hiScore = save.data.hiscore[0].mScore;
 		save.close();
 		return hiScore;
+	}
+	
+	private function getHighScore():Int
+	{
+		var save:FlxSave = new FlxSave();
+		save.bind(mDBName);
+		if (save.data.hiscore == null)
+		{
+			return 0;
+		}
+		save.data.hiscore.sort( function(a:Object, b:Object):Int
+		{
+			if (a.mScore < b.mScore) return 1;
+			if (a.mScore > b.mScore) return -1;
+			return 0;
+		} );
+		var highScore:Int = save.data.hiscore[0].mScore;
+		save.close();
+		return highScore;
 	}
 	
 	private function timeFormat():String
