@@ -1,8 +1,10 @@
 package menu.options;
 import configuration.GeneralConstants;
+import flixel.addons.ui.FlxUISlider;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import gameplay.GameState;
 import menu.MainMenu;
@@ -16,6 +18,8 @@ import utils.MenuHelper;
 class OptionsMenu extends FlxState
 {
 
+	private var mEnableJoystickCheck:FlxSprite;
+	
 	public function new() 
 	{
 		super();
@@ -28,7 +32,12 @@ class OptionsMenu extends FlxState
 		add(MenuHelper.createMenuButton("img/optionsMenu/close_button.png", GeneralConstants.options_menu_close_button_width, GeneralConstants.options_menu_close_button_heigth, GeneralConstants.options_menu_close_button_x, GeneralConstants.options_menu_close_button_y, goToMainMenu));
 		add(MenuHelper.createMenuButton("img/optionsMenu/credits_button.png", GeneralConstants.options_menu_credit_button_width, GeneralConstants.options_menu_credit_button_heigth, GeneralConstants.options_menu_credit_button_x, GeneralConstants.options_menu_credit_button_y, goToCredits));
 		
-		add(MenuHelper.createMenuButton("img/optionsMenu/check.png", 50, 49, 982, 647, toggleJoystick, false));
+		add(MenuHelper.createMenuButton("img/optionsMenu/check.png", GeneralConstants.options_menu_checkbox_width, GeneralConstants.options_menu_checkbox_heigth, GeneralConstants.options_menu_checkbox_x, GeneralConstants.options_menu_checkbox_y, toggleJoystick, false));
+	
+		mEnableJoystickCheck = MenuHelper.loadStaticImage("img/optionsMenu/cross.png", GeneralConstants.options_menu_cross_width, GeneralConstants.options_menu_cross_heigth, GeneralConstants.options_menu_cross_x, GeneralConstants.options_menu_cross_y);
+		mEnableJoystickCheck.visible = GameState.sEnableJoystick;
+		add(mEnableJoystickCheck);
+		
 	}
 	
 	function goToMainMenu(aButton:MenuButton) :Void
@@ -38,11 +47,13 @@ class OptionsMenu extends FlxState
 	
 	function goToCredits(aButton:MenuButton) :Void
 	{
+		
 	}
 	
 	function toggleJoystick(aButton:MenuButton) :Void
 	{
-		add(MenuHelper.loadStaticImage("img/optionsMenu/cross.png", 21,30, 995, 665));
+		GameState.sEnableJoystick = !GameState.sEnableJoystick;
+		mEnableJoystickCheck.visible = GameState.sEnableJoystick;
 	}
 	
 }

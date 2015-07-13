@@ -1,4 +1,5 @@
 package menu;
+import menu.tutorial.TutorialState;
 import openfl.Lib;
 import openfl.media.Video;
 import openfl.net.NetConnection;
@@ -54,7 +55,7 @@ class MainMenu extends FlxState
 	private function initMainMenu() : Void
 	{
 		add(MenuHelper.loadStaticImage("img/mainMenu/bottomBread.png", GeneralConstants.menu_bottomImage_width, GeneralConstants.menu_bottomImage_heigth, GeneralConstants.menu_bottomImage_x, GeneralConstants.menu_bottomImage_y));
-		add(MenuHelper.createMenuButton("img/mainMenu/tutorial_button.png", GeneralConstants.menu_tutorialButton_width, GeneralConstants.menu_tutorialButton_heigth, GeneralConstants.menu_tutorialButton_x, GeneralConstants.menu_tutorialButton_y, startGame, true));
+		add(MenuHelper.createMenuButton("img/mainMenu/tutorial_button.png", GeneralConstants.menu_tutorialButton_width, GeneralConstants.menu_tutorialButton_heigth, GeneralConstants.menu_tutorialButton_x, GeneralConstants.menu_tutorialButton_y, goToTutorial, true));
 		add(MenuHelper.createMenuButton("img/mainMenu/start_button.png", GeneralConstants.menu_startButton_width, GeneralConstants.menu_startButton_heigth,GeneralConstants.menu_startButton_x, GeneralConstants.menu_startButton_y, startGame, true));
 		add(MenuHelper.createMenuButton("img/mainMenu/options_button.png", GeneralConstants.menu_optionsButton_width, GeneralConstants.menu_optionsButton_heigth, GeneralConstants.menu_optionsButton_x, GeneralConstants.menu_optionsButton_y, goToOptions,true));
 		add(MenuHelper.createMenuButton("img/mainMenu/ranking_button.png", GeneralConstants.menu_creditsButton_width, GeneralConstants.menu_creditsButton_heigth, GeneralConstants.menu_creditsButton_x, GeneralConstants.menu_creditsButton_y, startGame,true));
@@ -76,6 +77,11 @@ class MainMenu extends FlxState
 			FlxG.switchState(new GameState());
 			FlxG.sound.music.stop();
 		});
+	}
+	
+	function goToTutorial(aButton:MenuButton) :Void
+	{
+		FlxG.switchState(new TutorialState());
 	}
 	
 	function goToOptions(aButton:MenuButton) :Void

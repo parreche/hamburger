@@ -36,6 +36,8 @@ import utils.SequenceCode;
  */
 class GameState extends FlxState
 {
+	public static var sEnableJoystick:Bool;
+	
 	var mIngredients = new FlxGroup();
 	var mObstacles = new FlxGroup();
 	var mObstaclesShadows = new FlxGroup();
@@ -54,11 +56,11 @@ class GameState extends FlxState
 		add(MenuHelper.loadStaticImage("img/game/game_background.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
 		FlxG.sound.playMusic("sound/gameTheme.wav");
 		
-		var enableJoystick:Bool = GeneralConstants.enableJoystick == 1;
+		//var enableJoystick:Bool = GeneralConstants.enableJoystick == 1;
 		
 		var pr:PlayerInput;
 		var pl:PlayerInput;
-		if (enableJoystick) 
+		if (sEnableJoystick) 
 		{	
 			pr = new JoystickInput(GamepadIDs.RIGHT_CONTROL);
 			pl = new JoystickInput(GamepadIDs.LEFT_CONTROL);
@@ -79,8 +81,8 @@ class GameState extends FlxState
 		loadObstacles();
 		
 		add(mObstaclesShadows);
-		add(mBreadTop);
-		add(mBreadBottom);
+		mIngredients.add(mBreadBottom);
+		mIngredients.add(mBreadTop);
 		add(mIngredients);
 		add(mObstacles);
 		
@@ -165,7 +167,7 @@ class GameState extends FlxState
 	override function update():Void
 	{
 		mPauseState.update();
-		//sort(FlxSort.byY, FlxSort.ASCENDING);
+		mIngredients.sort(cast FlxSort.byY, FlxSort.ASCENDING);
 		if (FlxG.keys.pressed.ENTER)
 			pauseGame(null);
 			
@@ -196,8 +198,6 @@ class GameState extends FlxState
 			}
 			mBreadTop.immovable = true;
 			mBreadBottom.immovable = true;
-			FlxG.collide(mBreadTop, mIngredients);
-			FlxG.collide(mBreadBottom, mIngredients);
 			FlxG.collide(mIngredients, mIngredients);
 			FlxG.collide(mIngredients, mObstacles);
 			
@@ -210,7 +210,7 @@ class GameState extends FlxState
 	
 	private function checkGameOver() : Void
 	{
-		var noIngredients:Bool = mIngredients.countLiving() == 0;
+		var noIngredients:Bool = mIngredients.countLiving() == 2;
 		var timerOut:Bool = HUD.isTimeOver();
 		var simulationStop:Bool = noIngredients || timerOut;
 		if (simulationStop)
@@ -241,7 +241,6 @@ class GameState extends FlxState
 			{
 				item.x = lastX;
 				item.y = lastY - GeneralConstants.HUD_ingredientsDistance;
-				//item.alpha = 0.7;
 				add(item);
 				lastY = item.y;
 			}
