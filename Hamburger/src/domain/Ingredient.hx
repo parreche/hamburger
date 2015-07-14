@@ -167,7 +167,7 @@ class Ingredient extends FlxSprite
 		mEatenAnimation.y = y - 500;
 		mEatenAnimation.visible = true;
 		mEatenAnimation.animation.play(AnimationFactory.EATEN_ANIMATION);
-		FlxG.sound.play("sound/eat.wav");
+		FlxG.sound.play("sound/Comer.wav");
 	}
 	
 	public function getScore() : Int 

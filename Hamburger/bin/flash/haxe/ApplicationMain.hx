@@ -158,6 +158,14 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("img/credits/Boton_Main_Menu.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/credits/Creditos_base.jpg");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("img/game/end/background_end_game.jpg");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -350,6 +358,14 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("img/optionsMenu/Boton_Bajar.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/optionsMenu/Boton_Subir.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("img/optionsMenu/check.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -367,10 +383,6 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/optionsMenu/options.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("img/optionsMenu/slider.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -486,27 +498,27 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("sound/breadCollide.wav");
+		urls.push ("sound/Alarma.wav");
 		types.push (lime.Assets.AssetType.SOUND);
 		
 		
-		urls.push ("sound/eat.wav");
+		urls.push ("sound/Ambiente_de_fondo.wav");
 		types.push (lime.Assets.AssetType.SOUND);
 		
 		
-		urls.push ("sound/endTheme.wav");
+		urls.push ("sound/Botones.wav");
 		types.push (lime.Assets.AssetType.SOUND);
 		
 		
-		urls.push ("sound/gameTheme.wav");
+		urls.push ("sound/Comer.wav");
 		types.push (lime.Assets.AssetType.SOUND);
 		
 		
-		urls.push ("sound/menuTheme.wav");
+		urls.push ("sound/Final.wav");
 		types.push (lime.Assets.AssetType.SOUND);
 		
 		
-		urls.push ("sound/tick.wav");
+		urls.push ("sound/Musica_del_juego.wav");
 		types.push (lime.Assets.AssetType.SOUND);
 		
 		

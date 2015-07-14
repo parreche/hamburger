@@ -41,7 +41,7 @@ class MainMenu extends FlxState
 	override public function create():Void 
 	{
 		add(MenuHelper.loadStaticImage("img/mainMenu/background_menu.png", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
-		FlxG.sound.playMusic("sound/menuTheme.wav");
+		FlxG.sound.playMusic("sound/Ambiente_de_fondo.wav");
 		if (sPlayAnimiation)
 		{
 			//mAnimation = AnimationFactory.loadAnimations(mAnimation, AnimationEnum.MAIN_MENU);
@@ -74,10 +74,15 @@ class MainMenu extends FlxState
 	
 	function startGame(aButton:MenuButton) :Void
 	{
-		FlxG.camera.fade(FlxColor.BLACK, 0.6, false, function() {
-			FlxG.switchState(new GameState());
-			FlxG.sound.music.stop();
-		});
+		if (GameState.sFirstTimePlayer)
+		{
+			showTutorial(aButton);
+		} else {
+			FlxG.camera.fade(FlxColor.BLACK, 0.6, false, function() {
+				FlxG.switchState(new GameState());
+				FlxG.sound.music.stop();
+			});
+		}		
 	}
 	
 	function goToTutorial(aButton:MenuButton) :Void
@@ -106,6 +111,7 @@ class MainMenu extends FlxState
 		stream.play("video1.mp4");
 		Lib.current.addChild(screen);
 	}
+	
 	function showTutorial(aButton:MenuButton) :Void
 	{
 		FlxG.switchState(new TutorialState());

@@ -37,6 +37,7 @@ import utils.SequenceCode;
 class GameState extends FlxState
 {
 	public static var sEnableJoystick:Bool;
+	public static var sFirstTimePlayer:Bool = true;
 	
 	var mIngredients = new FlxGroup();
 	var mObstacles = new FlxGroup();
@@ -53,8 +54,9 @@ class GameState extends FlxState
 	
 	override function create():Void
 	{	
+		sFirstTimePlayer = false;
 		add(MenuHelper.loadStaticImage("img/game/game_background.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
-		FlxG.sound.playMusic("sound/gameTheme.wav");
+		FlxG.sound.playMusic("sound/Musica_del_juego.wav");
 		
 		//var enableJoystick:Bool = GeneralConstants.enableJoystick == 1;
 		
@@ -159,8 +161,6 @@ class GameState extends FlxState
 	{
 		var xCoord:Float = Math.random() * GeneralConstants.game_screenWidth;
 		var yCoord:Float = Math.random() * GeneralConstants.game_screenHeigth;
-		trace("x " + xCoord);
-		trace("y " + yCoord);
 		return new Point(xCoord, yCoord);
 	}
 	
@@ -178,24 +178,16 @@ class GameState extends FlxState
 			HUD.update();
 			checkGameOver();
 			if (HUD.isHurryUp()) {
-				FlxG.sound.play("sound/tick.wav",2);
+				FlxG.sound.play("sound/Alarma.wav",2);
 			}
 			drawEatenIngredients();
 			
 			mBreadTop.immovable = false;
 			mBreadBottom.immovable = false;
-			if (FlxG.collide(mBreadTop, mBreadBottom)) 
-			{
-				FlxG.sound.play("sound/breadCollide.wav");
-			}
-			if (FlxG.collide(mBreadTop, mObstacles))
-			{
-				FlxG.sound.play("sound/breadCollide.wav");
-			}
-			if (FlxG.collide(mBreadBottom, mObstacles))
-			{
-				FlxG.sound.play("sound/breadCollide.wav");
-			}
+			FlxG.collide(mBreadTop, mBreadBottom);
+			FlxG.collide(mBreadTop, mObstacles);
+			FlxG.collide(mBreadBottom, mObstacles);
+			
 			mBreadTop.immovable = true;
 			mBreadBottom.immovable = true;
 			FlxG.collide(mIngredients, mIngredients);

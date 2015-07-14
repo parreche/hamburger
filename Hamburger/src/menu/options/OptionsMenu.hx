@@ -4,9 +4,11 @@ import flixel.addons.ui.FlxUISlider;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.text.FlxText;
 import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import gameplay.GameState;
+import menu.credits.Credits;
 import menu.MainMenu;
 import openfl.Assets;
 import utils.MenuHelper;
@@ -17,8 +19,9 @@ import utils.MenuHelper;
  */
 class OptionsMenu extends FlxState
 {
-
 	private var mEnableJoystickCheck:FlxSprite;
+	private var mVolumeText:FlxText;
+	private var mBrightnessText:FlxText;
 	
 	public function new() 
 	{
@@ -38,6 +41,54 @@ class OptionsMenu extends FlxState
 		mEnableJoystickCheck.visible = GameState.sEnableJoystick;
 		add(mEnableJoystickCheck);
 		
+		add(MenuHelper.createMenuButton("img/optionsMenu/Boton_Subir.png", GeneralConstants.options_menu_volume_up_button_width, GeneralConstants.options_menu_volume_up_button_heigth, GeneralConstants.options_menu_volume_up_button_x, GeneralConstants.options_menu_volume_up_button_y, clickVolumeUp));
+		add(MenuHelper.createMenuButton("img/optionsMenu/Boton_Bajar.png", GeneralConstants.options_menu_volume_down_button_width, GeneralConstants.options_menu_volume_down_button_heigth, GeneralConstants.options_menu_volume_down_button_x, GeneralConstants.options_menu_volume_down_button_y, clickVolumeDown));
+		
+		add(MenuHelper.createMenuButton("img/optionsMenu/Boton_Subir.png", GeneralConstants.options_menu_brightness_up_button_width, GeneralConstants.options_menu_brightness_up_button_heigth, GeneralConstants.options_menu_brightness_up_button_x, GeneralConstants.options_menu_brightness_down_button_y, clickBrightnessUp));
+		add(MenuHelper.createMenuButton("img/optionsMenu/Boton_Bajar.png", GeneralConstants.options_menu_brightness_down_button_width, GeneralConstants.options_menu_brightness_down_button_heigth, GeneralConstants.options_menu_brightness_down_button_x, GeneralConstants.options_menu_brightness_down_button_y, clickBrightnessDown));
+		
+		mVolumeText = MenuHelper.generateMenuText(GeneralConstants.options_menu_volume_text_x, GeneralConstants.options_menu_volume_text_y, "", GeneralConstants.options_menu_volume_text_size);
+		mBrightnessText = MenuHelper.generateMenuText(GeneralConstants.options_menu_brightness_text_x, GeneralConstants.options_menu_brightness_text_y, "", GeneralConstants.options_menu_brightness_text_size);
+		add(mVolumeText);
+		add(mBrightnessText);
+		updateVolume();
+		updateBrightness();
+	}
+	
+	private function clickVolumeDown(aButton:MenuButton):Void
+	{
+		FlxG.sound.volume -= 0.1;
+		updateVolume();
+	}
+	
+	private function clickVolumeUp(aButton:MenuButton):Void
+	{
+		FlxG.sound.volume += 0.1;
+		updateVolume();
+	}
+	
+	private function updateVolume():Void
+	{
+		var vol:Int = Math.round(FlxG.sound.volume * 100);
+		mVolumeText.text = Std.string(vol);
+	}
+	
+	private function clickBrightnessDown(aButton:MenuButton):Void
+	{
+		FlxG.camera.alpha -= 0.1;
+		updateBrightness();
+	}
+	
+	private function clickBrightnessUp(aButton:MenuButton):Void
+	{
+		FlxG.camera.alpha += 0.1;
+		updateBrightness();
+	}
+	
+	private function updateBrightness():Void
+	{
+		var vol:Int = Math.round(FlxG.camera.alpha * 100);
+		mBrightnessText.text = Std.string(vol);
 	}
 	
 	function goToMainMenu(aButton:MenuButton) :Void
@@ -47,7 +98,7 @@ class OptionsMenu extends FlxState
 	
 	function goToCredits(aButton:MenuButton) :Void
 	{
-		
+		FlxG.switchState(new Credits());
 	}
 	
 	function toggleJoystick(aButton:MenuButton) :Void

@@ -107,6 +107,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("flixel/flixel-ui/xml/default_loading_screen.xml", AssetType.TEXT);
 		className.set ("flixel/flixel-ui/xml/default_popup.xml", __ASSET__flixel_flixel_ui_xml_default_popup_xml);
 		type.set ("flixel/flixel-ui/xml/default_popup.xml", AssetType.TEXT);
+		className.set ("img/credits/Boton_Main_Menu.png", __ASSET__img_credits_boton_main_menu_png);
+		type.set ("img/credits/Boton_Main_Menu.png", AssetType.IMAGE);
+		className.set ("img/credits/Creditos_base.jpg", __ASSET__img_credits_creditos_base_jpg);
+		type.set ("img/credits/Creditos_base.jpg", AssetType.IMAGE);
 		className.set ("img/game/end/background_end_game.jpg", __ASSET__img_game_end_background_end_game_jpg);
 		type.set ("img/game/end/background_end_game.jpg", AssetType.IMAGE);
 		className.set ("img/game/end/High_Score.png", __ASSET__img_game_end_high_score_png);
@@ -203,6 +207,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/mainMenu/topBread.png", AssetType.IMAGE);
 		className.set ("img/mainMenu/tutorial_button.png", __ASSET__img_mainmenu_tutorial_button_png);
 		type.set ("img/mainMenu/tutorial_button.png", AssetType.IMAGE);
+		className.set ("img/optionsMenu/Boton_Bajar.png", __ASSET__img_optionsmenu_boton_bajar_png);
+		type.set ("img/optionsMenu/Boton_Bajar.png", AssetType.IMAGE);
+		className.set ("img/optionsMenu/Boton_Subir.png", __ASSET__img_optionsmenu_boton_subir_png);
+		type.set ("img/optionsMenu/Boton_Subir.png", AssetType.IMAGE);
 		className.set ("img/optionsMenu/check.png", __ASSET__img_optionsmenu_check_png);
 		type.set ("img/optionsMenu/check.png", AssetType.IMAGE);
 		className.set ("img/optionsMenu/close_button.png", __ASSET__img_optionsmenu_close_button_png);
@@ -213,8 +221,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/optionsMenu/cross.png", AssetType.IMAGE);
 		className.set ("img/optionsMenu/options.png", __ASSET__img_optionsmenu_options_png);
 		type.set ("img/optionsMenu/options.png", AssetType.IMAGE);
-		className.set ("img/optionsMenu/slider.png", __ASSET__img_optionsmenu_slider_png);
-		type.set ("img/optionsMenu/slider.png", AssetType.IMAGE);
 		className.set ("img/panceta/panceta xml data sprite.png", __ASSET__img_panceta_panceta_xml_data_sprite_png);
 		type.set ("img/panceta/panceta xml data sprite.png", AssetType.IMAGE);
 		className.set ("img/panceta/panceta xml data sprite.xml", __ASSET__img_panceta_panceta_xml_data_sprite_xml);
@@ -271,18 +277,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/tutorial/Tutorial_3.jpg", AssetType.IMAGE);
 		className.set ("img/tutorial/Tutorial_4.jpg", __ASSET__img_tutorial_tutorial_4_jpg);
 		type.set ("img/tutorial/Tutorial_4.jpg", AssetType.IMAGE);
-		className.set ("sound/breadCollide.wav", __ASSET__sound_breadcollide_wav);
-		type.set ("sound/breadCollide.wav", AssetType.SOUND);
-		className.set ("sound/eat.wav", __ASSET__sound_eat_wav);
-		type.set ("sound/eat.wav", AssetType.SOUND);
-		className.set ("sound/endTheme.wav", __ASSET__sound_endtheme_wav);
-		type.set ("sound/endTheme.wav", AssetType.SOUND);
-		className.set ("sound/gameTheme.wav", __ASSET__sound_gametheme_wav);
-		type.set ("sound/gameTheme.wav", AssetType.SOUND);
-		className.set ("sound/menuTheme.wav", __ASSET__sound_menutheme_wav);
-		type.set ("sound/menuTheme.wav", AssetType.SOUND);
-		className.set ("sound/tick.wav", __ASSET__sound_tick_wav);
-		type.set ("sound/tick.wav", AssetType.SOUND);
+		className.set ("sound/Alarma.wav", __ASSET__sound_alarma_wav);
+		type.set ("sound/Alarma.wav", AssetType.SOUND);
+		className.set ("sound/Ambiente_de_fondo.wav", __ASSET__sound_ambiente_de_fondo_wav);
+		type.set ("sound/Ambiente_de_fondo.wav", AssetType.SOUND);
+		className.set ("sound/Botones.wav", __ASSET__sound_botones_wav);
+		type.set ("sound/Botones.wav", AssetType.SOUND);
+		className.set ("sound/Comer.wav", __ASSET__sound_comer_wav);
+		type.set ("sound/Comer.wav", AssetType.SOUND);
+		className.set ("sound/Final.wav", __ASSET__sound_final_wav);
+		type.set ("sound/Final.wav", AssetType.SOUND);
+		className.set ("sound/Musica_del_juego.wav", __ASSET__sound_musica_del_juego_wav);
+		type.set ("sound/Musica_del_juego.wav", AssetType.SOUND);
 		className.set ("config/ingredients-cfg.csv", __ASSET__config_ingredients_cfg_csv);
 		type.set ("config/ingredients-cfg.csv", AssetType.TEXT);
 		className.set ("fonts/Barrio-Regular.ttf", __ASSET__fonts_barrio_regular_ttf);
@@ -416,6 +422,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
+		id = "img/credits/Boton_Main_Menu.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/credits/Creditos_base.jpg";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/game/end/background_end_game.jpg";
 		path.set (id, id);
 		
@@ -608,6 +622,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "img/optionsMenu/Boton_Bajar.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/optionsMenu/Boton_Subir.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/optionsMenu/check.png";
 		path.set (id, id);
 		
@@ -625,10 +647,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.IMAGE);
 		id = "img/optionsMenu/options.png";
-		path.set (id, id);
-		
-		type.set (id, AssetType.IMAGE);
-		id = "img/optionsMenu/slider.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -744,27 +762,27 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
-		id = "sound/breadCollide.wav";
+		id = "sound/Alarma.wav";
 		path.set (id, id);
 		
 		type.set (id, AssetType.SOUND);
-		id = "sound/eat.wav";
+		id = "sound/Ambiente_de_fondo.wav";
 		path.set (id, id);
 		
 		type.set (id, AssetType.SOUND);
-		id = "sound/endTheme.wav";
+		id = "sound/Botones.wav";
 		path.set (id, id);
 		
 		type.set (id, AssetType.SOUND);
-		id = "sound/gameTheme.wav";
+		id = "sound/Comer.wav";
 		path.set (id, id);
 		
 		type.set (id, AssetType.SOUND);
-		id = "sound/menuTheme.wav";
+		id = "sound/Final.wav";
 		path.set (id, id);
 		
 		type.set (id, AssetType.SOUND);
-		id = "sound/tick.wav";
+		id = "sound/Musica_del_juego.wav";
 		path.set (id, id);
 		
 		type.set (id, AssetType.SOUND);
@@ -788,6 +806,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#else
 		
 		#if openfl
+		
+		
+		
 		
 		
 		
@@ -1010,6 +1031,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("flixel/flixel-ui/xml/default_popup.xml", __ASSET__flixel_flixel_ui_xml_default_popup_xml);
 		type.set ("flixel/flixel-ui/xml/default_popup.xml", AssetType.TEXT);
 		
+		className.set ("img/credits/Boton_Main_Menu.png", __ASSET__img_credits_boton_main_menu_png);
+		type.set ("img/credits/Boton_Main_Menu.png", AssetType.IMAGE);
+		
+		className.set ("img/credits/Creditos_base.jpg", __ASSET__img_credits_creditos_base_jpg);
+		type.set ("img/credits/Creditos_base.jpg", AssetType.IMAGE);
+		
 		className.set ("img/game/end/background_end_game.jpg", __ASSET__img_game_end_background_end_game_jpg);
 		type.set ("img/game/end/background_end_game.jpg", AssetType.IMAGE);
 		
@@ -1154,6 +1181,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("img/mainMenu/tutorial_button.png", __ASSET__img_mainmenu_tutorial_button_png);
 		type.set ("img/mainMenu/tutorial_button.png", AssetType.IMAGE);
 		
+		className.set ("img/optionsMenu/Boton_Bajar.png", __ASSET__img_optionsmenu_boton_bajar_png);
+		type.set ("img/optionsMenu/Boton_Bajar.png", AssetType.IMAGE);
+		
+		className.set ("img/optionsMenu/Boton_Subir.png", __ASSET__img_optionsmenu_boton_subir_png);
+		type.set ("img/optionsMenu/Boton_Subir.png", AssetType.IMAGE);
+		
 		className.set ("img/optionsMenu/check.png", __ASSET__img_optionsmenu_check_png);
 		type.set ("img/optionsMenu/check.png", AssetType.IMAGE);
 		
@@ -1168,9 +1201,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("img/optionsMenu/options.png", __ASSET__img_optionsmenu_options_png);
 		type.set ("img/optionsMenu/options.png", AssetType.IMAGE);
-		
-		className.set ("img/optionsMenu/slider.png", __ASSET__img_optionsmenu_slider_png);
-		type.set ("img/optionsMenu/slider.png", AssetType.IMAGE);
 		
 		className.set ("img/panceta/panceta xml data sprite.png", __ASSET__img_panceta_panceta_xml_data_sprite_png);
 		type.set ("img/panceta/panceta xml data sprite.png", AssetType.IMAGE);
@@ -1256,23 +1286,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("img/tutorial/Tutorial_4.jpg", __ASSET__img_tutorial_tutorial_4_jpg);
 		type.set ("img/tutorial/Tutorial_4.jpg", AssetType.IMAGE);
 		
-		className.set ("sound/breadCollide.wav", __ASSET__sound_breadcollide_wav);
-		type.set ("sound/breadCollide.wav", AssetType.SOUND);
+		className.set ("sound/Alarma.wav", __ASSET__sound_alarma_wav);
+		type.set ("sound/Alarma.wav", AssetType.SOUND);
 		
-		className.set ("sound/eat.wav", __ASSET__sound_eat_wav);
-		type.set ("sound/eat.wav", AssetType.SOUND);
+		className.set ("sound/Ambiente_de_fondo.wav", __ASSET__sound_ambiente_de_fondo_wav);
+		type.set ("sound/Ambiente_de_fondo.wav", AssetType.SOUND);
 		
-		className.set ("sound/endTheme.wav", __ASSET__sound_endtheme_wav);
-		type.set ("sound/endTheme.wav", AssetType.SOUND);
+		className.set ("sound/Botones.wav", __ASSET__sound_botones_wav);
+		type.set ("sound/Botones.wav", AssetType.SOUND);
 		
-		className.set ("sound/gameTheme.wav", __ASSET__sound_gametheme_wav);
-		type.set ("sound/gameTheme.wav", AssetType.SOUND);
+		className.set ("sound/Comer.wav", __ASSET__sound_comer_wav);
+		type.set ("sound/Comer.wav", AssetType.SOUND);
 		
-		className.set ("sound/menuTheme.wav", __ASSET__sound_menutheme_wav);
-		type.set ("sound/menuTheme.wav", AssetType.SOUND);
+		className.set ("sound/Final.wav", __ASSET__sound_final_wav);
+		type.set ("sound/Final.wav", AssetType.SOUND);
 		
-		className.set ("sound/tick.wav", __ASSET__sound_tick_wav);
-		type.set ("sound/tick.wav", AssetType.SOUND);
+		className.set ("sound/Musica_del_juego.wav", __ASSET__sound_musica_del_juego_wav);
+		type.set ("sound/Musica_del_juego.wav", AssetType.SOUND);
 		
 		className.set ("config/ingredients-cfg.csv", __ASSET__config_ingredients_cfg_csv);
 		type.set ("config/ingredients-cfg.csv", AssetType.TEXT);
@@ -1911,6 +1941,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_xml_defaults_xml extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_xml_default_loading_screen_xml extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_xml_default_popup_xml extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__img_credits_boton_main_menu_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_credits_creditos_base_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_background_end_game_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_high_score_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_chedar_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1959,12 +1991,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_start_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_topbread_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_mainmenu_tutorial_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_optionsmenu_boton_bajar_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_optionsmenu_boton_subir_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_optionsmenu_check_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_optionsmenu_close_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_optionsmenu_credits_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_optionsmenu_cross_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_optionsmenu_options_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__img_optionsmenu_slider_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_panceta_panceta_xml_data_sprite_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_panceta_panceta_xml_data_sprite_xml extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__img_panceta_panceta_comer_xml_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1993,17 +2026,20 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_tutorial_tutorial_2_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_tutorial_tutorial_3_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_tutorial_tutorial_4_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__sound_breadcollide_wav extends flash.media.Sound { }
-@:keep @:bind #if display private #end class __ASSET__sound_eat_wav extends flash.media.Sound { }
-@:keep @:bind #if display private #end class __ASSET__sound_endtheme_wav extends flash.media.Sound { }
-@:keep @:bind #if display private #end class __ASSET__sound_gametheme_wav extends flash.media.Sound { }
-@:keep @:bind #if display private #end class __ASSET__sound_menutheme_wav extends flash.media.Sound { }
-@:keep @:bind #if display private #end class __ASSET__sound_tick_wav extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__sound_alarma_wav extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__sound_ambiente_de_fondo_wav extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__sound_botones_wav extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__sound_comer_wav extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__sound_final_wav extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__sound_musica_del_juego_wav extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__config_ingredients_cfg_csv extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__fonts_barrio_regular_ttf extends flash.text.Font { }
 
 
 #elseif html5
+
+
+
 
 
 
@@ -2166,6 +2202,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/xml/defaults.xml") #if display private #end class __ASSET__flixel_flixel_ui_xml_defaults_xml extends lime.utils.ByteArray {}
 @:file("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/xml/default_loading_screen.xml") #if display private #end class __ASSET__flixel_flixel_ui_xml_default_loading_screen_xml extends lime.utils.ByteArray {}
 @:file("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/xml/default_popup.xml") #if display private #end class __ASSET__flixel_flixel_ui_xml_default_popup_xml extends lime.utils.ByteArray {}
+@:image("assets/img/credits/Boton_Main_Menu.png") #if display private #end class __ASSET__img_credits_boton_main_menu_png extends lime.graphics.Image {}
+@:image("assets/img/credits/Creditos_base.jpg") #if display private #end class __ASSET__img_credits_creditos_base_jpg extends lime.graphics.Image {}
 @:image("assets/img/game/end/background_end_game.jpg") #if display private #end class __ASSET__img_game_end_background_end_game_jpg extends lime.graphics.Image {}
 @:image("assets/img/game/end/High_Score.png") #if display private #end class __ASSET__img_game_end_high_score_png extends lime.graphics.Image {}
 @:image("assets/img/game/end/ingredients/Chedar.png") #if display private #end class __ASSET__img_game_end_ingredients_chedar_png extends lime.graphics.Image {}
@@ -2214,12 +2252,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/img/mainMenu/start_button.png") #if display private #end class __ASSET__img_mainmenu_start_button_png extends lime.graphics.Image {}
 @:image("assets/img/mainMenu/topBread.png") #if display private #end class __ASSET__img_mainmenu_topbread_png extends lime.graphics.Image {}
 @:image("assets/img/mainMenu/tutorial_button.png") #if display private #end class __ASSET__img_mainmenu_tutorial_button_png extends lime.graphics.Image {}
+@:image("assets/img/optionsMenu/Boton_Bajar.png") #if display private #end class __ASSET__img_optionsmenu_boton_bajar_png extends lime.graphics.Image {}
+@:image("assets/img/optionsMenu/Boton_Subir.png") #if display private #end class __ASSET__img_optionsmenu_boton_subir_png extends lime.graphics.Image {}
 @:image("assets/img/optionsMenu/check.png") #if display private #end class __ASSET__img_optionsmenu_check_png extends lime.graphics.Image {}
 @:image("assets/img/optionsMenu/close_button.png") #if display private #end class __ASSET__img_optionsmenu_close_button_png extends lime.graphics.Image {}
 @:image("assets/img/optionsMenu/credits_button.png") #if display private #end class __ASSET__img_optionsmenu_credits_button_png extends lime.graphics.Image {}
 @:image("assets/img/optionsMenu/cross.png") #if display private #end class __ASSET__img_optionsmenu_cross_png extends lime.graphics.Image {}
 @:image("assets/img/optionsMenu/options.png") #if display private #end class __ASSET__img_optionsmenu_options_png extends lime.graphics.Image {}
-@:image("assets/img/optionsMenu/slider.png") #if display private #end class __ASSET__img_optionsmenu_slider_png extends lime.graphics.Image {}
 @:image("assets/img/panceta/panceta xml data sprite.png") #if display private #end class __ASSET__img_panceta_panceta_xml_data_sprite_png extends lime.graphics.Image {}
 @:file("assets/img/panceta/panceta xml data sprite.xml") #if display private #end class __ASSET__img_panceta_panceta_xml_data_sprite_xml extends lime.utils.ByteArray {}
 @:image("assets/img/panceta/panceta_comer_xml.png") #if display private #end class __ASSET__img_panceta_panceta_comer_xml_png extends lime.graphics.Image {}
@@ -2248,12 +2287,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/img/tutorial/Tutorial_2.jpg") #if display private #end class __ASSET__img_tutorial_tutorial_2_jpg extends lime.graphics.Image {}
 @:image("assets/img/tutorial/Tutorial_3.jpg") #if display private #end class __ASSET__img_tutorial_tutorial_3_jpg extends lime.graphics.Image {}
 @:image("assets/img/tutorial/Tutorial_4.jpg") #if display private #end class __ASSET__img_tutorial_tutorial_4_jpg extends lime.graphics.Image {}
-@:file("assets/sound/breadCollide.wav") #if display private #end class __ASSET__sound_breadcollide_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/eat.wav") #if display private #end class __ASSET__sound_eat_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/endTheme.wav") #if display private #end class __ASSET__sound_endtheme_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/gameTheme.wav") #if display private #end class __ASSET__sound_gametheme_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/menuTheme.wav") #if display private #end class __ASSET__sound_menutheme_wav extends lime.utils.ByteArray {}
-@:file("assets/sound/tick.wav") #if display private #end class __ASSET__sound_tick_wav extends lime.utils.ByteArray {}
+@:file("assets/sound/Alarma.wav") #if display private #end class __ASSET__sound_alarma_wav extends lime.utils.ByteArray {}
+@:file("assets/sound/Ambiente_de_fondo.wav") #if display private #end class __ASSET__sound_ambiente_de_fondo_wav extends lime.utils.ByteArray {}
+@:file("assets/sound/Botones.wav") #if display private #end class __ASSET__sound_botones_wav extends lime.utils.ByteArray {}
+@:file("assets/sound/Comer.wav") #if display private #end class __ASSET__sound_comer_wav extends lime.utils.ByteArray {}
+@:file("assets/sound/Final.wav") #if display private #end class __ASSET__sound_final_wav extends lime.utils.ByteArray {}
+@:file("assets/sound/Musica_del_juego.wav") #if display private #end class __ASSET__sound_musica_del_juego_wav extends lime.utils.ByteArray {}
 @:file("assets/config/ingredients-cfg.csv") #if display private #end class __ASSET__config_ingredients_cfg_csv extends lime.utils.ByteArray {}
 @:font("assets/fonts/Barrio-Regular.ttf") #if display private #end class __ASSET__fonts_barrio_regular_ttf extends lime.text.Font {}
 

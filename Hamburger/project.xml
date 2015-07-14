@@ -24,6 +24,7 @@
 	<icon path="assets/openfl.svg" />
 	<assets path="assets/img" rename="img" />
 	<assets path="assets/sound" rename="sound" />
+	<assets path="assets/sound" include="*.mp3" if="flash" />
 	<assets path="assets/config" rename="config" include="*.csv" />
 	<assets path="assets/fonts" rename="fonts" />
 	<!-- optimize output

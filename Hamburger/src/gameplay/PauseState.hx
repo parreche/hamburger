@@ -36,7 +36,6 @@ class PauseState extends flixel.FlxSubState
 	function quitGame(aButton:MenuButton) :Void
 	{
 		mCurrentGame.quitGame();
-		
 	}
 	
 }
