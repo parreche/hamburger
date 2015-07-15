@@ -245,6 +245,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/pepinos/pepino_comer_xml.png", AssetType.IMAGE);
 		className.set ("img/pepinos/pepino_comer_xml.xml", __ASSET__img_pepinos_pepino_comer_xml_xml);
 		type.set ("img/pepinos/pepino_comer_xml.xml", AssetType.TEXT);
+		className.set ("img/ranking/Boton_Cerrar.png", __ASSET__img_ranking_boton_cerrar_png);
+		type.set ("img/ranking/Boton_Cerrar.png", AssetType.IMAGE);
+		className.set ("img/ranking/Menu_de_Ranking.png", __ASSET__img_ranking_menu_de_ranking_png);
+		type.set ("img/ranking/Menu_de_Ranking.png", AssetType.IMAGE);
+		className.set ("img/ranking/RANKING_FINAL.jpg", __ASSET__img_ranking_ranking_final_jpg);
+		type.set ("img/ranking/RANKING_FINAL.jpg", AssetType.IMAGE);
 		className.set ("img/static/Bacon.png", __ASSET__img_static_bacon_png);
 		type.set ("img/static/Bacon.png", AssetType.IMAGE);
 		className.set ("img/static/Burger.png", __ASSET__img_static_burger_png);
@@ -698,6 +704,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
+		id = "img/ranking/Boton_Cerrar.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/ranking/Menu_de_Ranking.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/ranking/RANKING_FINAL.jpg";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "img/static/Bacon.png";
 		path.set (id, id);
 		
@@ -806,6 +824,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#else
 		
 		#if openfl
+		
+		
+		
 		
 		
 		
@@ -1237,6 +1258,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("img/pepinos/pepino_comer_xml.xml", __ASSET__img_pepinos_pepino_comer_xml_xml);
 		type.set ("img/pepinos/pepino_comer_xml.xml", AssetType.TEXT);
+		
+		className.set ("img/ranking/Boton_Cerrar.png", __ASSET__img_ranking_boton_cerrar_png);
+		type.set ("img/ranking/Boton_Cerrar.png", AssetType.IMAGE);
+		
+		className.set ("img/ranking/Menu_de_Ranking.png", __ASSET__img_ranking_menu_de_ranking_png);
+		type.set ("img/ranking/Menu_de_Ranking.png", AssetType.IMAGE);
+		
+		className.set ("img/ranking/RANKING_FINAL.jpg", __ASSET__img_ranking_ranking_final_jpg);
+		type.set ("img/ranking/RANKING_FINAL.jpg", AssetType.IMAGE);
 		
 		className.set ("img/static/Bacon.png", __ASSET__img_static_bacon_png);
 		type.set ("img/static/Bacon.png", AssetType.IMAGE);
@@ -2010,6 +2040,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__img_pepinos_pepino_xml_data_sprite_xml extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__img_pepinos_pepino_comer_xml_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_pepinos_pepino_comer_xml_xml extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__img_ranking_boton_cerrar_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_ranking_menu_de_ranking_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_ranking_ranking_final_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_static_bacon_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_static_burger_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_static_cucumber_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -2037,6 +2070,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
 
 
 
@@ -2271,6 +2307,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/img/pepinos/pepino xml data sprite.xml") #if display private #end class __ASSET__img_pepinos_pepino_xml_data_sprite_xml extends lime.utils.ByteArray {}
 @:image("assets/img/pepinos/pepino_comer_xml.png") #if display private #end class __ASSET__img_pepinos_pepino_comer_xml_png extends lime.graphics.Image {}
 @:file("assets/img/pepinos/pepino_comer_xml.xml") #if display private #end class __ASSET__img_pepinos_pepino_comer_xml_xml extends lime.utils.ByteArray {}
+@:image("assets/img/ranking/Boton_Cerrar.png") #if display private #end class __ASSET__img_ranking_boton_cerrar_png extends lime.graphics.Image {}
+@:image("assets/img/ranking/Menu_de_Ranking.png") #if display private #end class __ASSET__img_ranking_menu_de_ranking_png extends lime.graphics.Image {}
+@:image("assets/img/ranking/RANKING_FINAL.jpg") #if display private #end class __ASSET__img_ranking_ranking_final_jpg extends lime.graphics.Image {}
 @:image("assets/img/static/Bacon.png") #if display private #end class __ASSET__img_static_bacon_png extends lime.graphics.Image {}
 @:image("assets/img/static/Burger.png") #if display private #end class __ASSET__img_static_burger_png extends lime.graphics.Image {}
 @:image("assets/img/static/Cucumber.png") #if display private #end class __ASSET__img_static_cucumber_png extends lime.graphics.Image {}

@@ -10,6 +10,7 @@ import configuration.GeneralConstants;
 import menu.MainMenu;
 import menu.MenuButton;
 import openfl.utils.Object;
+import src.utils.DBHelper;
 import utils.MenuHelper;
 
 /**
@@ -70,25 +71,19 @@ class EndState extends FlxState
 		lastY = lastY - GeneralConstants.end_game_ingredients_separation;
 		add(MenuHelper.loadStaticImage("img/game/end/ingredients/topBread.png", 0, 0, GeneralConstants.end_game_ingredients_x, lastY));
 	
-		var save:FlxSave = new FlxSave();
-		save.bind(mDBName);
-		var name:String = " ";
-		if (save.data.name != null) 
-		{
-			name = save.data.name; 
-		}
-		save.close();
+		var name:String = DBHelper.getLastName();
 		
 		mNameTextField = MenuHelper.generateInputText(GeneralConstants.end_game_input_name_x, GeneralConstants.end_game_input_name_y, name, GeneralConstants.end_game_input_name_size);
 		add(mNameTextField);
 		
-		showHighScores();
+		DBHelper.showHighScores(this, GeneralConstants.end_game_ranking_name_x, GeneralConstants.end_game_ranking_score_x, GeneralConstants.end_game_ranking_y, GeneralConstants.end_game_ranking_space, GeneralConstants.end_game_ranking_size);
 				
 	}
 	
 	private function restart(aButton:MenuButton) : Void
 	{
-		updateHighScore();
+		DBHelper.updateHighScore(mScore, mTime, mNameTextField.text);
+		
 		FlxG.camera.fade(FlxColor.BLACK, .66, false, function() {
 			FlxG.switchState(new GameState());
 			FlxG.sound.music.stop();
@@ -97,7 +92,8 @@ class EndState extends FlxState
 	
 	private function goToMainMenu(aButton:MenuButton) : Void
 	{
-		updateHighScore();
+		DBHelper.updateHighScore(mScore, mTime, mNameTextField.text);
+		
 		FlxG.camera.fade(FlxColor.BLACK, .66, false, function() {
 			FlxG.switchState(new MainMenu());
 			FlxG.sound.music.stop();
@@ -107,101 +103,9 @@ class EndState extends FlxState
 	private function isHighScore() : Bool
 	{
 		var score:Int = mScore + mTime*30;
-		var hiScore:Int = getHighScore();
+		var hiScore:Int = DBHelper.getHighScore();
 		return score == hiScore;
 	}
 	
-	private function showHighScores():Void
-	{
-		var save:FlxSave = new FlxSave();
-		save.bind(mDBName);
-		if (save.data.hiscore != null)
-		{
-			for (i in 0...5) {
-				if (save.data.hiscore[i].mScore > 0) {
-					add(MenuHelper.generateMenuText(GeneralConstants.end_game_ranking_name_x, GeneralConstants.end_game_ranking_y + i*40, save.data.hiscore[i].mName, GeneralConstants.end_game_ranking_size));
-					add(MenuHelper.generateMenuText(GeneralConstants.end_game_ranking_score_x, GeneralConstants.end_game_ranking_y + i*40, save.data.hiscore[i].mScore, GeneralConstants.end_game_ranking_size));
-				}
-			}
-			
-		}
-		save.close();
-	}
-	
-	/**
-	 * This function modifies the high score and then returns it
-	 * @param	Score	the final score the player just obtained
-	 * @return	hi score
-	 */
-	private function updateHighScore():Int
-	{
-		var hiScore:Int = mScore + mTime*30;
-		var save:FlxSave = new FlxSave();
-		save.bind(mDBName);
-		save.data.name = mNameTextField.text;
-		if (save.data.hiscore == null)
-		{
-			save.data.hiscore = new Array();
-			save.data.hiscore.push(new HighScore(hiScore, mNameTextField.text));
-			save.data.hiscore.push(new HighScore(0, " "));
-			save.data.hiscore.push(new HighScore(0, " "));
-			save.data.hiscore.push(new HighScore(0, " "));
-			save.data.hiscore.push(new HighScore(0, " "));
-		} else {
-			var remove:Bool = true;
-			for (i in 0...save.data.hiscore.length) {
-				if (save.data.hiscore[i].mScore < hiScore && remove) {
-					save.data.hiscore.pop();
-					save.data.hiscore.push(new HighScore(hiScore, mNameTextField.text));
-					remove = false;
-				}
-			}
-		}
-		save.data.hiscore.sort( function(a:Object, b:Object):Int
-		{
-			if (a.mScore < b.mScore) return 1;
-			if (a.mScore > b.mScore) return -1;
-			return 0;
-		} );
-		hiScore = save.data.hiscore[0].mScore;
-		save.close();
-		return hiScore;
-	}
-	
-	private function getHighScore():Int
-	{
-		var save:FlxSave = new FlxSave();
-		save.bind(mDBName);
-		if (save.data.hiscore == null)
-		{
-			return 0;
-		}
-		save.data.hiscore.sort( function(a:Object, b:Object):Int
-		{
-			if (a.mScore < b.mScore) return 1;
-			if (a.mScore > b.mScore) return -1;
-			return 0;
-		} );
-		var highScore:Int = save.data.hiscore[0].mScore;
-		save.close();
-		return highScore;
-	}
-	
-	private function timeFormat():String
-	{
-		var format:String;
-		var minutes = Std.int(mTime / 60);
-		var seconds = Std.int(mTime - (minutes * 60));
-		
-		format = minutes + ":";
-			
-		if (seconds < 10)
-		{
-			format += "0";
-		}
-		format += seconds;
-		
-		return format;
-	}
 	
 }

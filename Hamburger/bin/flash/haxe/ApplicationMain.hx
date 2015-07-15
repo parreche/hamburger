@@ -434,6 +434,18 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("img/ranking/Boton_Cerrar.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/ranking/Menu_de_Ranking.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/ranking/RANKING_FINAL.jpg");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("img/static/Bacon.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
