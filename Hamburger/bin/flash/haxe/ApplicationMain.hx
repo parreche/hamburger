@@ -1,7 +1,5 @@
+import lime.Assets;
 #if !macro
-
-
-@:access(lime.Assets)
 
 
 class ApplicationMain {
@@ -13,15 +11,8 @@ class ApplicationMain {
 	
 	public static function create ():Void {
 		
-		var app = new lime.app.Application ();
+		var app = new openfl.display.Application ();
 		app.create (config);
-		openfl.Lib.application = app;
-		
-		#if !flash
-		var stage = new openfl.display.Stage (app.window.width, app.window.height, config.background);
-		stage.addChild (openfl.Lib.current);
-		app.addModule (stage);
-		#end
 		
 		var display = new NMEPreloader ();
 		
@@ -35,487 +26,499 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/sounds/beep.mp3");
-		types.push (lime.Assets.AssetType.MUSIC);
+		types.push (AssetType.MUSIC);
 		
 		
 		urls.push ("assets/sounds/flixel.mp3");
-		types.push (lime.Assets.AssetType.MUSIC);
+		types.push (AssetType.MUSIC);
 		
 		
 		urls.push ("flixel/flixel-ui/img/box.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/button_arrow_down.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/button_arrow_left.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/button_arrow_right.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/button_arrow_up.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/button_thin.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/button_toggle.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/check_box.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/check_mark.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/chrome.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/chrome_flat.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/chrome_inset.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/chrome_light.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/dropdown_mark.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/finger_big.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/finger_small.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/hilight.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/invis.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/minus_mark.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/plus_mark.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/radio.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/radio_dot.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/swatch.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/tab.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/img/tab_back.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/flixel-ui/xml/defaults.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("flixel/flixel-ui/xml/default_loading_screen.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("flixel/flixel-ui/xml/default_popup.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/game/end/background_end_game.jpg");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/High_Score.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/ingredients/Chedar.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/ingredients/Hamburguesa.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/ingredients/Lechuga.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/ingredients/Panceta.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/ingredients/Pepino.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/ingredients/Tomate.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/ingredients/topBread.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/mainMenu_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/playAgain_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/game_background.jpg");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/hud_background.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/mainMenu_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/canasta.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/canastaSombra.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/cuchillo.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/cuchilloSombra.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/frasco.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/frasco2.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/frasco2Sombra.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/frascoSombra.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/jarra.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/jarraSombra.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/ketchup.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/ketchupSombra.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/plato sombra.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/obstacles/plato.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/pause.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/pause_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/resume_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/hamburguesa/hamburgusa xml data sprite.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/hamburguesa/hamburgusa xml data sprite.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/hamburguesa/hamburg_comer_xml.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/hamburguesa/hamburg_comer_xml.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/lechuga/lechuga xml data sprite.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/lechuga/lechuga xml data sprite.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/lechuga/lechuga_comer_xml.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/lechuga/lechuga_comer_xml.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/mainMenu/animation/background_title.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/background_menu.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/bottomBread.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/exit_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/options_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/ranking_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/start_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/topBread.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/mainMenu/tutorial_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/optionsMenu/check.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/optionsMenu/close_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/optionsMenu/credits_button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/optionsMenu/cross.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/optionsMenu/options.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/optionsMenu/slider.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/panceta/panceta xml data sprite.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/panceta/panceta xml data sprite.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/panceta/panceta_comer_xml.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/panceta/panceta_comer_xml.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/pan_garganta/pan garganta xml data sprite.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/pan_garganta/pan garganta xml data sprite.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/pan_lengua/pan lengua xml data sprite.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/pan_lengua/pan lengua xml data sprite.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/pepinos/pepino xml data sprite.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/pepinos/pepino xml data sprite.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/pepinos/pepino_comer_xml.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/pepinos/pepino_comer_xml.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
+		
+		
+		urls.push ("img/ranking/Boton_Cerrar.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/ranking/Menu_de_Ranking.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/ranking/RANKING_FINAL.jpg");
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/static/Bacon.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/static/Burger.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/static/Cucumber.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/static/Lettuce.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/static/Tomato.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/static/TopBread.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/tomate/tomate xml data sprite.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/tomate/tomate xml data sprite.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/tomate/tomate_comer_xml.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/tomate/tomate_comer_xml.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("img/tutorial/Boton_Next.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/tutorial/Boton_Skip.png");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/tutorial/Tutorial_1.jpg");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/tutorial/Tutorial_2.jpg");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/tutorial/Tutorial_3.jpg");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/tutorial/Tutorial_4.jpg");
-		types.push (lime.Assets.AssetType.IMAGE);
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("sound/breadCollide.wav");
-		types.push (lime.Assets.AssetType.SOUND);
+		types.push (AssetType.SOUND);
 		
 		
 		urls.push ("sound/eat.wav");
-		types.push (lime.Assets.AssetType.SOUND);
+		types.push (AssetType.SOUND);
 		
 		
 		urls.push ("sound/endTheme.wav");
-		types.push (lime.Assets.AssetType.SOUND);
+		types.push (AssetType.SOUND);
 		
 		
 		urls.push ("sound/gameTheme.wav");
-		types.push (lime.Assets.AssetType.SOUND);
+		types.push (AssetType.SOUND);
 		
 		
 		urls.push ("sound/menuTheme.wav");
-		types.push (lime.Assets.AssetType.SOUND);
+		types.push (AssetType.SOUND);
 		
 		
 		urls.push ("sound/tick.wav");
-		types.push (lime.Assets.AssetType.SOUND);
+		types.push (AssetType.SOUND);
 		
 		
 		urls.push ("config/ingredients-cfg.csv");
-		types.push (lime.Assets.AssetType.TEXT);
+		types.push (AssetType.TEXT);
 		
 		
 		urls.push ("Barrio");
-		types.push (lime.Assets.AssetType.FONT);
+		types.push (AssetType.FONT);
 		
 		
 		
@@ -523,7 +526,7 @@ class ApplicationMain {
 			
 			for (i in 0...urls.length) {
 				
-				if (types[i] != lime.Assets.AssetType.FONT) {
+				if (types[i] != AssetType.FONT) {
 					
 					urls[i] = config.assetsPrefix + urls[i];
 					
@@ -538,7 +541,7 @@ class ApplicationMain {
 		
 		var result = app.exec ();
 		
-		#if (sys && !nodejs && !emscripten)
+		#if (sys && !emscripten)
 		Sys.exit (result);
 		#end
 		
@@ -581,26 +584,22 @@ class ApplicationMain {
 			antialiasing: Std.int (0),
 			background: Std.int (0),
 			borderless: false,
-			company: "Arreche-Piaggio",
 			depthBuffer: false,
-			file: "Hamburger",
 			fps: Std.int (60),
 			fullscreen: false,
 			height: Std.int (1080),
 			orientation: "",
-			packageName: "Hamburger",
 			resizable: true,
-			stencilBuffer: true,
+			stencilBuffer: false,
 			title: "Hamburger",
-			version: "1.0.0",
 			vsync: false,
 			width: Std.int (1920),
 			
 		}
 		
-		#if (js && html5)
+		#if js
 		#if (munit || utest)
-		openfl.Lib.embed (null, 1920, 1080, "000000");
+		flash.Lib.embed (null, 1920, 1080, "000000");
 		#end
 		#else
 		create ();
@@ -624,8 +623,6 @@ class ApplicationMain {
 			}
 			
 		}
-		
-		lime.Assets.initialize ();
 		
 		if (hasMain) {
 			

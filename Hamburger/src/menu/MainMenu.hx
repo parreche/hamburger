@@ -5,6 +5,7 @@ import openfl.media.Video;
 import openfl.net.NetConnection;
 import openfl.net.NetStream;
 import openfl.system.System;
+import src.menu.ranking.RankingState;
 import utils.AnimationEnum;
 import utils.AnimationFactory;
 import flixel.FlxG;
@@ -59,7 +60,7 @@ class MainMenu extends FlxState
 
 		add(MenuHelper.createMenuButton("img/mainMenu/start_button.png", GeneralConstants.menu_startButton_width, GeneralConstants.menu_startButton_heigth,GeneralConstants.menu_startButton_x, GeneralConstants.menu_startButton_y, startGame, true));
 		add(MenuHelper.createMenuButton("img/mainMenu/options_button.png", GeneralConstants.menu_optionsButton_width, GeneralConstants.menu_optionsButton_heigth, GeneralConstants.menu_optionsButton_x, GeneralConstants.menu_optionsButton_y, goToOptions,true));
-		add(MenuHelper.createMenuButton("img/mainMenu/ranking_button.png", GeneralConstants.menu_creditsButton_width, GeneralConstants.menu_creditsButton_heigth, GeneralConstants.menu_creditsButton_x, GeneralConstants.menu_creditsButton_y, startGame,true));
+		add(MenuHelper.createMenuButton("img/mainMenu/ranking_button.png", GeneralConstants.menu_creditsButton_width, GeneralConstants.menu_creditsButton_heigth, GeneralConstants.menu_creditsButton_x, GeneralConstants.menu_creditsButton_y, goToRanking,true));
 		add(MenuHelper.createMenuButton("img/mainMenu/exit_button.png", GeneralConstants.menu_exitButton_width, GeneralConstants.menu_exitButton_heigth,GeneralConstants.menu_exitButton_x, GeneralConstants.menu_exitButton_y, quitGame,true));
 		add(MenuHelper.loadStaticImage("img/mainMenu/topBread.png", GeneralConstants.menu_topImage_width, GeneralConstants.menu_topImage_heigth, GeneralConstants.menu_topImage_x, GeneralConstants.menu_topImage_y));
 	}
@@ -83,6 +84,11 @@ class MainMenu extends FlxState
 	function goToTutorial(aButton:MenuButton) :Void
 	{
 		FlxG.switchState(new TutorialState());
+	}
+	
+	function goToRanking(aButton:MenuButton) :Void
+	{
+		FlxG.switchState(new RankingState());
 	}
 	
 	function goToOptions(aButton:MenuButton) :Void
