@@ -1,7 +1,10 @@
 package gameplay;
 
+import domain.Ingredient.IngredientType;
 import flixel.util.FlxSort;
 import menu.MainMenu;
+import src.domain.Cheddar;
+import src.gameplay.EnemySpawner;
 import utils.AnimationEnum;
 import domain.Bread;
 import domain.Ingredient;
@@ -43,6 +46,7 @@ class GameState extends FlxState
 	var mObstaclesShadows = new FlxGroup();
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
+	var mCheddar:Cheddar;
 	public var mPausedGame:Bool = false;
 	var mPauseState:PauseState;
 	
@@ -99,15 +103,17 @@ class GameState extends FlxState
 		mPauseState = new PauseState(this);		
 		add(mPauseState);
 		mPauseState.visible = false;
+		
+		EnemySpawner.create();
 	}
 	
 	function loadIngredients():Void
 	{
-		initIngredient(GeneralConstants.tomatoCount, "img/static/Tomato.png","img/game/end/ingredients/Tomate.png", GeneralConstants.tomatoValue, GeneralConstants.tomatoVelocity, GeneralConstants.tomatoMaxVelocity, AnimationEnum.TOMATO);
-		initIngredient(GeneralConstants.baconCount, "img/static/Bacon.png","img/game/end/ingredients/Panceta.png", GeneralConstants.baconValue, GeneralConstants.baconVelocity, GeneralConstants.baconMaxVelocity,AnimationEnum.BACON);
-		initIngredient(GeneralConstants.lettuceCount, "img/static/Lettuce.png","img/game/end/ingredients/Lechuga.png", GeneralConstants.lettuceValue, GeneralConstants.lettuceVelocity, GeneralConstants.lettuceMaxVelocity,AnimationEnum.LETTUCE);
-		initIngredient(GeneralConstants.burgerCount, "img/static/Burger.png","img/game/end/ingredients/Hamburguesa.png", GeneralConstants.burgerValue, GeneralConstants.burgerVelocity, GeneralConstants.burgerMaxVelocity,AnimationEnum.HAMBURGER);
-		initIngredient(GeneralConstants.cucumberCount, "img/static/Cucumber.png","img/game/end/ingredients/Pepino.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity,AnimationEnum.CUCUMBER);
+		initIngredient(IngredientType.TOMATO, "img/static/Tomato.png","img/game/end/ingredients/Tomate.png", GeneralConstants.tomatoValue, GeneralConstants.tomatoVelocity, GeneralConstants.tomatoMaxVelocity, AnimationEnum.TOMATO);
+		initIngredient(IngredientType.BACON, "img/static/Bacon.png","img/game/end/ingredients/Panceta.png", GeneralConstants.baconValue, GeneralConstants.baconVelocity, GeneralConstants.baconMaxVelocity,AnimationEnum.BACON);
+		initIngredient(IngredientType.LETTUCE, "img/static/Lettuce.png","img/game/end/ingredients/Lechuga.png", GeneralConstants.lettuceValue, GeneralConstants.lettuceVelocity, GeneralConstants.lettuceMaxVelocity,AnimationEnum.LETTUCE);
+		initIngredient(IngredientType.BURGUER, "img/static/Burger.png","img/game/end/ingredients/Hamburguesa.png", GeneralConstants.burgerValue, GeneralConstants.burgerVelocity, GeneralConstants.burgerMaxVelocity,AnimationEnum.HAMBURGER);
+		initIngredient(IngredientType.CUCUMBER, "img/static/Cucumber.png","img/game/end/ingredients/Pepino.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity,AnimationEnum.CUCUMBER);
 	}
 	
 	function loadObstacles():Void
@@ -119,14 +125,11 @@ class GameState extends FlxState
 		initObstacle(false, "img/game/obstacles/frasco2.png", "img/game/obstacles/frasco2Sombra.png", GeneralConstants.frasco2_collisionBox_width, GeneralConstants.frasco2_collisionBox_heigth, GeneralConstants.frasco2_collisionBox_offset_x, GeneralConstants.frasco2_collisionBox_offset_y);
 	}
 	
-	function initIngredient(aCount:Int,aPathToImage:String,aPathToEndImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum):Void
+	function initIngredient(aType:IngredientType, aPathToImage:String,aPathToEndImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum):Void
 	{
-		for (i in 0...aCount)
-		{
-			var coords:Point = randomPointInScreen();
-			var ingredient:Ingredient = new Ingredient(coords.x, coords.y, aPathToImage, aPathToEndImage, mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity,aIngredientType,this);
-			mIngredients.add(ingredient);
-		}
+		var coords:Point = randomPointInScreen();
+		var ingredient:Ingredient = new Ingredient(coords.x, coords.y, aType, aPathToImage, aPathToEndImage, mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity,aIngredientType,this);
+		mIngredients.add(ingredient);
 	}
 	
 	function initObstacle(aIsInternalObstacle:Bool, aImage:String,aImageShadow:String, aCollisionBoxWidth:Int, aCollisionBoxHeigth:Int, aCollisionBoxX:Int, aCollisionBoxY:Int):Void
