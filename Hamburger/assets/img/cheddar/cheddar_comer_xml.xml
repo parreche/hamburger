@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:abc507116f92f1bc2fdc391276a8b9be:63621edc9954b3e88be5bb7929a9de03:4d444d096c90e7d07a292a0a6aa4fce5$ -->
+<TextureAtlas imagePath="cheddar_comer_xml.png">
+    <SubTexture name="splashhcheddar0001.png" x="909" y="3384" width="79" height="145" frameX="262" frameY="491" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0002.png" x="523" y="3384" width="384" height="352" frameX="114" frameY="326" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0003.png" x="523" y="2878" width="473" height="504" frameX="82" frameY="238" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0004.png" x="523" y="2261" width="519" height="615" frameX="16" frameY="136" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0005.png" x="2" y="2980" width="519" height="692" frameX="16" frameY="59" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0006.png" x="2" y="2261" width="519" height="717" frameX="16" frameY="34" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0007.png" x="2" y="2" width="531" height="751" frameX="16" frameY="0" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0008.png" x="535" y="2" width="531" height="751" frameX="16" frameY="0" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0009.png" x="2" y="755" width="531" height="751" frameX="16" frameY="0" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0010.png" x="535" y="755" width="531" height="751" frameX="16" frameY="0" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0011.png" x="2" y="1508" width="531" height="751" frameX="16" frameY="0" frameWidth="600" frameHeight="800"/>
+    <SubTexture name="splashhcheddar0012.png" x="535" y="1508" width="531" height="751" frameX="16" frameY="0" frameWidth="600" frameHeight="800"/>
+</TextureAtlas>

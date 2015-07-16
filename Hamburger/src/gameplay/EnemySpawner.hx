@@ -15,6 +15,7 @@ class EnemySpawner
 	private static var mCucumberCount:Int;
 	private static var mLettuceCount:Int;
 	private static var mTomatoCount:Int;
+	private static var mCheddarCount:Int;
 
 	public static function create():Void
 	{
@@ -23,6 +24,7 @@ class EnemySpawner
 		mCucumberCount = GeneralConstants.cucumberCount;
 		mLettuceCount = GeneralConstants.lettuceCount;
 		mTomatoCount = GeneralConstants.tomatoCount;
+		mCheddarCount = GeneralConstants.cheddarCount;
 	}
 	
 	public static function revive(aType:IngredientType):Bool
@@ -38,6 +40,8 @@ class EnemySpawner
 				return mLettuceCount > 0;
 			case IngredientType.TOMATO:
 				return mTomatoCount > 0;
+			case IngredientType.CHEDDAR:
+				return mCheddarCount > 0;
 			default:
 				return false;
 		}
@@ -56,6 +60,8 @@ class EnemySpawner
 				mLettuceCount--;
 			case IngredientType.TOMATO:
 				mTomatoCount--;
+			case IngredientType.CHEDDAR:
+				mCheddarCount--;
 			default:
 				return;
 		}

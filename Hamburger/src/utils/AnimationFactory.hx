@@ -29,6 +29,12 @@ class AnimationFactory
 	public static inline var LETTUCE_EATEN_ANIMATION_PNG = "img/lechuga/lechuga_comer_xml.png";
 	public static inline var ANIMATION_LETTUCE_EATEN_PREFIX = "splashhlechuga";
 	
+	public static inline var CHEDDAR_ANIMATION_XML = "img/cheddar/cheddar xml data sprite.xml";
+	public static inline var CHEDDAR_ANIMATION_PNG = "img/cheddar/cheddar xml data sprite.png";
+	public static inline var CHEDDAR_EATEN_ANIMATION_XML = "img/cheddar/cheddar_comer_xml.xml";
+	public static inline var CHEDDAR_EATEN_ANIMATION_PNG = "img/cheddar/cheddar_comer_xml.png";
+	public static inline var ANIMATION_CHEDDAR_EATEN_PREFIX = "splashhcheddar";
+	
 	public static inline var BACON_ANIMATION_XML = "img/panceta/panceta xml data sprite.xml";
 	public static inline var BACON_ANIMATION_PNG = "img/panceta/panceta xml data sprite.png";
 	public static inline var BACON_EATEN_ANIMATION_XML = "img/panceta/panceta_comer_xml.xml";
@@ -85,7 +91,9 @@ class AnimationFactory
 			case AnimationEnum.CUCUMBER:
 				graphics = new SparrowData(CUCUMBER_ANIMATION_XML,CUCUMBER_ANIMATION_PNG);
 			case AnimationEnum.LETTUCE:
-				graphics = new SparrowData(LETTUCE_ANIMATION_XML,LETTUCE_ANIMATION_PNG);
+				graphics = new SparrowData(LETTUCE_ANIMATION_XML, LETTUCE_ANIMATION_PNG);
+			case AnimationEnum.CHEDDAR:
+				graphics = new SparrowData(CHEDDAR_ANIMATION_XML, CHEDDAR_ANIMATION_PNG);
 			case AnimationEnum.TOMATO:
 				graphics = new SparrowData(TOMATO_ANIMATION_XML, TOMATO_ANIMATION_PNG);
 			case AnimationEnum.MAIN_MENU:
@@ -110,6 +118,8 @@ class AnimationFactory
 				graphics = new SparrowData(LETTUCE_EATEN_ANIMATION_XML,LETTUCE_EATEN_ANIMATION_PNG);
 			case AnimationEnum.TOMATO:
 				graphics = new SparrowData(TOMATO_EATEN_ANIMATION_XML, TOMATO_EATEN_ANIMATION_PNG);
+			case AnimationEnum.CHEDDAR:
+				graphics = new SparrowData(CHEDDAR_EATEN_ANIMATION_XML, CHEDDAR_EATEN_ANIMATION_PNG);
 			default:
 		}
 		
@@ -145,6 +155,11 @@ class AnimationFactory
 			case AnimationEnum.LETTUCE:
 				if (aIsEatenAnimation)
 					aObject.animation.addByPrefix(EATEN_ANIMATION, ANIMATION_LETTUCE_EATEN_PREFIX, GeneralConstants.animationFrameRate,false);
+				else
+					loadIngredientAnimation(aObject, aAnimationType);
+			case AnimationEnum.CHEDDAR:
+				if (aIsEatenAnimation)
+					aObject.animation.addByPrefix(EATEN_ANIMATION, ANIMATION_CHEDDAR_EATEN_PREFIX, GeneralConstants.animationFrameRate,false);
 				else
 					loadIngredientAnimation(aObject, aAnimationType);
 			case AnimationEnum.TOMATO:

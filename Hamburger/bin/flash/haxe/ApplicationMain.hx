@@ -149,6 +149,22 @@ class ApplicationMain {
 		types.push (AssetType.TEXT);
 		
 		
+		urls.push ("img/cheddar/cheddar xml data sprite.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/cheddar/cheddar xml data sprite.xml");
+		types.push (AssetType.TEXT);
+		
+		
+		urls.push ("img/cheddar/cheddar_comer_xml.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/cheddar/cheddar_comer_xml.xml");
+		types.push (AssetType.TEXT);
+		
+		
 		urls.push ("img/game/end/background_end_game.jpg");
 		types.push (AssetType.IMAGE);
 		
@@ -157,7 +173,7 @@ class ApplicationMain {
 		types.push (AssetType.IMAGE);
 		
 		
-		urls.push ("img/game/end/ingredients/Chedar.png");
+		urls.push ("img/game/end/ingredients/Cheddar.png");
 		types.push (AssetType.IMAGE);
 		
 		
@@ -430,6 +446,10 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/static/Burger.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/static/Cheddar.png");
 		types.push (AssetType.IMAGE);
 		
 		

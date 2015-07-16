@@ -12,6 +12,7 @@ enum AnimationEnum
 	HAMBURGER; 
 	LETTUCE; 
 	CUCUMBER; 
-	BACON; 
+	BACON;
+	CHEDDAR;
 	MAIN_MENU;
 }

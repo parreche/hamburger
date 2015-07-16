@@ -26,6 +26,7 @@ import openfl.Assets;
 import configuration.CsvImporter;
 import configuration.GeneralConstants;
 import openfl.geom.Point;
+import utils.HelpFunction;
 import utils.MenuHelper;
 import utils.SequenceCode;
 
@@ -46,7 +47,6 @@ class GameState extends FlxState
 	var mObstaclesShadows = new FlxGroup();
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
-	var mCheddar:Cheddar;
 	public var mPausedGame:Bool = false;
 	var mPauseState:PauseState;
 	
@@ -113,7 +113,8 @@ class GameState extends FlxState
 		initIngredient(IngredientType.BACON, "img/static/Bacon.png","img/game/end/ingredients/Panceta.png", GeneralConstants.baconValue, GeneralConstants.baconVelocity, GeneralConstants.baconMaxVelocity,AnimationEnum.BACON);
 		initIngredient(IngredientType.LETTUCE, "img/static/Lettuce.png","img/game/end/ingredients/Lechuga.png", GeneralConstants.lettuceValue, GeneralConstants.lettuceVelocity, GeneralConstants.lettuceMaxVelocity,AnimationEnum.LETTUCE);
 		initIngredient(IngredientType.BURGUER, "img/static/Burger.png","img/game/end/ingredients/Hamburguesa.png", GeneralConstants.burgerValue, GeneralConstants.burgerVelocity, GeneralConstants.burgerMaxVelocity,AnimationEnum.HAMBURGER);
-		initIngredient(IngredientType.CUCUMBER, "img/static/Cucumber.png","img/game/end/ingredients/Pepino.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity,AnimationEnum.CUCUMBER);
+		initIngredient(IngredientType.CUCUMBER, "img/static/Cucumber.png", "img/game/end/ingredients/Pepino.png", GeneralConstants.cucumberValue, GeneralConstants.cucumberVelocity, GeneralConstants.cucumberMaxVelocity, AnimationEnum.CUCUMBER);
+		initIngredient(IngredientType.CHEDDAR, "img/static/Cheddar.png","img/game/end/ingredients/Cheddar.png", GeneralConstants.cheddarValue, GeneralConstants.cheddarVelocity, GeneralConstants.cheddarMaxVelocity,AnimationEnum.CHEDDAR);
 	}
 	
 	function loadObstacles():Void
@@ -127,9 +128,17 @@ class GameState extends FlxState
 	
 	function initIngredient(aType:IngredientType, aPathToImage:String,aPathToEndImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum):Void
 	{
-		var coords:Point = randomPointInScreen();
-		var ingredient:Ingredient = new Ingredient(coords.x, coords.y, aType, aPathToImage, aPathToEndImage, mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity,aIngredientType,this);
-		mIngredients.add(ingredient);
+		var coords:Point = HelpFunction.randomPointInScreen();
+		if (aType.equals(IngredientType.CHEDDAR)) {
+			var timer = Math.random() * 10 + 10; //cheddar is alive between 10 and 20 seconds
+			var waitTime =  Math.random() * 40 + 20; //cheddar waits to appear between 20 and 60 seconds
+			var ingredient:Ingredient = new Cheddar(coords.x, coords.y, aType, aPathToImage, aPathToEndImage, mBreadTop, mBreadBottom, aValue, aVelocity, aMaxVelocity, aIngredientType, this, timer, waitTime);
+			mIngredients.add(ingredient);
+		} else
+		{
+			var ingredient:Ingredient = new Ingredient(coords.x, coords.y, aType, aPathToImage, aPathToEndImage, mBreadTop, mBreadBottom, aValue,aVelocity,aMaxVelocity,aIngredientType,this);
+			mIngredients.add(ingredient);
+		}
 	}
 	
 	function initObstacle(aIsInternalObstacle:Bool, aImage:String,aImageShadow:String, aCollisionBoxWidth:Int, aCollisionBoxHeigth:Int, aCollisionBoxX:Int, aCollisionBoxY:Int):Void
@@ -138,7 +147,7 @@ class GameState extends FlxState
 			var validCoords : Bool = false;
 			var tries:Int = 0;
 			while (!validCoords && tries < 10) {
-				var obstacleCoords:Point = randomPointInScreen();
+				var obstacleCoords:Point = HelpFunction.randomPointInScreen();
 				var obstacle:domain.Obstacle = new domain.Obstacle(obstacleCoords.x,obstacleCoords.y, aImage, aCollisionBoxWidth, aCollisionBoxHeigth, aCollisionBoxX, aCollisionBoxY);
 				var obstacleShadow:domain.Obstacle = new domain.Obstacle(obstacleCoords.x,obstacleCoords.y, aImageShadow, aCollisionBoxWidth, aCollisionBoxHeigth, aCollisionBoxX, aCollisionBoxY);
 				validCoords = !FlxG.overlap(obstacle, mBreadBottom) && !FlxG.overlap(obstacle, mBreadTop) && !FlxG.overlap(obstacle, mObstacles);
@@ -158,14 +167,12 @@ class GameState extends FlxState
 		}
 	}
 	
-	private function randomPointInScreen():Point 
+	/*private function randomPointInScreen():Point 
 	{
 		var xCoord:Float = Math.random() * GeneralConstants.game_screenWidth;
 		var yCoord:Float = Math.random() * GeneralConstants.game_screenHeigth;
-		trace("x " + xCoord);
-		trace("y " + yCoord);
 		return new Point(xCoord, yCoord);
-	}
+	}*/
 	
 	override function update():Void
 	{

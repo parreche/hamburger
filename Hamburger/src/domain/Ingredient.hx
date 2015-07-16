@@ -12,6 +12,7 @@ import configuration.GeneralConstants;
 import openfl.Assets;
 import openfl.geom.Point;
 import utils.AnimationEnum;
+import utils.HelpFunction;
 
 /**
  * This class represents each of the ingredients of the game.
@@ -87,7 +88,7 @@ class Ingredient extends FlxSprite
 					EnemySpawner.kill(mType);
 					if (EnemySpawner.revive(mType))
 					{
-						var coords:Point = randomPointInScreen();
+						var coords:Point = HelpFunction.randomPointInScreen();
 						reset(coords.x, coords.y);
 					} 
 					else 
