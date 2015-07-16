@@ -1,8 +1,6 @@
 -main ApplicationMain 
 -cp C:/HaxeToolkit/haxe/lib/actuate/1,8,2
 -D actuate=1.8.2
--cp C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2
--D flixel-ui=1.0.2
 -cp C:/HaxeToolkit/haxe/lib/flixel-addons/1,1,0
 -D flixel-addons=1.1.0
 -cp C:/HaxeToolkit/haxe/lib/openfl/3,0,2
@@ -11,6 +9,8 @@
 -D flixel=3.3.8
 -cp C:/HaxeToolkit/haxe/lib/lime/2,3,2
 -D lime=2.3.2
+-cp C:/HaxeToolkit/haxe/lib/swf/1,8,9
+-D swf=1.8.9
 -cp src
 -D openfl-next
 -D tools=2.3.2
@@ -20,6 +20,7 @@
 -D FLX_RENDER_BLIT
 -D fdb
 -D web
+-dce full
 -swf-lib bin/flash/obj/assets.swf
 -swf-version 11.8
 -swf bin/flash/bin/Hamburger.swf

@@ -1,6 +1,5 @@
 package menu.options;
 import configuration.GeneralConstants;
-import flixel.addons.ui.FlxUISlider;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;

@@ -47,7 +47,7 @@ class EndState extends FlxState
 	override function create():Void
 	{
 		
-		FlxG.sound.playMusic("sound/Final.wav");
+		FlxG.sound.playMusic("sound/Final.wav",FlxG.sound.volume, false);
 		
 		add(MenuHelper.loadStaticImage("img/game/end/background_end_game.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
 		

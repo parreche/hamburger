@@ -42,119 +42,19 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.MUSIC);
 		
 		
-		urls.push ("flixel/flixel-ui/img/box.png");
+		urls.push ("img/cheddar/cheddar xml data sprite.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("flixel/flixel-ui/img/button.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/button_arrow_down.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/button_arrow_left.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/button_arrow_right.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/button_arrow_up.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/button_thin.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/button_toggle.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/check_box.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/check_mark.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/chrome.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/chrome_flat.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/chrome_inset.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/chrome_light.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/dropdown_mark.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/finger_big.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/finger_small.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/hilight.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/invis.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/minus_mark.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/plus_mark.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/radio.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/radio_dot.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/swatch.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/tab.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/img/tab_back.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("flixel/flixel-ui/xml/defaults.xml");
+		urls.push ("img/cheddar/cheddar xml data sprite.xml");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("flixel/flixel-ui/xml/default_loading_screen.xml");
-		types.push (lime.Assets.AssetType.TEXT);
+		urls.push ("img/cheddar/cheddar_comer_xml.png");
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("flixel/flixel-ui/xml/default_popup.xml");
+		urls.push ("img/cheddar/cheddar_comer_xml.xml");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -175,6 +75,10 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/game/end/ingredients/Chedar.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/game/end/ingredients/Cheddar.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -386,6 +290,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("img/optionsMenu/slider.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("img/panceta/panceta xml data sprite.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -451,6 +359,10 @@ class ApplicationMain {
 		
 		
 		urls.push ("img/static/Burger.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/static/Cheddar.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -587,6 +499,9 @@ class ApplicationMain {
 		
 		preloader = null;
 		
+		
+		total++;
+		openfl.Assets.loadLibrary ("swf-library", library_onLoad);
 		
 		
 		if (loaded == total) {

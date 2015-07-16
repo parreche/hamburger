@@ -1,5 +1,8 @@
 package menu;
+import flixel.FlxBasic;
 import menu.tutorial.TutorialState;
+import openfl.display.Loader;
+import openfl.events.Event;
 import openfl.Lib;
 import openfl.media.Video;
 import openfl.net.NetConnection;
@@ -45,8 +48,6 @@ class MainMenu extends FlxState
 		FlxG.sound.playMusic("sound/Ambiente_de_fondo.wav");
 		if (sPlayAnimiation)
 		{
-			//mAnimation = AnimationFactory.loadAnimations(mAnimation, AnimationEnum.MAIN_MENU);
-			//showAnimation();
 			add(MenuHelper.createMenuButton("img/mainMenu/animation/background_title.png", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0, showMenu, false));
 		} else {
 			initMainMenu();
@@ -57,7 +58,6 @@ class MainMenu extends FlxState
 	{
 		add(MenuHelper.loadStaticImage("img/mainMenu/bottomBread.png", GeneralConstants.menu_bottomImage_width, GeneralConstants.menu_bottomImage_heigth, GeneralConstants.menu_bottomImage_x, GeneralConstants.menu_bottomImage_y));
 		add(MenuHelper.createMenuButton("img/mainMenu/tutorial_button.png", GeneralConstants.menu_tutorialButton_width, GeneralConstants.menu_tutorialButton_heigth, GeneralConstants.menu_tutorialButton_x, GeneralConstants.menu_tutorialButton_y, goToTutorial, true));
-
 		add(MenuHelper.createMenuButton("img/mainMenu/start_button.png", GeneralConstants.menu_startButton_width, GeneralConstants.menu_startButton_heigth,GeneralConstants.menu_startButton_x, GeneralConstants.menu_startButton_y, startGame, true));
 		add(MenuHelper.createMenuButton("img/mainMenu/options_button.png", GeneralConstants.menu_optionsButton_width, GeneralConstants.menu_optionsButton_heigth, GeneralConstants.menu_optionsButton_x, GeneralConstants.menu_optionsButton_y, goToOptions,true));
 		add(MenuHelper.createMenuButton("img/mainMenu/ranking_button.png", GeneralConstants.menu_creditsButton_width, GeneralConstants.menu_creditsButton_heigth, GeneralConstants.menu_creditsButton_x, GeneralConstants.menu_creditsButton_y, goToRanking,true));
@@ -68,7 +68,6 @@ class MainMenu extends FlxState
 	function showMenu(aButton:MenuButton) :Void
 	{
 		aButton.visible = false;
-		//mAnimation.animation.play(AnimationFactory.ANIMATION_MAIN_MENU);
 		initMainMenu();
 		sPlayAnimiation = false;
 	}
@@ -104,18 +103,6 @@ class MainMenu extends FlxState
 	function quitGame(aButton:MenuButton)
 	{
 		System.exit(0);
-	}
-	
-	private function showAnimation()
-	{
-		var screen = new Video();
-		var connection = new NetConnection();
-		connection.connect(null);
-		var stream = new NetStream(connection);
-		screen = new Video(160,120);
-		screen.attachNetStream(stream);
-		stream.play("video1.mp4");
-		Lib.current.addChild(screen);
 	}
 	
 	function showTutorial(aButton:MenuButton) :Void

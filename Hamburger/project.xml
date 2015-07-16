@@ -18,16 +18,18 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="flixel" />
-	<haxelib name="flixel-ui" />
 	<haxelib name="flixel-addons" />
+	<haxelib name="swf" />
+	
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
+	<library path="assets/inicio.swf" id="swf-library" type="swf" preload="true" />
 	<assets path="assets/img" rename="img" />
 	<assets path="assets/sound" rename="sound" />
-	<assets path="assets/sound" include="*.mp3" if="flash" />
 	<assets path="assets/config" rename="config" include="*.csv" />
 	<assets path="assets/fonts" rename="fonts" />
-	<!-- optimize output
-	<haxeflag name="-dce full" /> -->
+	<!-- optimize output-->
+	
+	<haxeflag name="-dce full" /> 
 	
 </project>

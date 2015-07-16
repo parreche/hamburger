@@ -41,11 +41,11 @@ class GameState extends FlxState
 	
 	var mIngredients = new FlxGroup();
 	var mObstacles = new FlxGroup();
-	var mObstaclesShadows = new FlxGroup();
 	var mBreadTop:Bread;
 	var mBreadBottom:Bread;
 	public var mPausedGame:Bool = false;
 	var mPauseState:PauseState;
+	var mIsHurryUp:Bool = false;
 	
 	public function new() 
 	{
@@ -57,8 +57,6 @@ class GameState extends FlxState
 		sFirstTimePlayer = false;
 		add(MenuHelper.loadStaticImage("img/game/game_background.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
 		FlxG.sound.playMusic("sound/Musica_del_juego.wav");
-		
-		//var enableJoystick:Bool = GeneralConstants.enableJoystick == 1;
 		
 		var pr:PlayerInput;
 		var pl:PlayerInput;
@@ -82,7 +80,6 @@ class GameState extends FlxState
 		loadIngredients();
 		loadObstacles();
 		
-		add(mObstaclesShadows);
 		mIngredients.add(mBreadBottom);
 		mIngredients.add(mBreadTop);
 		add(mIngredients);
@@ -114,11 +111,11 @@ class GameState extends FlxState
 	
 	function loadObstacles():Void
 	{
-		initObstacle(true, "img/game/obstacles/ketchup.png", "img/game/obstacles/ketchupSombra.png", GeneralConstants.ketchup_collisionBox_width, GeneralConstants.ketchup_collisionBox_heigth, GeneralConstants.ketchup_collisionBox_offset_x, GeneralConstants.ketchup_collisionBox_offset_y);		
-		initObstacle(false, "img/game/obstacles/canasta.png", "img/game/obstacles/canastaSombra.png", GeneralConstants.canasta_collisionBox_width, GeneralConstants.canasta_collisionBox_heigth, GeneralConstants.canasta_collisionBox_offset_x, GeneralConstants.canasta_collisionBox_offset_y);
-		initObstacle(true, "img/game/obstacles/cuchillo.png", "img/game/obstacles/cuchilloSombra.png", GeneralConstants.cuchillo_collisionBox_width, GeneralConstants.cuchillo_collisionBox_heigth, GeneralConstants.cuchillo_collisionBox_offset_x, GeneralConstants.cuchillo_collisionBox_offset_y);
-		initObstacle(true, "img/game/obstacles/frasco.png","img/game/obstacles/frascoSombra.png", GeneralConstants.frasco_collisionBox_width, GeneralConstants.frasco_collisionBox_heigth, GeneralConstants.frasco_collisionBox_offset_x, GeneralConstants.frasco_collisionBox_offset_y);
-		initObstacle(false, "img/game/obstacles/frasco2.png", "img/game/obstacles/frasco2Sombra.png", GeneralConstants.frasco2_collisionBox_width, GeneralConstants.frasco2_collisionBox_heigth, GeneralConstants.frasco2_collisionBox_offset_x, GeneralConstants.frasco2_collisionBox_offset_y);
+		initObstacle(true, "img/game/obstacles/ketchup.png", GeneralConstants.ketchup_collisionBox_width, GeneralConstants.ketchup_collisionBox_heigth, GeneralConstants.ketchup_collisionBox_offset_x, GeneralConstants.ketchup_collisionBox_offset_y);		
+		initObstacle(false, "img/game/obstacles/canasta.png", GeneralConstants.canasta_collisionBox_width, GeneralConstants.canasta_collisionBox_heigth, GeneralConstants.canasta_collisionBox_offset_x, GeneralConstants.canasta_collisionBox_offset_y);
+		initObstacle(true, "img/game/obstacles/cuchillo.png", GeneralConstants.cuchillo_collisionBox_width, GeneralConstants.cuchillo_collisionBox_heigth, GeneralConstants.cuchillo_collisionBox_offset_x, GeneralConstants.cuchillo_collisionBox_offset_y);
+		initObstacle(true, "img/game/obstacles/frasco.png", GeneralConstants.frasco_collisionBox_width, GeneralConstants.frasco_collisionBox_heigth, GeneralConstants.frasco_collisionBox_offset_x, GeneralConstants.frasco_collisionBox_offset_y);
+		initObstacle(false, "img/game/obstacles/frasco2.png", GeneralConstants.frasco2_collisionBox_width, GeneralConstants.frasco2_collisionBox_heigth, GeneralConstants.frasco2_collisionBox_offset_x, GeneralConstants.frasco2_collisionBox_offset_y);
 	}
 	
 	function initIngredient(aCount:Int,aPathToImage:String,aPathToEndImage:String, aValue:Int, aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum):Void
@@ -131,7 +128,7 @@ class GameState extends FlxState
 		}
 	}
 	
-	function initObstacle(aIsInternalObstacle:Bool, aImage:String,aImageShadow:String, aCollisionBoxWidth:Int, aCollisionBoxHeigth:Int, aCollisionBoxX:Int, aCollisionBoxY:Int):Void
+	function initObstacle(aIsInternalObstacle:Bool, aImage:String, aCollisionBoxWidth:Int, aCollisionBoxHeigth:Int, aCollisionBoxX:Int, aCollisionBoxY:Int):Void
 	{
 		if (Math.random() > 0.5) {
 			var validCoords : Bool = false;
@@ -139,7 +136,6 @@ class GameState extends FlxState
 			while (!validCoords && tries < 10) {
 				var obstacleCoords:Point = randomPointInScreen();
 				var obstacle:domain.Obstacle = new domain.Obstacle(obstacleCoords.x,obstacleCoords.y, aImage, aCollisionBoxWidth, aCollisionBoxHeigth, aCollisionBoxX, aCollisionBoxY);
-				var obstacleShadow:domain.Obstacle = new domain.Obstacle(obstacleCoords.x,obstacleCoords.y, aImageShadow, aCollisionBoxWidth, aCollisionBoxHeigth, aCollisionBoxX, aCollisionBoxY);
 				validCoords = !FlxG.overlap(obstacle, mBreadBottom) && !FlxG.overlap(obstacle, mBreadTop) && !FlxG.overlap(obstacle, mObstacles);
 				if (!aIsInternalObstacle)
 				{
@@ -148,7 +144,6 @@ class GameState extends FlxState
 					validCoords = validCoords && ((obstacleCoords.x > 200) || (obstacleCoords.x < 1500));
 				}
 				if (validCoords) {
-					mObstaclesShadows.add(obstacleShadow);
 					mObstacles.add(obstacle);
 				} else {
 					tries++;
@@ -177,8 +172,9 @@ class GameState extends FlxState
 			FlxG.sound.music.resume();
 			HUD.update();
 			checkGameOver();
-			if (HUD.isHurryUp()) {
-				FlxG.sound.play("sound/Alarma.wav",2);
+			if (HUD.isHurryUp() && !mIsHurryUp) {
+				mIsHurryUp = true;
+				FlxG.sound.play("sound/Alarma.wav", FlxG.sound.music.volume, false);
 			}
 			drawEatenIngredients();
 			

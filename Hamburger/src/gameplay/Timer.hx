@@ -32,7 +32,7 @@ class Timer
 			mTimer -= FlxG.elapsed;
 			var minutes = Std.int(mTimer / 60);
 			var seconds = Std.int(mTimer - (minutes * 60));
-			mIsHurryUp = mTimer <= 20 && mLastSecondSound != seconds; 
+			mIsHurryUp = mTimer <= GeneralConstants.timer_harryUp_value && mLastSecondSound != seconds; 
 			if (mIsHurryUp) {
 				mLastSecondSound = seconds;
 			}

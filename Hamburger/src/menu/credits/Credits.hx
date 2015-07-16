@@ -13,6 +13,7 @@ class Credits extends FlxState
 
 	override public function create() 
 	{
+		FlxG.sound.playMusic("sound/Musica_del_juego.wav");
 		add(MenuHelper.loadStaticImage("img/credits/Creditos_base.jpg", GeneralConstants.screenWidth, GeneralConstants.screenHeigth, 0, 0));
 		add(MenuHelper.createMenuButton("img/credits/Boton_Main_Menu.png", GeneralConstants.credits_mainMenu_button_width, GeneralConstants.credits_mainMenu_button_heigth, GeneralConstants.credits_mainMenu_button_x, GeneralConstants.credits_mainMenu_button_y, returnToMainMenu));
 	}
@@ -20,5 +21,6 @@ class Credits extends FlxState
 	function returnToMainMenu(aButton:MenuButton) :Void
 	{
 		FlxG.switchState(new MainMenu());
+		FlxG.sound.music.stop();
 	}
 }
