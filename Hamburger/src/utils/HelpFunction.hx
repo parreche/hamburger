@@ -1,4 +1,6 @@
 package utils;
+import configuration.GeneralConstants;
+import openfl.geom.Point;
 
 /**
  * ...
@@ -18,5 +20,12 @@ class HelpFunction
            untyped aArray.length = 0;
         #end
     }
+	
+	public static function randomPointInScreen():Point 
+	{
+		var xCoord:Float = Math.random() * GeneralConstants.game_screenWidth;
+		var yCoord:Float = Math.random() * GeneralConstants.game_screenHeigth;
+		return new Point(xCoord, yCoord);
+	}
 	
 }

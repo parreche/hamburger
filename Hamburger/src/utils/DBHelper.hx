@@ -22,6 +22,9 @@ class DBHelper
 		{
 			name = save.data.name; 
 		}
+		if (name.length == 0) {
+			name = " ";
+		}
 		save.close();
 		return name;
 	}
@@ -50,6 +53,9 @@ class DBHelper
 		var hiScore:Int = aScore + aTime*30;
 		var save:FlxSave = new FlxSave();
 		save.bind(mDBName);
+		if (aName.length == 0) {
+			aName = " ";
+		}
 		save.data.name = aName;
 		if (save.data.hiscore == null)
 		{

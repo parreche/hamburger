@@ -1,5 +1,6 @@
 package domain;
 import flixel.group.FlxGroup;
+import src.gameplay.EnemySpawner;
 import utils.AnimationFactory;
 import domain.Bread;
 import flixel.FlxG;
@@ -11,6 +12,7 @@ import configuration.GeneralConstants;
 import openfl.Assets;
 import openfl.geom.Point;
 import utils.AnimationEnum;
+import utils.HelpFunction;
 
 /**
  * This class represents each of the ingredients of the game.
@@ -23,6 +25,10 @@ import utils.AnimationEnum;
  * @author Arreche-Piaggio
  * 
  */
+enum IngredientType {
+	BURGUER; CUCUMBER; BACON; LETTUCE; TOMATO; CHEDDAR;
+}
+ 
 class Ingredient extends FlxSprite
 {
 	var mBreadTop:Bread;
@@ -33,10 +39,13 @@ class Ingredient extends FlxSprite
 	var mEndImage:String;
 	var mEatenAnimation : FlxSprite;
 	var mHasBeenEaten:Bool;
+	var mType:IngredientType;
+	var mVelocity:Int;
 	
-	public function new(aX:Float, aY:Float, aImage:String, aEndImage:String, aBreadTop:domain.Bread, aBreadBottom:domain.Bread, aScore:Int,aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum = null, aStage:FlxGroup = null) 
+	public function new(aX:Float, aY:Float, aType:IngredientType, aImage:String, aEndImage:String, aBreadTop:domain.Bread, aBreadBottom:domain.Bread, aScore:Int,aVelocity:Int,aMaxVelocity:Int, aIngredientType:AnimationEnum = null, aStage:FlxGroup = null) 
 	{
 		super(aX, aY);
+		mType = aType;
 		minDist= GeneralConstants.collisionBox_minDistance;
 		mStaticImage = aImage;
 		mEndImage = aEndImage;
@@ -49,14 +58,12 @@ class Ingredient extends FlxSprite
 			AnimationFactory.loadAnimations(this, aIngredientType);
 			width = GeneralConstants.collisionBox_width;
 			height = GeneralConstants.collisionBox_heigth;
-			aVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
-			velocity.set(aVelocity, aVelocity);
-			//acceleration.x = 0;
-			//acceleration.y = 0;
+			mVelocity = Math.random() > 0.5? -aVelocity:aVelocity; 
+			velocity.set(mVelocity, mVelocity);
+
 			maxVelocity.set(aMaxVelocity, aMaxVelocity);
 			elasticity = 0.5;
-			//x = 100 + 300 * Math.random();
-			//y = Math.random() * 200;
+
 			offset.x = GeneralConstants.collisionBox_offset_x;
 			offset.y = GeneralConstants.collisionBox_offset_y;
 			
@@ -78,7 +85,16 @@ class Ingredient extends FlxSprite
 				if (mHasBeenEaten)
 				{
 					mEatenAnimation.kill();
-					kill();
+					EnemySpawner.kill(mType);
+					if (EnemySpawner.revive(mType))
+					{
+						var coords:Point = HelpFunction.randomPointInScreen();
+						reset(coords.x, coords.y);
+					} 
+					else 
+					{
+						kill();
+					}
 				}
 			}
 		}
@@ -145,6 +161,17 @@ class Ingredient extends FlxSprite
 		}
 		
 		super.update();
+	}
+	
+	override function reset(aX:Float, aY:Float):Void
+	{
+		
+		super.reset(aX, aY);
+		mHasBeenEaten = false;
+		visible = true;
+		velocity.set(mVelocity, mVelocity);
+		
+		mEatenAnimation.reset(aX, aY);
 	}
 	
 	private function eat():Void

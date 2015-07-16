@@ -66,6 +66,22 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("img/cheddar/cheddar xml data sprite.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/cheddar/cheddar xml data sprite.xml");
+		types.push (AssetType.TEXT);
+		
+		
+		urls.push ("img/cheddar/cheddar_comer_xml.png");
+		types.push (AssetType.IMAGE);
+		
+		
+		urls.push ("img/cheddar/cheddar_comer_xml.xml");
+		types.push (AssetType.TEXT);
+		
+		
 		urls.push ("img/game/end/background_end_game.jpg");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -74,12 +90,17 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+<<<<<<< HEAD
 		urls.push ("img/game/end/ingredients/Chedar.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("img/game/end/ingredients/Cheddar.png");
 		types.push (lime.Assets.AssetType.IMAGE);
+=======
+		urls.push ("img/game/end/ingredients/Cheddar.png");
+		types.push (AssetType.IMAGE);
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 		
 		
 		urls.push ("img/game/end/ingredients/Hamburguesa.png");
@@ -364,6 +385,10 @@ class ApplicationMain {
 		
 		urls.push ("img/static/Cheddar.png");
 		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("img/static/Cheddar.png");
+		types.push (AssetType.IMAGE);
 		
 		
 		urls.push ("img/static/Cucumber.png");

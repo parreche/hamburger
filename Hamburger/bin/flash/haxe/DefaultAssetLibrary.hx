@@ -49,6 +49,67 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/sounds/beep.mp3", AssetType.MUSIC);
 		className.set ("assets/sounds/flixel.mp3", __ASSET__assets_sounds_flixel_mp3);
 		type.set ("assets/sounds/flixel.mp3", AssetType.MUSIC);
+<<<<<<< HEAD
+=======
+		className.set ("flixel/flixel-ui/img/box.png", __ASSET__flixel_flixel_ui_img_box_png);
+		type.set ("flixel/flixel-ui/img/box.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/button.png", __ASSET__flixel_flixel_ui_img_button_png);
+		type.set ("flixel/flixel-ui/img/button.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/button_arrow_down.png", __ASSET__flixel_flixel_ui_img_button_arrow_down_png);
+		type.set ("flixel/flixel-ui/img/button_arrow_down.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/button_arrow_left.png", __ASSET__flixel_flixel_ui_img_button_arrow_left_png);
+		type.set ("flixel/flixel-ui/img/button_arrow_left.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/button_arrow_right.png", __ASSET__flixel_flixel_ui_img_button_arrow_right_png);
+		type.set ("flixel/flixel-ui/img/button_arrow_right.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/button_arrow_up.png", __ASSET__flixel_flixel_ui_img_button_arrow_up_png);
+		type.set ("flixel/flixel-ui/img/button_arrow_up.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/button_thin.png", __ASSET__flixel_flixel_ui_img_button_thin_png);
+		type.set ("flixel/flixel-ui/img/button_thin.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/button_toggle.png", __ASSET__flixel_flixel_ui_img_button_toggle_png);
+		type.set ("flixel/flixel-ui/img/button_toggle.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/check_box.png", __ASSET__flixel_flixel_ui_img_check_box_png);
+		type.set ("flixel/flixel-ui/img/check_box.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/check_mark.png", __ASSET__flixel_flixel_ui_img_check_mark_png);
+		type.set ("flixel/flixel-ui/img/check_mark.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/chrome.png", __ASSET__flixel_flixel_ui_img_chrome_png);
+		type.set ("flixel/flixel-ui/img/chrome.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/chrome_flat.png", __ASSET__flixel_flixel_ui_img_chrome_flat_png);
+		type.set ("flixel/flixel-ui/img/chrome_flat.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/chrome_inset.png", __ASSET__flixel_flixel_ui_img_chrome_inset_png);
+		type.set ("flixel/flixel-ui/img/chrome_inset.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/chrome_light.png", __ASSET__flixel_flixel_ui_img_chrome_light_png);
+		type.set ("flixel/flixel-ui/img/chrome_light.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/dropdown_mark.png", __ASSET__flixel_flixel_ui_img_dropdown_mark_png);
+		type.set ("flixel/flixel-ui/img/dropdown_mark.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/finger_big.png", __ASSET__flixel_flixel_ui_img_finger_big_png);
+		type.set ("flixel/flixel-ui/img/finger_big.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/finger_small.png", __ASSET__flixel_flixel_ui_img_finger_small_png);
+		type.set ("flixel/flixel-ui/img/finger_small.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/hilight.png", __ASSET__flixel_flixel_ui_img_hilight_png);
+		type.set ("flixel/flixel-ui/img/hilight.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/invis.png", __ASSET__flixel_flixel_ui_img_invis_png);
+		type.set ("flixel/flixel-ui/img/invis.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/minus_mark.png", __ASSET__flixel_flixel_ui_img_minus_mark_png);
+		type.set ("flixel/flixel-ui/img/minus_mark.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/plus_mark.png", __ASSET__flixel_flixel_ui_img_plus_mark_png);
+		type.set ("flixel/flixel-ui/img/plus_mark.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/radio.png", __ASSET__flixel_flixel_ui_img_radio_png);
+		type.set ("flixel/flixel-ui/img/radio.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/radio_dot.png", __ASSET__flixel_flixel_ui_img_radio_dot_png);
+		type.set ("flixel/flixel-ui/img/radio_dot.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/swatch.png", __ASSET__flixel_flixel_ui_img_swatch_png);
+		type.set ("flixel/flixel-ui/img/swatch.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/tab.png", __ASSET__flixel_flixel_ui_img_tab_png);
+		type.set ("flixel/flixel-ui/img/tab.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/img/tab_back.png", __ASSET__flixel_flixel_ui_img_tab_back_png);
+		type.set ("flixel/flixel-ui/img/tab_back.png", AssetType.IMAGE);
+		className.set ("flixel/flixel-ui/xml/defaults.xml", __ASSET__flixel_flixel_ui_xml_defaults_xml);
+		type.set ("flixel/flixel-ui/xml/defaults.xml", AssetType.TEXT);
+		className.set ("flixel/flixel-ui/xml/default_loading_screen.xml", __ASSET__flixel_flixel_ui_xml_default_loading_screen_xml);
+		type.set ("flixel/flixel-ui/xml/default_loading_screen.xml", AssetType.TEXT);
+		className.set ("flixel/flixel-ui/xml/default_popup.xml", __ASSET__flixel_flixel_ui_xml_default_popup_xml);
+		type.set ("flixel/flixel-ui/xml/default_popup.xml", AssetType.TEXT);
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 		className.set ("img/cheddar/cheddar xml data sprite.png", __ASSET__img_cheddar_cheddar_xml_data_sprite_png);
 		type.set ("img/cheddar/cheddar xml data sprite.png", AssetType.IMAGE);
 		className.set ("img/cheddar/cheddar xml data sprite.xml", __ASSET__img_cheddar_cheddar_xml_data_sprite_xml);
@@ -57,16 +118,22 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/cheddar/cheddar_comer_xml.png", AssetType.IMAGE);
 		className.set ("img/cheddar/cheddar_comer_xml.xml", __ASSET__img_cheddar_cheddar_comer_xml_xml);
 		type.set ("img/cheddar/cheddar_comer_xml.xml", AssetType.TEXT);
+<<<<<<< HEAD
 		className.set ("img/credits/Boton_Main_Menu.png", __ASSET__img_credits_boton_main_menu_png);
 		type.set ("img/credits/Boton_Main_Menu.png", AssetType.IMAGE);
 		className.set ("img/credits/Creditos_base.jpg", __ASSET__img_credits_creditos_base_jpg);
 		type.set ("img/credits/Creditos_base.jpg", AssetType.IMAGE);
+=======
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 		className.set ("img/game/end/background_end_game.jpg", __ASSET__img_game_end_background_end_game_jpg);
 		type.set ("img/game/end/background_end_game.jpg", AssetType.IMAGE);
 		className.set ("img/game/end/High_Score.png", __ASSET__img_game_end_high_score_png);
 		type.set ("img/game/end/High_Score.png", AssetType.IMAGE);
+<<<<<<< HEAD
 		className.set ("img/game/end/ingredients/Chedar.png", __ASSET__img_game_end_ingredients_chedar_png);
 		type.set ("img/game/end/ingredients/Chedar.png", AssetType.IMAGE);
+=======
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 		className.set ("img/game/end/ingredients/Cheddar.png", __ASSET__img_game_end_ingredients_cheddar_png);
 		type.set ("img/game/end/ingredients/Cheddar.png", AssetType.IMAGE);
 		className.set ("img/game/end/ingredients/Hamburguesa.png", __ASSET__img_game_end_ingredients_hamburguesa_png);
@@ -292,6 +359,37 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+<<<<<<< HEAD
+=======
+		id = "flixel/flixel-ui/xml/defaults.xml";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "flixel/flixel-ui/xml/default_loading_screen.xml";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "flixel/flixel-ui/xml/default_popup.xml";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "img/cheddar/cheddar xml data sprite.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/cheddar/cheddar xml data sprite.xml";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "img/cheddar/cheddar_comer_xml.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "img/cheddar/cheddar_comer_xml.xml";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 		id = "img/game/end/background_end_game.jpg";
 		path.set (id, id);
 		
@@ -300,7 +398,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
-		id = "img/game/end/ingredients/Chedar.png";
+		id = "img/game/end/ingredients/Cheddar.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -797,7 +895,35 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+<<<<<<< HEAD
 		openfl.text.Font.registerFont (__ASSET__OPENFL__fonts_barrio_regular_ttf);
+=======
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		openfl.text.Font.registerFont (__ASSET__fonts_barrio_regular_ttf);
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 		
 		#end
 		
@@ -829,14 +955,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("img/credits/Creditos_base.jpg", __ASSET__img_credits_creditos_base_jpg);
 		type.set ("img/credits/Creditos_base.jpg", AssetType.IMAGE);
 		
+		className.set ("img/cheddar/cheddar xml data sprite.png", __ASSET__img_cheddar_cheddar_xml_data_sprite_png);
+		type.set ("img/cheddar/cheddar xml data sprite.png", AssetType.IMAGE);
+		
+		className.set ("img/cheddar/cheddar xml data sprite.xml", __ASSET__img_cheddar_cheddar_xml_data_sprite_xml);
+		type.set ("img/cheddar/cheddar xml data sprite.xml", AssetType.TEXT);
+		
+		className.set ("img/cheddar/cheddar_comer_xml.png", __ASSET__img_cheddar_cheddar_comer_xml_png);
+		type.set ("img/cheddar/cheddar_comer_xml.png", AssetType.IMAGE);
+		
+		className.set ("img/cheddar/cheddar_comer_xml.xml", __ASSET__img_cheddar_cheddar_comer_xml_xml);
+		type.set ("img/cheddar/cheddar_comer_xml.xml", AssetType.TEXT);
+		
 		className.set ("img/game/end/background_end_game.jpg", __ASSET__img_game_end_background_end_game_jpg);
 		type.set ("img/game/end/background_end_game.jpg", AssetType.IMAGE);
 		
 		className.set ("img/game/end/High_Score.png", __ASSET__img_game_end_high_score_png);
 		type.set ("img/game/end/High_Score.png", AssetType.IMAGE);
 		
-		className.set ("img/game/end/ingredients/Chedar.png", __ASSET__img_game_end_ingredients_chedar_png);
-		type.set ("img/game/end/ingredients/Chedar.png", AssetType.IMAGE);
+		className.set ("img/game/end/ingredients/Cheddar.png", __ASSET__img_game_end_ingredients_cheddar_png);
+		type.set ("img/game/end/ingredients/Cheddar.png", AssetType.IMAGE);
 		
 		className.set ("img/game/end/ingredients/Cheddar.png", __ASSET__img_game_end_ingredients_cheddar_png);
 		type.set ("img/game/end/ingredients/Cheddar.png", AssetType.IMAGE);
@@ -1722,15 +1860,52 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound { }
+<<<<<<< HEAD
+=======
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_box_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_button_arrow_down_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_button_arrow_left_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_button_arrow_right_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_button_arrow_up_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_button_thin_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_button_toggle_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_check_box_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_check_mark_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_chrome_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_chrome_flat_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_chrome_inset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_chrome_light_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_dropdown_mark_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_finger_big_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_finger_small_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_hilight_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_invis_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_minus_mark_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_plus_mark_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_radio_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_radio_dot_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_swatch_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_tab_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_img_tab_back_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_xml_defaults_xml extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_xml_default_loading_screen_xml extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__flixel_flixel_ui_xml_default_popup_xml extends flash.utils.ByteArray { }
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 @:keep @:bind #if display private #end class __ASSET__img_cheddar_cheddar_xml_data_sprite_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_cheddar_cheddar_xml_data_sprite_xml extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__img_cheddar_cheddar_comer_xml_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_cheddar_cheddar_comer_xml_xml extends flash.utils.ByteArray { }
+<<<<<<< HEAD
 @:keep @:bind #if display private #end class __ASSET__img_credits_boton_main_menu_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_credits_creditos_base_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_background_end_game_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_high_score_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_chedar_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+=======
+@:keep @:bind #if display private #end class __ASSET__img_game_end_background_end_game_jpg extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__img_game_end_high_score_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_cheddar_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_hamburguesa_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__img_game_end_ingredients_lechuga_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -2050,11 +2225,161 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:font("assets/fonts/Barrio-Regular.ttf") #if display private #end class __ASSET__fonts_barrio_regular_ttf extends lime.text.Font {}
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+@:keep #if display private #end class __ASSET__fonts_barrio_regular_ttf extends openfl.text.Font { public function new () { super (); fontName = "Barrio"; } } 
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 
 #end
 
 #if openfl
+<<<<<<< HEAD
 @:keep #if display private #end class __ASSET__OPENFL__fonts_barrio_regular_ttf extends openfl.text.Font { public function new () { __fontPath = "fonts/Barrio-Regular.ttf"; name = "Barrio"; super (); }}
+=======
+@:keep class __ASSET__fonts_barrio_regular_ttf extends openfl.text.Font { public function new () { super (); __fontPath = "fonts/Barrio-Regular.ttf"; fontName = "Barrio"; }}
+
+#end
+
+#if (windows || mac || linux)
+
+
+@:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends lime.audio.AudioSource {}
+@:sound("C:/HaxeToolkit/haxe/lib/flixel/3,3,6/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends lime.audio.AudioSource {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/box.png") class __ASSET__flixel_flixel_ui_img_box_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/button.png") class __ASSET__flixel_flixel_ui_img_button_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/button_arrow_down.png") class __ASSET__flixel_flixel_ui_img_button_arrow_down_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/button_arrow_left.png") class __ASSET__flixel_flixel_ui_img_button_arrow_left_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/button_arrow_right.png") class __ASSET__flixel_flixel_ui_img_button_arrow_right_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/button_arrow_up.png") class __ASSET__flixel_flixel_ui_img_button_arrow_up_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/button_thin.png") class __ASSET__flixel_flixel_ui_img_button_thin_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/button_toggle.png") class __ASSET__flixel_flixel_ui_img_button_toggle_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/check_box.png") class __ASSET__flixel_flixel_ui_img_check_box_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/check_mark.png") class __ASSET__flixel_flixel_ui_img_check_mark_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/chrome.png") class __ASSET__flixel_flixel_ui_img_chrome_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/chrome_flat.png") class __ASSET__flixel_flixel_ui_img_chrome_flat_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/chrome_inset.png") class __ASSET__flixel_flixel_ui_img_chrome_inset_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/chrome_light.png") class __ASSET__flixel_flixel_ui_img_chrome_light_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/dropdown_mark.png") class __ASSET__flixel_flixel_ui_img_dropdown_mark_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/finger_big.png") class __ASSET__flixel_flixel_ui_img_finger_big_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/finger_small.png") class __ASSET__flixel_flixel_ui_img_finger_small_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/hilight.png") class __ASSET__flixel_flixel_ui_img_hilight_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/invis.png") class __ASSET__flixel_flixel_ui_img_invis_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/minus_mark.png") class __ASSET__flixel_flixel_ui_img_minus_mark_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/plus_mark.png") class __ASSET__flixel_flixel_ui_img_plus_mark_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/radio.png") class __ASSET__flixel_flixel_ui_img_radio_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/radio_dot.png") class __ASSET__flixel_flixel_ui_img_radio_dot_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/swatch.png") class __ASSET__flixel_flixel_ui_img_swatch_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/tab.png") class __ASSET__flixel_flixel_ui_img_tab_png extends lime.graphics.Image {}
+@:bitmap("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/images/tab_back.png") class __ASSET__flixel_flixel_ui_img_tab_back_png extends lime.graphics.Image {}
+@:file("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/xml/defaults.xml") class __ASSET__flixel_flixel_ui_xml_defaults_xml extends lime.utils.ByteArray {}
+@:file("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/xml/default_loading_screen.xml") class __ASSET__flixel_flixel_ui_xml_default_loading_screen_xml extends lime.utils.ByteArray {}
+@:file("C:/HaxeToolkit/haxe/lib/flixel-ui/1,0,2/assets/xml/default_popup.xml") class __ASSET__flixel_flixel_ui_xml_default_popup_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/cheddar/cheddar xml data sprite.png") class __ASSET__img_cheddar_cheddar_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/cheddar/cheddar xml data sprite.xml") class __ASSET__img_cheddar_cheddar_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/cheddar/cheddar_comer_xml.png") class __ASSET__img_cheddar_cheddar_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/cheddar/cheddar_comer_xml.xml") class __ASSET__img_cheddar_cheddar_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/game/end/background_end_game.jpg") class __ASSET__img_game_end_background_end_game_jpg extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/High_Score.png") class __ASSET__img_game_end_high_score_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Cheddar.png") class __ASSET__img_game_end_ingredients_cheddar_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Hamburguesa.png") class __ASSET__img_game_end_ingredients_hamburguesa_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Lechuga.png") class __ASSET__img_game_end_ingredients_lechuga_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Panceta.png") class __ASSET__img_game_end_ingredients_panceta_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Pepino.png") class __ASSET__img_game_end_ingredients_pepino_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/Tomate.png") class __ASSET__img_game_end_ingredients_tomate_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/ingredients/topBread.png") class __ASSET__img_game_end_ingredients_topbread_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/mainMenu_button.png") class __ASSET__img_game_end_mainmenu_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/end/playAgain_button.png") class __ASSET__img_game_end_playagain_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/game_background.jpg") class __ASSET__img_game_game_background_jpg extends lime.graphics.Image {}
+@:bitmap("assets/img/game/hud_background.png") class __ASSET__img_game_hud_background_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/mainMenu_button.png") class __ASSET__img_game_mainmenu_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/canasta.png") class __ASSET__img_game_obstacles_canasta_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/canastaSombra.png") class __ASSET__img_game_obstacles_canastasombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/cuchillo.png") class __ASSET__img_game_obstacles_cuchillo_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/cuchilloSombra.png") class __ASSET__img_game_obstacles_cuchillosombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/frasco.png") class __ASSET__img_game_obstacles_frasco_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/frasco2.png") class __ASSET__img_game_obstacles_frasco2_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/frasco2Sombra.png") class __ASSET__img_game_obstacles_frasco2sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/frascoSombra.png") class __ASSET__img_game_obstacles_frascosombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/jarra.png") class __ASSET__img_game_obstacles_jarra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/jarraSombra.png") class __ASSET__img_game_obstacles_jarrasombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/ketchup.png") class __ASSET__img_game_obstacles_ketchup_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/ketchupSombra.png") class __ASSET__img_game_obstacles_ketchupsombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/plato sombra.png") class __ASSET__img_game_obstacles_plato_sombra_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/obstacles/plato.png") class __ASSET__img_game_obstacles_plato_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/pause.png") class __ASSET__img_game_pause_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/pause_button.png") class __ASSET__img_game_pause_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/game/resume_button.png") class __ASSET__img_game_resume_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/hamburguesa/hamburgusa xml data sprite.png") class __ASSET__img_hamburguesa_hamburgusa_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/hamburguesa/hamburgusa xml data sprite.xml") class __ASSET__img_hamburguesa_hamburgusa_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/hamburguesa/hamburg_comer_xml.png") class __ASSET__img_hamburguesa_hamburg_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/hamburguesa/hamburg_comer_xml.xml") class __ASSET__img_hamburguesa_hamburg_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/lechuga/lechuga xml data sprite.png") class __ASSET__img_lechuga_lechuga_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/lechuga/lechuga xml data sprite.xml") class __ASSET__img_lechuga_lechuga_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/lechuga/lechuga_comer_xml.png") class __ASSET__img_lechuga_lechuga_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/lechuga/lechuga_comer_xml.xml") class __ASSET__img_lechuga_lechuga_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/mainMenu/animation/background_title.png") class __ASSET__img_mainmenu_animation_background_title_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/background_menu.png") class __ASSET__img_mainmenu_background_menu_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/bottomBread.png") class __ASSET__img_mainmenu_bottombread_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/exit_button.png") class __ASSET__img_mainmenu_exit_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/options_button.png") class __ASSET__img_mainmenu_options_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/ranking_button.png") class __ASSET__img_mainmenu_ranking_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/start_button.png") class __ASSET__img_mainmenu_start_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/topBread.png") class __ASSET__img_mainmenu_topbread_png extends lime.graphics.Image {}
+@:bitmap("assets/img/mainMenu/tutorial_button.png") class __ASSET__img_mainmenu_tutorial_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/check.png") class __ASSET__img_optionsmenu_check_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/close_button.png") class __ASSET__img_optionsmenu_close_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/credits_button.png") class __ASSET__img_optionsmenu_credits_button_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/cross.png") class __ASSET__img_optionsmenu_cross_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/options.png") class __ASSET__img_optionsmenu_options_png extends lime.graphics.Image {}
+@:bitmap("assets/img/optionsMenu/slider.png") class __ASSET__img_optionsmenu_slider_png extends lime.graphics.Image {}
+@:bitmap("assets/img/panceta/panceta xml data sprite.png") class __ASSET__img_panceta_panceta_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/panceta/panceta xml data sprite.xml") class __ASSET__img_panceta_panceta_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/panceta/panceta_comer_xml.png") class __ASSET__img_panceta_panceta_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/panceta/panceta_comer_xml.xml") class __ASSET__img_panceta_panceta_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/pan_garganta/pan garganta xml data sprite.png") class __ASSET__img_pan_garganta_pan_garganta_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/pan_garganta/pan garganta xml data sprite.xml") class __ASSET__img_pan_garganta_pan_garganta_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/pan_lengua/pan lengua xml data sprite.png") class __ASSET__img_pan_lengua_pan_lengua_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/pan_lengua/pan lengua xml data sprite.xml") class __ASSET__img_pan_lengua_pan_lengua_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/pepinos/pepino xml data sprite.png") class __ASSET__img_pepinos_pepino_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/pepinos/pepino xml data sprite.xml") class __ASSET__img_pepinos_pepino_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/pepinos/pepino_comer_xml.png") class __ASSET__img_pepinos_pepino_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/pepinos/pepino_comer_xml.xml") class __ASSET__img_pepinos_pepino_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/ranking/Boton_Cerrar.png") class __ASSET__img_ranking_boton_cerrar_png extends lime.graphics.Image {}
+@:bitmap("assets/img/ranking/Menu_de_Ranking.png") class __ASSET__img_ranking_menu_de_ranking_png extends lime.graphics.Image {}
+@:bitmap("assets/img/ranking/RANKING_FINAL.jpg") class __ASSET__img_ranking_ranking_final_jpg extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Bacon.png") class __ASSET__img_static_bacon_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Burger.png") class __ASSET__img_static_burger_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Cheddar.png") class __ASSET__img_static_cheddar_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Cucumber.png") class __ASSET__img_static_cucumber_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Lettuce.png") class __ASSET__img_static_lettuce_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/Tomato.png") class __ASSET__img_static_tomato_png extends lime.graphics.Image {}
+@:bitmap("assets/img/static/TopBread.png") class __ASSET__img_static_topbread_png extends lime.graphics.Image {}
+@:bitmap("assets/img/tomate/tomate xml data sprite.png") class __ASSET__img_tomate_tomate_xml_data_sprite_png extends lime.graphics.Image {}
+@:file("assets/img/tomate/tomate xml data sprite.xml") class __ASSET__img_tomate_tomate_xml_data_sprite_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/tomate/tomate_comer_xml.png") class __ASSET__img_tomate_tomate_comer_xml_png extends lime.graphics.Image {}
+@:file("assets/img/tomate/tomate_comer_xml.xml") class __ASSET__img_tomate_tomate_comer_xml_xml extends lime.utils.ByteArray {}
+@:bitmap("assets/img/tutorial/Boton_Next.png") class __ASSET__img_tutorial_boton_next_png extends lime.graphics.Image {}
+@:bitmap("assets/img/tutorial/Boton_Skip.png") class __ASSET__img_tutorial_boton_skip_png extends lime.graphics.Image {}
+@:bitmap("assets/img/tutorial/Tutorial_1.jpg") class __ASSET__img_tutorial_tutorial_1_jpg extends lime.graphics.Image {}
+@:bitmap("assets/img/tutorial/Tutorial_2.jpg") class __ASSET__img_tutorial_tutorial_2_jpg extends lime.graphics.Image {}
+@:bitmap("assets/img/tutorial/Tutorial_3.jpg") class __ASSET__img_tutorial_tutorial_3_jpg extends lime.graphics.Image {}
+@:bitmap("assets/img/tutorial/Tutorial_4.jpg") class __ASSET__img_tutorial_tutorial_4_jpg extends lime.graphics.Image {}
+@:sound("assets/sound/breadCollide.wav") class __ASSET__sound_breadcollide_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/eat.wav") class __ASSET__sound_eat_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/endTheme.wav") class __ASSET__sound_endtheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/gameTheme.wav") class __ASSET__sound_gametheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/menuTheme.wav") class __ASSET__sound_menutheme_wav extends lime.audio.AudioSource {}
+@:sound("assets/sound/tick.wav") class __ASSET__sound_tick_wav extends lime.audio.AudioSource {}
+@:file("assets/config/ingredients-cfg.csv") class __ASSET__config_ingredients_cfg_csv extends lime.utils.ByteArray {}
+@:font("assets/fonts/Barrio-Regular.ttf") class __ASSET__fonts_barrio_regular_ttf extends lime.graphics.Font {}
+
+
+>>>>>>> 031ccc9da70535c2806499cb9255e0e3f634ec58
 
 #end
 

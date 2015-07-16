@@ -103,7 +103,7 @@ class HUD
 	
 	public static function addEatenIngredient(aIngredient:Ingredient):Void
 	{
-		var eaten:Ingredient = new Ingredient(0, 0, aIngredient.getStaticImage(), aIngredient.getEndImage(), null, null, aIngredient.getScore(), 0, 0);
+		var eaten:Ingredient = new Ingredient(0, 0, null, aIngredient.getStaticImage(), aIngredient.getEndImage(), null, null, aIngredient.getScore(), 0, 0);
 		sIngredientsEaten.add(eaten);
 		sHasEaten = true;
 		eaten.loadGraphic(Assets.getBitmapData(eaten.getStaticImage()), false);
