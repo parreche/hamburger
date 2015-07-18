@@ -164,13 +164,6 @@ class GameState extends FlxState
 		}
 	}
 	
-	/*private function randomPointInScreen():Point 
-	{
-		var xCoord:Float = Math.random() * GeneralConstants.game_screenWidth;
-		var yCoord:Float = Math.random() * GeneralConstants.game_screenHeigth;
-		return new Point(xCoord, yCoord);
-	}*/
-	
 	override function update():Void
 	{
 		mPauseState.update();
